@@ -162,21 +162,27 @@
 
   /* ---------- Intro ---------- */
   .s-intro{justify-content:center}
-  .intro-grid{display:grid;grid-template-columns:1fr 520px;gap:100px;align-items:center}
-  .chip{display:inline-block;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:24px;color:var(--ink-2);
-    border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:8px;padding:8px 16px;margin-bottom:32px}
+  .intro-grid{display:grid;grid-template-columns:1fr 640px;gap:96px;align-items:center}
   .s-intro h2{font-size:96px;line-height:1.05}
-  .s-intro .hl{white-space:nowrap}
-  .s-intro .hl{color:var(--accent)}
-  .facts{display:flex;flex-direction:column;gap:18px;margin-top:48px;max-width:1000px}
-  .fact{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:22px 34px}
-  .fact .k{display:block;font-size:20px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--active-hi)}
-  .fact .v{display:block;margin-top:8px;font-size:34px;font-weight:600;line-height:1.3}
-  .intro-right{display:flex;justify-content:center}
-  .avatar-slot{width:520px;height:520px;border-radius:50%;border:4px dashed var(--eagle);opacity:.8;display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(circle, rgba(0,174,239,.06), transparent 70%);overflow:hidden}
-  .avatar-slot span{font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--eagle);opacity:.7}
-  .avatar-slot img{width:100%;height:100%;object-fit:cover}
+  .s-intro .hl{white-space:nowrap;color:var(--accent)}
+  .facts{margin:64px 0 0;max-width:1000px}
+  .facts > div{display:grid;grid-template-columns:240px 1fr;align-items:baseline;gap:32px;padding:26px 0;border-top:1px solid var(--line)}
+  .facts > div:last-child{border-bottom:1px solid var(--line)}
+  .facts dt{font-size:30px;font-weight:600;color:var(--ink-3)}
+  .facts dd{margin:0;font-size:42px;font-weight:600;line-height:1.25}
+  /* photos: one portrait plus up to two smaller ones; drop an <img> into any .ph, delete the slots you don't need */
+  .photos{position:relative;width:640px;height:640px}
+  .ph{position:absolute;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;
+    background:var(--panel);border:3px dashed rgba(0,174,239,.55);box-shadow:0 0 0 10px var(--midnight)}
+  .ph:has(img){border:0}
+  .ph.main{width:500px;height:500px;left:0;top:0}
+  .ph.sm{width:220px;height:220px}
+  .ph.sm.a{right:0;top:250px}
+  .ph.sm.b{left:250px;top:420px}
+  .ph span{font-size:26px;font-weight:600;color:var(--ink-3)}
+  .ph img{width:100%;height:100%;object-fit:cover}
+  .ph::after{content:"";position:absolute;inset:0;border-radius:50%;background:rgba(11,28,44,.14);pointer-events:none}   /* slight navy tint */
+  .ph:not(:has(img))::after{display:none}
 
   /* footer source credit */
   .footer .meta .credit{color:var(--ink-3)}
@@ -618,17 +624,18 @@
     data-notes="Quick intro: who I am and why I care about this topic.">
     <div class="intro-grid">
       <div class="intro-left">
-        <div class="chip">~/who-am-i</div>
         <h2>Hi, I’m<br><span class="hl">Yevhenii Volkovych</span></h2>
-        <div class="facts">
-          <div class="fact"><span class="k">Role</span><span class="v">Risk AI Business Analyst</span></div>
-          <div class="fact"><span class="k">Experience</span><span class="v">15 years in banking IT as an analyst</span></div>
-          <div class="fact"><span class="k">Stance</span><span class="v">Big AI advocate and enthusiast</span></div>
-        </div>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Risk AI Business Analyst</dd></div>
+          <div><dt>Experience</dt><dd>15 years in banking IT as an analyst</dd></div>
+          <div><dt>Stance</dt><dd>Big AI advocate and enthusiast</dd></div>
+        </dl>
       </div>
-      <div class="intro-right">
-        <!-- PLACEHOLDER: LinkedIn-style photo (circular crop; drop an <img> inside .avatar-slot) -->
-        <div class="avatar-slot" role="img" aria-label="Placeholder: LinkedIn-style photo"><span>Photo</span></div>
+      <!-- PLACEHOLDERS: put an <img src="…" alt="…"> inside any .ph; remove the .sm slots if you only use one photo -->
+      <div class="photos">
+        <div class="ph main" role="img" aria-label="Placeholder: portrait photo"><span>Portrait</span></div>
+        <div class="ph sm a" role="img" aria-label="Placeholder: optional photo"><span>Photo 2</span></div>
+        <div class="ph sm b" role="img" aria-label="Placeholder: optional photo"><span>Photo 3</span></div>
       </div>
     </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">06</span></span></div>
