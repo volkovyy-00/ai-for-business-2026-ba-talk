@@ -119,11 +119,11 @@ From the impeccable critique run on 2026-10-29: score 16/28, "Acceptable". Issue
 ## 7. Gotchas and dead ends (don't repeat these)
 
 - **Network:** impeccable.style and most barclays.com hosts are **blocked** from cloud sessions. GitHub (`git clone`, raw.githubusercontent.com) works.
-- **Impeccable skill:** it lives in the user's global skills folder and is not in this repo. A fresh cloud container won't have it. To reinstall:
+- **Impeccable skill:** it is committed to this repo as a project skill at `.claude/skills/impeccable/` (upstream pbakaus/impeccable, Apache 2.0, `LICENSE` included), so any session that opens the repo loads it automatically. To update it to the latest upstream version:
   ```
-  git clone --depth 1 https://github.com/pbakaus/impeccable.git /tmp/imp && mkdir -p ~/.claude/skills && cp -r /tmp/imp/.claude/skills/impeccable ~/.claude/skills/
+  git clone --depth 1 https://github.com/pbakaus/impeccable.git /tmp/imp && rm -rf .claude/skills/impeccable && cp -r /tmp/imp/.claude/skills/impeccable .claude/skills/ && cp /tmp/imp/LICENSE .claude/skills/impeccable/
   ```
-  Then run `~/.claude/skills/impeccable/scripts/impeccable context --target src/deck.html` once per session. The detector's rendered-URL scan needs Chromium with `--no-sandbox` (wrap `/opt/pw-browsers/chromium*/chrome-linux64/chrome` in a script and point `IMPECCABLE_BROWSER` at it). Expected static false positives: low-contrast with "#000000 text" (the parser can't resolve CSS variables), broken-image on `img.falcon` (its src is set at runtime), cramped-padding on placeholder slots, and overused-font.
+  Then run `.claude/skills/impeccable/scripts/impeccable context --target src/deck.html` once per session. The detector's rendered-URL scan needs Chromium with `--no-sandbox` (wrap `/opt/pw-browsers/chromium*/chrome-linux64/chrome` in a script and point `IMPECCABLE_BROWSER` at it). Expected static false positives: low-contrast with "#000000 text" (the parser can't resolve CSS variables), broken-image on `img.falcon` (its src is set at runtime), cramped-padding on placeholder slots, and overused-font.
 - **Logo:** `falcon.svg` is the simple-icons "barclays" eagle path (CC0 path data, still a Barclays trademark), filled `#00AEEF`. It is git-ignored so the trademark isn't published in a public repo. To recreate it:
   ```
   curl -sS https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/barclays.svg | sed 's/<path /<path fill="#00AEEF" /' > falcon.svg
