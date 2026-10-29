@@ -1,0 +1,9 @@
+# tool state, caches and scratch output
+.impeccable/
+node_modules/
+*.png
+*.log
+.DS_Store
+Thumbs.db
+# Barclays logo: trademark, kept local only (see HANDOFF.md → Logo)
+falcon.svg

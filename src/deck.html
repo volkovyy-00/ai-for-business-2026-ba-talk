@@ -1,0 +1,1232 @@
+<title>How AI Rewired the BA Role</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<script>document.documentElement.classList.add('preload')</script>
+<!--
+  Foundation deck, slides 1–23. Static.
+  One-page vertical deck: each slide is a full-viewport section (scroll-snap). Design stage = 1920×1080, scaled to fit.
+  Navigation: native scroll (wheel / trackpad / touch); ↑/↓, ←/→, Space / Shift+Space, PageUp/PageDown, Home/End jump; dots on the right.
+  Deep link: index.html#3 opens slide 3.
+-->
+<style>
+  /* Layout: 1920×1080 stage, 140px side margins; two templates — content (title at fixed top) and statement (centred).
+     Colour roles follow Barclays: navy ground, cyan for emphasised text, Active Blue only as fill. */
+  :root{
+    color-scheme:dark;
+    --midnight:#0B1C2C;    /* Barclays-navy-leaning ground */
+    --midnight-2:#0F2437;
+    --panel:#12293F;       /* solid surface for compared items */
+    --panel-hi:#15304A;    /* highlighted surface */
+    --line:rgba(255,255,255,.14);
+    --active:#006DE3;      /* Barclays Active Blue — fills, bars, rules only */
+    --accent:#00AEEF;      /* Barclays cyan — emphasised words and key numbers */
+    --active-hi:var(--accent);
+    --eagle:#00AEEF;       /* logo */
+    --ink:#FFFFFF;
+    --ink-2:#BCCBDA;
+    --ink-3:#8FA3B6;
+    --r:16px;
+    --ease-out:cubic-bezier(.16,1,.3,1);
+    --font-display:"Figtree", "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font:"Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;background:var(--midnight)}
+  body{font-family:var(--font);color:var(--ink);background:var(--midnight);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  /* one-page vertical deck: each frame is a full-viewport section; the 1920×1080 slide inside scales to fit */
+  .frame{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;
+    background:var(--midnight)}
+  .frame::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .slide{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center;
+    padding:120px 140px 150px;display:flex;flex-direction:column}
+
+  /* shared chrome */
+  .rule{width:96px;height:8px;background:var(--active);border-radius:2px}
+  .slide > .rule{margin-bottom:40px}
+  .slide > *{flex-shrink:0}
+  .kicker{font-size:28px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--active-hi)}
+  h1,h2,h3,.v,.n,blockquote{font-family:var(--font-display)}
+  h1{font-size:112px;line-height:1.02;font-weight:800;letter-spacing:-.025em}
+  h2{font-size:96px;line-height:1.04;font-weight:800;letter-spacing:-.02em}
+  .sub{font-size:44px;line-height:1.3;color:var(--ink-2);font-weight:400}
+  .footer{position:absolute;left:140px;right:140px;bottom:56px;display:flex;align-items:center;justify-content:space-between;
+    font-size:22px;color:var(--ink-3);letter-spacing:.01em}
+  .footer .brand{display:flex;align-items:center;gap:14px;color:var(--eagle);font-weight:600;font-size:26px;opacity:.85}
+  .falcon{display:block;height:40px;width:auto}
+  .falcon:not([src]){display:none}
+  .footer .meta span+span::before{content:"•";margin:0 14px;color:var(--ink-3)}
+  .slide-no{font-variant-numeric:tabular-nums}
+
+  /* section dots: fixed, vertical, right edge — quiet until hovered */
+  #dots{position:fixed;right:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:5;opacity:.4;transition:opacity .3s}
+  #dots:hover,#dots:focus-within{opacity:1}
+  #dots button{width:8px;height:8px;border-radius:4px;border:0;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s}
+  #dots button.on{height:30px;background:var(--active)}
+  #dots button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  #bar{position:fixed;left:0;top:0;height:3px;background:var(--active);z-index:5;transition:width .35s ease,opacity .3s}
+  body.on-cover #dots,body.on-cover #bar{opacity:0;pointer-events:none}
+  ::selection{background:var(--active);color:#fff}
+
+  /* clicker builds: each press reveals the next data-build group; data-play elements stay visible and start moving */
+  [data-build]{transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
+  [data-build].pending:not([data-play]){opacity:0;transform:translateY(18px)}
+  .frame.arrive .slide{animation:arrive .32s var(--ease-out)}
+  @keyframes arrive{from{opacity:0}}
+
+  /* ---------- Slide 1: Title (cover) ---------- */
+  .s1{justify-content:center;overflow:hidden;padding-top:60px}
+  .s1 .top-brand{position:absolute;top:96px;left:140px;display:flex;align-items:center;gap:20px;font-size:28px;font-weight:600;color:var(--ink-2);letter-spacing:.01em}
+  .s1 .top-brand .falcon{height:72px}
+  .s1 h1{position:relative;font-size:132px;line-height:1;font-weight:800;letter-spacing:-.03em;max-width:1080px;text-wrap:balance}
+  .s1 h1 .hl{color:var(--accent)}
+  .s1 .thesis{position:relative;margin-top:44px;font-size:44px;line-height:1.25;color:var(--ink-2);max-width:960px}
+  .s1 .thesis b{color:var(--ink);font-weight:600}
+  .s1 .speaker{position:absolute;left:140px;bottom:104px;display:flex;gap:64px;align-items:flex-end}
+  .s1 .speaker .name{font-family:var(--font-display);font-size:40px;font-weight:700}
+  .s1 .speaker .role{font-size:30px;color:var(--ink-2);margin-top:6px}
+  .s1 .speaker .when{font-size:30px;color:var(--ink-2);border-left:2px solid var(--line);padding-left:64px}
+  .s1 .speaker .when b{display:block;font-family:var(--font-display);color:var(--ink);font-size:34px;font-weight:600;margin-bottom:6px}
+  /* ghost of the slide-3 bottleneck, bleeding off the right edge */
+  .pipe-ghost{position:absolute;left:1110px;top:330px;width:900px;height:520px}
+  .pipe-ghost .body{fill:url(#hatch-cover);stroke:rgba(143,163,182,.5);stroke-width:2}
+  .pipe-ghost .throat{stroke:var(--active);stroke-width:3;opacity:.7}
+  .pipe-ghost .idea{fill:var(--active)}
+  .pipe-ghost .value{fill:#fff}
+  @media (prefers-reduced-motion:reduce){
+    [data-build].pending:not([data-play]){transform:none}
+    .frame.arrive .slide{animation:none}
+  }
+
+  /* ---------- Slide 2: Ground rules ---------- */
+  .s2 .rule{margin-bottom:48px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:80px}
+  .card{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:64px 64px 72px}
+  .card .num{font-size:96px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.02em}
+  .card h3{font-size:52px;font-weight:700;margin-top:36px;line-height:1.15}
+  .card p{font-size:34px;line-height:1.45;color:var(--ink-2);margin-top:24px}
+
+  /* ---------- Slide 3: Agenda ---------- */
+  .s3 .head{display:flex;justify-content:space-between;align-items:flex-end}
+  .s3 .rule{margin-bottom:40px}
+  .s3 h2{font-size:104px}
+  .s3 .thread{max-width:900px;font-size:30px;line-height:1.4;color:var(--ink-2);border-left:5px solid var(--active);padding-left:32px;margin-bottom:10px}
+  .s3 .thread b{color:var(--ink);font-weight:600}
+  .agenda{list-style:none;display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:column;grid-template-rows:repeat(4,auto);
+    column-gap:96px;margin-top:64px}
+  .agenda li{display:flex;align-items:baseline;gap:28px;padding:36px 0;border-top:1px solid var(--line);font-size:42px;font-weight:500}
+  .agenda li:nth-child(4),.agenda li:nth-child(8){border-bottom:1px solid var(--line)}
+  .agenda li .n{font-size:28px;font-weight:700;color:var(--ink-3);width:44px;font-variant-numeric:tabular-nums}
+  .agenda li .t{flex:1}
+  .agenda li .m{font-size:32px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+  .agenda li.demo .t{color:var(--ink);font-weight:700}
+  .agenda li.demo .n,.agenda li.demo .m{color:var(--active-hi)}
+  .agenda li.demo .tag{font-size:20px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--active-hi);
+    border:1.5px solid var(--active);border-radius:999px;padding:6px 14px;margin-left:16px;vertical-align:middle}
+
+  .beats{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:72px}
+  .beats li{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 40px 48px;min-height:400px}
+  .beats .n{font-size:84px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.02em}
+  .beats .k{margin-top:40px;font-size:24px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .beats .t{margin-top:14px;font-size:42px;font-weight:700;line-height:1.15}
+  .beats .d{margin-top:20px;font-size:30px;line-height:1.4;color:var(--ink-2)}
+  .beats li.demo{border-color:var(--active);background:var(--panel-hi)}
+  .beats li.demo .k{color:var(--active-hi)}
+
+  /* ---------- Agenda: one line (the question) through four stops ---------- */
+  .s-agenda h2{font-size:96px}
+  .s-agenda .thread{margin-top:28px;font-size:44px;line-height:1.3;color:var(--ink-2)}
+  .s-agenda .thread b{color:var(--ink);font-weight:600}
+  .track,.stops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:48px}
+  .track{position:relative;margin-top:150px;height:4px}
+  .track::before{content:"";position:absolute;inset:0 -140px 0 0;background:var(--line)}
+  .track .seg{position:relative;height:4px;background:var(--active);transform-origin:left center;width:calc(100% + 48px)}
+  .track .tail{width:calc(100% + 140px)}
+  .stops{list-style:none;margin-top:-18px}
+  .stop{position:relative;padding-top:72px}
+  .stop .node{position:absolute;left:0;top:4px;width:28px;height:28px;border-radius:50%;background:var(--midnight);border:4px solid var(--accent)}
+  .stop.live .node{left:-6px;top:-2px;width:40px;height:40px;background:var(--accent);box-shadow:0 0 0 10px rgba(0,174,239,.16)}
+  .stop h3{font-size:46px;font-weight:700;line-height:1.12;letter-spacing:-.01em;text-wrap:balance;display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px}
+  .stop p{margin-top:18px;font-size:32px;line-height:1.35;color:var(--ink-2);text-wrap:pretty}
+  .stop .tag{position:absolute;left:52px;top:-50px;font-family:var(--font);font-size:26px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--midnight);background:var(--accent);border-radius:999px;padding:4px 16px 5px}
+  /* builds: the line draws to the next stop, then the stop arrives */
+  .track .seg[data-build]{transition:transform .5s var(--ease-out)}
+  .track .seg[data-build].pending{opacity:1;transform:scaleX(0)}
+  .stops .stop[data-build].built{transition-delay:.25s}
+  .stops .stop[data-build].pending{transform:none}
+
+  /* ---------- Intro ---------- */
+  .s-intro{justify-content:center}
+  .intro-grid{display:grid;grid-template-columns:1fr 520px;gap:100px;align-items:center}
+  .chip{display:inline-block;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:24px;color:var(--ink-2);
+    border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:8px;padding:8px 16px;margin-bottom:32px}
+  .s-intro h2{font-size:96px;line-height:1.05}
+  .s-intro .hl{white-space:nowrap}
+  .s-intro .hl{color:var(--accent)}
+  .facts{display:flex;flex-direction:column;gap:18px;margin-top:48px;max-width:1000px}
+  .fact{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:22px 34px}
+  .fact .k{display:block;font-size:20px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--active-hi)}
+  .fact .v{display:block;margin-top:8px;font-size:34px;font-weight:600;line-height:1.3}
+  .intro-right{display:flex;justify-content:center}
+  .avatar-slot{width:520px;height:520px;border-radius:50%;border:4px dashed var(--eagle);opacity:.8;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle, rgba(0,174,239,.06), transparent 70%);overflow:hidden}
+  .avatar-slot span{font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--eagle);opacity:.7}
+  .avatar-slot img{width:100%;height:100%;object-fit:cover}
+
+  /* footer source credit */
+  .footer .meta .credit{color:var(--ink-3)}
+
+  /* ---------- After agents (SDLC) ---------- */
+  .sdlc{margin-top:56px;border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:48px 56px 40px}
+  .row-label{font-size:30px;color:var(--ink-2);margin-bottom:22px}
+  .row-label b{color:var(--ink);font-weight:700}
+  .row-label.after{margin-top:52px}
+  .row{display:flex;gap:14px;align-items:flex-start}
+  .st{height:92px;border-radius:12px;background:#183550;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;
+    font-size:30px;font-weight:600;color:var(--ink);flex:none}
+  .w-plan{width:180px}.w-design{width:200px}.w-test{width:180px}.w-deploy{width:180px}.w-maint{width:200px}
+  .st.build{flex:1;background:var(--active);border-color:var(--active)}
+  .st.build.sliver{flex:none;width:28px}
+  .grp{display:flex;flex-direction:column;flex:none}
+  .grp.grow{flex:1}
+  .pair{display:flex;gap:14px}
+  .sl{text-align:center;font-size:22px;color:var(--ink-3);margin-top:12px;letter-spacing:.02em}
+  .st.reclaimed{width:100%;background:transparent;border:2px dashed rgba(255,255,255,.28);color:var(--ink-3);font-weight:500;font-size:26px}
+  .s-after .caption{margin-top:44px;font-size:42px;line-height:1.35;color:var(--ink-2)}
+  .s-after .caption b{color:var(--ink);font-weight:700}
+
+  /* ---------- Constraint moved (arithmetic) ---------- */
+  .s-constraint .rule{margin-bottom:40px}
+  .s-constraint h2{font-size:96px}
+  .eq{display:flex;align-items:stretch;gap:36px;margin-top:80px}
+  .eq .term{flex:1;border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 44px 48px}
+  .eq .term .v{font-size:128px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+  .eq .term .l{margin-top:20px;font-size:32px;color:var(--ink-2)}
+  .eq .term.hero .v{color:var(--accent)}
+  .eq .term.hero{border-color:var(--active);background:var(--panel-hi)}
+  .eq .op{align-self:center;font-family:var(--font-display);font-size:96px;font-weight:700;line-height:1;color:var(--ink);margin-top:-36px}
+  .s-constraint .line{margin-top:64px;font-size:46px;color:var(--ink-2)}
+  .s-constraint .line em{font-style:normal;color:var(--ink);font-weight:600;border-bottom:5px solid var(--active);padding-bottom:2px;white-space:nowrap}
+
+  /* ---------- Evidence slides (expertise, IIBA) ---------- */
+  .ev-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:64px}
+  .ev{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 52px 44px}
+  .ev.hero{border-color:var(--active);background:var(--panel-hi)}
+  .ev .k{font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .ev.hero .k{color:var(--active-hi)}
+  .ev .pair{display:flex;align-items:flex-end;gap:28px;margin-top:28px}
+  .ev .v{font-size:104px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--accent)}
+  .ev .v.dim{color:var(--ink-2)}
+  .ev .l{margin-top:12px;font-size:28px;color:var(--ink-2)}
+  .ev .arrow{font-size:56px;color:var(--ink-3);padding-bottom:56px}
+  .ev .foot{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:26px;color:var(--ink-3)}
+  .ev .foot b{color:var(--ink)}
+  .ev .rank{margin-top:28px;display:flex;flex-direction:column;gap:16px}
+  .ev .rank .r{font-size:48px;font-weight:700;color:var(--ink-2);display:flex;align-items:baseline;gap:24px}
+  .ev .rank .r span{font-size:40px;color:var(--ink-3);width:72px}
+  .ev .rank .r.on{color:var(--ink)} .ev .rank .r.on span{color:var(--accent)}
+  .s-ev .remember{margin-top:52px;font-size:40px;line-height:1.3;color:var(--ink-2)}
+  .s-ev .remember b{color:var(--ink);font-weight:700}
+
+  /* ---------- RAND ---------- */
+  .s-rand{justify-content:center}
+  .s-rand .kicker{margin-bottom:36px}
+  .s-rand h2.big{font-size:100px;line-height:1.08;max-width:1600px}
+  .s-rand .hl{color:var(--accent)}
+  .s-rand .sub2{margin-top:44px;font-size:36px;color:var(--ink-2)}
+  .s-rand .next{margin-top:72px;font-size:28px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ---------- Discovery under pressure ---------- */
+  .s-why .kicker{margin-bottom:28px}
+  .s-why h2{font-size:88px}
+  .flow{display:flex;align-items:stretch;gap:24px;margin-top:56px}
+  .fstep{flex:1;border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:36px 40px;display:flex;flex-direction:column}
+  .fstep .n{font-size:22px;font-weight:700;letter-spacing:.12em;color:var(--ink-3)}
+  .fstep b{font-size:40px;font-weight:700;margin-top:14px}
+  .fstep span:last-child{font-size:28px;color:var(--ink-2);margin-top:10px;line-height:1.35}
+  .fstep.on{border-color:var(--active);background:var(--panel-hi)} .fstep.on .n{color:var(--active-hi)}
+  .farrow{align-self:center;font-size:48px;color:var(--ink-3)}
+  .s-why .remember,.s-settle .remember{margin-top:56px;font-size:40px;line-height:1.35;color:var(--ink-2)}
+  .s-why .remember b,.s-settle .remember b{color:var(--ink);font-weight:700}
+  .s-quote{justify-content:center}
+  .s-quote .kicker{margin-bottom:40px}
+  .s-quote blockquote{font-size:84px;font-weight:700;line-height:1.15;letter-spacing:-.015em;max-width:1560px}
+  .s-quote .hl,.s-question .hl{color:var(--accent)}
+  .s-quote .cite{margin-top:48px;font-size:34px;color:var(--ink-2)}
+  .s-sector .ev .v{margin-top:24px}
+  .shock{margin-top:44px;border:1px solid var(--line);border-left:5px solid var(--active);background:var(--panel);border-radius:var(--r);padding:26px 36px;font-size:34px;color:var(--ink-2)}
+  .shock .tag{font-size:22px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--active-hi);margin-right:24px}
+  .shock b{color:var(--ink)} .shock .dim{color:var(--ink-3);font-size:28px}
+  .s-question{justify-content:center}
+  .s-question .kicker{margin-bottom:36px}
+  .s-question h2.big{font-size:88px;line-height:1.12;max-width:1640px}
+  .chips{display:flex;gap:16px;margin-top:56px}
+  .chips span{font-size:26px;font-weight:600;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:12px 28px;background:rgba(255,255,255,.03)}
+  .settle{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:72px}
+  .settle .it{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:36px 32px 40px;display:flex;flex-direction:column;min-height:360px}
+  .settle .n{font-size:64px;font-weight:800;color:var(--accent);line-height:1}
+  .settle b{font-size:34px;font-weight:700;margin-top:28px;line-height:1.2}
+  .settle span:last-child{font-size:26px;color:var(--ink-2);margin-top:14px;line-height:1.4}
+  .settle .it.on{border-color:var(--active);background:var(--panel-hi)}
+
+  /* ---------- Section divider ---------- */
+  .s-div{justify-content:center}
+  .div-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:560px}
+  .div-left{padding-right:80px}
+  .div-left .kicker{margin-bottom:28px}
+  .div-left h2{font-size:120px;line-height:1.02}
+  .div-right{border-left:5px solid var(--active);padding-left:80px;min-height:360px;display:flex;align-items:center}
+  .div-right p{font-size:60px;line-height:1.2;color:var(--ink-2);font-weight:500}
+
+  /* ---------- Jagged frontier ---------- */
+  .ev .v.neg{color:var(--ink)}
+  .s-jag .ev .v{font-size:96px}
+  .s-jag .ev .pair{gap:56px}
+  .s-jag .lede{margin-top:20px;font-size:34px;color:var(--ink-2)}
+  .s-jag .ev-grid{margin-top:44px}
+  .s-jag .remember{margin-top:44px}
+
+  /* ---------- Live moment ---------- */
+  .s-live .kicker{margin-bottom:20px}
+  .s-live h2{font-size:84px}
+  .live-grid{display:grid;grid-template-columns:700px 1fr;gap:40px;margin-top:44px;flex:1 1 auto;min-height:0;flex-shrink:1}
+  .framing{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:32px 40px}
+  .framing .fk{font-size:22px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--active-hi)}
+  .framing ul{list-style:none;margin-top:18px}
+  .framing li{font-size:28px;padding:12px 0;border-top:1px solid var(--line);display:flex;gap:20px}
+  .framing li span{width:150px;flex:none;color:var(--ink-3);font-weight:600}
+  .framing .fnote{margin-top:20px;font-size:26px;color:var(--ink-2);font-style:italic}
+  .shot-slot{border:3px dashed rgba(0,174,239,.6);border-radius:var(--r);display:flex;align-items:center;justify-content:center;background:rgba(0,174,239,.03);overflow:hidden}
+  .shot-slot span{font-size:26px;letter-spacing:.12em;text-transform:uppercase;color:var(--eagle);opacity:.8}
+  .shot-slot img{width:100%;height:100%;object-fit:contain}
+
+
+
+
+  /* ---------- Deep research agent (definition) ---------- */
+  .s-dra{justify-content:center}
+  .s-dra .kicker{margin-bottom:28px}
+  .s-dra h2{font-size:104px}
+  .s-dra .lede{margin-top:36px;font-size:44px;line-height:1.3;color:var(--ink-2);max-width:1500px}
+  .s-dra .lede b{color:var(--ink);font-weight:700}
+  .traits{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:72px}
+  .traits li{border:1px solid var(--line);border-top:5px solid var(--active);background:var(--panel);border-radius:16px;padding:36px 36px 40px;display:flex;flex-direction:column}
+  .traits b{font-size:40px;font-weight:700}
+  .traits span{margin-top:14px;font-size:28px;line-height:1.4;color:var(--ink-2)}
+
+  /* ---------- Several agents, different angles ---------- */
+  .s-multi h2{font-size:84px}
+  .multi-grid{display:grid;grid-template-columns:560px 1fr;gap:48px;margin-top:48px;flex:1 1 auto;min-height:0;flex-shrink:1}
+  .angles{display:flex;flex-direction:column}
+  .angles .q{font-size:30px;line-height:1.4;color:var(--ink-2);border-left:5px solid var(--active);padding-left:28px}
+  .angles .q b{color:var(--ink);font-weight:600}
+  .angles ul{list-style:none;margin-top:32px}
+  .angles li{font-size:30px;padding:16px 0;border-top:1px solid var(--line);display:flex;gap:20px;align-items:baseline}
+  .angles li:last-child{border-bottom:1px solid var(--line)}
+  .angles li i{font-style:normal;font-size:22px;font-weight:700;color:var(--active-hi);width:40px;flex:none;font-variant-numeric:tabular-nums}
+  .strip{margin-top:28px;display:flex;align-items:center;gap:28px;font-size:30px;font-weight:600;color:var(--ink-2);
+    border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:20px 36px}
+  .strip b{color:var(--ink)} .strip .ar{color:var(--active-hi)} .strip .tag{font-size:20px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-right:8px}
+
+  /* ---------- Three approaches ---------- */
+  .s-three h2{font-size:96px}
+  .s-three .lede{margin-top:20px;font-size:34px;color:var(--ink-2)}
+  .appr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:56px}
+  .ap{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 48px 48px;display:flex;flex-direction:column}
+  .ap .n{font-size:80px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.02em}
+  .ap .k{margin-top:28px;font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .ap h3{margin-top:12px;font-size:46px;font-weight:700;line-height:1.15;min-height:2.3em}
+  .ap p{margin-top:28px;padding-top:28px;border-top:1px solid var(--line);font-size:30px;line-height:1.4;color:var(--ink-2)}
+
+  /* ---------- Console explainer (foundation mock) ---------- */
+  .s-console h2{font-size:84px}
+  .console{margin-top:44px;border:1px solid rgba(255,255,255,.14);border-radius:var(--r);background:#08141F;overflow:hidden;display:flex;flex-direction:column;flex:1 1 auto;min-height:0;flex-shrink:1}
+  .c-chrome{display:flex;align-items:center;gap:18px;padding:18px 28px;border-bottom:1px solid var(--line);background:#0E2033}
+  .c-chrome .dotsx{display:flex;gap:10px} .c-chrome .dotsx i{width:14px;height:14px;border-radius:7px;background:rgba(255,255,255,.18)}
+  .c-chrome .ttl{font-size:24px;font-weight:600;color:var(--ink-2);margin-left:12px}
+  .c-chrome .sp{flex:1}
+  .badge{font-size:18px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:6px 16px;border:1.5px solid}
+  .badge.live{color:#fff;background:var(--active);border-color:var(--active)}
+  .badge.live::before{content:"";display:inline-block;width:9px;height:9px;border-radius:5px;background:#fff;margin-right:10px;vertical-align:1px}
+  .badge.replay{color:var(--ink-3);border-color:rgba(255,255,255,.25)}
+  .c-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;flex:1}
+  .pnl{padding:28px 32px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+  .pnl:last-child{border-right:0}
+  .pnl .pk{font-size:20px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--active-hi)}
+  .pnl .pk em{font-style:normal;color:var(--ink-3);margin-right:10px}
+  .qchip{font-size:24px;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:10px 20px;align-self:flex-start;background:rgba(255,255,255,.03)}
+  .qchip.on{color:var(--ink);border-color:var(--active);background:rgba(0,109,227,.12)}
+  .qbox{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:22px;color:var(--ink-3);border:1px dashed rgba(255,255,255,.22);border-radius:10px;padding:14px 18px}
+  .ans-line{height:16px;border-radius:8px;background:rgba(255,255,255,.10)}
+  .ans-line.hi{background:rgba(0,109,227,.45)}
+  .ans-note{font-size:22px;color:var(--ink-3);margin-top:4px}
+  .ev-item{display:flex;gap:14px;align-items:center;font-size:22px;color:var(--ink-2);border:1px solid var(--line);border-left:4px solid var(--active);border-radius:10px;padding:12px 16px;background:var(--panel)}
+  .ev-item code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:19px;color:var(--ink-3)}
+  .c-flow{display:flex;align-items:center;gap:22px;margin-top:28px;font-size:30px;color:var(--ink-2)}
+  .c-flow b{color:var(--ink)} .c-flow .ar{color:var(--active-hi)} .c-flow .mock{margin-left:auto;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ---------- Demo cue slides ---------- */
+  .s-cue h2{font-size:96px}
+  .s-cue .kicker{margin-bottom:24px}
+  .cue-grid{display:grid;grid-template-columns:620px 1fr;gap:48px;margin-top:48px;flex:1 1 auto;min-height:0;flex-shrink:1}
+  .watch{border:1px solid var(--active);background:var(--panel-hi);border-radius:var(--r);padding:44px 48px;display:flex;flex-direction:column}
+  .watch .wk{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--active-hi)}
+  .watch p{margin-top:24px;font-size:44px;line-height:1.25;font-weight:600}
+  .watch .switch{margin-top:auto;display:flex;align-items:center;gap:16px;font-size:26px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+  .watch .switch::before{content:"↗";font-size:34px;color:var(--active-hi)}
+
+  /* ---------- Who sits at the new constraint ---------- */
+  .who-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;margin-top:64px}
+  .exhibit{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 48px 36px}
+  .ex-row+.ex-row{margin-top:36px}
+  .ex-label{font-size:30px;font-weight:600;margin-bottom:14px}
+  .ex-label span{font-weight:400;color:var(--ink-3);margin-left:12px;font-size:26px}
+  .bar{display:flex;height:68px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.04)}
+  .seg{display:flex;align-items:center;padding:0 22px;font-size:26px;font-weight:700;white-space:nowrap}
+  .seg.people{background:var(--active);color:#fff}
+  .seg.model{background:#2B4A68;color:#E8F0FF;justify-content:flex-end}
+  .ex-key{display:flex;gap:32px;margin-top:28px;font-size:22px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  .ex-key i{display:inline-block;width:16px;height:16px;border-radius:4px;margin-right:10px;vertical-align:-1px}
+  .ex-key i.people{background:var(--active)} .ex-key i.model{background:#2B4A68}
+  .stations{display:flex;flex-direction:column;gap:18px}
+  .stn{flex:1;border:1px solid var(--line);border-left:5px solid var(--active);background:var(--panel);border-radius:var(--r);padding:22px 32px;display:flex;flex-direction:column;justify-content:center}
+  .stn b{font-size:38px;font-weight:700}
+  .stn span{font-size:28px;color:var(--ink-2);margin-top:4px}
+  .s-who .remember{margin-top:52px;font-size:42px;line-height:1.3;color:var(--ink-2)}
+  .s-who .remember b{color:var(--ink);font-weight:700}
+
+  /* ---------- Slide 4: Section opener ---------- */
+  .s4{justify-content:center}
+  .s4 .kicker{margin-bottom:44px}
+  .s4 .rule{margin-bottom:64px}
+  .s4 h2{font-size:120px;max-width:1500px}
+  .s4 .line{margin-top:56px;font-size:52px;line-height:1.3;color:var(--ink-2);max-width:1640px}
+  .s4 .line em{white-space:nowrap}
+  .s4 .line em{font-style:normal;color:var(--ink);font-weight:600;border-bottom:5px solid var(--active);padding-bottom:2px}
+
+  /* ---------- Slide 5: Bottleneck ---------- */
+  /* ---------- Slide 3: live bottleneck ---------- */
+  .s-flow h2{font-size:96px}
+  .flow-wrap{margin-top:48px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:36px 48px 28px}
+  .flow-svg{display:block;width:100%;height:auto;font-family:var(--font-display)}
+  .flow-svg .stations text{fill:var(--ink);font-size:38px;font-weight:700}
+  .flow-svg .body{fill:url(#hatch-flow);stroke:rgba(255,255,255,.3);stroke-width:2}
+  .flow-svg .throat{stroke:var(--active);stroke-width:3}
+  .flow-svg .idea{fill:var(--active)}
+  .flow-svg .value{fill:#fff}
+  .flow-svg .under text,.flow-svg .rates text{font-family:var(--font);font-size:28px;font-weight:600;letter-spacing:.08em;fill:var(--ink-3)}
+  .flow-svg .under .hot{fill:var(--accent)}
+  .flow-svg .rates text{font-size:26px}
+  .flow-svg .waiting{font-variant-numeric:tabular-nums}
+  .s-flow .twist{margin-top:16px;font-size:36px;line-height:1.4;color:var(--ink-2)}
+  .s-flow .twist b{color:var(--accent);font-weight:700}
+  .s-flow .caption{margin-top:40px;font-size:42px;line-height:1.3;color:var(--ink);font-weight:600}
+  .s-flow .twist{margin-top:16px;font-size:36px;line-height:1.4;color:var(--ink-2)}
+  .s-flow .twist b{color:var(--accent);font-weight:700}
+
+  /* ---------- Slide 5: coding widens, then zoom out to the whole lifecycle ---------- */
+  .flow-stage{position:relative;overflow:hidden}
+  .s-after2 .flow-svg .body{fill:url(#hatch-flow5)}
+  .flow-stage .zoom-b{position:absolute;inset:0}
+  .zoom-a,.zoom-b{transform-origin:0 50%;transition:transform 1.1s var(--ease-out),opacity .7s var(--ease-out)}
+  .zoom-b{opacity:0;transform:translateX(-28.96%) scale(1.8)}
+  .flow-stage.zoomed .zoom-a{opacity:0;transform:translateX(16.1%) scale(.5556)}
+  .flow-stage.zoomed .zoom-b{opacity:1;transform:none}
+  .flow-svg .stations.small text{font-size:32px}
+  .flow-svg .under.small text{font-size:24px}
+  .flow-svg .why text{font-family:var(--font);font-size:24px;font-weight:600;letter-spacing:.04em;fill:var(--ink-3)}
+  .flow-svg .why .fast{fill:var(--ink)}
+  .s-flow .cue{display:none}
+  .s-after2 .twist{transition-delay:.5s}
+  @media (prefers-reduced-motion:reduce){ .zoom-a,.zoom-b{transition:opacity .4s} }
+
+  .s5 .rule{margin-bottom:40px}
+  .s5 h2{font-size:96px}
+  .pipe-wrap{margin-top:56px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:40px 56px 36px;position:relative}
+  .legend{position:absolute;top:36px;right:56px;display:flex;gap:36px;font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+  .legend i{display:inline-block;width:18px;height:18px;border-radius:9px;margin-right:12px;vertical-align:-2px}
+  .legend .idea i{background:var(--active)}
+  .legend .value i{background:#E8F0FF}
+  .pipe svg{display:block;width:100%;height:auto}
+  .s5 .caption{margin-top:40px;font-size:40px;line-height:1.35;color:var(--ink);font-weight:500}
+  .s5 .twist{margin-top:18px;font-size:36px;line-height:1.4;color:var(--ink-2)}
+  .s5 .twist b{color:var(--active-hi);font-weight:700}
+
+  .preload *{transition:none!important}
+  @media print{ .frame{page-break-after:always} }
+</style>
+
+<div id="bar"></div>
+<main id="deck">
+  <div class="frame" id="slide-1">
+  <section class="slide s1" data-title="Title"
+    data-notes="Holding slide while the room fills. The pipe on the right runs on its own: requirements flow in and jam at the narrow point. 'This is what delivery looks like in most banks I know.' Introduce myself properly later, once the room has the problem.">
+    <div class="top-brand"><img class="falcon" alt="Barclays"></div>
+    <svg class="pipe-ghost" viewBox="0 0 900 520" aria-hidden="true" data-play="pipe">
+      <defs>
+        <pattern id="hatch-cover" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="14" stroke="rgba(255,255,255,.06)" stroke-width="4"/>
+        </pattern>
+      </defs>
+      <path class="body" d="M0 160 H260 C310 160 310 232 360 232 H620 C670 232 670 160 720 160 H900 V360 H720 C670 360 670 288 620 288 H360 C310 288 310 360 260 360 H0 Z"/>
+      <path class="throat" d="M360 232 H620 M360 288 H620"/>
+      <g class="flow"></g>
+    </svg>
+    <h1>How AI <span class="hl">rewired</span> the business analyst role</h1>
+    <p class="thesis">Coding is no longer the bottleneck. <b>Discovery is.</b></p>
+    <div class="speaker">
+      <div><div class="name">Yevhenii Volkovych</div><div class="role">Risk AI Business Analyst</div></div>
+      <div class="when"><b>AI for Business 2026</b>Prague</div>
+    </div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-2">
+  <section class="slide s-agenda" data-title="Agenda" data-auto="600"
+    data-notes="Four parts, one line. The line is the credit-risk question — it runs through every part, so by the demo you already know what we're answering. The four stops appear on their own in quick succession: why the constraint moved; the BA thinking with AI; the same question answered three ways, live; three lines to take home.">
+    <div class="rule"></div>
+    <h2>Agenda</h2>
+    <p class="thread">One credit-risk question runs through <b>all four parts.</b></p>
+    <div class="track" aria-hidden="true"><span class="seg" data-build="2"></span><span class="seg" data-build="3"></span><span class="seg" data-build="4"></span><span class="seg tail" data-build="4"></span></div>
+    <ol class="stops">
+      <li class="stop" data-build="1"><span class="node"></span><h3>The constraint moved</h3><p>Why faster code didn’t mean faster delivery.</p></li>
+      <li class="stop" data-build="2"><span class="node"></span><h3>The BA, thinking with AI</h3><p>Discovery and decisions at the new constraint.</p></li>
+      <li class="stop live" data-build="3"><span class="node"></span><span class="tag">Live</span><h3>Three approaches</h3><p>The same question, answered three ways.</p></li>
+      <li class="stop" data-build="4"><span class="node"></span><h3>Three lines to leave with</h3><p>The short version to take home.</p></li>
+    </ol>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">02</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-3">
+  <section class="slide s-flow" data-title="The bottleneck"
+    data-notes="The pipe runs as soon as the slide is up. Requirements come in faster than coding can turn them into working software, so they queue at the narrow part and the 'waiting' number keeps climbing. Let it run for a few seconds in silence. Then: the narrowest station sets the throughput of the whole system. For years that station was coding. (What changed comes on the next slides.)">
+    <div class="rule"></div>
+    <h2>This is a bottleneck</h2>
+    <div class="flow-wrap">
+      <svg class="flow-svg" viewBox="0 0 1640 340" role="img" data-play="sdlc"
+        aria-label="Pipe: a wide Requirements section narrows into a Coding choke, then widens into Working software. Requirements arrive faster than Coding can finish them, so they queue inside Coding.">
+        <defs>
+          <pattern id="hatch-flow" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="14" stroke="rgba(255,255,255,.07)" stroke-width="4"/>
+          </pattern>
+        </defs>
+        <g class="stations" text-anchor="middle">
+          <text x="250" y="66">Requirements</text>
+          <text x="820" y="66">Coding</text>
+          <text x="1390" y="66">Working software</text>
+        </g>
+        <path class="body" d="M20 120 H500 C570 120 570 172 640 172 H1000 C1070 172 1070 120 1140 120 H1620 V260 H1140 C1070 260 1070 208 1000 208 H640 C570 208 570 260 500 260 H20 Z"/>
+        <path class="throat" d="M640 172 H1000 M640 208 H1000"/>
+        <g class="flow"></g>
+        <g class="under" text-anchor="middle">
+          <text x="250" y="316">TOO MANY IN</text>
+          <text x="820" y="316" class="hot"><tspan class="waiting">17</tspan> REQUIREMENTS WAITING</text>
+          <text x="1390" y="316">LESS OUT THAN IN</text>
+        </g>
+      </svg>
+    </div>
+    <p class="caption">The narrowest station sets the throughput of the whole system.</p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">03</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-4">
+  <!-- ================= THE CONSTRAINT MOVED ================= -->
+  <!-- Source: Gartner — developers spend ~20–30% of their time writing code (Philip Walsh, Gartner, quoted in ITPro:
+       https://www.itpro.com/technology/artificial-intelligence/most-developers-will-soon-use-an-ai-pair-programmer-but-the-benefits-arent-black-and-white ).
+       Arithmetic is illustrative: halve the ~20% coding share → ~10% faster lifecycle. -->
+  <section class="slide s-constraint" data-title="The constraint moved"
+    data-notes="Simple arithmetic. Say coding gets 50% faster. But Gartner says only about a fifth of the lifecycle is writing code. So delivery gets roughly 10% faster. Coding is not delivery. The constraint moved upstream, to deciding what to build.">
+    <div class="rule"></div>
+    <h2>Coding ≠ delivery</h2>
+    <div class="eq">
+      <div class="term"><div class="v">50%</div><div class="l">faster coding</div></div>
+      <div class="op">of</div>
+      <div class="term"><div class="v">~20%</div><div class="l">of the lifecycle is coding</div></div>
+      <div class="op">≈</div>
+      <div class="term hero"><div class="v">~10%</div><div class="l">faster delivery</div></div>
+    </div>
+    <p class="line">The constraint moved upstream — to <em>deciding what to build</em>.</p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Coding share: Gartner (P. Walsh), 20–30% of developer time</span><span>Yevhenii Volkovych</span><span class="slide-no">04</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-5">
+  <section class="slide s-flow s-after2" data-title="After coding agents"
+    data-notes="Same pipe as before, still jammed. Click 1: coding agents arrive and Coding widens. The queue drains and everything that comes in now goes out. Click 2: coding got wider, more flows through. Click 3: but zoom out to the whole lifecycle. Code is now one wide station among eight, and everything after it flows. The queue has moved upstream, to discovery: working out what problem we are solving. That's where the BA sits.">
+    <div class="rule"></div>
+    <h2>After coding agents</h2>
+    <div class="flow-wrap">
+      <div class="flow-stage">
+        <svg class="flow-svg zoom-a" viewBox="0 0 1640 360" role="img" data-play="widen"
+          aria-label="The same pipe as slide 3. Coding widens; the queue drains and output rises to match input.">
+          <defs>
+            <pattern id="hatch-flow5" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="14" stroke="rgba(255,255,255,.07)" stroke-width="4"/>
+            </pattern>
+          </defs>
+          <g class="stations" text-anchor="middle">
+            <text x="250" y="66">Requirements</text>
+            <text x="820" y="66">Coding</text>
+            <text x="1390" y="66">Working software</text>
+          </g>
+          <path class="body"/>
+          <path class="throat"/>
+          <g class="flow"></g>
+          <g class="under" text-anchor="middle">
+            <text x="250" y="316">TOO MANY IN</text>
+            <text x="820" y="316" class="hot"><tspan class="waiting">17</tspan> REQUIREMENTS WAITING</text>
+            <text x="1390" y="316" class="out-label">LESS OUT THAN IN</text>
+          </g>
+        </svg>
+        <svg class="flow-svg zoom-b" viewBox="0 0 1640 360" role="img" data-play="lifecycle"
+          aria-label="The whole delivery lifecycle: Idea, Discovery, Prioritise, Code, Review, CI and QA, Deploy, User. Code is wide and so are the steps after it; Discovery is the narrowest step and work queues in front of it.">
+          <g class="stations small" text-anchor="middle">
+            <text x="120" y="66">Idea</text><text x="320" y="66">Discovery</text><text x="520" y="66">Prioritise</text><text x="720" y="66">Code</text>
+            <text x="920" y="66">Review</text><text x="1120" y="66">CI / QA</text><text x="1320" y="66">Deploy</text><text x="1520" y="66">User</text>
+          </g>
+          <path class="body"/>
+          <path class="throat"/>
+          <g class="flow"></g>
+          <g class="under small" text-anchor="middle">
+            <text x="320" y="300" class="hot"><tspan class="w0">0</tspan> WAITING</text>
+          </g>
+          <g class="why" text-anchor="middle">
+            <text x="320" y="340">WHAT PROBLEM?</text><text x="520" y="340">WHOSE GOAL?</text><text x="720" y="340" class="fast">AGENT SPEED</text>
+            <text x="920" y="340">HUMANS</text><text x="1120" y="340">CONFIDENCE</text><text x="1320" y="340">PERMISSION</text><text x="1520" y="340">VALUE</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <span class="cue" data-build="1" data-action="widen"></span>
+    <p class="caption" data-build="2">Coding got wider. More flows through.</p>
+    <span class="cue" data-build="3" data-action="zoom"></span>
+    <p class="twist" data-build="3">Build is no longer the constraint — <b>discovery is.</b></p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">05</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-6">
+  <!-- ================= INTRO (who am I) ================= -->
+  <section class="slide s-intro" data-title="Intro"
+    data-notes="Quick intro: who I am and why I care about this topic.">
+    <div class="intro-grid">
+      <div class="intro-left">
+        <div class="chip">~/who-am-i</div>
+        <h2>Hi, I’m<br><span class="hl">Yevhenii Volkovych</span></h2>
+        <div class="facts">
+          <div class="fact"><span class="k">Role</span><span class="v">Risk AI Business Analyst</span></div>
+          <div class="fact"><span class="k">Experience</span><span class="v">15 years in banking IT as an analyst</span></div>
+          <div class="fact"><span class="k">Stance</span><span class="v">Big AI advocate and enthusiast</span></div>
+        </div>
+      </div>
+      <div class="intro-right">
+        <!-- PLACEHOLDER: LinkedIn-style photo (circular crop; drop an <img> inside .avatar-slot) -->
+        <div class="avatar-slot" role="img" aria-label="Placeholder: LinkedIn-style photo"><span>Photo</span></div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">06</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-7">
+  <!-- ================= WHO SITS AT THE NEW CONSTRAINT ================= -->
+  <!-- Source: Anthropic, "Agentic coding and persistent returns to expertise" (Jun 2026), ~400k Claude Code sessions:
+       https://www.anthropic.com/research/claude-code-expertise — people make ~70% of planning decisions; Claude ~80% of execution decisions. -->
+  <section class="slide s-who" data-title="Who sits at the new constraint"
+    data-notes="Anthropic looked at about 400,000 Claude Code sessions. People make about 70% of the planning decisions; the model makes about 80% of the execution decisions. When execution gets cheap, whoever frames the question and checks the answer sets the value. That's the BA.">
+    <div class="rule"></div>
+    <h2>Who sits at the new constraint</h2>
+    <div class="who-grid">
+      <div class="exhibit">
+        <div class="ex-row">
+          <div class="ex-label">Planning decisions <span>what to do</span></div>
+          <div class="bar"><div class="seg people" style="width:70%">People ~70%</div><div class="seg model" style="width:30%"></div></div>
+        </div>
+        <div class="ex-row">
+          <div class="ex-label">Execution decisions <span>how to do it</span></div>
+          <div class="bar"><div class="seg people" style="width:20%"></div><div class="seg model" style="width:80%">Model ~80%</div></div>
+        </div>
+        <div class="ex-key"><span><i class="people"></i>People</span><span><i class="model"></i>Model</span></div>
+      </div>
+      <div class="stations">
+        <div class="stn"><b>Discovery</b><span>frame the question</span></div>
+        <div class="stn"><b>Review</b><span>check what came back</span></div>
+        <div class="stn"><b>Decision</b><span>say what is done</span></div>
+      </div>
+    </div>
+    <p class="remember">When execution gets cheap, <b>the person who frames and checks sets the value.</b></p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Anthropic, Agentic coding and persistent returns to expertise (2026)</span><span>Yevhenii Volkovych</span><span class="slide-no">07</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-8">
+  <!-- ================= DOMAIN EXPERTISE > JOB TITLE ================= -->
+  <!-- Source: Anthropic, "Agentic coding and persistent returns to expertise" (16 Jun 2026), ~400k Claude Code sessions:
+       https://www.anthropic.com/research/claude-code-expertise
+       - Verified success: novice-rated sessions 15%; intermediate-or-above 28–33%.
+       - Code-producing sessions, verified success: software occupations ~34% vs other occupations ~29%; every top-10 occupation within 7 points.
+       - "success is determined by how well a person understands the problem they are trying to solve, not whether they're trained in coding." -->
+  <section class="slide s-ev" data-title="Domain expertise beats job title"
+    data-notes="Same study, second finding. What predicted success wasn't job title — it was how well the person understood the problem. Novice-rated sessions hit verified success 15% of the time; intermediate and up, about 30%. Software people versus everyone else: 34 versus 29 — a small gap. That's the BA argument in one finding.">
+    <div class="rule"></div>
+    <h2>Domain expertise &gt; job title</h2>
+    <div class="ev-grid">
+      <div class="ev hero">
+        <div class="k">By domain expertise</div>
+        <div class="pair"><div><div class="v dim">15%</div><div class="l">novice</div></div><div class="arrow">→</div><div><div class="v">~30%</div><div class="l">intermediate or expert</div></div></div>
+        <div class="foot">verified success · roughly <b>2×</b></div>
+      </div>
+      <div class="ev">
+        <div class="k">By job title</div>
+        <div class="pair"><div><div class="v dim">34%</div><div class="l">software roles</div></div><div class="arrow">vs</div><div><div class="v dim">29%</div><div class="l">everyone else</div></div></div>
+        <div class="foot">verified success in coding sessions · small gap</div>
+      </div>
+    </div>
+    <p class="remember">Success tracks <b>how well you understand the problem</b>,<br>not whether you're trained to code.</p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Anthropic, Agentic coding and persistent returns to expertise (2026)</span><span>Yevhenii Volkovych</span><span class="slide-no">08</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-9">
+  <!-- ================= IIBA 2026 ================= -->
+  <!-- Source: IIBA, Global State of Business Analysis 2026 — 2,120 professionals, 122 countries. Positive AI career impact: 63% (2024), 74% (2025), 69% (2026); negative 5%.
+       Communication #1 skill (3rd year running); critical thinking climbed to #2.
+       https://www.iiba.org/business-analysis-blogs/insight-enables-confidence-the-2026-global-state-of-business-analysis-report/ -->
+  <section class="slide s-ev" data-title="IIBA 2026"
+    data-notes="IIBA asked 2,120 analysts across 122 countries. 69% say AI is positive for their career — down from 74% last year. At the same time, critical thinking climbed to the second most important skill. Sentiment dipped; the skill most valued moved towards judgement.">
+    <div class="rule"></div>
+    <h2>Analysts on AI, 2026</h2>
+    <div class="ev-grid">
+      <div class="ev">
+        <div class="k">Positive on AI for their career</div>
+        <div class="pair"><div><div class="v dim">74%</div><div class="l">2025</div></div><div class="arrow">→</div><div><div class="v">69%</div><div class="l">2026</div></div></div>
+        <div class="foot">sentiment dipped</div>
+      </div>
+      <div class="ev hero">
+        <div class="k">Most important BA skills</div>
+        <div class="rank"><div class="r"><span>#1</span>Communication</div><div class="r on"><span>#2</span>Critical thinking</div></div>
+        <div class="foot">critical thinking climbed to second</div>
+      </div>
+    </div>
+    <p class="remember">Sentiment dipped. <b>Judgement rose in value.</b></p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">IIBA, Global State of Business Analysis 2026 · n = 2,120</span><span>Yevhenii Volkovych</span><span class="slide-no">09</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-10">
+  <!-- ================= RAND ================= -->
+  <!-- Source: RAND, "The Root Causes of Failure for Artificial Intelligence Projects and How They Can Succeed" (RR-A2680-1, 2024),
+       interviews with 65 experienced data scientists and engineers: misunderstanding / miscommunicating the problem to be solved was the most common root cause.
+       https://www.rand.org/pubs/research_reports/RRA2680-1.html -->
+  <section class="slide s-rand" data-title="RAND: misunderstanding the problem"
+    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. Let me make this concrete with one question from credit risk.">
+    <div class="rule"></div>
+    <div class="kicker">Why AI projects get into trouble</div>
+    <h2 class="big">The most common root cause:<br><span class="hl">misunderstanding the problem.</span></h2>
+    <p class="sub2">RAND interviews with 65 experienced data scientists and engineers.</p>
+    <p class="next">Next → one question from credit risk</p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">RAND, Root Causes of Failure for AI Projects (2024)</span><span>Yevhenii Volkovych</span><span class="slide-no">10</span></span></div>
+  </section>
+  </div>
+
+  
+  <div class="frame" id="slide-11">
+  <!-- ================= SECTION DIVIDER: Discovery under pressure ================= -->
+  <section class="slide s-div" data-title="Section: Discovery under pressure"
+    data-notes="RAND said the root cause is misunderstanding the problem. So let me show you one real credit-risk question, and what it took to define it.">
+    <div class="div-grid">
+      <div class="div-left"><div class="kicker">Section</div><h2>Discovery under pressure</h2></div>
+      <div class="div-right"><p>One credit-risk question</p></div>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">11</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-12">
+  <!-- ================= BASEL ================= -->
+  <!-- Source: BCBS Working Paper No. 15, "Studies on credit risk concentration" (Nov 2006): https://www.bis.org/publ/bcbs_wp15.pdf
+       "Historical experience shows that concentration of credit risk in asset portfolios has been one of the major causes of bank distress." -->
+  <section class="slide s-quote" data-title="Basel: concentration and bank distress"
+    data-notes="Why this question? Because the Basel Committee says it plainly: concentration of credit risk has been one of the major causes of bank distress.">
+    <div class="rule"></div>
+    <div class="kicker">Why concentration</div>
+    <blockquote>“Concentration of credit risk in asset portfolios has been <span class="hl">one of the major causes of bank distress.</span>”</blockquote>
+    <p class="cite">— Basel Committee on Banking Supervision, Working Paper 15</p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS Working Paper 15, Studies on credit risk concentration (2006)</span><span>Yevhenii Volkovych</span><span class="slide-no">12</span></span></div>
+  </section>
+  </div>
+  <div class="frame" id="slide-13">
+  <!-- ================= SECTOR VS NAME ================= -->
+  <!-- Sources: BCBS WP15 (2006): name concentration could add 2–8% to credit VaR; sector concentration can increase economic capital by 20–40%.
+       AlixPartners press release, 23 Sep 2021: shortages related to semiconductors to cost the auto industry $210bn in revenue in 2021; 7.7m units of production lost (forecast).
+       https://www.alixpartners.com/newsroom/press-release-shortages-related-to-semiconductors-to-cost-the-auto-industry-210-billion-in-revenues-this-year-says-new-alixpartners-forecast/ -->
+  <section class="slide s-ev s-sector" data-title="Sector beats single name"
+    data-notes="And it's not mainly about single big names. Basel's studies: name concentration adds 2 to 8% to capital; sector concentration can add 20 to 40%. What hurts is risk that many counterparties share. 2021 is the example: one chip shortage hit an entire industry — about $210bn of auto revenue, 7.7 million vehicles, per AlixPartners' forecast.">
+    <div class="rule"></div>
+    <h2>Shared risk beats single names</h2>
+    <div class="ev-grid">
+      <div class="ev">
+        <div class="k">Name concentration</div>
+        <div class="v dim">+2–8%</div>
+        <div class="foot">added to credit VaR · one big borrower</div>
+      </div>
+      <div class="ev hero">
+        <div class="k">Sector concentration</div>
+        <div class="v">+20–40%</div>
+        <div class="foot">added to economic capital · risks counterparties share</div>
+      </div>
+    </div>
+    <div class="shock"><span class="tag">Shared shock · 2021</span>Chip shortage: <b>~$210bn</b> auto revenue and <b>7.7m vehicles</b> lost <span class="dim">· forecast</span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS WP15 (2006) · AlixPartners (Sep 2021)</span><span>Yevhenii Volkovych</span><span class="slide-no">13</span></span></div>
+  </section>
+  </div>
+  <div class="frame" id="slide-14">
+  <!-- ================= THE QUESTION ================= -->
+  <section class="slide s-question" data-title="The question"
+    data-notes="So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only.">
+    <div class="rule"></div>
+    <div class="kicker">The question for the rest of this talk</div>
+    <h2 class="big">Across ten public auto and semiconductor companies:<br><span class="hl">which risks do they share — and how strongly?</span></h2>
+    <div class="chips"><span>Autos</span><span>Semiconductors</span><span>Public filings</span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">14</span></span></div>
+  </section>
+  </div>
+  <div class="frame" id="slide-15">
+  <!-- ================= SECTION DIVIDER: AI as a thinking partner ================= -->
+  <section class="slide s-div" data-title="Section: AI as a thinking partner"
+    data-notes="Before anyone builds anything, I use AI to attack the question. Not one chat — several research agents, each coming at it from a different angle. Then I read what comes back and decide what we actually build.">
+    <div class="div-grid">
+      <div class="div-left"><div class="kicker">Section</div><h2>AI as a thinking partner</h2></div>
+      <div class="div-right"><p>Attack the question from several angles before anyone builds</p></div>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">15</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-16">
+  <!-- ================= SAME AI, TWO KINDS OF WORK (Dell'Acqua et al.) ================= -->
+  <!-- Source: Dell'Acqua et al., "Navigating the Jagged Technological Frontier", Harvard Business School working paper 24-013 (2023), with BCG; 758 consultants, GPT-4.
+       On 18 tasks within the model's capabilities: 25.1% faster, >40% higher quality vs control. On a task selected to be outside its capabilities:
+       19 percentage points less likely to produce a correct solution. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4573321 -->
+  <section class="slide s-ev s-jag" data-title="Same AI, two kinds of work"
+    data-notes="Harvard and BCG gave 758 consultants GPT-4 and compared them with colleagues working without it. On tasks the AI is good at, they finished about a quarter faster and their work was rated over 40% better. Then they got a task that looked just as easy, but the AI gets it wrong. There, the people using AI were 19 points more often wrong than people working without it. The output looked equally confident both times. You can't tell from the answer which kind of task you're in — so before I trust any answer, I use the AI to attack the framing.">
+    <div class="rule"></div>
+    <h2>Same AI, two kinds of work</h2>
+    <p class="lede">Harvard &amp; BCG gave 758 consultants GPT-4 and compared them with colleagues working without it.</p>
+    <div class="ev-grid">
+      <div class="ev hero">
+        <div class="k">Tasks the AI is good at</div>
+        <div class="pair"><div><div class="v">25%</div><div class="l">faster to finish</div></div><div><div class="v">&gt;40%</div><div class="l">better quality</div></div></div>
+        <div class="foot">vs colleagues without AI · 18 consulting tasks</div>
+      </div>
+      <div class="ev">
+        <div class="k">Similar-looking task the AI gets wrong</div>
+        <div class="pair"><div><div class="v neg">19 pts</div><div class="l">more often wrong</div></div></div>
+        <div class="foot">vs colleagues without AI · one business-case task</div>
+      </div>
+    </div>
+    <p class="remember">The output can’t tell you which kind you’re in. <b>So attack the framing first.</b></p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Dell’Acqua et al., Harvard Business School &amp; BCG (2023)</span><span>Yevhenii Volkovych</span><span class="slide-no">16</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-17">
+  <!-- ================= WHAT IS A DEEP RESEARCH AGENT ================= -->
+  <section class="slide s-dra" data-title="What is a deep research agent"
+    data-notes="Quick definition, because I'll use the term a lot. A deep research agent isn't a chat reply. You give it a question, and it goes off with tools — search, read, follow links — for minutes, sometimes longer, and comes back with a brief that cites where every claim came from. You still own the question. And the trick I want to show you: I didn't run one. I ran several, in parallel.">
+    <div class="rule"></div>
+    <div class="kicker">A quick definition</div>
+    <h2>What is a deep research agent?</h2>
+    <p class="lede">Not a chat reply. <b>An agent that searches, reads and comes back with a sourced brief.</b></p>
+    <ul class="traits">
+      <li><b>Uses tools</b><span>search, open, read, follow links</span></li>
+      <li><b>Runs long</b><span>minutes, not seconds — loops until done</span></li>
+      <li><b>Cites sources</b><span>every claim points back to a page</span></li>
+      <li><b>You steer</b><span>you own the question and the angle</span></li>
+    </ul>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">17</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-18">
+  <!-- ================= SEVERAL AGENTS, DIFFERENT ANGLES ================= -->
+  <section class="slide s-multi" data-title="Several agents, different angles"
+    data-notes="Here's what that looked like. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. I'll play the short recording rather than spin them up live — it takes a while. Then I merged what came back into one brief, and that brief is what I prototyped from.">
+    <div class="rule"></div>
+    <h2>Several agents, different angles</h2>
+    <div class="multi-grid">
+      <div class="angles">
+        <p class="q"><b>Same question as slide 14.</b> Each agent got a different angle.</p>
+        <ul>
+          <li><i>01</i>The risk-analyst view</li>
+          <li><i>02</i>What 10-K filings contain</li>
+          <li><i>03</i>Retrieval approaches</li>
+          <li><i>04</i>How to check the answer</li>
+        </ul>
+      </div>
+      <!-- PLACEHOLDER: short video of several deep-research agents running in parallel (multi-terminal). Drop a <video> or <img> inside .shot-slot -->
+      <div class="shot-slot" role="img" aria-label="Placeholder: multi-agent research video"><span>Video · Agents researching in parallel</span></div>
+    </div>
+    <div class="strip"><span class="tag">Then</span><b>Synthesise</b><span class="ar">→</span><b>one brief</b><span class="ar">→</span><b>prototype</b></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">18</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-19">
+  <!-- ================= THREE APPROACHES ================= -->
+  <section class="slide s-three" data-title="Three approaches"
+    data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live.">
+    <div class="rule"></div>
+    <h2>Three approaches</h2>
+    <p class="lede">From the synthesised brief · same shared-risk question</p>
+    <div class="appr">
+      <div class="ap"><span class="n">01</span><span class="k">Similarity</span><h3>Plain vector RAG</h3><p>Retrieves the most similar passages and lets the model summarise shared risks.</p></div>
+      <div class="ap"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p></div>
+      <div class="ap"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p></div>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">19</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-20">
+  <!-- ================= DEMO: HOW THE CONSOLE WORKS (foundation mock, not the real app) ================= -->
+  <section class="slide s-console" data-title="Demo: how the console works"
+    data-notes="Before I leave the slides, one walk through the console so you know where to look. Top right tells you whether it's live or a replay. You pick a question from the chips, or type one. The answer comes back in the middle. And on the right is the part I care about most: the evidence — which filing, which passage, so you can check it. Same layout for all three approaches.">
+    <div class="rule"></div>
+    <div class="kicker">Demo</div>
+    <h2>How the console works</h2>
+    <div class="console" role="img" aria-label="Schematic of the demo console: question, answer and evidence panels">
+      <div class="c-chrome"><span class="dotsx"><i></i><i></i><i></i></span><span class="ttl">Shared-risk console · synthetic demo</span><span class="sp"></span><span class="badge live">Live</span><span class="badge replay">Replay</span></div>
+      <div class="c-body">
+        <div class="pnl"><span class="pk"><em>1</em>Ask</span>
+          <span class="qchip on">Which risks do they share?</span><span class="qchip">How strongly?</span><span class="qchip">Who is most exposed?</span>
+          <span class="qbox">or type a question…</span></div>
+        <div class="pnl"><span class="pk"><em>2</em>Answer</span>
+          <span class="ans-line hi" style="width:88%"></span><span class="ans-line" style="width:96%"></span><span class="ans-line" style="width:72%"></span><span class="ans-line hi" style="width:60%"></span><span class="ans-line" style="width:84%"></span>
+          <span class="ans-note">shared risks · strength · companies</span></div>
+        <div class="pnl"><span class="pk"><em>3</em>Evidence</span>
+          <span class="ev-item">Company A · 10-K <code>Item 1A ¶4</code></span><span class="ev-item">Company D · 10-K <code>Item 1A ¶11</code></span><span class="ev-item">Company G · 10-K <code>Item 1A ¶2</code></span>
+          <span class="ans-note">click to see the quoted passage</span></div>
+      </div>
+    </div>
+    <div class="c-flow"><b>Question</b><span class="ar">→</span><b>Answer</b><span class="ar">→</span><b>Evidence you can check</b><span class="mock">Schematic · not the live app</span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>Yevhenii Volkovych</span><span class="slide-no">20</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-21">
+  <!-- ================= DEMO CUE 1: PLAIN RAG ================= -->
+  <section class="slide s-cue" data-title="Plain RAG"
+    data-notes="Demo one, plain vector RAG. Watch the answer — it reads well. Then try to trace it: which filings, which passages, how many companies actually said this? That's the gap. Switching to the live console now.">
+    <div class="rule"></div>
+    <div class="kicker">Demo 1 of 3 · Plain vector RAG</div>
+    <h2>Plain RAG</h2>
+    <div class="cue-grid">
+      <div class="watch">
+        <div class="wk">Watch for</div>
+        <p>Fluent answer — but can you trace which filings it came from?</p>
+        <div class="switch">Switch to live console</div>
+      </div>
+      <!-- PLACEHOLDER: live console, Plain RAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
+      <div class="shot-slot" role="img" aria-label="Placeholder: live console, Plain RAG"><span>Live console · Plain vector RAG</span></div>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>Yevhenii Volkovych</span><span class="slide-no">21</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-22">
+  <!-- ================= DEMO CUE 2: GRAPHRAG ================= -->
+  <section class="slide s-cue" data-title="GraphRAG"
+    data-notes="Demo two, GraphRAG on Neo4j. This time watch three things: the Cypher query it writes, the subgraph of companies and risks that comes back, and that I can click any link to see the quote behind it. Over to the console.">
+    <div class="rule"></div>
+    <div class="kicker">Demo 2 of 3 · GraphRAG (Neo4j)</div>
+    <h2>GraphRAG</h2>
+    <div class="cue-grid">
+      <div class="watch">
+        <div class="wk">Watch for</div>
+        <p>The Cypher query, the subgraph it returns, and click-to-quote on each link.</p>
+        <div class="switch">Switch to live console</div>
+      </div>
+      <!-- PLACEHOLDER: live console, GraphRAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
+      <div class="shot-slot" role="img" aria-label="Placeholder: live console, GraphRAG"><span>Live console · GraphRAG (Neo4j)</span></div>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>Yevhenii Volkovych</span><span class="slide-no">22</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-23">
+  <!-- ================= DEMO CUE 3: TAXONOMY-FIRST ================= -->
+  <section class="slide s-cue" data-title="Taxonomy-first"
+    data-notes="Demo three, taxonomy first. Categories fixed up front, the counting done in code. Watch the heatmap — risk by company — and then open any cell: the quote drawer shows exactly which passage put it there. Let's go live.">
+    <div class="rule"></div>
+    <div class="kicker">Demo 3 of 3 · Taxonomy-first</div>
+    <h2>Taxonomy-first</h2>
+    <div class="cue-grid">
+      <div class="watch">
+        <div class="wk">Watch for</div>
+        <p>A heatmap of risk × company — and the quote drawer behind every cell.</p>
+        <div class="switch">Switch to live console</div>
+      </div>
+      <!-- PLACEHOLDER: live console, Taxonomy-first. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
+      <div class="shot-slot" role="img" aria-label="Placeholder: live console, Taxonomy-first"><span>Live console · Taxonomy-first</span></div>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>Yevhenii Volkovych</span><span class="slide-no">23</span></span></div>
+  </section>
+  </div>
+
+
+  </main>
+<nav id="dots" aria-label="Slides"></nav>
+
+<script>
+(function(){
+  // preview mode for rendering PNGs: index.html?shot=N shows only frame N, fully built
+  const shot = parseInt(new URLSearchParams(location.search).get('shot'),10);
+  if (shot) document.querySelectorAll('.frame').forEach((f,k)=>{ if (k!==shot-1) f.style.display='none'; });
+  const frames = [...document.querySelectorAll('.frame')];
+  const slides = frames.map(f => f.querySelector('.slide'));
+  const dots = document.getElementById('dots');
+  const bar = document.getElementById('bar');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  let i = -1;
+
+  // logo: shows only where falcon.svg sits next to this file (local copy); otherwise the slot disappears
+  const logo = new Image();
+  logo.onload = () => document.querySelectorAll('img.falcon').forEach(img => { img.src = logo.src; });
+  logo.src = 'falcon.svg';
+
+  // players: elements with data-play animate once their build is revealed
+  // cosine ease between two widths, for smooth pipe shoulders
+  const blend = (a, b, t) => a + (b - a)*(1 - Math.cos(Math.PI*Math.max(0, Math.min(1, t))))/2;
+  const players = {
+    // cover: ghost pipe, queue forms in front of the narrow part
+    pipe: el => makeFlow(el, {C:260, R:9, gap:22, valueAt:620, exit:900, fadeOut:820,
+      half: x => x < 260 ? 100 : x < 360 ? 100 - 72*(x-260)/100 : x < 620 ? 28 : x < 720 ? 28 + 72*(x-620)/100 : 100,
+      gates:[{x:352, every:1.6}], spawn:.42, cap:13, inSpeed:150, outSpeed:170,
+      seed:[[40, 130, 210, ...rowOf(352, 22, 6)], [780]]}),
+    // slide 3: requirements queue single-file inside Coding; the waiting count keeps climbing
+    sdlc: el => makeFlow(el, {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560,
+      half: x => x < 500 ? 70 : x < 640 ? 70 - 52*(x-500)/140 : x < 1000 ? 18 : x < 1140 ? 18 + 52*(x-1000)/140 : 70,
+      gates:[{x:988, every:1.0, waiting: el.querySelector('.waiting')}], spawn:.45, cap:26, inSpeed:190, outSpeed:220,
+      seed:[[90, 200, 300, 390, 470, ...rowOf(988, 24, 12)], [1230, 1480]]}),
+    // slide 5, part 1: same pipe; the Coding section can widen (o.w) and then releases at agent speed
+    widen: el => {
+      const o = {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560, w:18, x0:20, x1:1620,
+        gates:[{x:988, every:1.0, waiting: el.querySelector('.waiting')}], spawn:.45, cap:26, inSpeed:190, outSpeed:220,
+        seed:[[90, 200, 300, 390, 470, ...rowOf(988, 24, 12)], [1230, 1480]],
+        throat: () => `M640 ${190-o.w} H1000 M640 ${190+o.w} H1000`};
+      o.half = x => x < 500 ? 70 : x < 640 ? blend(70, o.w, (x-500)/140) : x < 1000 ? o.w : x < 1140 ? blend(o.w, 70, (x-1000)/140) : 70;
+      return makeFlow(el, o);
+    },
+    // slide 5, part 2: the whole lifecycle; Code is wide, the human-speed steps are narrow
+    lifecycle: el => {
+      const W = [70, 16, 32, 60, 46, 56, 62, 70];               // half-width per station, 200 units each from x=20
+      const half = x => {
+        const k = Math.max(0, Math.min(7, Math.floor((x-20)/200))), edge = 20 + 200*k;
+        if (x - edge < 26 && k > 0) return blend(W[k-1], W[k], (x - edge + 26)/52);
+        if (edge + 200 - x < 26 && k < 7) return blend(W[k], W[k+1], (x - (edge+200) + 26)/52);
+        return W[k];
+      };
+      return makeFlow(el, {C:190, R:9, gap:21, valueAt:820, exit:1640, fadeOut:1570, x0:20, x1:1620, half,
+        gates:[{x:410, every:1.1, waiting: el.querySelector('.w0')}, {x:610, every:.8}],
+        spawn:.45, cap:16, inSpeed:200, outSpeed:220,
+        throat: () => [[220,420,16]].map(([a,b,w]) => `M${a+26} ${190-w} H${b-26} M${a+26} ${190+w} H${b-26}`).join(' '),
+        seed:[[40, 120, 190, ...rowOf(410, 21, 9)], rowOf(610, 21, 3), [700, 930, 1150, 1360, 1500]]});
+    }
+  };
+  function rowOf(head, gap, n){ return Array.from({length:n}, (_, k) => head - k*gap); }
+  // one-off moments triggered by a build step; called with on=false when the speaker steps back
+  const actions = {
+    widen(cue, on){
+      const svg = cue.closest('.slide').querySelector('.zoom-a'), f = svg._player.flow;
+      f.tween('w', on ? 56 : 18, reduce.matches ? 0 : 900);
+      f.o.gates[0].every = on ? .2 : 1.0;
+      svg.querySelector('.out-label').textContent = on ? 'MORE OUT' : 'LESS OUT THAN IN';
+    },
+    zoom(cue, on){ cue.closest('.slide').querySelector('.flow-stage').classList.toggle('zoomed', on); }
+  };
+  slides.forEach(s => s.querySelectorAll('[data-play]').forEach(el => { el._player = players[el.dataset.play](el); }));
+
+  // builds: groups of [data-build] per slide, revealed in order by the clicker
+  const groups = slides.map(s => {
+    const els = [...s.querySelectorAll('[data-build]')];
+    return [...new Set(els.map(e => +e.dataset.build))].sort((a,b)=>a-b).map(n => els.filter(e => +e.dataset.build === n));
+  });
+  const step = slides.map(() => 0);
+  function setStep(k, n){
+    n = Math.max(0, Math.min(groups[k].length, n));
+    step[k] = n;
+    groups[k].forEach((g, j) => g.forEach(el => {
+      const shown = j < n;
+      el.classList.toggle('pending', !shown);
+      el.classList.toggle('built', shown);
+      if (el._player) shown && k === i ? el._player.play() : el._player.stop();
+      if (el.dataset.action && !!el._on !== shown){ el._on = shown; actions[el.dataset.action](el, shown); }
+    }));
+  }
+
+  function fit(){
+    const s = Math.min(innerWidth/1920, innerHeight/1080);
+    document.documentElement.style.setProperty('--s', s);
+  }
+  frames.forEach((f, k) => {
+    const b = document.createElement('button');
+    b.title = (k+1) + ' · ' + (slides[k].dataset.title || '');
+    b.setAttribute('aria-label', 'Go to slide ' + b.title);
+    b.onclick = () => go(k);
+    dots.appendChild(b);
+  });
+
+  let arriving = null;   // set by keyboard / clicker navigation
+  // slides with data-auto="ms" reveal their builds on their own after arrival; a clicker press finishes the sequence
+  let autoT = 0;
+  function autoRun(k, first){
+    clearTimeout(autoT);
+    const ms = +slides[k].dataset.auto;
+    if (!ms || shot || step[k] >= groups[k].length) return;
+    autoT = setTimeout(() => { if (k === i){ setStep(k, step[k] + 1); autoRun(k); } }, first ? 600 : ms);
+  }
+  function mark(k){
+    if (k === i) return;
+    const prev = i; i = k;
+    if (prev >= 0) slides[prev].querySelectorAll('[data-play]').forEach(el => el._player.stop());
+    slides[k].querySelectorAll('[data-play]:not([data-build])').forEach(el => el._player.play());
+    // moving forward (clicker, keys, wheel, trackpad or dots) starts a slide at its first build; moving back shows it complete
+    const fwd = arriving && arriving.k === k ? arriving.dir > 0 : prev < 0 || k > prev;
+    setStep(k, shot ? groups[k].length : fwd ? 0 : groups[k].length);
+    autoRun(k, true);
+    arriving = null;
+    document.body.classList.toggle('on-cover', k === 0);
+    [...dots.children].forEach((d,j)=>d.classList.toggle('on', j===i));
+    bar.style.width = ((i+1)/frames.length*100) + '%';
+    if (!shot && location.hash !== '#'+(i+1)) history.replaceState(null,'','#'+(i+1));
+    if (slides[i].dataset.notes) console.log('[notes ' + (i+1) + '] ' + slides[i].dataset.notes);
+  }
+  function go(n, how){
+    n = Math.max(0, Math.min(frames.length-1, n));
+    if (n === i) return;
+    const key = how === 'key';
+    if (key){
+      arriving = {k:n, dir: n > i ? 1 : -1};
+      frames[n].classList.remove('arrive'); void frames[n].offsetWidth; frames[n].classList.add('arrive');
+    }
+    frames[n].scrollIntoView({behavior: key || how === 'instant' ? 'instant' : 'smooth', block:'start'});
+  }
+  function next(){
+    if (step[i] < groups[i].length && slides[i].dataset.auto){ clearTimeout(autoT); setStep(i, groups[i].length); return; }
+    step[i] < groups[i].length ? setStep(i, step[i]+1) : go(i+1, 'key');
+  }
+  function prev(){
+    if (slides[i].dataset.auto){ clearTimeout(autoT); go(i-1, 'key'); return; }
+    step[i] > 0 && groups[i].length ? setStep(i, step[i]-1) : go(i-1, 'key');
+  }
+  // clickers send PageDown/PageUp or arrows; native scroll (wheel / trackpad / touch) still works
+  addEventListener('keydown', e => {
+    if (['ArrowRight','ArrowDown','PageDown'].includes(e.key) || (e.key===' ' && !e.shiftKey)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key) || (e.key===' ' && e.shiftKey)) { e.preventDefault(); prev(); }
+    else if (e.key==='Home') { e.preventDefault(); go(0, 'key'); }
+    else if (e.key==='End') { e.preventDefault(); go(frames.length-1, 'key'); }
+  });
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (en.isIntersecting && en.intersectionRatio >= .6) mark(frames.indexOf(en.target));
+  }), {threshold:[.6]});
+  frames.forEach(f => io.observe(f));
+  addEventListener('resize', fit);
+  fit();
+  if (shot) { mark(shot-1); }
+  else {
+    const start = (parseInt(location.hash.slice(1),10)||1)-1;
+    const k = Math.max(0, Math.min(frames.length-1, start));
+    if (k > 0) frames[k].scrollIntoView({behavior:'instant', block:'start'});
+    mark(k);
+  }
+  setTimeout(()=>document.documentElement.classList.remove('preload'), 400);
+
+  // A pipe with narrow stations (gates). Items arrive at a fixed rate; each gate lets one through every `every` seconds,
+  // so queues build in front of the slowest gates. Rest state is a still frame from `seed` (one x-list per stage,
+  // the last list being items already through every gate); play() starts the flow, stop() puts the still frame back.
+  function makeFlow(svg, o){
+    const NS = 'http://www.w3.org/2000/svg', g = svg.querySelector('.flow'), G = o.gates.length;
+    const body = o.x0 != null && svg.querySelector('.body'), throat = o.throat && svg.querySelector('.throat');
+    let list = [], raf = 0, last = 0, spawnT = 0, timers = o.gates.map(() => 0), backlog = 0, n = 7, tw = null;
+    const rnd = () => (n = (n*9301 + 49297) % 233280) / 233280;   // repeatable still frame
+    function shape(){
+      if (body){
+        const top = [], bot = [];
+        for (let x = o.x0; x <= o.x1; x += 6){ const h = o.half(x); top.push(x + ' ' + (o.C - h).toFixed(1)); bot.unshift(x + ' ' + (o.C + h).toFixed(1)); }
+        body.setAttribute('d', 'M' + top.join(' L') + ' L' + bot.join(' L') + ' Z');
+      }
+      if (throat) throat.setAttribute('d', o.throat());
+    }
+    function add(x, stage){
+      const el = document.createElementNS(NS, 'circle');
+      el.setAttribute('r', o.R); el.setAttribute('class', 'idea'); g.appendChild(el);
+      const d = {x, off: rnd()*2-1, el, stage}; list.push(d); draw(d); return d;
+    }
+    function draw(d){
+      d.el.setAttribute('cx', d.x.toFixed(1));
+      d.el.setAttribute('cy', (o.C + d.off*Math.max(0, o.half(d.x) - o.R - 3)).toFixed(1));
+      d.el.setAttribute('class', d.x > o.valueAt ? 'value' : 'idea');
+      d.el.style.opacity = d.x < 20 ? Math.max(0, (d.x+20)/40) : d.x > o.fadeOut ? Math.max(0, 1 - (d.x-o.fadeOut)/(o.exit-o.fadeOut)) : 1;
+    }
+    const inStage = s => list.filter(d => d.stage === s).sort((a, b) => b.x - a.x);
+    // waiting = items held up in front of a gate (still frame: every item before the gate)
+    function count(){ o.gates.forEach((gt, k) => { if (gt.waiting) gt.waiting.textContent = list.filter(d => d.stage === k && (!raf || d.held)).length + (k === 0 ? backlog : 0); }); }
+    function seed(){
+      list.forEach(d => d.el.remove()); list = []; backlog = 0; n = 7; spawnT = 0; timers = timers.map(() => 0);
+      (o.seed || []).forEach((xs, stage) => xs.forEach(x => add(x, stage)));
+      count();
+    }
+    function tick(t){
+      const dt = Math.min(.05, (t - last)/1000); last = t;
+      if (tw){                                   // shape change in progress (e.g. Coding widening)
+        const p = Math.min(1, (t - tw.t0)/tw.ms);
+        o[tw.key] = blend(tw.from, tw.to, p); shape();
+        if (p >= 1) tw = null;
+      }
+      spawnT += dt;
+      if (spawnT > o.spawn){ spawnT = 0; inStage(0).length < o.cap ? add(-20, 0) : backlog++; }
+      o.gates.forEach((gt, k) => {
+        timers[k] += dt;
+        if (timers[k] < gt.every) return;
+        const head = inStage(k)[0];
+        const blocked = list.some(d => d.stage === k+1 && d.x < gt.x + o.gap);
+        if (head && head.x >= gt.x - 1 && !blocked){
+          timers[k] = 0; head.stage++;
+          if (k === 0 && backlog){ backlog--; add(-20, 0); }
+        }
+      });
+      for (let st = 0; st <= G; st++){
+        let limit = st < G ? o.gates[st].x : Infinity;
+        for (const d of inStage(st)){
+          const v = st === G ? o.outSpeed : o.inSpeed;
+          const nx = Math.max(d.x, Math.min(d.x + v*dt, limit));
+          d.held = st < G && nx - d.x < v*dt*.5; d.x = nx;
+          limit = d.x - o.gap;
+          draw(d);
+        }
+      }
+      list = list.filter(d => d.x < o.exit || (d.el.remove(), false));
+      count();
+      raf = requestAnimationFrame(tick);
+    }
+    shape(); seed();
+    const flow = {o, tween(key, to, ms){
+      if (!ms || !raf){ o[key] = to; tw = null; shape(); list.forEach(draw); return; }
+      tw = {key, from: o[key], to, ms, t0: performance.now()};
+    }};
+    return {
+      flow,
+      play(){
+        if (svg.classList.contains('running') || reduce.matches) return;   // reduced motion: the still frame stays
+        svg.classList.add('running');
+        last = performance.now(); raf = requestAnimationFrame(tick);
+      },
+      stop(){ cancelAnimationFrame(raf); raf = 0; tw = null; svg.classList.remove('running'); seed(); }
+    };
+  }
+})();
+</script>
