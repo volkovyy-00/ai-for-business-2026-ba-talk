@@ -473,9 +473,14 @@
 
   /* ---------- Who sits at the new constraint ---------- */
   .who-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;margin-top:56px;align-items:start}
-  .exhibit{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 48px 48px}
-  .ex-row+.ex-row{margin-top:44px}
+  .exhibit{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:40px 48px 32px}
+  .ex-row+.ex-row{margin-top:36px}
   .ex-label{font-size:32px;font-weight:600;margin-bottom:16px}
+  /* each row leads with its sourced share, big and cyan, so the flip (people plan, the model executes) reads at a glance */
+  .ex-row{display:grid;grid-template-columns:190px minmax(0,1fr);column-gap:32px;align-items:end}
+  .stat{font-size:28px;font-weight:600;color:var(--ink-2);line-height:1.2;padding-bottom:4px}
+  .stat b{display:block;font-family:var(--font-display);font-size:64px;font-weight:800;line-height:1;letter-spacing:-.02em;color:var(--accent);margin-bottom:6px}
+  .exhibit .base{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-size:26px;color:var(--ink-3)}
   .ex-label span{font-weight:400;color:var(--ink-3);margin-left:12px;font-size:30px}
   .bar{display:flex;height:76px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.04)}
   .bar .seg{display:flex;align-items:center;padding:0 24px;font-size:30px;font-weight:700;white-space:nowrap;
@@ -489,14 +494,14 @@
   .bar .seg{clip-path:inset(0)}
   .bar .seg.model{transition-delay:.15s}
   /* where people still decide: three stations on one line, nodes in the "people" blue */
-  .stations{display:flex;flex-direction:column;gap:26px;padding-top:44px}
+  .stations{display:flex;flex-direction:column;gap:30px;padding-top:44px}
   .stations .ex-label{margin:0 0 4px}
   .stn{position:relative;padding-left:72px}
-  .stn::before{content:"";position:absolute;left:0;top:12px;width:30px;height:30px;border-radius:50%;background:var(--active)}
-  .stn:not(:last-child)::after{content:"";position:absolute;left:13px;top:50px;bottom:-28px;width:4px;background:var(--line)}
-  .stn b{display:block;font-family:var(--font-display);font-size:42px;font-weight:700;line-height:1.1}
+  .stn::before{content:"";position:absolute;left:0;top:8px;width:30px;height:30px;border-radius:50%;background:var(--active)}
+  .stn:not(:last-child)::after{content:"";position:absolute;left:13px;top:46px;bottom:-32px;width:4px;background:var(--line)}
+  .stn b{display:block;font-family:var(--font-display);font-size:36px;font-weight:700;line-height:1.1}
   .stn span{display:block;font-size:30px;color:var(--ink-2);margin-top:4px}
-  .s-who .remember{margin-top:52px;font-size:42px;line-height:1.3;color:var(--ink-2)}
+  .s-who .remember{margin-top:44px;font-size:42px;line-height:1.3;color:var(--ink-2)}
   .s-who .remember b{color:var(--ink);font-weight:700}
 
   /* ---------- Slide 4: Section opener ---------- */
@@ -810,29 +815,32 @@
   <!-- ================= WHO SITS AT THE NEW CONSTRAINT ================= -->
   <!-- Source: Anthropic, "Agentic coding and persistent returns to expertise" (Jun 2026), ~400k Claude Code sessions:
        https://www.anthropic.com/research/claude-code-expertise — people make ~70% of planning decisions; Claude ~80% of execution decisions. -->
-  <section class="slide s-who" data-title="Who sits at the new constraint" data-auto="700"
-    data-notes="Anthropic looked at about 400,000 Claude Code sessions. People make about 70% of the planning decisions; the model makes about 80% of the execution decisions. When execution gets cheap, whoever frames the question and checks the answer sets the value. The bars fill on their own, then the three stations and the closing line appear. That's the BA.">
+  <section class="slide s-who" data-title="Who sits at the new constraint" data-auto="700" data-auto-stop="3"
+    data-notes="Anthropic looked at about 400,000 Claude Code sessions. People make about 70% of the planning decisions; the model makes about 80% of the execution decisions. When execution gets cheap, whoever frames the question and checks the answer sets the value. That's a share of all decisions, each one given to the person or to the model. The bars fill on their own, then the three stations appear: discovery, review, sign-off. Click for the closing line: the analyst who frames and checks sets the value. That's the BA.">
     <div class="rule"></div>
     <h2>Who sits at the new constraint</h2>
     <div class="who-grid">
       <div class="exhibit">
         <div class="ex-row">
-          <div class="ex-label">Planning decisions <span>what to do</span></div>
-          <div class="bar" data-build="1"><div class="seg people" style="width:70%">People ~70%</div><div class="seg model" style="width:30%">Model</div></div>
+          <div class="stat" data-build="1"><b>~70%</b>people</div>
+          <div><div class="ex-label">Planning decisions <span>what to do</span></div>
+          <div class="bar" data-build="1"><div class="seg people" style="width:70%">People</div><div class="seg model" style="width:30%">Model</div></div></div>
         </div>
         <div class="ex-row">
-          <div class="ex-label">Execution decisions <span>how to do it</span></div>
-          <div class="bar" data-build="2"><div class="seg people" style="width:20%">People</div><div class="seg model" style="width:80%">Model ~80%</div></div>
+          <div class="stat" data-build="2"><b>~80%</b>model</div>
+          <div><div class="ex-label">Execution decisions <span>how to do it</span></div>
+          <div class="bar" data-build="2"><div class="seg people" style="width:20%">People</div><div class="seg model" style="width:80%">Model</div></div></div>
         </div>
+        <p class="base">Share of decisions · ~400,000 Claude Code sessions</p>
       </div>
       <div class="stations" data-build="3">
         <div class="ex-label">Where people still decide</div>
         <div class="stn"><b>Discovery</b><span>frame the question</span></div>
         <div class="stn"><b>Review</b><span>check what came back</span></div>
-        <div class="stn"><b>Decision</b><span>say what is done</span></div>
+        <div class="stn"><b>Sign-off</b><span>say what is done</span></div>
       </div>
     </div>
-    <p class="remember" data-build="4">When execution gets cheap, <b>the person who frames and checks sets the value.</b></p>
+    <p class="remember" data-build="4">When execution gets cheap, <b>the analyst who frames and checks sets the value.</b></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Anthropic, Agentic coding and persistent returns to expertise (2026)</span><span>How AI rewired the business analyst role</span><span class="slide-no">07</span></span></div>
   </section>
   </div>
@@ -1273,11 +1281,13 @@
 
   let arriving = null;   // set by keyboard / clicker navigation
   // slides with data-auto="ms" reveal their builds on their own after arrival; a clicker press finishes the sequence
+  // data-auto-stop="n" stops the auto sequence after n builds; the rest are clicks
   let autoT = 0;
+  const autoEnd = k => Math.min(groups[k].length, +slides[k].dataset.autoStop || Infinity);
   function autoRun(k, first){
     clearTimeout(autoT);
     const ms = +slides[k].dataset.auto;
-    if (!ms || shot || step[k] >= groups[k].length) return;
+    if (!ms || shot || step[k] >= autoEnd(k)) return;
     autoT = setTimeout(() => { if (k === i){ setStep(k, step[k] + 1); autoRun(k); } }, first ? 600 : ms);
   }
   function mark(k){
@@ -1309,7 +1319,7 @@
     frames[n].scrollIntoView({behavior: key || how === 'instant' ? 'instant' : 'smooth', block:'start'});
   }
   function next(){
-    if (step[i] < groups[i].length && slides[i].dataset.auto){ clearTimeout(autoT); setStep(i, groups[i].length); return; }
+    if (step[i] < autoEnd(i) && slides[i].dataset.auto){ clearTimeout(autoT); setStep(i, autoEnd(i)); return; }
     step[i] < groups[i].length ? setStep(i, step[i]+1) : go(i+1, 'key');
   }
   function prev(){
