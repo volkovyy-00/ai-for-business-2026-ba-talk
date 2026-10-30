@@ -586,19 +586,21 @@
   .filing footer{display:flex;align-items:center;gap:1.4em;padding:0 1.4em 1.2em;color:var(--ink-2);font-size:.9em}
   .filing footer p{flex:1} .filing footer b{color:var(--ink);font-weight:600}
   .filing footer a{color:var(--accent);font-weight:600;white-space:nowrap;text-underline-offset:4px}
-  /* SDLC playbook chart dialog, opened from slide 4 (redrawn from the article's before/after chart) */
-  .filing .sdlc{margin:1.2em 1.4em;padding:1.6em 1.8em 1.2em;background:var(--midnight);border:1px solid var(--line);border-radius:10px}
-  .sdlc h4{font-size:1em;font-weight:600;color:var(--ink-2)} .sdlc h4 b{color:var(--ink);font-weight:700}
-  .sdlc h4 + .row{margin-top:.7em} .sdlc .row + h4{margin-top:1.6em}
-  .sdlc .row,.sdlc .notes{display:grid;gap:.4em} .sdlc .row{height:3.2em;align-items:stretch}
-  .sdlc .before{grid-template-columns:56fr 76fr 290fr 76fr 56fr 66fr}
-  .sdlc .after,.sdlc .notes{grid-template-columns:56fr 76fr 14fr 76fr 56fr 66fr 270fr}
-  .sdlc .row span{display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--panel-hi);border:1px solid var(--line);font-size:.9em;color:var(--ink);min-width:0}
-  .sdlc .row .build{background:var(--active);border-color:var(--active);font-weight:700}
-  .sdlc .row .build:empty{min-width:10px}
-  .sdlc .row .gain{background:none;border:2px dashed rgba(255,255,255,.28);color:var(--ink-3)}
-  .sdlc .notes{margin-top:.5em;font-size:.82em;color:var(--ink-3);text-align:center}
-  .sdlc .notes .req{grid-column:1 / 3} .sdlc .notes .rev{grid-column:4} .sdlc .notes .rel{grid-column:5}
+  /* SDLC playbook instant view, opened from slide 4: the article's own text and chart (claude.com refuses to load in a frame) */
+  .filing .addr{display:flex;align-items:center;gap:.6em;margin:1.2em 1.4em 0;padding:.5em .9em;border-radius:999px;background:var(--midnight);border:1px solid var(--line);
+    color:var(--ink-3);font-size:.82em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .filing .addr b{color:var(--ink-2);font-weight:600}
+  .filing .web{margin:.8em 1.4em 1.2em;padding:1.8em 2.4em 2em;background:#FAF9F5;color:#1F1E1D;border-radius:10px;overflow:auto;overscroll-behavior:contain;
+    font-size:1em;line-height:1.55}
+  .web .kick{font-size:.78em;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66}
+  .web h4{margin-top:.3em;font-family:Georgia,"Times New Roman",serif;font-size:1.7em;font-weight:400;line-height:1.15}
+  .web p,.web ul{margin-top:.9em} .web ul{padding-left:1.2em} .web li + li{margin-top:.4em}
+  .web figure{margin-top:1.2em}
+  .web figure img{display:block;width:100%;height:auto;border-radius:8px;background:#F0EEE6}
+  .web figure img.gone{display:none}
+  .web figure .miss{display:none;padding:2.4em 1em;border:2px dashed #CFCBC0;border-radius:8px;text-align:center;color:#6B6A66}
+  .web figure img.gone + .miss{display:block}
+  .web figcaption{margin-top:.6em;font-size:.88em;color:#6B6A66;text-align:center}
   @media (prefers-reduced-motion:reduce){ dialog.filing[open]{animation:none} }
 
   .preload *{transition:none!important}
@@ -1147,19 +1149,25 @@
   <footer><p>One risk factor from one company. <b>The question: which of these recur across all ten filings?</b></p>
     <a href="https://www.sec.gov/Archives/edgar/data/37996/000003799622000013/f-20211231.htm" target="_blank" rel="noopener">Full filing on SEC.gov ↗</a></footer>
 </dialog>
-<!-- SDLC chart, opened from slide 4. Redrawn from the before/after chart in Anthropic's "The AI-native SDLC playbook":
-     https://claude.com/resources/articles/the-ai-native-sdlc-playbook -->
+<!-- SDLC playbook, opened from slide 4. Instant view of Anthropic's "The AI-native SDLC playbook": text is verbatim, the chart image loads from the article.
+     The page itself can't be framed (X-Frame-Options: SAMEORIGIN). https://claude.com/resources/articles/the-ai-native-sdlc-playbook -->
 <dialog class="filing" id="sdlc-playbook" aria-labelledby="sdlc-playbook-t">
   <header><h3 id="sdlc-playbook-t">The AI-native SDLC playbook</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
-  <div class="sdlc" role="img" aria-label="Before agents, every stage runs at human speed and Build is the widest stage. After agents, Build shrinks to a sliver and the cycle time it took is reclaimed.">
-    <h4><b>Before agents</b> — every stage runs at human speed</h4>
-    <div class="row before"><span>Plan</span><span>Design</span><span class="build">Build</span><span>Test</span><span>Deploy</span><span>Maintain</span></div>
-    <h4><b>After agents</b> — build runs at agent speed</h4>
-    <div class="row after"><span>Plan</span><span>Design</span><span class="build"></span><span>Test</span><span>Deploy</span><span>Maintain</span><span class="gain">cycle time reclaimed</span></div>
-    <div class="notes" aria-hidden="true"><span class="req">requirements</span><span class="rev">review</span><span class="rel">release</span></div>
+  <div class="addr" aria-hidden="true"><b>claude.com</b>/resources/articles/the-ai-native-sdlc-playbook</div>
+  <div class="web">
+    <div class="kick">Anthropic · Article</div>
+    <h4>The AI-native SDLC playbook</h4>
+    <p>When code is no longer the bottleneck and the build phase runs faster than the traditional SDLC allows for, three things become true:</p>
+    <ul><li>The bottleneck moves to the steps to the left and right of the build phase. This is mainly plan, review/test, and deploy, which still run at human speed.</li></ul>
+    <figure>
+      <img src="https://assets.claude.com/90fb4ed05417570c9d4ff95d33bef9502c765da4.png" loading="lazy" referrerpolicy="no-referrer"
+        alt="Chart from the article: human-speed stages keep their length while build collapses to hours." onerror="this.classList.add('gone')">
+      <div class="miss">The chart loads from claude.com. Open the article below.</div>
+      <figcaption>Build is no longer the constraint — the human-speed steps around it are. Human-speed stages keep their length while build collapses to hours.</figcaption>
+    </figure>
   </div>
-  <footer><p>Chart redrawn from Anthropic’s playbook.</p>
-    <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Read the article on claude.com ↗</a></footer>
+  <footer><p>Excerpt from Anthropic’s playbook.</p>
+    <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Open the full article on claude.com ↗</a></footer>
 </dialog>
 <!-- Recording, opened from slide 14 -->
 <dialog class="filing" id="agents-run" aria-labelledby="agents-run-t">
