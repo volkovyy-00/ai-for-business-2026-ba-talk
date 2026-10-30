@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 <script>document.documentElement.classList.add('preload')</script>
 <!--
-  Foundation deck, slides 1–17. Static.
+  Foundation deck, slides 1–18. Static.
   One-page vertical deck: each slide is a full-viewport section (scroll-snap). Design stage = 1920×1080, scaled to fit.
   Navigation: native scroll (wheel / trackpad / touch); ↑/↓, ←/→, Space / Shift+Space, PageUp/PageDown, Home/End jump; dots on the right.
   Deep link: index.html#3 opens slide 3.
@@ -409,6 +409,20 @@
   .multi-svg .cite{fill:var(--accent)}
   .multi-svg .ar{stroke:var(--ink-3);stroke-width:3;fill:none}
   .s-multi .rec{margin-top:40px;font-size:34px;color:var(--ink-2)}
+  /* ---------- The agents explored. I decided. (brief → build decisions) ---------- */
+  .s-decide h2{font-size:96px}
+  .s-decide h2 .hl{color:var(--accent)}
+  .decide-grid{display:grid;grid-template-columns:500px 1fr;gap:64px;margin-top:56px;align-items:start}
+  .agents-box{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:36px 40px 40px}
+  .decide-grid .ex-label{margin:0 0 24px}
+  .agents-box .stn::before{background:none;border:4px solid #3A5B7A;box-sizing:border-box}   /* hollow: the model side, as on slide 7 */
+  .agents-box .stn b{color:var(--ink-2)}
+  .agents-box .stn + .stn{margin-top:22px}
+  .agents-box .stn::after{display:none}
+  .decide-grid .stations{padding-top:0;gap:26px}
+  .decide-grid .rec{margin-top:32px;font-size:30px;color:var(--ink-2)}
+  .s-decide .remember{margin-top:44px;font-size:40px;line-height:1.3;color:var(--ink-2)}
+  .s-decide .remember b{color:var(--ink);font-weight:700}
   /* recording dialog (reuses the 10-K dialog frame) */
   .filing .vid{margin:1.2em 1.4em;aspect-ratio:16/9;height:auto}
   .filing .vid video{width:100%;height:100%;object-fit:contain}
@@ -928,12 +942,12 @@
   <div class="frame" id="slide-12">
   <!-- ================= SEVERAL AGENTS, DIFFERENT ANGLES ================= -->
   <section class="slide s-multi" data-title="Several agents, different angles" data-auto="2200"
-    data-notes="Here's what that looked like. A deep research agent isn't a chat reply: you give it a question and it searches, reads and follows links for minutes, then comes back with a brief that cites every claim. I didn't run one; I ran several, in parallel. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. The four bars fill on their own, at different speeds, like the real runs. Then what came back merges into one brief, and that brief is what I prototyped from. Optional: click 'four agents running in parallel' to play the short recording rather than spin them up live; any clicker press or Esc closes it.">
+    data-notes="Here's what that looked like. A deep research agent isn't a chat reply: you give it a question and it searches, reads and follows links for minutes, then comes back with a brief that cites every claim. I didn't run one; I ran several, in parallel. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. The four bars fill on their own, at different speeds, like the real runs. Then what came back merges into one brief. The agents explored and drafted options; the decisions were mine. That's the next slide. Optional: click 'four agents running in parallel' to play the short recording rather than spin them up live; any clicker press or Esc closes it.">
     <div class="rule"></div>
     <h2>Several agents, different angles</h2>
     <p class="lede">Same question: <b>which risks do they share — and how strongly?</b> Each agent — searching, reading, citing — got a different angle.</p>
     <svg class="multi-svg" viewBox="0 0 1640 420" role="img"
-      aria-label="Four research agents work on the same question from different angles: the risk-analyst view, what 10-K filings contain, retrieval approaches, and how to check the answer. Their findings merge into one synthesised brief, which becomes a prototype.">
+      aria-label="Four research agents work on the same question from different angles: the risk-analyst view, what 10-K filings contain, retrieval approaches, and how to check the answer. Their findings merge into one synthesised brief; the analyst makes the decisions from it.">
       <defs><marker id="multi-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8FA3B6"/></marker></defs>
       <text class="lab" x="0" y="62">The risk-analyst view</text>
       <text class="lab" x="0" y="162">What 10-K filings contain</text>
@@ -955,7 +969,8 @@
       <g data-build="3">
         <path class="ar" d="M1352 210H1400" marker-end="url(#multi-ar)"/>
         <rect class="box" x="1410" y="150" width="230" height="120" rx="16"/>
-        <text class="t" x="1525" y="224" text-anchor="middle">Prototype</text>
+        <text class="t" x="1525" y="206" text-anchor="middle">Decisions</text>
+        <text class="s" x="1525" y="246" text-anchor="middle">by the analyst</text>
       </g>
     </svg>
     <p class="rec" data-build="3">Recording: <button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">four agents running in parallel</button></p>
@@ -964,6 +979,37 @@
   </div>
 
   <div class="frame" id="slide-13">
+  <!-- ================= THE AGENTS EXPLORED. I DECIDED. (synthesised brief → build decisions) =================
+       Wording from the speaker (session 4): "Agents explored angles and drafted options. I decided: which filing section/year to use,
+       the risk taxonomy / what 'shared across counterparties' means, what a correct answer looks like, and that we'd compare three
+       approaches under one fixed scoring idea before building. Defining that took longer than the build." Prototype: coding agent, one afternoon. -->
+  <section class="slide s-decide" data-title="The agents explored. I decided." data-auto="700"
+    data-notes="This is the part that's still the analyst's job. The agents explored the angles and drafted options. But four things no agent decided for me. Which filing section and which year we'd use. The risk taxonomy — and what 'shared across counterparties' actually means. What a correct answer looks like. And that we'd compare three approaches under one fixed scoring idea, before building anything. Defining that took longer than the build. The build itself: a coding agent turned those decisions into three prototypes in an afternoon. That's the bottleneck shift from the start of the talk, in my own project. Optional: click the extract link to show the redacted brief and my build decisions; any clicker press or Esc closes it.">
+    <div class="rule"></div>
+    <h2>The agents explored. <span class="hl">I decided.</span></h2>
+    <div class="decide-grid">
+      <div>
+        <div class="ex-label">What the agents did</div>
+        <div class="agents-box">
+          <div class="stn"><b>Explored angles</b><span>four, in parallel</span></div>
+          <div class="stn"><b>Drafted options</b><span>one synthesised brief</span></div>
+        </div>
+        <p class="rec">Extract: <button class="doclink" type="button" data-dialog="brief-extract" aria-haspopup="dialog">brief → build decisions</button></p>
+      </div>
+      <div class="stations" data-build="1">
+        <div class="ex-label">What I settled before anyone built</div>
+        <div class="stn"><b>Source</b><span>which filing section, which year</span></div>
+        <div class="stn"><b>Taxonomy</b><span>the risk categories, and what “shared across counterparties” means</span></div>
+        <div class="stn"><b>A correct answer</b><span>what a right answer looks like</span></div>
+        <div class="stn"><b>One scoring idea</b><span>three approaches, compared the same way, fixed before building</span></div>
+      </div>
+    </div>
+    <p class="remember" data-build="2">Defining that took longer than the build: <b>a coding agent built three prototypes in an afternoon.</b></p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-14">
   <!-- ================= THREE APPROACHES ================= -->
   <section class="slide s-three" data-title="Three approaches"
     data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live.">
@@ -975,11 +1021,11 @@
       <div class="ap"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p></div>
       <div class="ap"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-14">
+  <div class="frame" id="slide-15">
   <!-- ================= DEMO: HOW THE CONSOLE WORKS (foundation mock, not the real app) ================= -->
   <section class="slide s-console" data-title="Demo: how the console works"
     data-notes="Before I leave the slides, one walk through the console so you know where to look. Top right tells you whether it's live or a replay. You pick a question from the chips, or type one. The answer comes back in the middle. And on the right is the part I care about most: the evidence — which filing, which passage, so you can check it. Same layout for all three approaches.">
@@ -1001,11 +1047,11 @@
       </div>
     </div>
     <div class="c-flow"><b>Question</b><span class="ar">→</span><b>Answer</b><span class="ar">→</span><b>Evidence you can check</b><span class="mock">Schematic · not the live app</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-15">
+  <div class="frame" id="slide-16">
   <!-- ================= DEMO CUE 1: PLAIN RAG ================= -->
   <section class="slide s-cue" data-title="Plain RAG"
     data-notes="Demo one, plain vector RAG. Watch the answer — it reads well. Then try to trace it: which filings, which passages, how many companies actually said this? That's the gap. Switching to the live console now.">
@@ -1021,11 +1067,11 @@
       <!-- PLACEHOLDER: live console, Plain RAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Plain RAG"><span>Live console · Plain vector RAG</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-16">
+  <div class="frame" id="slide-17">
   <!-- ================= DEMO CUE 2: GRAPHRAG ================= -->
   <section class="slide s-cue" data-title="GraphRAG"
     data-notes="Demo two, GraphRAG on Neo4j. This time watch three things: the Cypher query it writes, the subgraph of companies and risks that comes back, and that I can click any link to see the quote behind it. Over to the console.">
@@ -1041,11 +1087,11 @@
       <!-- PLACEHOLDER: live console, GraphRAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, GraphRAG"><span>Live console · GraphRAG (Neo4j)</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-17">
+  <div class="frame" id="slide-18">
   <!-- ================= DEMO CUE 3: TAXONOMY-FIRST ================= -->
   <section class="slide s-cue" data-title="Taxonomy-first"
     data-notes="Demo three, taxonomy first. Categories fixed up front, the counting done in code. Watch the heatmap — risk by company — and then open any cell: the quote drawer shows exactly which passage put it there. Let's go live.">
@@ -1061,7 +1107,7 @@
       <!-- PLACEHOLDER: live console, Taxonomy-first. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Taxonomy-first"><span>Live console · Taxonomy-first</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
   </section>
   </div>
 
@@ -1107,6 +1153,12 @@
   <header><h3 id="agents-run-t">Four research agents, one question</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
   <!-- PLACEHOLDER: short video of the agents running in parallel. Replace the span with <video src="…" controls muted playsinline></video> -->
   <div class="shot-slot vid" role="img" aria-label="Placeholder: multi-agent research video"><span>Video · Agents researching in parallel</span></div>
+</dialog>
+<!-- Brief extract, opened from "The agents explored. I decided." -->
+<dialog class="filing" id="brief-extract" aria-labelledby="brief-extract-t">
+  <header><h3 id="brief-extract-t">From synthesised brief to build decisions</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
+  <!-- PLACEHOLDER: the speaker's redacted screenshot or short extract (no bank-confidential content). Replace the span with <img src="…" alt="…">. -->
+  <div class="shot-slot vid" role="img" aria-label="Placeholder: redacted extract of the brief and build decisions"><span>Redacted extract · brief → build decisions</span></div>
 </dialog>
 <nav id="dots" aria-label="Slides"></nav>
 
