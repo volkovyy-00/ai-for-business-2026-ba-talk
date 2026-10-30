@@ -88,12 +88,12 @@
   .s1 .speaker .role{font-size:30px;color:var(--ink-2);margin-top:6px}
   .s1 .speaker .when{font-size:30px;color:var(--ink-2);border-left:2px solid var(--line);padding-left:64px}
   .s1 .speaker .when b{display:block;font-family:var(--font-display);color:var(--ink);font-size:34px;font-weight:600;margin-bottom:6px}
-  /* ghost of the slide-3 bottleneck, bleeding off the right edge */
-  .pipe-ghost{position:absolute;left:1110px;top:330px;width:900px;height:520px}
-  .pipe-ghost .body{fill:url(#hatch-cover);stroke:rgba(143,163,182,.5);stroke-width:2}
-  .pipe-ghost .throat{stroke:var(--active);stroke-width:3;opacity:.7}
-  .pipe-ghost .idea{fill:var(--active)}
-  .pipe-ghost .value{fill:#fff}
+  /* still image: work piles up in a funnel and leaves single-file through a narrow throat; bleeds off the right edge */
+  .pipe-ghost{position:absolute;left:1060px;top:225px;width:900px;height:630px}
+  .pipe-ghost .wall{fill:none;stroke:rgba(143,163,182,.55);stroke-width:3}
+  .pipe-ghost .throat{fill:none;stroke:var(--active);stroke-width:4}
+  .pipe-ghost .queue circle{fill:var(--active)}
+  .pipe-ghost .out circle{fill:#fff}
   @media (prefers-reduced-motion:reduce){
     [data-build].pending:not([data-play]){transform:none}
     .frame.arrive .slide{animation:none}
@@ -142,7 +142,6 @@
   .track{position:relative;margin-top:150px;height:4px}
   .track::before{content:"";position:absolute;inset:0 -140px 0 0;background:var(--line)}
   .track .seg{position:relative;height:4px;background:var(--active);transform-origin:left center;width:calc(100% + 48px)}
-  .track .tail{width:calc(100% + 140px)}
   .stops{list-style:none;margin-top:-18px}
   .stop{position:relative;padding-top:72px}
   .stop .node{position:absolute;left:0;top:4px;width:28px;height:28px;border-radius:50%;background:var(--midnight);border:4px solid var(--accent)}
@@ -150,11 +149,16 @@
   .stop h3{font-size:46px;font-weight:700;line-height:1.12;letter-spacing:-.01em;text-wrap:balance;display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px}
   .stop p{margin-top:18px;font-size:32px;line-height:1.35;color:var(--ink-2);text-wrap:pretty}
   .stop .tag{position:absolute;left:52px;top:-50px;font-family:var(--font);font-size:26px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--midnight);background:var(--accent);border-radius:999px;padding:4px 16px 5px}
-  /* builds: the line draws to the next stop, then the stop arrives */
-  .track .seg[data-build]{transition:transform .5s var(--ease-out)}
-  .track .seg[data-build].pending{opacity:1;transform:scaleX(0)}
-  .stops .stop[data-build].built{transition-delay:.25s}
-  .stops .stop[data-build].pending{transform:none}
+  /* one continuous sweep: the line draws left to right at a steady pace and each stop settles in as the line reaches it */
+  .track .sweep{position:absolute;left:0;top:0;right:-140px;height:4px;background:var(--active);transform-origin:left center}
+  .track .sweep[data-build]{transition:transform 2s linear}
+  .track .sweep[data-build].pending{opacity:1;transform:scaleX(0);transition:none}
+  .stops .stop[data-build]{transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+  .stops .stop[data-build].pending{transform:translateY(12px);transition:none}
+  .stops .stop[data-build].built:nth-child(2){transition-delay:.47s}
+  .stops .stop[data-build].built:nth-child(3){transition-delay:.95s}
+  .stops .stop[data-build].built:nth-child(4){transition-delay:1.42s}
+  @media (prefers-reduced-motion:reduce){ .track .sweep[data-build]{transition:opacity .4s} .track .sweep[data-build].pending{opacity:0;transform:none} .stops .stop[data-build].built{transition-delay:0s} .stops .stop[data-build].pending{transform:none} }
 
   /* ---------- Intro ---------- */
   .s-intro{justify-content:center}
@@ -293,7 +297,7 @@
   .s-rand h2 .lead{display:block;font-size:68px;line-height:1.2;letter-spacing:-.015em;margin-bottom:12px}
   .s-rand .hl{color:var(--accent)}
   .s-rand .sub2{margin-top:36px;font-size:36px;color:var(--ink-2)}
-  /* callback to slide 5: the lifecycle as a row of stations, Discovery lit */
+  /* callback to slide 6: the lifecycle as a row of stations, Discovery lit */
   .s-rand .life{list-style:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px;margin-top:96px}
   .s-rand .life li{height:72px;border:1.5px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;
     font-size:28px;font-weight:600;color:var(--ink-3);transition:background .6s var(--ease-out) .5s,border-color .6s var(--ease-out) .5s,color .6s var(--ease-out) .5s}
@@ -582,17 +586,20 @@
 <main id="deck">
   <div class="frame" id="slide-1">
   <section class="slide s1" data-title="Title"
-    data-notes="Holding slide while the room fills. The pipe on the right runs on its own: requirements flow in and jam at the narrow point. 'This is what delivery looks like in most banks I know.' Introduce myself properly later, once the room has the problem.">
+    data-notes="Holding slide while the room fills. Still image on the right: work piles up in front of one narrow point and leaves single-file. 'This is what delivery looks like in most banks I know.' Next slide: who I am.">
     <div class="top-brand"><img class="falcon" alt="Barclays"></div>
-    <svg class="pipe-ghost" viewBox="0 0 900 520" aria-hidden="true" data-play="pipe">
+    <svg class="pipe-ghost" viewBox="0 0 1000 700" aria-hidden="true">
       <defs>
-        <pattern id="hatch-cover" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="14" stroke="rgba(255,255,255,.06)" stroke-width="4"/>
-        </pattern>
+        <linearGradient id="cover-fade" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".34" stop-color="#fff"/></linearGradient>
+        <mask id="cover-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="700"><rect width="1000" height="700" fill="url(#cover-fade)"/></mask>
       </defs>
-      <path class="body" d="M0 160 H260 C310 160 310 232 360 232 H620 C670 232 670 160 720 160 H900 V360 H720 C670 360 670 288 620 288 H360 C310 288 310 360 260 360 H0 Z"/>
-      <path class="throat" d="M360 232 H620 M360 288 H620"/>
-      <g class="flow"></g>
+      <g mask="url(#cover-mask)">
+        <path class="wall" d="M0 110.0 L5 110.0 L10 110.0 L15 110.0 L20 110.0 L25 110.0 L30 110.0 L35 110.0 L40 110.0 L45 110.0 L50 110.0 L55 110.0 L60 110.0 L65 110.0 L70 110.0 L75 110.0 L80 110.0 L85 110.0 L90 110.0 L95 110.0 L100 110.0 L105 110.0 L110 110.0 L115 110.0 L120 110.0 L125 110.0 L130 110.0 L135 110.0 L140 110.0 L145 110.0 L150 110.0 L155 110.0 L160 110.0 L165 110.0 L170 110.0 L175 110.0 L180 110.0 L185 110.0 L190 110.0 L195 110.0 L200 110.0 L205 110.0 L210 110.0 L215 110.0 L220 110.0 L225 110.0 L230 110.0 L235 110.0 L240 110.0 L245 110.0 L250 110.0 L255 110.0 L260 110.0 L265 110.0 L270 110.0 L275 110.0 L280 110.0 L285 110.0 L290 110.0 L295 110.0 L300 110.0 L305 110.3 L310 111.1 L315 112.5 L320 114.4 L325 116.8 L330 119.8 L335 123.2 L340 127.1 L345 131.5 L350 136.4 L355 141.6 L360 147.3 L365 153.3 L370 159.6 L375 166.2 L380 173.1 L385 180.3 L390 187.6 L395 195.0 L400 202.6 L405 210.3 L410 218.0 L415 225.7 L420 233.4 L425 241.0 L430 248.4 L435 255.7 L440 262.9 L445 269.8 L450 276.4 L455 282.7 L460 288.7 L465 294.4 L470 299.6 L475 304.5 L480 308.9 L485 312.8 L490 316.2 L495 319.2 L500 321.6 L505 323.5 L510 324.9 L515 325.7 L520 326.0 L525 326.0 L530 326.0 L535 326.0 L540 326.0 L545 326.0 L550 326.0 L555 326.0 L560 326.0 L565 326.0 L570 326.0 L575 326.0 L580 326.0 L585 326.0 L590 326.0 L595 326.0 L600 326.0 L605 326.0 L610 326.0 L615 326.0 L620 326.0 L625 326.0 L630 326.0 L635 326.0 L640 326.0 L645 326.0 L650 326.0 L655 326.0 L660 326.0 L665 326.0 L670 326.0 L675 326.0 L680 326.0 L685 326.0 L690 326.0 L695 326.0 L700 326.0 L705 326.0 L710 326.0 L715 326.0 L720 326.0 L725 326.0 L730 326.0 L735 326.0 L740 326.0 L745 326.0 L750 326.0 L755 326.0 L760 326.0 L765 325.6 L770 324.4 L775 322.5 L780 319.8 L785 316.3 L790 312.3 L795 307.5 L800 302.3 L805 296.5 L810 290.3 L815 283.8 L820 277.0 L825 270.1 L830 263.0 L835 255.9 L840 249.0 L845 242.2 L850 235.7 L855 229.5 L860 223.7 L865 218.5 L870 213.7 L875 209.7 L880 206.2 L885 203.5 L890 201.6 L895 200.4 L900 200.0 L905 200.0 L910 200.0 L915 200.0 L920 200.0 L925 200.0 L930 200.0 L935 200.0 L940 200.0 L945 200.0 L950 200.0 L955 200.0 L960 200.0 L965 200.0 L970 200.0 L975 200.0 L980 200.0 L985 200.0 L990 200.0 L995 200.0 L1000 200.0"/>
+        <path class="wall" d="M0 590.0 L5 590.0 L10 590.0 L15 590.0 L20 590.0 L25 590.0 L30 590.0 L35 590.0 L40 590.0 L45 590.0 L50 590.0 L55 590.0 L60 590.0 L65 590.0 L70 590.0 L75 590.0 L80 590.0 L85 590.0 L90 590.0 L95 590.0 L100 590.0 L105 590.0 L110 590.0 L115 590.0 L120 590.0 L125 590.0 L130 590.0 L135 590.0 L140 590.0 L145 590.0 L150 590.0 L155 590.0 L160 590.0 L165 590.0 L170 590.0 L175 590.0 L180 590.0 L185 590.0 L190 590.0 L195 590.0 L200 590.0 L205 590.0 L210 590.0 L215 590.0 L220 590.0 L225 590.0 L230 590.0 L235 590.0 L240 590.0 L245 590.0 L250 590.0 L255 590.0 L260 590.0 L265 590.0 L270 590.0 L275 590.0 L280 590.0 L285 590.0 L290 590.0 L295 590.0 L300 590.0 L305 589.7 L310 588.9 L315 587.5 L320 585.6 L325 583.2 L330 580.2 L335 576.8 L340 572.9 L345 568.5 L350 563.6 L355 558.4 L360 552.7 L365 546.7 L370 540.4 L375 533.8 L380 526.9 L385 519.7 L390 512.4 L395 505.0 L400 497.4 L405 489.7 L410 482.0 L415 474.3 L420 466.6 L425 459.0 L430 451.6 L435 444.3 L440 437.1 L445 430.2 L450 423.6 L455 417.3 L460 411.3 L465 405.6 L470 400.4 L475 395.5 L480 391.1 L485 387.2 L490 383.8 L495 380.8 L500 378.4 L505 376.5 L510 375.1 L515 374.3 L520 374.0 L525 374.0 L530 374.0 L535 374.0 L540 374.0 L545 374.0 L550 374.0 L555 374.0 L560 374.0 L565 374.0 L570 374.0 L575 374.0 L580 374.0 L585 374.0 L590 374.0 L595 374.0 L600 374.0 L605 374.0 L610 374.0 L615 374.0 L620 374.0 L625 374.0 L630 374.0 L635 374.0 L640 374.0 L645 374.0 L650 374.0 L655 374.0 L660 374.0 L665 374.0 L670 374.0 L675 374.0 L680 374.0 L685 374.0 L690 374.0 L695 374.0 L700 374.0 L705 374.0 L710 374.0 L715 374.0 L720 374.0 L725 374.0 L730 374.0 L735 374.0 L740 374.0 L745 374.0 L750 374.0 L755 374.0 L760 374.0 L765 374.4 L770 375.6 L775 377.5 L780 380.2 L785 383.7 L790 387.7 L795 392.5 L800 397.7 L805 403.5 L810 409.7 L815 416.2 L820 423.0 L825 429.9 L830 437.0 L835 444.1 L840 451.0 L845 457.8 L850 464.3 L855 470.5 L860 476.3 L865 481.5 L870 486.3 L875 490.3 L880 493.8 L885 496.5 L890 498.4 L895 499.6 L900 500.0 L905 500.0 L910 500.0 L915 500.0 L920 500.0 L925 500.0 L930 500.0 L935 500.0 L940 500.0 L945 500.0 L950 500.0 L955 500.0 L960 500.0 L965 500.0 L970 500.0 L975 500.0 L980 500.0 L985 500.0 L990 500.0 L995 500.0 L1000 500.0"/>
+        <path class="throat" d="M520 326 H760 M520 374 H760"/>
+        <g class="queue"><circle cx="508" cy="351" r="9"/><circle cx="483" cy="328" r="9"/><circle cx="484" cy="353" r="9"/><circle cx="463" cy="320" r="9"/><circle cx="463" cy="343" r="9"/><circle cx="462" cy="369" r="9"/><circle cx="442" cy="277" r="9"/><circle cx="439" cy="303" r="9"/><circle cx="441" cy="329" r="9"/><circle cx="442" cy="353" r="9"/><circle cx="439" cy="377" r="9"/><circle cx="442" cy="402" r="9"/><circle cx="420" cy="261" r="9"/><circle cx="420" cy="285" r="9"/><circle cx="420" cy="309" r="9"/><circle cx="420" cy="336" r="9"/><circle cx="419" cy="360" r="9"/><circle cx="418" cy="384" r="9"/><circle cx="419" cy="409" r="9"/><circle cx="419" cy="433" r="9"/><circle cx="398" cy="215" r="9"/><circle cx="398" cy="237" r="9"/><circle cx="399" cy="263" r="9"/><circle cx="397" cy="290" r="9"/><circle cx="395" cy="312" r="9"/><circle cx="399" cy="338" r="9"/><circle cx="398" cy="363" r="9"/><circle cx="398" cy="388" r="9"/><circle cx="399" cy="440" r="9"/><circle cx="396" cy="465" r="9"/><circle cx="376" cy="195" r="9"/><circle cx="376" cy="220" r="9"/><circle cx="377" cy="243" r="9"/><circle cx="376" cy="270" r="9"/><circle cx="375" cy="294" r="9"/><circle cx="375" cy="318" r="9"/><circle cx="377" cy="346" r="9"/><circle cx="377" cy="369" r="9"/><circle cx="375" cy="396" r="9"/><circle cx="377" cy="417" r="9"/><circle cx="376" cy="446" r="9"/><circle cx="375" cy="468" r="9"/><circle cx="375" cy="493" r="9"/><circle cx="355" cy="154" r="9"/><circle cx="354" cy="181" r="9"/><circle cx="355" cy="205" r="9"/><circle cx="355" cy="230" r="9"/><circle cx="353" cy="254" r="9"/><circle cx="354" cy="279" r="9"/><circle cx="355" cy="307" r="9"/><circle cx="355" cy="330" r="9"/><circle cx="355" cy="356" r="9"/><circle cx="352" cy="381" r="9"/><circle cx="353" cy="404" r="9"/><circle cx="354" cy="429" r="9"/><circle cx="355" cy="455" r="9"/><circle cx="355" cy="479" r="9"/><circle cx="354" cy="507" r="9"/><circle cx="352" cy="528" r="9"/><circle cx="330" cy="150" r="9"/><circle cx="333" cy="172" r="9"/><circle cx="332" cy="200" r="9"/><circle cx="334" cy="225" r="9"/><circle cx="332" cy="247" r="9"/><circle cx="331" cy="300" r="9"/><circle cx="333" cy="323" r="9"/><circle cx="334" cy="349" r="9"/><circle cx="331" cy="372" r="9"/><circle cx="331" cy="398" r="9"/><circle cx="330" cy="424" r="9"/><circle cx="331" cy="449" r="9"/><circle cx="332" cy="473" r="9"/><circle cx="333" cy="498" r="9"/><circle cx="333" cy="523" r="9"/><circle cx="332" cy="549" r="9"/><circle cx="309" cy="125" r="9"/><circle cx="308" cy="175" r="9"/><circle cx="309" cy="201" r="9"/><circle cx="309" cy="226" r="9"/><circle cx="311" cy="252" r="9"/><circle cx="311" cy="275" r="9"/><circle cx="311" cy="326" r="9"/><circle cx="311" cy="351" r="9"/><circle cx="309" cy="378" r="9"/><circle cx="311" cy="450" r="9"/><circle cx="311" cy="477" r="9"/><circle cx="309" cy="501" r="9"/><circle cx="311" cy="524" r="9"/><circle cx="311" cy="553" r="9"/><circle cx="289" cy="137" r="9"/><circle cx="290" cy="164" r="9"/><circle cx="289" cy="186" r="9"/><circle cx="289" cy="211" r="9"/><circle cx="287" cy="237" r="9"/><circle cx="288" cy="262" r="9"/><circle cx="289" cy="311" r="9"/><circle cx="288" cy="337" r="9"/><circle cx="288" cy="361" r="9"/><circle cx="289" cy="388" r="9"/><circle cx="289" cy="413" r="9"/><circle cx="290" cy="437" r="9"/><circle cx="290" cy="461" r="9"/><circle cx="290" cy="487" r="9"/><circle cx="288" cy="513" r="9"/><circle cx="290" cy="537" r="9"/><circle cx="290" cy="564" r="9"/><circle cx="266" cy="125" r="9"/><circle cx="265" cy="151" r="9"/><circle cx="266" cy="174" r="9"/><circle cx="265" cy="223" r="9"/><circle cx="268" cy="249" r="9"/><circle cx="268" cy="277" r="9"/><circle cx="268" cy="300" r="9"/><circle cx="267" cy="324" r="9"/><circle cx="265" cy="350" r="9"/><circle cx="267" cy="374" r="9"/><circle cx="266" cy="399" r="9"/><circle cx="269" cy="424" r="9"/><circle cx="267" cy="473" r="9"/><circle cx="268" cy="501" r="9"/><circle cx="265" cy="525" r="9"/><circle cx="265" cy="551" r="9"/><circle cx="265" cy="576" r="9"/><circle cx="243" cy="164" r="9"/><circle cx="247" cy="189" r="9"/><circle cx="247" cy="212" r="9"/><circle cx="245" cy="236" r="9"/><circle cx="245" cy="339" r="9"/><circle cx="243" cy="363" r="9"/><circle cx="244" cy="414" r="9"/><circle cx="247" cy="461" r="9"/><circle cx="246" cy="489" r="9"/><circle cx="245" cy="512" r="9"/><circle cx="246" cy="536" r="9"/><circle cx="246" cy="562" r="9"/><circle cx="225" cy="150" r="9"/><circle cx="225" cy="174" r="9"/><circle cx="224" cy="199" r="9"/><circle cx="221" cy="224" r="9"/><circle cx="225" cy="249" r="9"/><circle cx="222" cy="273" r="9"/><circle cx="225" cy="302" r="9"/><circle cx="223" cy="324" r="9"/><circle cx="223" cy="375" r="9"/><circle cx="225" cy="400" r="9"/><circle cx="223" cy="451" r="9"/><circle cx="224" cy="475" r="9"/><circle cx="223" cy="498" r="9"/><circle cx="223" cy="525" r="9"/><circle cx="225" cy="548" r="9"/><circle cx="223" cy="575" r="9"/><circle cx="200" cy="136" r="9"/><circle cx="203" cy="162" r="9"/><circle cx="202" cy="187" r="9"/><circle cx="200" cy="262" r="9"/><circle cx="203" cy="286" r="9"/><circle cx="200" cy="314" r="9"/><circle cx="202" cy="339" r="9"/><circle cx="202" cy="389" r="9"/><circle cx="201" cy="413" r="9"/><circle cx="203" cy="461" r="9"/><circle cx="201" cy="539" r="9"/><circle cx="203" cy="562" r="9"/><circle cx="178" cy="149" r="9"/><circle cx="179" cy="176" r="9"/><circle cx="179" cy="225" r="9"/><circle cx="181" cy="252" r="9"/><circle cx="180" cy="276" r="9"/><circle cx="179" cy="351" r="9"/><circle cx="181" cy="424" r="9"/><circle cx="181" cy="451" r="9"/><circle cx="179" cy="474" r="9"/><circle cx="180" cy="499" r="9"/><circle cx="181" cy="525" r="9"/><circle cx="181" cy="552" r="9"/><circle cx="159" cy="162" r="9"/><circle cx="158" cy="211" r="9"/><circle cx="157" cy="238" r="9"/><circle cx="158" cy="262" r="9"/><circle cx="157" cy="339" r="9"/><circle cx="159" cy="363" r="9"/><circle cx="158" cy="389" r="9"/><circle cx="159" cy="414" r="9"/><circle cx="156" cy="462" r="9"/><circle cx="159" cy="538" r="9"/><circle cx="159" cy="564" r="9"/><circle cx="136" cy="127" r="9"/><circle cx="135" cy="149" r="9"/><circle cx="135" cy="224" r="9"/><circle cx="135" cy="325" r="9"/><circle cx="136" cy="349" r="9"/><circle cx="138" cy="376" r="9"/><circle cx="138" cy="448" r="9"/><circle cx="136" cy="475" r="9"/><circle cx="134" cy="501" r="9"/><circle cx="135" cy="525" r="9"/><circle cx="134" cy="551" r="9"/><circle cx="135" cy="577" r="9"/><circle cx="116" cy="162" r="9"/><circle cx="114" cy="187" r="9"/><circle cx="113" cy="262" r="9"/><circle cx="115" cy="338" r="9"/><circle cx="114" cy="387" r="9"/><circle cx="115" cy="412" r="9"/><circle cx="113" cy="436" r="9"/><circle cx="115" cy="513" r="9"/><circle cx="92" cy="248" r="9"/><circle cx="93" cy="275" r="9"/><circle cx="94" cy="301" r="9"/><circle cx="93" cy="324" r="9"/><circle cx="94" cy="400" r="9"/><circle cx="95" cy="426" r="9"/><circle cx="94" cy="473" r="9"/><circle cx="72" cy="136" r="9"/><circle cx="70" cy="314" r="9"/><circle cx="70" cy="339" r="9"/><circle cx="69" cy="361" r="9"/><circle cx="69" cy="414" r="9"/><circle cx="73" cy="487" r="9"/><circle cx="73" cy="513" r="9"/><circle cx="71" cy="536" r="9"/><circle cx="48" cy="177" r="9"/><circle cx="48" cy="277" r="9"/><circle cx="49" cy="351" r="9"/><circle cx="6" cy="373" r="9"/><circle cx="5" cy="399" r="9"/><circle cx="6" cy="548" r="9"/><circle cx="-17" cy="262" r="9"/><circle cx="-17" cy="361" r="9"/><circle cx="540" cy="350" r="9"/><circle cx="564" cy="350" r="9"/><circle cx="588" cy="350" r="9"/><circle cx="612" cy="350" r="9"/><circle cx="636" cy="350" r="9"/><circle cx="660" cy="350" r="9"/><circle cx="684" cy="350" r="9"/><circle cx="708" cy="350" r="9"/><circle cx="732" cy="350" r="9"/></g>
+        <g class="out"><circle cx="812" cy="344" r="9"/><circle cx="868" cy="390" r="9"/></g>
+      </g>
     </svg>
     <h1>How AI <span class="hl">rewired</span> the business analyst role</h1>
     <p class="thesis">Coding is no longer the bottleneck. <b>Discovery is.</b></p>
@@ -604,23 +611,47 @@
   </div>
 
   <div class="frame" id="slide-2">
-  <section class="slide s-agenda" data-title="Agenda" data-auto="600"
-    data-notes="Four parts, one line. The line is the credit-risk question — it runs through every part, so by the demo you already know what we're answering. The four stops appear on their own in quick succession: why the constraint moved; the BA thinking with AI; the same question answered three ways, live; three lines to take home.">
-    <div class="rule"></div>
-    <h2>Agenda</h2>
-    <p class="thread">One credit-risk question runs through <b>all four parts.</b></p>
-    <div class="track" aria-hidden="true"><span class="seg" data-build="2"></span><span class="seg" data-build="3"></span><span class="seg" data-build="4"></span><span class="seg tail" data-build="4"></span></div>
-    <ol class="stops">
-      <li class="stop" data-build="1"><span class="node"></span><h3>The constraint moved</h3><p>Why faster code didn’t mean faster delivery.</p></li>
-      <li class="stop" data-build="2"><span class="node"></span><h3>The BA, thinking with AI</h3><p>Discovery and decisions at the new constraint.</p></li>
-      <li class="stop live" data-build="3"><span class="node"></span><span class="tag">Live</span><h3>Three approaches</h3><p>The same question, answered three ways.</p></li>
-      <li class="stop" data-build="4"><span class="node"></span><h3>Three lines to leave with</h3><p>The short version to take home.</p></li>
-    </ol>
+  <!-- ================= INTRO (who am I) ================= -->
+  <section class="slide s-intro" data-title="Intro"
+    data-notes="Right after the cover. Who I am: Risk AI Business Analyst, 15 years in banking IT as an analyst. I learned the craft in the WIMP world — windows, icons, menus, pointer — where analysis meant specifying screens people click through. AI has completely reshaped how I approach analysis. That's what this talk is about. Then the plan.">
+    <div class="intro-grid">
+      <div class="intro-left">
+        <h2>Hi, I’m<br><span class="hl">Yevhenii Volkovych</span></h2>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Risk AI Business Analyst</dd></div>
+          <div><dt>Experience</dt><dd>15 years in banking IT as an analyst</dd></div>
+          <div><dt>Stance</dt><dd>Big AI advocate and enthusiast</dd></div>
+        </dl>
+      </div>
+      <!-- PLACEHOLDERS: put an <img src="…" alt="…"> inside any .ph; remove the .sm slots if you only use one photo -->
+      <div class="photos">
+        <div class="ph main" role="img" aria-label="Placeholder: portrait photo"><span>Portrait</span></div>
+        <div class="ph sm a" role="img" aria-label="Placeholder: optional photo"><span>Photo 2</span></div>
+        <div class="ph sm b" role="img" aria-label="Placeholder: optional photo"><span>Photo 3</span></div>
+      </div>
+    </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">02</span></span></div>
   </section>
   </div>
 
   <div class="frame" id="slide-3">
+  <section class="slide s-agenda" data-title="Agenda" data-auto="600"
+    data-notes="Four parts, one line. The line is the credit-risk question — it runs through every part, so by the demo you already know what we're answering. The line draws across once, on its own, and each stop appears as the line reaches it: why the constraint moved; the BA thinking with AI; the same question answered three ways, live; three lines to take home.">
+    <div class="rule"></div>
+    <h2>Agenda</h2>
+    <p class="thread">One credit-risk question runs through <b>all four parts.</b></p>
+    <div class="track" aria-hidden="true"><span class="sweep" data-build="1"></span></div>
+    <ol class="stops">
+      <li class="stop" data-build="1"><span class="node"></span><h3>The constraint moved</h3><p>Why faster code didn’t mean faster delivery.</p></li>
+      <li class="stop" data-build="1"><span class="node"></span><h3>The BA, thinking with AI</h3><p>Discovery and decisions at the new constraint.</p></li>
+      <li class="stop live" data-build="1"><span class="node"></span><span class="tag">Live</span><h3>Three approaches</h3><p>The same question, answered three ways.</p></li>
+      <li class="stop" data-build="1"><span class="node"></span><h3>Three lines to leave with</h3><p>The short version to take home.</p></li>
+    </ol>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">03</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-4">
   <section class="slide s-flow" data-title="The bottleneck"
     data-notes="The pipe runs as soon as the slide is up. Requirements come in faster than coding can turn them into working software, so they queue at the narrow part and the 'waiting' number keeps climbing. Let it run for a few seconds in silence. Then: the narrowest station sets the throughput of the whole system. For years that station was coding. (What changed comes on the next slides.)">
     <div class="rule"></div>
@@ -649,11 +680,11 @@
       </svg>
     </div>
     <p class="caption">The narrowest station sets the throughput of the whole system.</p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">03</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">04</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-4">
+  <div class="frame" id="slide-5">
   <!-- ================= THE CONSTRAINT MOVED ================= -->
   <!-- Source: Gartner — developers spend ~20–30% of their time writing code (Philip Walsh, Gartner, quoted in ITPro:
        https://www.itpro.com/technology/artificial-intelligence/most-developers-will-soon-use-an-ai-pair-programmer-but-the-benefits-arent-black-and-white ).
@@ -670,11 +701,11 @@
       <div class="term hero"><div class="v">~10%</div><div class="l">faster delivery</div></div>
     </div>
     <p class="line">The constraint moved upstream — to <em>deciding what to build</em>.</p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Coding share: Gartner (P. Walsh), 20–30% of developer time</span><span>How AI rewired the business analyst role</span><span class="slide-no">04</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Coding share: Gartner (P. Walsh), 20–30% of developer time</span><span>How AI rewired the business analyst role</span><span class="slide-no">05</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-5">
+  <div class="frame" id="slide-6">
   <section class="slide s-flow s-after2" data-title="After coding agents"
     data-notes="Same pipe as before, still jammed. Click 1: coding agents arrive and Coding widens. The queue drains and everything that comes in now goes out. Click 2: coding got wider, more flows through. Click 3: but zoom out to the whole lifecycle. Code is now one wide station among eight, and everything after it flows. The queue has moved upstream, to discovery: working out what problem we are solving. That's where the BA sits.">
     <div class="rule"></div>
@@ -682,7 +713,7 @@
     <div class="flow-wrap">
       <div class="flow-stage">
         <svg class="flow-svg zoom-a" viewBox="0 0 1640 360" role="img" data-play="widen"
-          aria-label="The same pipe as slide 3. Coding widens; the queue drains and output rises to match input.">
+          aria-label="The same pipe as slide 4. Coding widens; the queue drains and output rises to match input.">
           <defs>
             <pattern id="hatch-flow5" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
               <line x1="0" y1="0" x2="0" y2="14" stroke="rgba(255,255,255,.07)" stroke-width="4"/>
@@ -725,30 +756,6 @@
     <p class="caption" data-build="2">Coding got wider. More flows through.</p>
     <span class="cue" data-build="3" data-action="zoom"></span>
     <p class="twist" data-build="3">Build is no longer the constraint — <b>discovery is.</b></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">05</span></span></div>
-  </section>
-  </div>
-
-  <div class="frame" id="slide-6">
-  <!-- ================= INTRO (who am I) ================= -->
-  <section class="slide s-intro" data-title="Intro"
-    data-notes="Quick intro: who I am and why I care about this topic.">
-    <div class="intro-grid">
-      <div class="intro-left">
-        <h2>Hi, I’m<br><span class="hl">Yevhenii Volkovych</span></h2>
-        <dl class="facts">
-          <div><dt>Role</dt><dd>Risk AI Business Analyst</dd></div>
-          <div><dt>Experience</dt><dd>15 years in banking IT as an analyst</dd></div>
-          <div><dt>Stance</dt><dd>Big AI advocate and enthusiast</dd></div>
-        </dl>
-      </div>
-      <!-- PLACEHOLDERS: put an <img src="…" alt="…"> inside any .ph; remove the .sm slots if you only use one photo -->
-      <div class="photos">
-        <div class="ph main" role="img" aria-label="Placeholder: portrait photo"><span>Portrait</span></div>
-        <div class="ph sm a" role="img" aria-label="Placeholder: optional photo"><span>Photo 2</span></div>
-        <div class="ph sm b" role="img" aria-label="Placeholder: optional photo"><span>Photo 3</span></div>
-      </div>
-    </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">06</span></span></div>
   </section>
   </div>
@@ -832,11 +839,11 @@
   <!-- Aside in notes — IIBA, Global State of Business Analysis 2026 (2,120 professionals, 122 countries): communication #1 skill, critical thinking #2.
        https://www.iiba.org/business-analysis-blogs/insight-enables-confidence-the-2026-global-state-of-business-analysis-report/ -->
   <section class="slide s-rand" data-title="RAND: misunderstanding the problem" data-auto="800"
-    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. The lifecycle from slide 5 appears on its own and Discovery lights up: getting the problem right is discovery's job. Let me make this concrete with one question from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
+    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. The lifecycle from slide 6 appears on its own and Discovery lights up: getting the problem right is discovery's job. Let me make this concrete with one question from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
     <div class="rule"></div>
     <h2 class="big"><span class="lead">The most common reason AI projects fail:</span><span class="hl">misunderstanding the problem.</span></h2>
     <p class="sub2">RAND interviews with 65 experienced data scientists and engineers.</p>
-    <ol class="life" data-build="1" aria-label="The delivery lifecycle from slide 5, with Discovery highlighted">
+    <ol class="life" data-build="1" aria-label="The delivery lifecycle from slide 6, with Discovery highlighted">
       <li>Idea</li><li class="on">Discovery</li><li>Prioritise</li><li>Code</li><li>Review</li><li>CI / QA</li><li>Deploy</li><li>User</li>
     </ol>
     <p class="life-note" data-build="1">Getting the problem right is <b>discovery’s job</b> — the new constraint.</p>
@@ -1126,17 +1133,12 @@
   // cosine ease between two widths, for smooth pipe shoulders
   const blend = (a, b, t) => a + (b - a)*(1 - Math.cos(Math.PI*Math.max(0, Math.min(1, t))))/2;
   const players = {
-    // cover: ghost pipe, queue forms in front of the narrow part
-    pipe: el => makeFlow(el, {C:260, R:9, gap:22, valueAt:620, exit:900, fadeOut:820,
-      half: x => x < 260 ? 100 : x < 360 ? 100 - 72*(x-260)/100 : x < 620 ? 28 : x < 720 ? 28 + 72*(x-620)/100 : 100,
-      gates:[{x:352, every:1.6}], spawn:.42, cap:13, inSpeed:150, outSpeed:170,
-      seed:[[40, 130, 210, ...rowOf(352, 22, 6)], [780]]}),
-    // slide 3: requirements queue single-file inside Coding; the waiting count keeps climbing
+    // slide 4: requirements queue single-file inside Coding; the waiting count keeps climbing
     sdlc: el => makeFlow(el, {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560,
       half: x => x < 500 ? 70 : x < 640 ? 70 - 52*(x-500)/140 : x < 1000 ? 18 : x < 1140 ? 18 + 52*(x-1000)/140 : 70,
       gates:[{x:988, every:1.0, waiting: el.querySelector('.waiting')}], spawn:.45, cap:26, inSpeed:190, outSpeed:220,
       seed:[[90, 200, 300, 390, 470, ...rowOf(988, 24, 12)], [1230, 1480]]}),
-    // slide 5, part 1: same pipe; the Coding section can widen (o.w) and then releases at agent speed
+    // slide 6, part 1: same pipe; the Coding section can widen (o.w) and then releases at agent speed
     widen: el => {
       const o = {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560, w:18, x0:20, x1:1620,
         gates:[{x:988, every:1.0, waiting: el.querySelector('.waiting')}], spawn:.45, cap:26, inSpeed:190, outSpeed:220,
@@ -1145,7 +1147,7 @@
       o.half = x => x < 500 ? 70 : x < 640 ? blend(70, o.w, (x-500)/140) : x < 1000 ? o.w : x < 1140 ? blend(o.w, 70, (x-1000)/140) : 70;
       return makeFlow(el, o);
     },
-    // slide 5, part 2: the whole lifecycle; Code is wide, the human-speed steps are narrow
+    // slide 6, part 2: the whole lifecycle; Code is wide, the human-speed steps are narrow
     lifecycle: el => {
       const W = [70, 16, 32, 60, 46, 56, 62, 70];               // half-width per station, 200 units each from x=20
       const half = x => {
