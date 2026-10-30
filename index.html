@@ -277,11 +277,18 @@
 
   /* ---------- RAND ---------- */
   .s-rand{justify-content:center}
-  .s-rand .kicker{margin-bottom:36px}
-  .s-rand h2.big{font-size:100px;line-height:1.08;max-width:1600px}
+  .s-rand .rule{margin-bottom:48px}
+  .s-rand h2.big{font-size:108px;line-height:1.05;letter-spacing:-.025em;max-width:none}
+  .s-rand h2 .lead{display:block;font-size:68px;line-height:1.2;letter-spacing:-.015em;margin-bottom:12px}
   .s-rand .hl{color:var(--accent)}
-  .s-rand .sub2{margin-top:44px;font-size:36px;color:var(--ink-2)}
-  .s-rand .next{margin-top:72px;font-size:28px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .s-rand .sub2{margin-top:36px;font-size:36px;color:var(--ink-2)}
+  /* callback to slide 5: the lifecycle as a row of stations, Discovery lit */
+  .s-rand .life{list-style:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px;margin-top:96px}
+  .s-rand .life li{height:72px;border:1.5px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:28px;font-weight:600;color:var(--ink-3);transition:background .6s var(--ease-out) .5s,border-color .6s var(--ease-out) .5s,color .6s var(--ease-out) .5s}
+  .s-rand .life.built li.on{background:var(--active);border-color:var(--active);color:#fff}
+  .s-rand .life-note{margin-top:28px;font-size:36px;color:var(--ink-2)}
+  .s-rand .life-note b{color:var(--ink);font-weight:600}
 
   /* ---------- Discovery under pressure ---------- */
   .s-why .kicker{margin-bottom:28px}
@@ -764,13 +771,15 @@
        https://www.rand.org/pubs/research_reports/RRA2680-1.html -->
   <!-- Aside in notes — IIBA, Global State of Business Analysis 2026 (2,120 professionals, 122 countries): communication #1 skill, critical thinking #2.
        https://www.iiba.org/business-analysis-blogs/insight-enables-confidence-the-2026-global-state-of-business-analysis-report/ -->
-  <section class="slide s-rand" data-title="RAND: misunderstanding the problem"
-    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. Let me make this concrete with one question from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
+  <section class="slide s-rand" data-title="RAND: misunderstanding the problem" data-auto="800"
+    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. The lifecycle from slide 5 appears on its own and Discovery lights up: getting the problem right is discovery's job. Let me make this concrete with one question from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
     <div class="rule"></div>
-    <div class="kicker">Why AI projects get into trouble</div>
-    <h2 class="big">The most common root cause:<br><span class="hl">misunderstanding the problem.</span></h2>
+    <h2 class="big"><span class="lead">The most common reason AI projects fail:</span><span class="hl">misunderstanding the problem.</span></h2>
     <p class="sub2">RAND interviews with 65 experienced data scientists and engineers.</p>
-    <p class="next">Next → one question from credit risk</p>
+    <ol class="life" data-build="1" aria-label="The delivery lifecycle from slide 5, with Discovery highlighted">
+      <li>Idea</li><li class="on">Discovery</li><li>Prioritise</li><li>Code</li><li>Review</li><li>CI / QA</li><li>Deploy</li><li>User</li>
+    </ol>
+    <p class="life-note" data-build="1">Getting the problem right is <b>discovery’s job</b> — the new constraint.</p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">RAND, Root Causes of Failure for AI Projects (2024)</span><span>How AI rewired the business analyst role</span><span class="slide-no">09</span></span></div>
   </section>
   </div>
