@@ -330,7 +330,7 @@
   .s-why .remember b,.s-settle .remember b{color:var(--ink);font-weight:700}
   .s-question .hl{color:var(--accent)}
   .s-question{justify-content:center}
-  .s-question .rule{margin-bottom:48px}
+  .s-question .kicker{margin-bottom:40px}
   .s-question h2.big{font-size:112px;line-height:1.06;letter-spacing:-.025em;max-width:1600px;text-wrap:balance}
   .s-question h2 .lead{display:block;font-size:64px;line-height:1.2;letter-spacing:-.015em;margin-bottom:20px;color:var(--ink)}
   .s-question .stakes{margin-top:48px;font-size:36px;line-height:1.35;color:var(--ink-2)}
@@ -568,7 +568,7 @@
   .s5 .twist{margin-top:18px;font-size:36px;line-height:1.4;color:var(--ink-2)}
   .s5 .twist b{color:var(--active-hi);font-weight:700}
 
-  /* ---------- 10-K example modal (slide 10) ---------- */
+  /* ---------- 10-K example modal (slide 11) ---------- */
   .doclink{font:inherit;color:var(--ink);font-weight:600;background:none;border:0;padding:0;cursor:pointer;
     text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:8px}
   .doclink::after{content:"";display:inline-block;width:.62em;height:.62em;margin-left:.3em;vertical-align:.02em;
@@ -890,7 +890,7 @@
   <!-- Aside in notes — IIBA, Global State of Business Analysis 2026 (2,120 professionals, 122 countries): communication #1 skill, critical thinking #2.
        https://www.iiba.org/business-analysis-blogs/insight-enables-confidence-the-2026-global-state-of-business-analysis-report/ -->
   <section class="slide s-rand" data-title="RAND: misunderstanding the problem"
-    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. Understanding the problem is the analyst's job. Let me make this concrete with one question from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
+    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. Understanding the problem is the analyst's job. So part two: the analyst thinking with AI, on one real problem from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
     <div class="rule"></div>
     <h2 class="big"><span class="lead">The most common reason AI projects fail:</span><span class="hl">misunderstanding the problem.</span></h2>
     <p class="sub2">RAND interviews with 65 experienced data scientists and engineers.</p>
@@ -901,25 +901,9 @@
 
   
   <div class="frame" id="slide-10">
-  <!-- ================= THE QUESTION (the old "Shared risk beats single names" slide is folded in: its 2021 line is on the slide, Basel in the notes) ================= -->
-  <!-- Sources: BCBS Working Paper No. 15, "Studies on credit risk concentration" (Nov 2006): https://www.bis.org/publ/bcbs_wp15.pdf
-       "Historical experience shows that concentration of credit risk in asset portfolios has been one of the major causes of bank distress."
-       Name concentration could add 2–8% to credit VaR; sector concentration can increase economic capital by 20–40%.
-       AlixPartners press release, 23 Sep 2021: shortages related to semiconductors to cost the auto industry $210bn in revenue in 2021; 7.7m units of production lost (forecast).
-       https://www.alixpartners.com/newsroom/press-release-shortages-related-to-semiconductors-to-cost-the-auto-industry-210-billion-in-revenues-this-year-says-new-alixpartners-forecast/ -->
-  <section class="slide s-question" data-title="The question"
-    data-notes="RAND said the root cause is misunderstanding the problem. So let me make it concrete with one question from my world, credit risk. Why would a bank ask it? The Basel Committee: concentration of credit risk has been one of the major causes of bank distress, and it is not mainly about single big names. Name concentration adds about 2 to 8% to credit VaR; sector concentration can add 20 to 40% to economic capital. What hurts is risk that many counterparties share. 2021 is the example on the slide: one chip shortage hit a whole industry at once, about $210bn of auto revenue (and 7.7 million vehicles), per AlixPartners' forecast. So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only. This is the question for the rest of the talk; we'll come back to it in the demo. Optional: click 'public 10-K filings only' to show a real risk factor (Ford, FY2021, semiconductor shortage — note 'we and our competitors'); any clicker press or Esc closes it.">
-    <div class="rule"></div>
-    <h2 class="big"><span class="lead">Across ten public auto and semiconductor companies:</span><span class="hl">Which risks do they share&nbsp;—<br>and how strongly?</span></h2>
-    <p class="stakes"><b>2021:</b> one chip shortage hit a whole industry at once — <b>~$210bn</b> of auto revenue lost <span class="dim">(forecast)</span>.</p>
-    <p class="src">Source material: <button class="doclink" type="button" data-dialog="filing-ford" aria-haspopup="dialog">public annual reports (US 10-K filings) only.</button></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS WP15 (2006) · AlixPartners (Sep 2021)</span><span>How AI rewired the business analyst role</span><span class="slide-no">10</span></span></div>
-  </section>
-  </div>
-  <div class="frame" id="slide-11">
   <!-- ================= SECTION DIVIDER: AI as a thinking partner ================= -->
   <section class="slide s-div" data-title="Section: AI as a thinking partner" data-auto="700"
-    data-notes="Part two of four. The line draws on to the second stop on its own. Before anyone builds anything, I use AI to attack the question. Not one chat — several research agents, each coming at it from a different angle. Then I read what comes back and decide what we actually build.">
+    data-notes="Part two of four. The line draws on to the second stop on its own. First the problem we will work on for the rest of the talk; then, before anyone builds anything, how I use AI to attack it. Not one chat — several research agents, each coming at it from a different angle. Then I read what comes back and decide what we actually build.">
     <div class="here" aria-label="Agenda: part 2 of 4">
       <div class="track" aria-hidden="true"><span class="seg done"></span><span class="seg" data-build="1"></span></div>
       <ol class="stops">
@@ -931,10 +915,25 @@
     </div>
     <h2>AI as a <span class="hl">thinking partner</span></h2>
     <p class="sub">Use the model to attack your framing <b>before you use it to produce answers.</b></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">10</span></span></div>
   </section>
   </div>
-
+  <div class="frame" id="slide-11">
+  <!-- ================= THE QUESTION (the old "Shared risk beats single names" slide is folded in: its 2021 line is on the slide, Basel in the notes) ================= -->
+  <!-- Sources: BCBS Working Paper No. 15, "Studies on credit risk concentration" (Nov 2006): https://www.bis.org/publ/bcbs_wp15.pdf
+       "Historical experience shows that concentration of credit risk in asset portfolios has been one of the major causes of bank distress."
+       Name concentration could add 2–8% to credit VaR; sector concentration can increase economic capital by 20–40%.
+       AlixPartners press release, 23 Sep 2021: shortages related to semiconductors to cost the auto industry $210bn in revenue in 2021; 7.7m units of production lost (forecast).
+       https://www.alixpartners.com/newsroom/press-release-shortages-related-to-semiconductors-to-cost-the-auto-industry-210-billion-in-revenues-this-year-says-new-alixpartners-forecast/ -->
+  <section class="slide s-question" data-title="The problem we’ll solve"
+    data-notes="Here is the problem we will solve for the rest of this talk, from my world, credit risk. Everything that follows — the research agents, the decisions, the three demos — works on this one question. Why would a bank ask it? The Basel Committee: concentration of credit risk has been one of the major causes of bank distress, and it is not mainly about single big names. Name concentration adds about 2 to 8% to credit VaR; sector concentration can add 20 to 40% to economic capital. What hurts is risk that many counterparties share. 2021 is the example on the slide: one chip shortage hit a whole industry at once, about $210bn of auto revenue (and 7.7 million vehicles), per AlixPartners' forecast. So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only. Keep it in mind: we come back to it in the demos. Optional: click 'public 10-K filings only' to show a real risk factor (Ford, FY2021, semiconductor shortage — note 'we and our competitors'); any clicker press or Esc closes it.">
+    <div class="kicker">The problem we’ll solve in this talk</div>
+    <h2 class="big"><span class="lead">Across ten public auto and semiconductor companies:</span><span class="hl">Which risks do they share&nbsp;—<br>and how strongly?</span></h2>
+    <p class="stakes"><b>2021:</b> one chip shortage hit a whole industry at once — <b>~$210bn</b> of auto revenue lost <span class="dim">(forecast)</span>.</p>
+    <p class="src">Source material: <button class="doclink" type="button" data-dialog="filing-ford" aria-haspopup="dialog">public annual reports (US 10-K filings) only.</button></p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS WP15 (2006) · AlixPartners (Sep 2021)</span><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
+  </section>
+  </div>
   <div class="frame" id="slide-12">
   <!-- ================= SEVERAL AGENTS, DIFFERENT ANGLES ================= -->
   <section class="slide s-multi" data-title="Several agents, different angles" data-auto="2200"
@@ -1109,7 +1108,7 @@
 
 
   </main>
-<!-- 10-K example, opened from slide 10. Excerpt is verbatim (omissions marked …) from Ford Motor Company, Form 10-K for fiscal 2021, Item 1A, filed 4 Feb 2022:
+<!-- 10-K example, opened from slide 11. Excerpt is verbatim (omissions marked …) from Ford Motor Company, Form 10-K for fiscal 2021, Item 1A, filed 4 Feb 2022:
      https://www.sec.gov/Archives/edgar/data/37996/000003799622000013/f-20211231.htm -->
 <dialog class="filing" id="filing-ford" aria-labelledby="filing-ford-t">
   <header><h3 id="filing-ford-t">What a 10-K risk factor looks like</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
