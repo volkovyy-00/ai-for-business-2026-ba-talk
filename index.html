@@ -418,7 +418,7 @@
   .multi-svg .rs{font-size:28px;font-weight:600;fill:#fff}
   .multi-svg [data-build]{transition:opacity .6s var(--ease-out)}
   .multi-svg [data-build].pending{transform:none}
-  .dr-wrap .run-link{position:absolute;left:40px;top:312px;font-size:28px;white-space:nowrap}
+  .dr-wrap .run-link{position:absolute;left:40px;top:212px;font-size:28px;white-space:nowrap}
   .dr-wrap .run-link .doclink{color:var(--ink-2)}
   .dr-wrap .run-link[data-build].pending{transform:none}
   .strategy{display:grid;grid-template-columns:220px repeat(3,minmax(0,1fr));column-gap:40px;margin-top:48px}
@@ -963,20 +963,13 @@
   <div class="frame" id="slide-12">
   <!-- ================= DEEP RESEARCH: WHY, HOW IT WORKS, MY STRATEGY (user: real runs take 10–15 min; the recording is a re-creation, not a real run) ================= -->
   <section class="slide s-multi" data-title="Deep research: how the analyst uses AI" data-auto="1400"
-    data-notes="This is how I use AI as a thinking partner. First, why not just ask the chatbot? A chat reply comes back in seconds, from what the model already remembers, usually without sources. Fine for a quick fact; not good enough for discovery. A deep research agent works differently. You give it a question and it investigates: it plans what to look for, searches, reads the sources, follows the leads it finds, and repeats until the question is covered. Then it writes a report with a source for every claim. One run takes ten to fifteen minutes. My strategy: I don't run it once. I send the same question out several times, each run with its own angle, then compare what comes back. Where the runs disagree is exactly where I need to look. The result is one brief I can defend. Optional: click 'Watch a run' to show the recording (re-created and sped up; any clicker press or Esc closes it). Next slide: what I decided from that brief.">
+    data-notes="This is how I use AI as a thinking partner. A chatbot answers in seconds from what it already remembers, usually without sources: fine for a quick fact, not good enough for discovery. A deep research agent works differently. You give it a question and it investigates: it plans what to look for, searches, reads the sources, follows the leads it finds, and repeats until the question is covered. Then it writes a report with a source for every claim. One run takes ten to fifteen minutes. My strategy: I don't run it once. I send the same question out several times, each run with its own angle, then compare what comes back. Where the runs disagree is exactly where I need to look. The result is one brief I can defend. Optional: click 'Watch a run' to show the recording (re-created and sped up; any clicker press or Esc closes it). Next slide: what I decided from that brief.">
     <div class="rule"></div>
     <h2>Don’t ask AI for an answer.<br><span class="hl">Send it to research.</span></h2>
     <div class="dr-wrap">
-    <svg class="multi-svg" viewBox="0 0 1640 390" role="img"
-      aria-label="A chat reply is one short hop: question to answer in seconds, from memory, usually without sources. Deep research is an agent that investigates for 10 to 15 minutes per run: it plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources.">
+    <svg class="multi-svg" viewBox="0 100 1640 290" role="img"
+      aria-label="Deep research is an agent that investigates for 10 to 15 minutes per run: it plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources.">
       <g data-build="1">
-        <text class="lab sm" x="0" y="44">Chat reply</text>
-        <path class="quick" d="M216 34H312"/><path class="tip q" d="M300 26L316 34L300 42Z"/>
-        <rect class="box" x="328" y="6" width="150" height="56" rx="12"/>
-        <text class="ans" x="403" y="44" text-anchor="middle">Answer</text>
-        <text class="s q" x="506" y="44">seconds · usually no sources</text>
-      </g>
-      <g data-build="2">
         <rect class="panel" x="0" y="100" width="1640" height="290" rx="20"/>
         <text class="lab" x="40" y="172">Deep research</text>
         <text class="s" x="40" y="214">an agent that investigates</text>
@@ -992,16 +985,16 @@
           <text class="s" x="895" y="293" text-anchor="middle">repeats until the question is covered</text>
         </g>
       </g>
-      <g data-build="3">
+      <g data-build="2">
         <path class="exit" d="M1250 245H1308"/><path class="tip" d="M1300 233L1320 245L1300 257Z"/>
         <rect class="report" x="1330" y="175" width="270" height="140" rx="16"/>
         <text class="t" x="1465" y="239" text-anchor="middle">Report</text>
         <text class="rs" x="1465" y="281" text-anchor="middle">with sources</text>
       </g>
     </svg>
-    <p class="run-link" data-build="2"><button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
+    <p class="run-link" data-build="1"><button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
     </div>
-    <div class="strategy" data-build="4">
+    <div class="strategy" data-build="3">
       <p class="sk">My strategy</p>
       <ol>
         <li><svg class="mini" viewBox="0 0 72 40" aria-hidden="true"><rect x="8" y="2" width="56" height="10" rx="5"/><rect x="8" y="15" width="56" height="10" rx="5"/><rect x="8" y="28" width="56" height="10" rx="5"/></svg><b>Several angles</b><span>same question, each run framed differently</span></li>
