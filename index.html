@@ -219,7 +219,7 @@
   .s-constraint .line{margin-top:64px;font-size:46px;color:var(--ink-2)}
   .s-constraint .line em{font-style:normal;color:var(--ink);font-weight:600;border-bottom:5px solid var(--active);padding-bottom:2px;white-space:nowrap}
 
-  /* ---------- Evidence slides (expertise, IIBA) ---------- */
+  /* ---------- Evidence slides ---------- */
   .ev-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:64px}
   .ev{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 52px 44px}
   .ev.hero{border-color:var(--active);background:var(--panel-hi)}
@@ -232,10 +232,6 @@
   .ev .arrow{font-size:56px;color:var(--ink-3);padding-bottom:56px}
   .ev .foot{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:26px;color:var(--ink-3)}
   .ev .foot b{color:var(--ink)}
-  .ev .rank{margin-top:28px;display:flex;flex-direction:column;gap:16px}
-  .ev .rank .r{font-size:48px;font-weight:700;color:var(--ink-2);display:flex;align-items:baseline;gap:24px}
-  .ev .rank .r span{font-size:40px;color:var(--ink-3);width:72px}
-  .ev .rank .r.on{color:var(--ink)} .ev .rank .r.on span{color:var(--accent)}
   .s-ev .remember{margin-top:52px;font-size:40px;line-height:1.3;color:var(--ink-2)}
   .s-ev .remember b{color:var(--ink);font-weight:700}
 
@@ -762,49 +758,25 @@
   </div>
 
   <div class="frame" id="slide-9">
-  <!-- ================= IIBA 2026 ================= -->
-  <!-- Source: IIBA, Global State of Business Analysis 2026 — 2,120 professionals, 122 countries. Positive AI career impact: 63% (2024), 74% (2025), 69% (2026); negative 5%.
-       Communication #1 skill (3rd year running); critical thinking climbed to #2.
-       https://www.iiba.org/business-analysis-blogs/insight-enables-confidence-the-2026-global-state-of-business-analysis-report/ -->
-  <section class="slide s-ev" data-title="IIBA 2026"
-    data-notes="IIBA asked 2,120 analysts across 122 countries. 69% say AI is positive for their career — down from 74% last year. At the same time, critical thinking climbed to the second most important skill. Sentiment dipped; the skill most valued moved towards judgement.">
-    <div class="rule"></div>
-    <h2>Analysts on AI, 2026</h2>
-    <div class="ev-grid">
-      <div class="ev">
-        <div class="k">Positive on AI for their career</div>
-        <div class="pair"><div><div class="v dim">74%</div><div class="l">2025</div></div><div class="arrow">→</div><div><div class="v">69%</div><div class="l">2026</div></div></div>
-        <div class="foot">sentiment dipped</div>
-      </div>
-      <div class="ev hero">
-        <div class="k">Most important BA skills</div>
-        <div class="rank"><div class="r"><span>#1</span>Communication</div><div class="r on"><span>#2</span>Critical thinking</div></div>
-        <div class="foot">critical thinking climbed to second</div>
-      </div>
-    </div>
-    <p class="remember">Sentiment dipped. <b>Judgement rose in value.</b></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">IIBA, Global State of Business Analysis 2026 · n = 2,120</span><span>How AI rewired the business analyst role</span><span class="slide-no">09</span></span></div>
-  </section>
-  </div>
-
-  <div class="frame" id="slide-10">
   <!-- ================= RAND ================= -->
   <!-- Source: RAND, "The Root Causes of Failure for Artificial Intelligence Projects and How They Can Succeed" (RR-A2680-1, 2024),
        interviews with 65 experienced data scientists and engineers: misunderstanding / miscommunicating the problem to be solved was the most common root cause.
        https://www.rand.org/pubs/research_reports/RRA2680-1.html -->
+  <!-- Aside in notes — IIBA, Global State of Business Analysis 2026 (2,120 professionals, 122 countries): communication #1 skill, critical thinking #2.
+       https://www.iiba.org/business-analysis-blogs/insight-enables-confidence-the-2026-global-state-of-business-analysis-report/ -->
   <section class="slide s-rand" data-title="RAND: misunderstanding the problem"
-    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. Let me make this concrete with one question from credit risk.">
+    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. Let me make this concrete with one question from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
     <div class="rule"></div>
     <div class="kicker">Why AI projects get into trouble</div>
     <h2 class="big">The most common root cause:<br><span class="hl">misunderstanding the problem.</span></h2>
     <p class="sub2">RAND interviews with 65 experienced data scientists and engineers.</p>
     <p class="next">Next → one question from credit risk</p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">RAND, Root Causes of Failure for AI Projects (2024)</span><span>How AI rewired the business analyst role</span><span class="slide-no">10</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">RAND, Root Causes of Failure for AI Projects (2024)</span><span>How AI rewired the business analyst role</span><span class="slide-no">09</span></span></div>
   </section>
   </div>
 
   
-  <div class="frame" id="slide-11">
+  <div class="frame" id="slide-10">
   <!-- ================= SECTION DIVIDER: Discovery under pressure ================= -->
   <section class="slide s-div" data-title="Section: Discovery under pressure"
     data-notes="RAND said the root cause is misunderstanding the problem. So let me show you one real credit-risk question, and what it took to define it.">
@@ -812,11 +784,11 @@
       <div class="div-left"><div class="kicker">Section</div><h2>Discovery under pressure</h2></div>
       <div class="div-right"><p>One credit-risk question</p></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">10</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-12">
+  <div class="frame" id="slide-11">
   <!-- ================= BASEL ================= -->
   <!-- Source: BCBS Working Paper No. 15, "Studies on credit risk concentration" (Nov 2006): https://www.bis.org/publ/bcbs_wp15.pdf
        "Historical experience shows that concentration of credit risk in asset portfolios has been one of the major causes of bank distress." -->
@@ -826,10 +798,10 @@
     <div class="kicker">Why concentration</div>
     <blockquote>“Concentration of credit risk in asset portfolios has been <span class="hl">one of the major causes of bank distress.</span>”</blockquote>
     <p class="cite">— Basel Committee on Banking Supervision, Working Paper 15</p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS Working Paper 15, Studies on credit risk concentration (2006)</span><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS Working Paper 15, Studies on credit risk concentration (2006)</span><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
   </section>
   </div>
-  <div class="frame" id="slide-13">
+  <div class="frame" id="slide-12">
   <!-- ================= SECTOR VS NAME ================= -->
   <!-- Sources: BCBS WP15 (2006): name concentration could add 2–8% to credit VaR; sector concentration can increase economic capital by 20–40%.
        AlixPartners press release, 23 Sep 2021: shortages related to semiconductors to cost the auto industry $210bn in revenue in 2021; 7.7m units of production lost (forecast).
@@ -851,10 +823,10 @@
       </div>
     </div>
     <div class="shock"><span class="tag">Shared shock · 2021</span>Chip shortage: <b>~$210bn</b> auto revenue and <b>7.7m vehicles</b> lost <span class="dim">· forecast</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS WP15 (2006) · AlixPartners (Sep 2021)</span><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS WP15 (2006) · AlixPartners (Sep 2021)</span><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
   </section>
   </div>
-  <div class="frame" id="slide-14">
+  <div class="frame" id="slide-13">
   <!-- ================= THE QUESTION ================= -->
   <section class="slide s-question" data-title="The question"
     data-notes="So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only.">
@@ -862,10 +834,10 @@
     <div class="kicker">The question for the rest of this talk</div>
     <h2 class="big">Across ten public auto and semiconductor companies:<br><span class="hl">which risks do they share — and how strongly?</span></h2>
     <div class="chips"><span>Autos</span><span>Semiconductors</span><span>Public filings</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
   </section>
   </div>
-  <div class="frame" id="slide-15">
+  <div class="frame" id="slide-14">
   <!-- ================= SECTION DIVIDER: AI as a thinking partner ================= -->
   <section class="slide s-div" data-title="Section: AI as a thinking partner"
     data-notes="Before anyone builds anything, I use AI to attack the question. Not one chat — several research agents, each coming at it from a different angle. Then I read what comes back and decide what we actually build.">
@@ -873,11 +845,11 @@
       <div class="div-left"><div class="kicker">Section</div><h2>AI as a thinking partner</h2></div>
       <div class="div-right"><p>Attack the question from several angles before anyone builds</p></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-16">
+  <div class="frame" id="slide-15">
   <!-- ================= SAME AI, TWO KINDS OF WORK (Dell'Acqua et al.) ================= -->
   <!-- Source: Dell'Acqua et al., "Navigating the Jagged Technological Frontier", Harvard Business School working paper 24-013 (2023), with BCG; 758 consultants, GPT-4.
        On 18 tasks within the model's capabilities: 25.1% faster, >40% higher quality vs control. On a task selected to be outside its capabilities:
@@ -900,11 +872,11 @@
       </div>
     </div>
     <p class="remember">The output can’t tell you which kind you’re in. <b>So attack the framing first.</b></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Dell’Acqua et al., Harvard Business School &amp; BCG (2023)</span><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Dell’Acqua et al., Harvard Business School &amp; BCG (2023)</span><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-17">
+  <div class="frame" id="slide-16">
   <!-- ================= WHAT IS A DEEP RESEARCH AGENT ================= -->
   <section class="slide s-dra" data-title="What is a deep research agent"
     data-notes="Quick definition, because I'll use the term a lot. A deep research agent isn't a chat reply. You give it a question, and it goes off with tools — search, read, follow links — for minutes, sometimes longer, and comes back with a brief that cites where every claim came from. You still own the question. And the trick I want to show you: I didn't run one. I ran several, in parallel.">
@@ -918,11 +890,11 @@
       <li><b>Cites sources</b><span>every claim points back to a page</span></li>
       <li><b>You steer</b><span>you own the question and the angle</span></li>
     </ul>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-18">
+  <div class="frame" id="slide-17">
   <!-- ================= SEVERAL AGENTS, DIFFERENT ANGLES ================= -->
   <section class="slide s-multi" data-title="Several agents, different angles"
     data-notes="Here's what that looked like. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. I'll play the short recording rather than spin them up live — it takes a while. Then I merged what came back into one brief, and that brief is what I prototyped from.">
@@ -930,7 +902,7 @@
     <h2>Several agents, different angles</h2>
     <div class="multi-grid">
       <div class="angles">
-        <p class="q"><b>Same question as slide 14.</b> Each agent got a different angle.</p>
+        <p class="q"><b>Same question as slide 13.</b> Each agent got a different angle.</p>
         <ul>
           <li><i>01</i>The risk-analyst view</li>
           <li><i>02</i>What 10-K filings contain</li>
@@ -942,11 +914,11 @@
       <div class="shot-slot" role="img" aria-label="Placeholder: multi-agent research video"><span>Video · Agents researching in parallel</span></div>
     </div>
     <div class="strip"><span class="tag">Then</span><b>Synthesise</b><span class="ar">→</span><b>one brief</b><span class="ar">→</span><b>prototype</b></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-19">
+  <div class="frame" id="slide-18">
   <!-- ================= THREE APPROACHES ================= -->
   <section class="slide s-three" data-title="Three approaches"
     data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live.">
@@ -958,11 +930,11 @@
       <div class="ap"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p></div>
       <div class="ap"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">19</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-20">
+  <div class="frame" id="slide-19">
   <!-- ================= DEMO: HOW THE CONSOLE WORKS (foundation mock, not the real app) ================= -->
   <section class="slide s-console" data-title="Demo: how the console works"
     data-notes="Before I leave the slides, one walk through the console so you know where to look. Top right tells you whether it's live or a replay. You pick a question from the chips, or type one. The answer comes back in the middle. And on the right is the part I care about most: the evidence — which filing, which passage, so you can check it. Same layout for all three approaches.">
@@ -984,11 +956,11 @@
       </div>
     </div>
     <div class="c-flow"><b>Question</b><span class="ar">→</span><b>Answer</b><span class="ar">→</span><b>Evidence you can check</b><span class="mock">Schematic · not the live app</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">20</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">19</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-21">
+  <div class="frame" id="slide-20">
   <!-- ================= DEMO CUE 1: PLAIN RAG ================= -->
   <section class="slide s-cue" data-title="Plain RAG"
     data-notes="Demo one, plain vector RAG. Watch the answer — it reads well. Then try to trace it: which filings, which passages, how many companies actually said this? That's the gap. Switching to the live console now.">
@@ -1004,11 +976,11 @@
       <!-- PLACEHOLDER: live console, Plain RAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Plain RAG"><span>Live console · Plain vector RAG</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">21</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">20</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-22">
+  <div class="frame" id="slide-21">
   <!-- ================= DEMO CUE 2: GRAPHRAG ================= -->
   <section class="slide s-cue" data-title="GraphRAG"
     data-notes="Demo two, GraphRAG on Neo4j. This time watch three things: the Cypher query it writes, the subgraph of companies and risks that comes back, and that I can click any link to see the quote behind it. Over to the console.">
@@ -1024,11 +996,11 @@
       <!-- PLACEHOLDER: live console, GraphRAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, GraphRAG"><span>Live console · GraphRAG (Neo4j)</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">22</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">21</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-23">
+  <div class="frame" id="slide-22">
   <!-- ================= DEMO CUE 3: TAXONOMY-FIRST ================= -->
   <section class="slide s-cue" data-title="Taxonomy-first"
     data-notes="Demo three, taxonomy first. Categories fixed up front, the counting done in code. Watch the heatmap — risk by company — and then open any cell: the quote drawer shows exactly which passage put it there. Let's go live.">
@@ -1044,7 +1016,7 @@
       <!-- PLACEHOLDER: live console, Taxonomy-first. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Taxonomy-first"><span>Live console · Taxonomy-first</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">23</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">22</span></span></div>
   </section>
   </div>
 
