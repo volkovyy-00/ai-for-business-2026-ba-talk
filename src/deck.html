@@ -1164,7 +1164,7 @@
     wide: el => players.widen(el, true),
     // slide 6, after the zoom: the whole lifecycle; Code is wide, the human-speed steps are narrow
     lifecycle: el => {
-      const W = [70, 16, 32, 60, 46, 56, 62, 70];               // half-width per station, 200 units each from x=20
+      const W = [70, 16, 70, 70, 70, 70, 70, 70];               // half-width per station, 200 units each from x=20: one width everywhere, Discovery the only throat
       const half = x => {
         const k = Math.max(0, Math.min(7, Math.floor((x-20)/200))), edge = 20 + 200*k;
         if (x - edge < 26 && k > 0) return blend(W[k-1], W[k], (x - edge + 26)/52);
@@ -1172,10 +1172,10 @@
         return W[k];
       };
       return makeFlow(el, {C:190, R:9, gap:21, valueAt:820, exit:1640, fadeOut:1570, x0:20, x1:1620, half,
-        gates:[{x:410, every:1.1, waiting: el.querySelector('.w0')}, {x:610, every:.8}],
+        gates:[{x:410, every:1.1, waiting: el.querySelector('.w0')}],
         spawn:.45, cap:16, inSpeed:200, outSpeed:220,
         throat: () => [[220,420,16]].map(([a,b,w]) => `M${a+26} ${190-w} H${b-26} M${a+26} ${190+w} H${b-26}`).join(' '),
-        seed:[[40, 120, 190, ...rowOf(410, 21, 9)], rowOf(610, 21, 3), [700, 930, 1150, 1360, 1500]]});
+        seed:[[40, 120, 190, ...rowOf(410, 21, 9)], [560, 700, 930, 1150, 1360, 1500]]});
     }
   };
   function rowOf(head, gap, n){ return Array.from({length:n}, (_, k) => head - k*gap); }
