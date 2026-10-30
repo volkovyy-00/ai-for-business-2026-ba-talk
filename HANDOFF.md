@@ -111,7 +111,7 @@ If you publish without `url`, you create a new artifact and the user loses the l
 
 **Missing slides:** the agenda promises "Three lines to leave with" (takeaways) and there is no closing slide. Both are flagged in the critique, but the user has not asked for them yet. Raise this; don't build them unasked.
 
-## 6. Open critique items for slides 14–19
+## 6. Open critique items for the end slides (numbered before session 4; they are now 14–18: Three approaches, Console, three demo cues)
 
 From the impeccable critique run on 2026-10-29: score 16/28, "Acceptable". Issues still to fix:
 - Remove the `.kicker` labels above titles (slides 16–19 (current numbers)), folding any meaning into the title or notes.
@@ -121,6 +121,12 @@ From the impeccable critique run on 2026-10-29: score 16/28, "Acceptable". Issue
 - The deck has dead CSS from the skeleton (`.s2`, `.cards`, `.agenda*`, `.beats*`, `.s3 *`, `.s5 .pipe-wrap/.legend`). It is safe to delete once the slides that might use it are redesigned.
 
 ## 7. Gotchas and dead ends (don't repeat these)
+
+- **The slide 12 recording (`agents-run.mp4`) is a re-creation, not a real run** (user, session 4). Never read timings, counts, quotes or angle names off it onto a slide; that was rejected outright. Real deep-research runs take **10–15 minutes** each. The user hasn't named their real angles; ask before putting any on a slide.
+- **`agents-run.mp4`** (3.9 MB, user's upload) is git-ignored (`*.mp4`) and sits next to `index.html`. Every publish must pass it in `files` with `falcon.svg`. If the local copy is gone (fresh container), fetch it from the artifact: Artifact `read` with `url` = the deck URL and `path: "agents-run.mp4"`, then copy it next to `index.html`.
+- **Class name clash:** `.watch` is the demo-cue panel style (slides 16–18). Slide 12's link uses `.run-link`. Check for an existing class before naming a new one.
+- **Inline `.doclink` buttons** wrap their window icon onto a new line when absolutely positioned; wrap the button in a `<p>` and position the `<p>`.
+- **SVG builds:** a `transform` attribute on a `data-build` group is overridden by the deck's CSS `transform` on `.pending`; nest an inner `<g transform>` instead.
 
 - **Network:** impeccable.style and most barclays.com hosts are **blocked** from cloud sessions. GitHub (`git clone`, raw.githubusercontent.com) works. SEC EDGAR (www.sec.gov, data.sec.gov) works; it requires a User-Agent with a contact, so use a generic one, never the user's email.
 - **Impeccable skill:** it is committed to this repo as a project skill at `.claude/skills/impeccable/` (upstream pbakaus/impeccable, Apache 2.0, `LICENSE` included), so any session that opens the repo loads it automatically. To update it to the latest upstream version:
@@ -177,13 +183,26 @@ From the impeccable critique run on 2026-10-29: score 16/28, "Acceptable". Issue
 - The user wants a part that proves the essence of BA work and the BA–AI synergy before the skills demo. A 24-slide order was proposed (a Frame · Check · Sign off strip from the question slide on, a "what discovery had to settle first" slide from the brief, a rubric, scorecard, governance, takeaways). The user chose **"discuss first"**: nothing of it is built or agreed.
 
 
-**Open questions to the user (asked, not yet answered):**
+**Older open questions (sessions 1–3, still unanswered):**
 - Slide 4: the title "This is a bottleneck" stays up after Coding widens. Change it on the click? If yes, the user picks the words.
 - Slide 2 (intro): add a "then → now" line for the WIMP → AI story, e.g. "Analysis for WIMP: screens, clicks, specs" → "Analysis with AI: questions, agents, evidence"? Only with the user's approval or wording. It is in the notes either way.
 
+**Session 4 log (slides 4–13; artifact versions 30–42):**
+- Slide 4: "instant view" dialog of Anthropic's AI-native SDLC playbook (verbatim excerpt + the user's chart as a data URI; claude.com can't be framed).
+- Deck-wide no-flash fix: slides no longer drain and rebuild when revisited (prep on leave, `.preload`, IO rootMargin −2px).
+- Slides 7 and 8 critiqued and reworked (see §5). Slide 9 trimmed; old "Shared risk beats single names" and "What is a deep research agent" slides removed; new slide 13 "The agents explored. I decided." built from the user's own words.
+- Order now: 9 RAND → 10 divider "AI as a thinking partner" → 11 **the problem** (kicker "The problem we'll solve in this talk"; the user wanted it clearly announced as the problem the talk solves, after the break slide) → 12 deep research → 13 decisions → 14 three approaches → 15 console → 16–18 demo cues. 18 slides.
+- Slide 12 went through four versions. The accepted direction: "Don't ask AI for an answer. / Send it to research." — chat reply (one small hop) vs the deep-research loop in one panel, then "My strategy" (3 → 2 → 1). Built from Fable's design advice, then aligned after an impeccable critique (version 42). The user liked the idea; the last iteration fixed alignment and the "My strategy"/logo merge.
+
+**Open questions to the user (asked, not yet answered):**
+- Slide 12: move "Deep research / an agent that investigates / 10–15 minutes per run" out of the panel into one line above it, so the loop and Report centre across the full width? (Offered at the end of session 4.)
+- Slide 12: name the real research angles on the slide? Only with the user's words.
+- Slide 13: it lists four decisions (Source / Taxonomy / A correct answer / One scoring idea, from the user's own words). Earlier the user was asked whether to align it with other lists; unanswered. Its "several, in parallel" is deliberately vague.
+- Slide 13: the redacted brief → build decisions screenshot for `#brief-extract` (the user offered it; not yet sent).
+
 **Then, in order:**
-1. **Next redesign: slide 15 (Three approaches)** (recommendation: keep it, it sets up the demo). Slide 14 is done; it still needs the real recording dropped into `#agents-run`.
-2. Then 16 (console schematic, has a kicker), 17–19 (demo cues: kickers, the audience-visible "Switch to live console" stage direction, no shared comparison spine). Ask the user before each whether the slide earns its place; they have been cutting.
+1. Wait for the user's verdict on slide 12 (version 42) and the questions above.
+2. **Next: slide 14 (Three approaches).** Keep RAG/Neo4j names, one plain line each; frame it as the spec being proved, not a tech bake-off. Then 15 (console schematic, has a kicker — kickers are on impeccable's ban list), 16–18 (demo cues: kickers, the audience-visible "Switch to live console" stage direction, no shared comparison spine). Ask before each whether the slide earns its place; the user has been cutting.
 3. Slide 2 (intro): drop in the user's photos when they send them.
-4. Continue slide by slide, applying §6. After each change: `./scripts/build.sh`, republish to the same artifact URL, commit and push to `main` (a stop hook asks for it; the user accepted direct pushes to `main`), update §5, and summarise what changed including exact wording changes.
+4. Workflow per slide: edit `src/deck.html` → `./scripts/build.sh` → screenshot check (scripts in the session scratchpad are gone with the container; recreate: Playwright, 1920×1080, `index.html?shot=N#N`, reload, wait 4 s) → republish to the same artifact URL with `falcon.svg` + `agents-run.mp4` → commit and push to `main` → update §5 → tell the user the exact wording changes. For "critique with impeccable": two isolated subagents (A design review, B detector + measurements), then synthesise, end with a question.
 5. Before the talk: ask whether to add the takeaways and closing slides, run a full detector pass, and do a projector check.
