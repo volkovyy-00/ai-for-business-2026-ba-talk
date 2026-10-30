@@ -533,8 +533,8 @@
   .flow-stage.zoomed .zoom-a{opacity:0;transform:translateX(16.1%) scale(.5556)}
   .flow-stage.zoomed .zoom-b{opacity:1;transform:none}
   .flow-svg .stations.small text{font-size:32px}
-  .flow-svg .under.small text{font-size:24px}
-  .flow-svg .why text{font-family:var(--font);font-size:24px;font-weight:600;letter-spacing:.04em;fill:var(--ink-3)}
+  .flow-svg .under.small text{font-size:30px}   /* ≈28px on screen */
+  .flow-svg .why text{font-family:var(--font);font-size:30px;font-weight:600;letter-spacing:.04em;fill:var(--ink-3)}
   .flow-svg .why .fast{fill:var(--ink)}
   .s-flow .cue{display:none}
   .s-flow .twist[data-build].built{transition-delay:.9s}   /* the line follows the widen / zoom it describes */
@@ -763,11 +763,10 @@
           <path class="throat"/>
           <g class="flow"></g>
           <g class="under small" text-anchor="middle">
-            <text x="320" y="300" class="hot"><tspan class="w0">0</tspan> WAITING</text>
+            <text x="320" y="302" class="hot"><tspan class="w0">0</tspan> WAITING</text>
           </g>
           <g class="why" text-anchor="middle">
-            <text x="320" y="340">WHAT PROBLEM?</text><text x="520" y="340">WHOSE GOAL?</text><text x="720" y="340" class="fast">AGENT SPEED</text>
-            <text x="920" y="340">HUMANS</text><text x="1120" y="340">CONFIDENCE</text><text x="1320" y="340">PERMISSION</text><text x="1520" y="340">VALUE</text>
+            <text x="320" y="346">WHAT PROBLEM?</text><text x="720" y="346" class="fast">AGENT SPEED</text>
           </g>
         </svg>
       </div>
