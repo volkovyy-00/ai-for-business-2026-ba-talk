@@ -670,7 +670,7 @@
   </div>
 
   <div class="frame" id="slide-4">
-  <section class="slide s-flow" data-title="The bottleneck"
+  <section class="slide s-flow" data-title="The bottleneck" data-reset
     data-notes="The pipe runs as soon as the slide is up. Requirements come in faster than coding can turn them into working software, so they queue at the narrow part and the 'waiting' number keeps climbing. Let it run for a few seconds in silence. Then: the narrowest station sets the throughput of the whole system. For years that station was coding. Click: coding agents arrive and Coding widens. The queue drains and everything that comes in now goes out. Coding got wider, more flows through. (Why that alone didn't speed up delivery comes next.)">
     <div class="rule"></div>
     <h2>This is a bottleneck</h2>
@@ -1237,7 +1237,8 @@
     slides[k].querySelectorAll('[data-play]:not([data-build])').forEach(el => el._player.play());
     // moving forward (clicker, keys, wheel, trackpad or dots) starts a slide at its first build; moving back shows it complete
     const fwd = arriving && arriving.k === k ? arriving.dir > 0 : prev < 0 || k > prev;
-    setStep(k, shot ? groups[k].length : fwd ? 0 : groups[k].length);
+    // data-reset slides start from build 0 even when you come back to them
+    setStep(k, shot ? groups[k].length : fwd || 'reset' in slides[k].dataset ? 0 : groups[k].length);
     autoRun(k, true);
     arriving = null;
     document.body.classList.toggle('on-cover', k === 0);
@@ -1286,7 +1287,7 @@
   });
   // a slide coming into view is put into its arrival state before it is visible (build 0 ahead, complete behind),
   // so it never flashes its finished state first; it becomes current at 60% visible
-  const prep = k => { if (k !== i) setStep(k, i < 0 || k > i ? 0 : groups[k].length); };
+  const prep = k => { if (k !== i) setStep(k, i < 0 || k > i || 'reset' in slides[k].dataset ? 0 : groups[k].length); };
   const io = new IntersectionObserver(es => es.forEach(en => {
     if (!en.isIntersecting) return;
     const k = frames.indexOf(en.target);
