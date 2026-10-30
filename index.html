@@ -545,7 +545,8 @@
   .zoom-b .chamber{fill:rgba(0,109,227,.2);stroke:var(--active);stroke-width:3}   /* drawn over the body, clipped to the Code section */
   .zoom-b .marks{stroke:rgba(255,255,255,.22);stroke-width:2;stroke-dasharray:4 7}
   .s-flow .cue{display:none}
-  .s-flow .twist[data-build].built{transition-delay:.9s}   /* the line follows the widen / zoom it describes */
+  .s-flow .rec{margin-top:20px;font-size:32px;color:var(--ink-2)}
+  .s-flow .twist[data-build].built,.s-flow .rec[data-build].built{transition-delay:.9s}   /* the line follows the widen / zoom it describes */
   @media (prefers-reduced-motion:reduce){ .zoom-a,.zoom-b{transition:opacity .4s} }
 
   .s5 .rule{margin-bottom:40px}
@@ -589,6 +590,19 @@
   .filing footer{display:flex;align-items:center;gap:1.4em;padding:0 1.4em 1.2em;color:var(--ink-2);font-size:.9em}
   .filing footer p{flex:1} .filing footer b{color:var(--ink);font-weight:600}
   .filing footer a{color:var(--accent);font-weight:600;white-space:nowrap;text-underline-offset:4px}
+  /* SDLC playbook chart dialog, opened from slide 4 (redrawn from the article's before/after chart) */
+  .filing .sdlc{margin:1.2em 1.4em;padding:1.6em 1.8em 1.2em;background:var(--midnight);border:1px solid var(--line);border-radius:10px}
+  .sdlc h4{font-size:1em;font-weight:600;color:var(--ink-2)} .sdlc h4 b{color:var(--ink);font-weight:700}
+  .sdlc h4 + .row{margin-top:.7em} .sdlc .row + h4{margin-top:1.6em}
+  .sdlc .row,.sdlc .notes{display:grid;gap:.4em} .sdlc .row{height:3.2em;align-items:stretch}
+  .sdlc .before{grid-template-columns:56fr 76fr 290fr 76fr 56fr 66fr}
+  .sdlc .after,.sdlc .notes{grid-template-columns:56fr 76fr 14fr 76fr 56fr 66fr 270fr}
+  .sdlc .row span{display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--panel-hi);border:1px solid var(--line);font-size:.9em;color:var(--ink);min-width:0}
+  .sdlc .row .build{background:var(--active);border-color:var(--active);font-weight:700}
+  .sdlc .row .build:empty{min-width:10px}
+  .sdlc .row .gain{background:none;border:2px dashed rgba(255,255,255,.28);color:var(--ink-3)}
+  .sdlc .notes{margin-top:.5em;font-size:.82em;color:var(--ink-3);text-align:center}
+  .sdlc .notes .req{grid-column:1 / 3} .sdlc .notes .rev{grid-column:4} .sdlc .notes .rel{grid-column:5}
   @media (prefers-reduced-motion:reduce){ dialog.filing[open]{animation:none} }
 
   .preload *{transition:none!important}
@@ -708,6 +722,7 @@
     <p class="caption">The narrowest station sets the throughput of the whole system.</p>
     <span class="cue" data-build="1" data-action="widen"></span>
     <p class="twist" data-build="1">Coding got wider. More flows through.</p>
+    <p class="rec" data-build="1">Anthropic: <button class="doclink" type="button" data-dialog="sdlc-playbook" aria-haspopup="dialog">The AI-native SDLC playbook</button></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">04</span></span></div>
   </section>
   </div>
@@ -1135,6 +1150,20 @@
   </div>
   <footer><p>One risk factor from one company. <b>The question: which of these recur across all ten filings?</b></p>
     <a href="https://www.sec.gov/Archives/edgar/data/37996/000003799622000013/f-20211231.htm" target="_blank" rel="noopener">Full filing on SEC.gov ↗</a></footer>
+</dialog>
+<!-- SDLC chart, opened from slide 4. Redrawn from the before/after chart in Anthropic's "The AI-native SDLC playbook":
+     https://claude.com/resources/articles/the-ai-native-sdlc-playbook -->
+<dialog class="filing" id="sdlc-playbook" aria-labelledby="sdlc-playbook-t">
+  <header><h3 id="sdlc-playbook-t">The AI-native SDLC playbook</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
+  <div class="sdlc" role="img" aria-label="Before agents, every stage runs at human speed and Build is the widest stage. After agents, Build shrinks to a sliver and the cycle time it took is reclaimed.">
+    <h4><b>Before agents</b> — every stage runs at human speed</h4>
+    <div class="row before"><span>Plan</span><span>Design</span><span class="build">Build</span><span>Test</span><span>Deploy</span><span>Maintain</span></div>
+    <h4><b>After agents</b> — build runs at agent speed</h4>
+    <div class="row after"><span>Plan</span><span>Design</span><span class="build"></span><span>Test</span><span>Deploy</span><span>Maintain</span><span class="gain">cycle time reclaimed</span></div>
+    <div class="notes" aria-hidden="true"><span class="req">requirements</span><span class="rev">review</span><span class="rel">release</span></div>
+  </div>
+  <footer><p>Chart redrawn from Anthropic’s playbook.</p>
+    <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Read the article on claude.com ↗</a></footer>
 </dialog>
 <!-- Recording, opened from slide 14 -->
 <dialog class="filing" id="agents-run" aria-labelledby="agents-run-t">
