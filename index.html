@@ -416,9 +416,14 @@
   .multi-svg .report{fill:var(--active)}
   .multi-svg .t{font-family:var(--font-display);font-size:40px;font-weight:700;fill:#fff}
   .multi-svg .rs{font-size:28px;font-weight:600;fill:#fff}
+  /* the analyst's two steps: white outline on the darker panel, labelled "You" in cyan; the agent's loop sits between them */
+  .multi-svg .mine{fill:var(--panel);stroke:var(--ink);stroke-width:2}
+  .multi-svg .ms{font-size:28px;fill:var(--ink-2)}
+  .multi-svg .who{font-family:var(--font-display);font-size:30px;font-weight:700;fill:var(--ink-3)}
+  .multi-svg .who.you{fill:var(--accent)}
   .multi-svg [data-build]{transition:opacity .6s var(--ease-out)}
   .multi-svg [data-build].pending{transform:none}
-  .dr-wrap .run-link{position:absolute;left:40px;top:212px;font-size:28px;white-space:nowrap}
+  .dr-wrap .run-link{position:absolute;right:40px;top:34px;font-size:28px;white-space:nowrap}
   .dr-wrap .run-link .doclink{color:var(--ink-2)}
   .dr-wrap .run-link[data-build].pending{transform:none}
   .strategy{display:grid;grid-template-columns:220px repeat(3,minmax(0,1fr));column-gap:40px;margin-top:48px}
@@ -963,33 +968,44 @@
   <div class="frame" id="slide-12">
   <!-- ================= DEEP RESEARCH: WHY, HOW IT WORKS, MY STRATEGY (user: real runs take 10–15 min; the recording is a re-creation, not a real run) ================= -->
   <section class="slide s-multi" data-title="Deep research: how the analyst uses AI" data-auto="1400"
-    data-notes="This is how I use AI as a thinking partner. A chatbot answers in seconds from what it already remembers, usually without sources: fine for a quick fact, not good enough for discovery. A deep research agent works differently. You give it a question and it investigates: it plans what to look for, searches, reads the sources, follows the leads it finds, and repeats until the question is covered. Then it writes a report with a source for every claim. One run takes ten to fifteen minutes. My strategy: I don't run it once. I send the same question out several times, each run with its own angle, then compare what comes back. Where the runs disagree is exactly where I need to look. The result is one brief I can defend. Optional: click 'Watch a run' to show the recording (re-created and sped up; any clicker press or Esc closes it). Next slide: what I decided from that brief.">
+    data-notes="This is how I use AI as a thinking partner. A chatbot answers in seconds from what it already remembers, usually without sources: fine for a quick fact, not good enough for discovery. A deep research agent works differently, and the analyst sits at both ends. I frame the question; the agent does the legwork. It investigates: it plans what to look for, searches, reads the sources, follows the leads it finds, and repeats until the question is covered. Then it writes a report with a source for every claim. One run takes ten to fifteen minutes. Then it is back to me: I check the sources before I trust any of it. My strategy: I don't run it once. I send the same question out several times, each run with its own angle, then compare what comes back. Where the runs disagree is exactly where I need to look. The result is one brief I can defend. Optional: click 'Watch a run' to show the recording (re-created and sped up; any clicker press or Esc closes it). Next slide: what I decided from that brief.">
     <div class="rule"></div>
     <h2>Don’t ask AI for an answer.<br><span class="hl">Send it to research.</span></h2>
     <div class="dr-wrap">
-    <svg class="multi-svg" viewBox="0 100 1640 290" role="img"
-      aria-label="Deep research is an agent that investigates for 10 to 15 minutes per run: it plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources.">
+    <svg class="multi-svg" viewBox="0 0 1640 360" role="img"
+      aria-label="Deep research, an agent that investigates for 10 to 15 minutes per run. You frame the question. The agent plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources. You check the sources.">
       <g data-build="1">
-        <rect class="panel" x="0" y="100" width="1640" height="290" rx="20"/>
-        <text class="lab" x="40" y="172">Deep research</text>
-        <text class="s" x="40" y="214">an agent that investigates</text>
-        <text class="dur" x="40" y="262">10–15 minutes per run</text>
-        <path class="loop" pathLength="1" d="M610 175H1180A70 70 0 0 1 1180 315H610A70 70 0 0 1 610 175Z"/>
-        <g class="steps">
-          <path class="tip" d="M907 303L883 315L907 327Z"/>
-          <circle cx="618" cy="175" r="16"/><circle cx="763" cy="175" r="16"/><circle cx="915" cy="175" r="16"/><circle cx="1109" cy="175" r="16"/>
-          <text class="st" x="618" y="231" text-anchor="middle">Plan</text>
-          <text class="st" x="763" y="231" text-anchor="middle">Search</text>
-          <text class="st" x="915" y="231" text-anchor="middle">Read</text>
-          <text class="st" x="1109" y="231" text-anchor="middle">Follow leads</text>
-          <text class="s" x="895" y="293" text-anchor="middle">repeats until the question is covered</text>
-        </g>
+        <rect class="panel" x="0" y="0" width="1640" height="360" rx="20"/>
+        <text x="40" y="70"><tspan class="lab">Deep research</tspan><tspan class="s" dx="20">an agent that investigates ·</tspan><tspan class="dur" dx="10">10–15 minutes per run</tspan></text>
+        <text class="who you" x="145" y="148" text-anchor="middle">You</text>
+        <rect class="mine" x="40" y="180" width="210" height="130" rx="16"/>
+        <text class="t" x="145" y="238" text-anchor="middle">Frame</text>
+        <text class="ms" x="145" y="278" text-anchor="middle">the question</text>
+        <path class="exit" d="M250 245H288"/><path class="tip" d="M282 233L302 245L282 257Z"/>
       </g>
       <g data-build="2">
-        <path class="exit" d="M1250 245H1308"/><path class="tip" d="M1300 233L1320 245L1300 257Z"/>
-        <rect class="report" x="1330" y="175" width="270" height="140" rx="16"/>
-        <text class="t" x="1465" y="239" text-anchor="middle">Report</text>
-        <text class="rs" x="1465" y="281" text-anchor="middle">with sources</text>
+        <text class="who" x="705" y="148" text-anchor="middle">AI agent</text>
+        <path class="loop" pathLength="1" d="M390 175H1020A70 70 0 0 1 1020 315H390A70 70 0 0 1 390 175Z"/>
+        <g class="steps">
+          <path class="tip" d="M717 303L693 315L717 327Z"/>
+          <circle cx="410" cy="175" r="16"/><circle cx="560" cy="175" r="16"/><circle cx="708" cy="175" r="16"/><circle cx="900" cy="175" r="16"/>
+          <text class="st" x="410" y="231" text-anchor="middle">Plan</text>
+          <text class="st" x="560" y="231" text-anchor="middle">Search</text>
+          <text class="st" x="708" y="231" text-anchor="middle">Read</text>
+          <text class="st" x="900" y="231" text-anchor="middle">Follow leads</text>
+          <text class="s" x="705" y="293" text-anchor="middle">repeats until the question is covered</text>
+        </g>
+      </g>
+      <g data-build="3">
+        <path class="exit" d="M1090 245H1128"/><path class="tip" d="M1122 233L1142 245L1122 257Z"/>
+        <rect class="report" x="1152" y="180" width="210" height="130" rx="16"/>
+        <text class="t" x="1257" y="238" text-anchor="middle">Report</text>
+        <text class="rs" x="1257" y="278" text-anchor="middle">with sources</text>
+        <path class="exit" d="M1362 245H1394"/><path class="tip" d="M1388 233L1408 245L1388 257Z"/>
+        <text class="who you" x="1510" y="148" text-anchor="middle">You</text>
+        <rect class="mine" x="1420" y="180" width="180" height="130" rx="16"/>
+        <text class="t" x="1510" y="238" text-anchor="middle">Check</text>
+        <text class="ms" x="1510" y="278" text-anchor="middle">the sources</text>
       </g>
     </svg>
     <p class="run-link" data-build="1"><button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
