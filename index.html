@@ -275,6 +275,21 @@
   .dbaxis .ticks span{position:absolute;top:6px;transform:translateX(-50%);font-size:28px;color:var(--ink-3);font-variant-numeric:tabular-nums}
   .s-exp .remember{margin-top:40px}
 
+  /* ---------- Why concentration (Basel quote + sector vs name) ---------- */
+  .s-sector .bq{margin-top:28px;font-family:var(--font);font-size:40px;line-height:1.3;font-weight:400;color:var(--ink-2);max-width:1640px}
+  .s-sector .bq .hl{color:var(--accent);font-weight:600}
+  .s-sector .bq cite{display:block;margin-top:8px;font-style:normal;font-size:30px;color:var(--ink-3)}
+  .s-sector .bq cite::before{content:"— "}
+  .s-sector .dbx{margin-top:40px}
+  .s-sector .dbrow,.s-sector .dbaxis{grid-template-columns:500px 1fr 300px}
+  .s-sector .dbrow{height:130px}
+  .s-sector .conn{height:24px;margin-top:-12px;border-radius:12px}
+  .s-sector .dbrow .gap{font-size:62px;text-align:right;white-space:nowrap}
+  .s-sector .dbrow.weak .gap{font-size:56px}
+  .shock2{margin-top:36px;font-size:36px;line-height:1.35;color:var(--ink-2)}
+  .shock2 b{color:var(--ink);font-weight:700}
+  .shock2 .dim{color:var(--ink-3)}
+
   /* ---------- RAND ---------- */
   .s-rand{justify-content:center}
   .s-rand .rule{margin-bottom:48px}
@@ -302,15 +317,7 @@
   .farrow{align-self:center;font-size:48px;color:var(--ink-3)}
   .s-why .remember,.s-settle .remember{margin-top:56px;font-size:40px;line-height:1.35;color:var(--ink-2)}
   .s-why .remember b,.s-settle .remember b{color:var(--ink);font-weight:700}
-  .s-quote{justify-content:center}
-  .s-quote .kicker{margin-bottom:40px}
-  .s-quote blockquote{font-size:84px;font-weight:700;line-height:1.15;letter-spacing:-.015em;max-width:1560px}
-  .s-quote .hl,.s-question .hl{color:var(--accent)}
-  .s-quote .cite{margin-top:48px;font-size:34px;color:var(--ink-2)}
-  .s-sector .ev .v{margin-top:24px}
-  .shock{margin-top:44px;border:1px solid var(--line);border-left:5px solid var(--active);background:var(--panel);border-radius:var(--r);padding:26px 36px;font-size:34px;color:var(--ink-2)}
-  .shock .tag{font-size:22px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--active-hi);margin-right:24px}
-  .shock b{color:var(--ink)} .shock .dim{color:var(--ink-3);font-size:28px}
+  .s-question .hl{color:var(--accent)}
   .s-question{justify-content:center}
   .s-question .kicker{margin-bottom:36px}
   .s-question h2.big{font-size:88px;line-height:1.12;max-width:1640px}
@@ -786,56 +793,38 @@
 
   
   <div class="frame" id="slide-10">
-  <!-- ================= SECTION DIVIDER: Discovery under pressure ================= -->
-  <section class="slide s-div" data-title="Section: Discovery under pressure"
-    data-notes="RAND said the root cause is misunderstanding the problem. So let me show you one real credit-risk question, and what it took to define it.">
-    <div class="div-grid">
-      <div class="div-left"><div class="kicker">Section</div><h2>Discovery under pressure</h2></div>
-      <div class="div-right"><p>One credit-risk question</p></div>
+  <!-- ================= WHY CONCENTRATION: Basel quote + sector vs name (merged; the "Discovery under pressure" divider was cut) ================= -->
+  <!-- Sources: BCBS Working Paper No. 15, "Studies on credit risk concentration" (Nov 2006): https://www.bis.org/publ/bcbs_wp15.pdf
+       "Historical experience shows that concentration of credit risk in asset portfolios has been one of the major causes of bank distress."
+       Name concentration could add 2–8% to credit VaR; sector concentration can increase economic capital by 20–40%.
+       AlixPartners press release, 23 Sep 2021: shortages related to semiconductors to cost the auto industry $210bn in revenue in 2021; 7.7m units of production lost (forecast).
+       https://www.alixpartners.com/newsroom/press-release-shortages-related-to-semiconductors-to-cost-the-auto-industry-210-billion-in-revenues-this-year-says-new-alixpartners-forecast/ -->
+  <section class="slide s-ev s-sector" data-title="Shared risk beats single names" data-auto="800"
+    data-notes="RAND said the root cause is misunderstanding the problem. So let me make it concrete with one question from my world, credit risk. Why concentration? The Basel Committee says it plainly: concentration of credit risk has been one of the major causes of bank distress. And it is not mainly about single big names. Basel's studies: name concentration adds about 2 to 8% to credit VaR; sector concentration can add 20 to 40% to economic capital. What hurts is risk that many counterparties share. 2021 is the example: one chip shortage hit a whole industry, about $210bn of auto revenue and 7.7 million vehicles, per AlixPartners' forecast. Those are exactly the kinds of companies in the question that comes next. The two rows and the 2021 line build on their own.">
+    <div class="rule"></div>
+    <h2>Shared risk beats single names</h2>
+    <blockquote class="bq">“Concentration of credit risk … has been <span class="hl">one of the major causes of bank distress.</span>” <cite>Basel Committee</cite></blockquote>
+    <div class="dbx">
+      <div class="dbrow weak" data-build="1">
+        <div class="who"><b>Name concentration</b><span>one big borrower · credit VaR</span></div>
+        <div class="plot" style="--a:4%;--b:16%"><div class="conn"></div></div>
+        <div class="gap">+2–8%</div>
+      </div>
+      <div class="dbrow strong" data-build="2">
+        <div class="who"><b>Sector concentration</b><span>a risk many share · economic capital</span></div>
+        <div class="plot" style="--a:40%;--b:80%"><div class="conn"></div></div>
+        <div class="gap">+20–40%</div>
+      </div>
+      <div class="dbaxis" aria-hidden="true"><span></span>
+        <div class="ticks"><span style="left:0">0%</span><span style="left:20%">10%</span><span style="left:40%">20%</span><span style="left:60%">30%</span><span style="left:80%">40%</span><span style="left:100%">50%</span></div><span></span>
+      </div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">10</span></span></div>
+    <p class="shock2" data-build="3"><b>2021:</b> one chip shortage hit a whole industry — <b>~$210bn</b> of auto revenue and <b>7.7m vehicles</b> lost <span class="dim">(forecast)</span>.</p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS WP15 (2006) · AlixPartners (Sep 2021)</span><span>How AI rewired the business analyst role</span><span class="slide-no">10</span></span></div>
   </section>
   </div>
 
   <div class="frame" id="slide-11">
-  <!-- ================= BASEL ================= -->
-  <!-- Source: BCBS Working Paper No. 15, "Studies on credit risk concentration" (Nov 2006): https://www.bis.org/publ/bcbs_wp15.pdf
-       "Historical experience shows that concentration of credit risk in asset portfolios has been one of the major causes of bank distress." -->
-  <section class="slide s-quote" data-title="Basel: concentration and bank distress"
-    data-notes="Why this question? Because the Basel Committee says it plainly: concentration of credit risk has been one of the major causes of bank distress.">
-    <div class="rule"></div>
-    <div class="kicker">Why concentration</div>
-    <blockquote>“Concentration of credit risk in asset portfolios has been <span class="hl">one of the major causes of bank distress.</span>”</blockquote>
-    <p class="cite">— Basel Committee on Banking Supervision, Working Paper 15</p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS Working Paper 15, Studies on credit risk concentration (2006)</span><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
-  </section>
-  </div>
-  <div class="frame" id="slide-12">
-  <!-- ================= SECTOR VS NAME ================= -->
-  <!-- Sources: BCBS WP15 (2006): name concentration could add 2–8% to credit VaR; sector concentration can increase economic capital by 20–40%.
-       AlixPartners press release, 23 Sep 2021: shortages related to semiconductors to cost the auto industry $210bn in revenue in 2021; 7.7m units of production lost (forecast).
-       https://www.alixpartners.com/newsroom/press-release-shortages-related-to-semiconductors-to-cost-the-auto-industry-210-billion-in-revenues-this-year-says-new-alixpartners-forecast/ -->
-  <section class="slide s-ev s-sector" data-title="Sector beats single name"
-    data-notes="And it's not mainly about single big names. Basel's studies: name concentration adds 2 to 8% to capital; sector concentration can add 20 to 40%. What hurts is risk that many counterparties share. 2021 is the example: one chip shortage hit an entire industry — about $210bn of auto revenue, 7.7 million vehicles, per AlixPartners' forecast.">
-    <div class="rule"></div>
-    <h2>Shared risk beats single names</h2>
-    <div class="ev-grid">
-      <div class="ev">
-        <div class="k">Name concentration</div>
-        <div class="v dim">+2–8%</div>
-        <div class="foot">added to credit VaR · one big borrower</div>
-      </div>
-      <div class="ev hero">
-        <div class="k">Sector concentration</div>
-        <div class="v">+20–40%</div>
-        <div class="foot">added to economic capital · risks counterparties share</div>
-      </div>
-    </div>
-    <div class="shock"><span class="tag">Shared shock · 2021</span>Chip shortage: <b>~$210bn</b> auto revenue and <b>7.7m vehicles</b> lost <span class="dim">· forecast</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS WP15 (2006) · AlixPartners (Sep 2021)</span><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
-  </section>
-  </div>
-  <div class="frame" id="slide-13">
   <!-- ================= THE QUESTION ================= -->
   <section class="slide s-question" data-title="The question"
     data-notes="So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only.">
@@ -843,10 +832,10 @@
     <div class="kicker">The question for the rest of this talk</div>
     <h2 class="big">Across ten public auto and semiconductor companies:<br><span class="hl">which risks do they share — and how strongly?</span></h2>
     <div class="chips"><span>Autos</span><span>Semiconductors</span><span>Public filings</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
   </section>
   </div>
-  <div class="frame" id="slide-14">
+  <div class="frame" id="slide-12">
   <!-- ================= SECTION DIVIDER: AI as a thinking partner ================= -->
   <section class="slide s-div" data-title="Section: AI as a thinking partner"
     data-notes="Before anyone builds anything, I use AI to attack the question. Not one chat — several research agents, each coming at it from a different angle. Then I read what comes back and decide what we actually build.">
@@ -854,11 +843,11 @@
       <div class="div-left"><div class="kicker">Section</div><h2>AI as a thinking partner</h2></div>
       <div class="div-right"><p>Attack the question from several angles before anyone builds</p></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-15">
+  <div class="frame" id="slide-13">
   <!-- ================= SAME AI, TWO KINDS OF WORK (Dell'Acqua et al.) ================= -->
   <!-- Source: Dell'Acqua et al., "Navigating the Jagged Technological Frontier", Harvard Business School working paper 24-013 (2023), with BCG; 758 consultants, GPT-4.
        On 18 tasks within the model's capabilities: 25.1% faster, >40% higher quality vs control. On a task selected to be outside its capabilities:
@@ -881,11 +870,11 @@
       </div>
     </div>
     <p class="remember">The output can’t tell you which kind you’re in. <b>So attack the framing first.</b></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Dell’Acqua et al., Harvard Business School &amp; BCG (2023)</span><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Dell’Acqua et al., Harvard Business School &amp; BCG (2023)</span><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-16">
+  <div class="frame" id="slide-14">
   <!-- ================= WHAT IS A DEEP RESEARCH AGENT ================= -->
   <section class="slide s-dra" data-title="What is a deep research agent"
     data-notes="Quick definition, because I'll use the term a lot. A deep research agent isn't a chat reply. You give it a question, and it goes off with tools — search, read, follow links — for minutes, sometimes longer, and comes back with a brief that cites where every claim came from. You still own the question. And the trick I want to show you: I didn't run one. I ran several, in parallel.">
@@ -899,11 +888,11 @@
       <li><b>Cites sources</b><span>every claim points back to a page</span></li>
       <li><b>You steer</b><span>you own the question and the angle</span></li>
     </ul>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-17">
+  <div class="frame" id="slide-15">
   <!-- ================= SEVERAL AGENTS, DIFFERENT ANGLES ================= -->
   <section class="slide s-multi" data-title="Several agents, different angles"
     data-notes="Here's what that looked like. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. I'll play the short recording rather than spin them up live — it takes a while. Then I merged what came back into one brief, and that brief is what I prototyped from.">
@@ -911,7 +900,7 @@
     <h2>Several agents, different angles</h2>
     <div class="multi-grid">
       <div class="angles">
-        <p class="q"><b>Same question as slide 13.</b> Each agent got a different angle.</p>
+        <p class="q"><b>Same question as slide 11.</b> Each agent got a different angle.</p>
         <ul>
           <li><i>01</i>The risk-analyst view</li>
           <li><i>02</i>What 10-K filings contain</li>
@@ -923,11 +912,11 @@
       <div class="shot-slot" role="img" aria-label="Placeholder: multi-agent research video"><span>Video · Agents researching in parallel</span></div>
     </div>
     <div class="strip"><span class="tag">Then</span><b>Synthesise</b><span class="ar">→</span><b>one brief</b><span class="ar">→</span><b>prototype</b></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-18">
+  <div class="frame" id="slide-16">
   <!-- ================= THREE APPROACHES ================= -->
   <section class="slide s-three" data-title="Three approaches"
     data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live.">
@@ -939,11 +928,11 @@
       <div class="ap"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p></div>
       <div class="ap"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-19">
+  <div class="frame" id="slide-17">
   <!-- ================= DEMO: HOW THE CONSOLE WORKS (foundation mock, not the real app) ================= -->
   <section class="slide s-console" data-title="Demo: how the console works"
     data-notes="Before I leave the slides, one walk through the console so you know where to look. Top right tells you whether it's live or a replay. You pick a question from the chips, or type one. The answer comes back in the middle. And on the right is the part I care about most: the evidence — which filing, which passage, so you can check it. Same layout for all three approaches.">
@@ -965,11 +954,11 @@
       </div>
     </div>
     <div class="c-flow"><b>Question</b><span class="ar">→</span><b>Answer</b><span class="ar">→</span><b>Evidence you can check</b><span class="mock">Schematic · not the live app</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">19</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-20">
+  <div class="frame" id="slide-18">
   <!-- ================= DEMO CUE 1: PLAIN RAG ================= -->
   <section class="slide s-cue" data-title="Plain RAG"
     data-notes="Demo one, plain vector RAG. Watch the answer — it reads well. Then try to trace it: which filings, which passages, how many companies actually said this? That's the gap. Switching to the live console now.">
@@ -985,11 +974,11 @@
       <!-- PLACEHOLDER: live console, Plain RAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Plain RAG"><span>Live console · Plain vector RAG</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">20</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-21">
+  <div class="frame" id="slide-19">
   <!-- ================= DEMO CUE 2: GRAPHRAG ================= -->
   <section class="slide s-cue" data-title="GraphRAG"
     data-notes="Demo two, GraphRAG on Neo4j. This time watch three things: the Cypher query it writes, the subgraph of companies and risks that comes back, and that I can click any link to see the quote behind it. Over to the console.">
@@ -1005,11 +994,11 @@
       <!-- PLACEHOLDER: live console, GraphRAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, GraphRAG"><span>Live console · GraphRAG (Neo4j)</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">21</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">19</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-22">
+  <div class="frame" id="slide-20">
   <!-- ================= DEMO CUE 3: TAXONOMY-FIRST ================= -->
   <section class="slide s-cue" data-title="Taxonomy-first"
     data-notes="Demo three, taxonomy first. Categories fixed up front, the counting done in code. Watch the heatmap — risk by company — and then open any cell: the quote drawer shows exactly which passage put it there. Let's go live.">
@@ -1025,7 +1014,7 @@
       <!-- PLACEHOLDER: live console, Taxonomy-first. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Taxonomy-first"><span>Live console · Taxonomy-first</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">22</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">20</span></span></div>
   </section>
   </div>
 
