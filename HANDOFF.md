@@ -152,9 +152,18 @@ From the impeccable critique run on 2026-10-29: score 16/28, "Acceptable". Issue
   - Reported "arrived at the last state" (forward wheel arrival used to show everything; fixed).
   - Asked for the YouTube talk only as inspiration ("do not move towards the screenshot itself").
   - Keep copy changes minimal and always say what wording changed.
+  - Session 2 (2026-10-29/30): the user is happy to **cut** slides that don't serve the thesis (IIBA, both "Discovery under pressure" and jagged-frontier slides) and to **merge** neighbours (Basel quote + sector vs name). When a slide feels weak, say so plainly and offer cut / shrink / keep with a recommendation.
+  - Asked for clarity ("make it more clear what is this about") → answered with one chart on a shared scale plus a lede that says what is measured.
+  - Likes interactive extras when they add proof (the 10-K modal on slide 11).
+  - Keeps "Big AI advocate and enthusiast" on slide 6 by choice; don't re-propose.
+- **Recurring visual idioms (reuse them):** the dumbbell / range chart `.dbx` (slides 8, 10); the lifecycle row with Discovery lit (slide 9, callback to slide 5); the agenda track as a "you are here" marker (slide 12); `data-auto` self-building slides (2, 7, 8, 9, 10, 12).
+- **Screenshots:** write them to the session scratchpad, never the repo folder. A Node script run with relative paths from the repo root drops PNGs into the repo (they're git-ignored, but delete them).
+- **Deep-link testing of a slide's start state:** `index.html?x=1#N`, then `ArrowUp` then `ArrowDown` lands on slide N at build 0; pressing `ArrowDown` from N-1 may only finish N-1's builds.
 
 ## 8. Next steps
 
-1. Slide 6: drop in the user's photos when they send them. Next redesign: slide 14 (Several agents, different angles).
-2. Continue slide by slide (7 onward), applying §6. After each slide, run `./scripts/build.sh`, republish to the same artifact URL, and summarise what changed.
-3. Before the talk: ask whether to add the takeaways and closing slides, run a full detector pass, and do a projector check.
+1. **Next redesign: slide 14 (Several agents, different angles).** Known issues: video placeholder, `.angles .q` left-border stripe, "Same question as slide 11" (critique: restate the question instead), small `.strip .tag` labels.
+2. Then 15 (Three approaches), 16 (console schematic, has a kicker), 17–19 (demo cues: kickers, the audience-visible "Switch to live console" stage direction, no shared comparison spine). Ask the user before each whether the slide earns its place; they have been cutting.
+3. Slide 6: drop in the user's photos when they send them.
+4. Continue slide by slide, applying §6. After each slide, run `./scripts/build.sh`, republish to the same artifact URL, and summarise what changed.
+5. Before the talk: ask whether to add the takeaways and closing slides, run a full detector pass, and do a projector check.
