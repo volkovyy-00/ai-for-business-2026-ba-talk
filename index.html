@@ -392,23 +392,24 @@
 
   /* ---------- Several agents, different angles ---------- */
   .s-multi h2{font-size:96px}
-  .s-multi .lede{margin-top:24px;font-size:40px;line-height:1.3;color:var(--ink-2)}
-  .s-multi .lede b{color:var(--accent);font-weight:600}
-  /* four agent lanes fill at different speeds, merge into one brief, then a prototype */
+  .s-multi .lede{margin-top:24px;font-size:36px;line-height:1.35;color:var(--ink-2)}
+  .s-multi .lede b{color:var(--ink);font-weight:600}
+  /* lead agent fans out to three angles; bars are the real run times (53/53/38 s, 240 units = 53 s); they merge into one brief */
   .multi-svg{display:block;width:100%;height:auto;margin-top:48px;font-family:var(--font);overflow:visible}
   .multi-svg .lab{font-family:var(--font-display);font-size:36px;font-weight:700;fill:var(--ink)}
   .multi-svg .trk{fill:rgba(255,255,255,.1)}
   .multi-svg .fill{fill:var(--active);transform-box:fill-box;transform-origin:left center;transition:transform var(--d,1.4s) var(--ease-out)}
   .multi-svg .fill[data-build].pending{opacity:1;transform:scaleX(0)}
+  .multi-svg .sec{font-size:28px;font-weight:600;fill:var(--ink-2);font-variant-numeric:tabular-nums}
   .multi-svg .mg{fill:none;stroke:var(--ink-3);stroke-width:3}
   .multi-svg .box{fill:var(--panel);stroke:var(--line);stroke-width:2}
   .multi-svg .box.hi{fill:var(--panel-hi);stroke:var(--active)}
   .multi-svg .t{font-family:var(--font-display);font-size:40px;font-weight:700;fill:var(--ink)}
   .multi-svg .s{font-size:30px;fill:var(--ink-2)}
-  .multi-svg .ln{fill:rgba(255,255,255,.16)}
-  .multi-svg .cite{fill:var(--accent)}
-  .multi-svg .ar{stroke:var(--ink-3);stroke-width:3;fill:none}
-  .s-multi .rec{margin-top:40px;font-size:34px;color:var(--ink-2)}
+  .s-multi .verdict{margin-top:44px;font-size:40px;line-height:1.3;color:var(--ink-2)}
+  .s-multi .verdict .by{display:block;font-size:30px;color:var(--ink-3);margin-bottom:6px}
+  .s-multi .verdict b{color:var(--accent);font-weight:700}
+  .s-multi .verdict .doclink{margin-left:24px;font-size:30px;color:var(--ink-2)}
   /* ---------- The agents explored. I decided. (brief → build decisions) ---------- */
   .s-decide h2{font-size:96px}
   .s-decide h2 .hl{color:var(--accent)}
@@ -425,7 +426,9 @@
   .s-decide .remember b{color:var(--ink);font-weight:700}
   /* recording dialog (reuses the 10-K dialog frame) */
   .filing .vid{margin:1.2em 1.4em;aspect-ratio:16/9;height:auto}
-  .filing .vid video{width:100%;height:100%;object-fit:contain}
+  .filing .vid video{width:100%;height:100%;object-fit:contain;background:#000}
+  dialog.filing.wide{width:min(1760px,96vw)}
+  .filing .vid:has(video){border:0;background:#000}
 
   /* ---------- Three approaches ---------- */
   .s-three h2{font-size:96px}
@@ -939,40 +942,33 @@
   </section>
   </div>
   <div class="frame" id="slide-12">
-  <!-- ================= SEVERAL AGENTS, DIFFERENT ANGLES ================= -->
-  <section class="slide s-multi" data-title="Several agents, different angles" data-auto="2200"
-    data-notes="Here's what that looked like. A deep research agent isn't a chat reply: you give it a question and it searches, reads and follows links for minutes, then comes back with a brief that cites every claim. I didn't run one; I ran several, in parallel. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. The four bars fill on their own, at different speeds, like the real runs. Then what came back merges into one brief. The agents explored and drafted options; the decisions were mine. That's the next slide. Optional: click 'four agents running in parallel' to play the short recording rather than spin them up live; any clicker press or Esc closes it.">
+  <!-- ================= THREE RESEARCH AGENTS, ONE BRIEF (matches the user's recording agents-run.mp4: lead + domain/approaches/spec angles, 53/53/38 s, "2 conflicts · 0 unsupported citations", "Taxonomy is the critical-path decision — owned by the BA, not the agent") ================= -->
+  <section class="slide s-multi" data-title="Three research agents, one brief" data-auto="2200"
+    data-notes="Here's what that looked like, from the real run. A deep research agent isn't a chat reply: you give it a question and it searches, reads and follows sources for a minute or more, then comes back with a brief that cites its claims. I didn't run one; a lead agent sent the same question out on three angles, in parallel. Domain: why shared industry risk matters to a bank. Approaches: three ways to answer it — plain vector RAG, GraphRAG on Neo4j, and taxonomy-first. Spec: what an afternoon prototype would need. The bars are the real run times: 53, 53 and 38 seconds. Then the lead checked the three briefs against each other: two conflicts, no unsupported citations, and wrote one brief. And look at what the agent itself concluded: the taxonomy is the critical-path decision, and it belongs to the BA, not the agent. That's the next slide. Optional: click 'the real run' to play the 29-second recording (sped up); any clicker press or Esc closes it.">
     <div class="rule"></div>
-    <h2>Several agents, different angles</h2>
-    <p class="lede">Same question: <b>which risks do they share — and how strongly?</b> Each agent — searching, reading, citing — got a different angle.</p>
-    <svg class="multi-svg" viewBox="0 0 1640 420" role="img"
-      aria-label="Four research agents work on the same question from different angles: the risk-analyst view, what 10-K filings contain, retrieval approaches, and how to check the answer. Their findings merge into one synthesised brief; the analyst makes the decisions from it.">
-      <defs><marker id="multi-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8FA3B6"/></marker></defs>
-      <text class="lab" x="0" y="62">The risk-analyst view</text>
-      <text class="lab" x="0" y="162">What 10-K filings contain</text>
-      <text class="lab" x="0" y="262">Retrieval approaches</text>
-      <text class="lab" x="0" y="362">How to check the answer</text>
-      <rect class="trk" x="470" y="44" width="400" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.2s" x="470" y="44" width="400" height="14" rx="7"/>
-      <rect class="trk" x="470" y="144" width="400" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.9s" x="470" y="144" width="400" height="14" rx="7"/>
-      <rect class="trk" x="470" y="244" width="400" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.5s" x="470" y="244" width="400" height="14" rx="7"/>
-      <rect class="trk" x="470" y="344" width="400" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:2.1s" x="470" y="344" width="400" height="14" rx="7"/>
+    <h2>Three research agents, one brief</h2>
+    <p class="lede">Same question: <b>which risks do they share — and how strongly?</b> A lead agent sent it out on three angles, then merged what came back.</p>
+    <svg class="multi-svg" viewBox="0 0 1640 340" role="img"
+      aria-label="A lead agent sends the question to three research agents in parallel: domain (why shared industry risk matters), approaches (vector RAG, GraphRAG, taxonomy-first) and spec (what an afternoon prototype needs). They took 53, 53 and 38 seconds. The lead checks their claims against each other, finds 2 conflicts and 0 unsupported citations, and writes one brief.">
+      <rect class="box" x="0" y="110" width="230" height="120" rx="16"/>
+      <text class="t" x="115" y="164" text-anchor="middle">Lead</text>
+      <text class="s" x="115" y="204" text-anchor="middle">agent</text>
+      <path class="mg" d="M230 170C270 170 260 40 300 40M230 170H300M230 170C270 170 260 300 300 300"/>
+      <text class="lab" x="320" y="38">Domain</text><text class="s" x="320" y="76">why shared industry risk matters</text>
+      <text class="lab" x="320" y="168">Approaches</text><text class="s" x="320" y="206">vector RAG · GraphRAG · taxonomy-first</text>
+      <text class="lab" x="320" y="298">Spec</text><text class="s" x="320" y="336">what an afternoon prototype needs</text>
+      <rect class="trk" x="900" y="43" width="240" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.9s" x="900" y="43" width="240" height="14" rx="7"/><text class="sec" x="1156" y="60">53 s</text>
+      <rect class="trk" x="900" y="173" width="240" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.9s" x="900" y="173" width="240" height="14" rx="7"/><text class="sec" x="1156" y="190">53 s</text>
+      <rect class="trk" x="900" y="303" width="240" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.4s" x="900" y="303" width="172" height="14" rx="7"/><text class="sec" x="1156" y="320">38 s</text>
       <g data-build="2">
-        <path class="mg" d="M886 51C960 51 940 190 1010 200M886 151C950 151 950 196 1010 204M886 251C950 251 950 212 1010 212M886 351C960 351 940 222 1010 216"/>
-        <rect class="box hi" x="1010" y="90" width="330" height="240" rx="16"/>
-        <rect class="ln" x="1050" y="130" width="230" height="10" rx="5"/><rect class="cite" x="1288" y="128" width="14" height="14" rx="3"/>
-        <rect class="ln" x="1050" y="158" width="190" height="10" rx="5"/><rect class="cite" x="1248" y="156" width="14" height="14" rx="3"/>
-        <rect class="ln" x="1050" y="186" width="210" height="10" rx="5"/><rect class="cite" x="1268" y="184" width="14" height="14" rx="3"/>
-        <text class="t" x="1050" y="262">One brief</text>
-        <text class="s" x="1050" y="302">synthesised</text>
-      </g>
-      <g data-build="3">
-        <path class="ar" d="M1352 210H1400" marker-end="url(#multi-ar)"/>
-        <rect class="box" x="1410" y="150" width="230" height="120" rx="16"/>
-        <text class="t" x="1525" y="206" text-anchor="middle">Decisions</text>
-        <text class="s" x="1525" y="246" text-anchor="middle">by the analyst</text>
+        <path class="mg" d="M1226 50C1262 50 1254 166 1286 168M1226 180H1286M1226 310C1262 310 1254 194 1286 192"/>
+        <rect class="box hi" x="1290" y="60" width="350" height="240" rx="16"/>
+        <text class="t" x="1324" y="128">One brief</text>
+        <text class="s" x="1324" y="196">2 conflicts resolved</text>
+        <text class="s" x="1324" y="244">0 unsupported citations</text>
       </g>
     </svg>
-    <p class="rec" data-build="3">Recording: <button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">four agents running in parallel</button></p>
+    <p class="verdict" data-build="3"><span class="by">The lead agent’s own conclusion:</span> “Taxonomy is the critical-path decision — <b>owned by the BA, not the agent.</b>” <button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">the real run</button></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
   </section>
   </div>
@@ -990,7 +986,7 @@
       <div>
         <div class="ex-label">What the agents did</div>
         <div class="agents-box">
-          <div class="stn"><b>Explored angles</b><span>four, in parallel</span></div>
+          <div class="stn"><b>Explored angles</b><span>three, in parallel</span></div>
           <div class="stn"><b>Drafted options</b><span>one synthesised brief</span></div>
         </div>
         <p class="rec">Extract: <button class="doclink" type="button" data-dialog="brief-extract" aria-haspopup="dialog">brief → build decisions</button></p>
@@ -1148,10 +1144,11 @@
     <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Open the full article on claude.com ↗</a></footer>
 </dialog>
 <!-- Recording, opened from slide 12 -->
-<dialog class="filing" id="agents-run" aria-labelledby="agents-run-t">
-  <header><h3 id="agents-run-t">Four research agents, one question</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
-  <!-- PLACEHOLDER: short video of the agents running in parallel. Replace the span with <video src="…" controls muted playsinline></video> -->
-  <div class="shot-slot vid" role="img" aria-label="Placeholder: multi-agent research video"><span>Video · Agents researching in parallel</span></div>
+<dialog class="filing wide" id="agents-run" aria-labelledby="agents-run-t">
+  <header><h3 id="agents-run-t">The real run: a lead agent and three research angles</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
+  <!-- the user's screen recording (29 s, sped up; badges in the video say how much). Published next to the page as agents-run.mp4; git-ignored, see HANDOFF.md -->
+  <div class="shot-slot vid"><video src="agents-run.mp4" muted playsinline controls preload="auto" aria-label="Screen recording: the lead agent fans the question out to three research agents, each returns a cited brief, and the lead writes one synthesised research brief"></video></div>
+  <footer><p>Top left: <b>the lead agent</b> sends the question out, checks the claims and writes the brief. Next three: <b>domain, approaches, spec</b>. Bottom row: coding agents fetch the filings and set up the checks.</p></footer>
 </dialog>
 <!-- Brief extract, opened from "The agents explored. I decided." -->
 <dialog class="filing" id="brief-extract" aria-labelledby="brief-extract-t">
@@ -1307,11 +1304,12 @@
   document.querySelectorAll('[data-dialog]').forEach(b => b.addEventListener('click', () => {
     const d = document.getElementById(b.dataset.dialog); document.documentElement.style.overflow = 'hidden'; d.showModal(); d.querySelector('[data-close]').focus();
     d.querySelectorAll('[data-open-end]').forEach(w => { w.scrollTop = w.scrollHeight; });   // open long excerpts at the part being shown (the chart)
+    d.querySelectorAll('video').forEach(v => { v.currentTime = 0; v.play().catch(() => {}); });   // recordings start on open
   }));
   document.querySelectorAll('dialog').forEach(d => {
     d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-close]')) d.close(); });
     d.addEventListener('wheel', e => e.stopPropagation(), {passive:true});
-    d.addEventListener('close', () => document.documentElement.style.overflow = '');
+    d.addEventListener('close', () => { document.documentElement.style.overflow = ''; d.querySelectorAll('video').forEach(v => v.pause()); });
   });
   addEventListener('keydown', e => {
     const d = openDlg();

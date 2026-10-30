@@ -7,3 +7,5 @@ node_modules/
 Thumbs.db
 # Barclays logo: trademark, kept local only (see HANDOFF.md → Logo)
 falcon.svg
+# screen recordings: published with the artifact, kept local (see HANDOFF.md)
+*.mp4
