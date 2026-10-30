@@ -97,7 +97,11 @@
   .pipe-ghost .w{fill:none;stroke:rgba(143,163,182,.45);stroke-width:3}
   .pipe-ghost .w.hot{stroke:var(--active);stroke-width:4}
   .pipe-ghost .o{fill:none;stroke:var(--active);stroke-width:6;stroke-linecap:round}
-  .pipe-ghost .node{fill:var(--midnight);stroke:var(--accent);stroke-width:6}
+  /* the node is drawn as a dial: thin outer ring, fine ticks, the rim the wires meet, a small ring and core */
+  .pipe-ghost .halo{fill:none;stroke:rgba(0,174,239,.22);stroke-width:2}
+  .pipe-ghost .ticks{fill:none;stroke:rgba(0,174,239,.55);stroke-width:2;stroke-linecap:round}
+  .pipe-ghost .node{fill:var(--midnight);stroke:var(--accent);stroke-width:5}
+  .pipe-ghost .ring{fill:none;stroke:rgba(0,174,239,.5);stroke-width:2}
   .pipe-ghost .core{fill:var(--accent)}
   @media (prefers-reduced-motion:reduce){
     [data-build].pending:not([data-play]){transform:none}
@@ -599,20 +603,24 @@
         <mask id="cover-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="700"><rect width="1000" height="700" fill="url(#cover-fade)"/></mask>
       </defs>
       <g mask="url(#cover-mask)">
-        <path class="w" d="M0 40C150 40 230 420 330 420S470 315 526 315"/>
-        <path class="w" d="M0 105C150 105 230 160 330 160S470 315 526 315"/>
-        <path class="w hot" d="M0 160C150 160 230 545 330 545S470 315 526 315"/>
-        <path class="w" d="M0 230C150 230 230 40 330 40S470 315 526 315"/>
-        <path class="w" d="M0 290C150 290 230 600 330 600S470 315 526 315"/>
-        <path class="w" d="M0 350C150 350 230 230 330 230S470 315 526 315"/>
-        <path class="w hot" d="M0 420C150 420 230 480 330 480S470 315 526 315"/>
-        <path class="w" d="M0 480C150 480 230 105 330 105S470 315 526 315"/>
-        <path class="w" d="M0 545C150 545 230 350 330 350S470 315 526 315"/>
-        <path class="w" d="M0 600C150 600 230 290 330 290S470 315 526 315"/>
-        <path class="o" d="M594 315C700 315 700 255 820 255H1000"/>
-        <path class="o" d="M594 315C700 315 700 315 820 315H1000"/>
-        <path class="o" d="M594 315C700 315 700 375 820 375H1000"/>
-        <circle class="node" cx="560" cy="315" r="34"/><circle class="core" cx="560" cy="315" r="12"/>
+        <path class="w" d="M0 230C150 230 230 40 330 40S417 292.6 526.8 292.6"/>
+        <path class="w" d="M0 480C150 480 230 105 330 105S414 297.2 524.2 297.2"/>
+        <path class="w" d="M0 105C150 105 230 160 330 160S412 302.1 522.2 302.1"/>
+        <path class="w" d="M0 350C150 350 230 230 330 230S411 307.1 520.8 307.1"/>
+        <path class="w" d="M0 600C150 600 230 290 330 290S410 312.4 520.1 312.4"/>
+        <path class="w" d="M0 545C150 545 230 350 330 350S410 317.6 520.1 317.6"/>
+        <path class="w" d="M0 40C150 40 230 420 330 420S411 322.9 520.8 322.9"/>
+        <path class="w hot" d="M0 420C150 420 230 480 330 480S412 327.9 522.2 327.9"/>
+        <path class="w hot" d="M0 160C150 160 230 545 330 545S414 332.8 524.2 332.8"/>
+        <path class="w" d="M0 290C150 290 230 600 330 600S417 337.4 526.8 337.4"/>
+        <path class="o" d="M595.3 296.2C675 296.2 700 255 820 255H1000"/>
+        <path class="o" d="M600.0 315.0C680 315.0 700 315 820 315H1000"/>
+        <path class="o" d="M595.3 333.8C675 333.8 700 375 820 375H1000"/>
+        <circle class="halo" cx="560" cy="315" r="94"/>
+        <path class="ticks" d="M616.0 315.0L630.0 315.0M621.5 323.1L629.4 324.1M619.9 331.0L627.6 333.1M617.3 338.7L624.7 341.8M613.7 346.0L620.6 350.0M609.2 352.7L615.5 357.6M599.6 354.6L609.5 364.5M597.7 364.2L602.6 370.5M591.0 368.7L595.0 375.6M583.7 372.3L586.8 379.7M576.0 374.9L578.1 382.6M568.1 376.5L569.1 384.4M560.0 371.0L560.0 385.0M551.9 376.5L550.9 384.4M544.0 374.9L541.9 382.6M536.3 372.3L533.2 379.7M529.0 368.7L525.0 375.6M522.3 364.2L517.4 370.5M520.4 354.6L510.5 364.5M510.8 352.7L504.5 357.6M506.3 346.0L499.4 350.0M502.7 338.7L495.3 341.8M500.1 331.0L492.4 333.1M498.5 323.1L490.6 324.1M504.0 315.0L490.0 315.0M498.5 306.9L490.6 305.9M500.1 299.0L492.4 296.9M502.7 291.3L495.3 288.2M506.3 284.0L499.4 280.0M510.8 277.3L504.5 272.4M520.4 275.4L510.5 265.5M522.3 265.8L517.4 259.5M529.0 261.3L525.0 254.4M536.3 257.7L533.2 250.3M544.0 255.1L541.9 247.4M551.9 253.5L550.9 245.6M560.0 259.0L560.0 245.0M568.1 253.5L569.1 245.6M576.0 255.1L578.1 247.4M583.7 257.7L586.8 250.3M591.0 261.3L595.0 254.4M597.7 265.8L602.6 259.5M599.6 275.4L609.5 265.5M609.2 277.3L615.5 272.4M613.7 284.0L620.6 280.0M617.3 291.3L624.7 288.2M619.9 299.0L627.6 296.9M621.5 306.9L629.4 305.9"/>
+        <circle class="node" cx="560" cy="315" r="40"/>
+        <circle class="ring" cx="560" cy="315" r="23"/>
+        <circle class="core" cx="560" cy="315" r="10"/>
       </g>
     </svg>
     <h1>How AI <span class="hl">rewired</span> the business analyst role</h1>
