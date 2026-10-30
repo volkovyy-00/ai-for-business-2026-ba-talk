@@ -1,6 +1,6 @@
 # HANDOFF — "How AI Rewired the Business Analyst Role" deck
 
-Written for the next Claude session. Read this file fully before touching the deck. Everything under **Current state** was checked by rendering the deck in headless Chromium on 2026-10-29. Anything not checked is marked *(unverified)*.
+Written for the next Claude session. Read this file fully before touching the deck. Everything under **Current state** was checked by rendering the deck in headless Chromium (last on 2026-10-30, session 3). Anything not checked is marked *(unverified)*.
 
 ---
 
@@ -156,15 +156,27 @@ From the impeccable critique run on 2026-10-29: score 16/28, "Acceptable". Issue
   - Session 2 (2026-10-29/30): the user is happy to **cut** slides that don't serve the thesis (IIBA, both "Discovery under pressure" and jagged-frontier slides) and to **merge** neighbours (Basel quote + sector vs name). When a slide feels weak, say so plainly and offer cut / shrink / keep with a recommendation.
   - Asked for clarity ("make it more clear what is this about") → answered with one chart on a shared scale plus a lede that says what is measured.
   - Likes interactive extras when they add proof (the 10-K modal on slide 11).
-  - Keeps "Big AI advocate and enthusiast" on slide 6 by choice; don't re-propose.
-- **Recurring visual idioms (reuse them):** the dumbbell / range chart `.dbx` (slides 8, 10); the lifecycle row with Discovery lit (slide 9, callback to slide 6); the agenda track as a "you are here" marker (slide 12); `data-auto` self-building slides (2, 7, 8, 9, 10, 12).
+  - Keeps "Big AI advocate and enthusiast" on the intro (now slide 2) by choice; don't re-propose.
+  - Session 3 (2026-10-30):
+    - Asked to **use the impeccable skill** for design reviews. Run `impeccable context` once per session, read `reference/craft-floor.md` before UI edits, and the matching command reference (e.g. `animate.md`) for the task. Run `impeccable detect --json src/deck.html` after a change; only known false positives remain (see the Impeccable skill note above) plus the 132 px cover `h1` (oversized-h1, approved).
+    - Doubts motion that has no job: removed the cover loop. Wants motion **smooth or not at all** (agenda: one continuous sweep instead of stepwise reveals).
+    - Spots rendering bugs fast ("full agenda disappears and then appears") → fixed generally with `prep()`; always test arrival by keyboard **and** wheel.
+    - Visual taste: dislikes busy or arbitrary shapes ("too many dots", "different width everywhere", a "very basic" dot). Likes one clear idea per visual, two widths not six, crafted details (the dial node), slim line-drawn forms.
+    - Shares reference screenshots as inspiration: borrow the visual language (slim tube, highlighted chamber, dashed station marks), never copy the layout.
+    - Responds to short questions with "agreed" / "NICE!!!"; ask before wording changes, then do exactly what was approved.
+- **Recurring visual idioms (reuse them):** the dumbbell / range chart `.dbx` (slides 8, 10); the lifecycle row with Discovery lit (slide 9, callback to slide 6); the agenda track as a "you are here" marker (slide 12); `data-auto` self-building slides (3, 7, 8, 9, 10, 12, 14); the cover's "rewired" wires through one node (slide 1); the slim lifecycle tube with the Code chamber (slide 6).
 - **Screenshots:** write them to the session scratchpad, never the repo folder. A Node script run with relative paths from the repo root drops PNGs into the repo (they're git-ignored, but delete them).
 - **Deep-link testing of a slide's start state:** `index.html?x=1#N`, then `ArrowUp` then `ArrowDown` lands on slide N at build 0; pressing `ArrowDown` from N-1 may only finish N-1's builds.
 
 ## 8. Next steps
 
-1. **Next redesign: slide 15 (Three approaches).** Slide 14 is done pending user review; it still needs the real recording dropped into `#agents-run`.
-2. Then 15 (Three approaches), 16 (console schematic, has a kicker), 17–19 (demo cues: kickers, the audience-visible "Switch to live console" stage direction, no shared comparison spine). Ask the user before each whether the slide earns its place; they have been cutting.
-3. Slide 6: drop in the user's photos when they send them.
-4. Continue slide by slide, applying §6. After each slide, run `./scripts/build.sh`, republish to the same artifact URL, and summarise what changed.
+**Open questions to the user (asked, not yet answered):**
+- Slide 4: the title "This is a bottleneck" stays up after Coding widens. Change it on the click? If yes, the user picks the words.
+- Slide 2 (intro): add a "then → now" line for the WIMP → AI story, e.g. "Analysis for WIMP: screens, clicks, specs" → "Analysis with AI: questions, agents, evidence"? Only with the user's approval or wording. It is in the notes either way.
+
+**Then, in order:**
+1. **Next redesign: slide 15 (Three approaches)** (recommendation: keep it, it sets up the demo). Slide 14 is done; it still needs the real recording dropped into `#agents-run`.
+2. Then 16 (console schematic, has a kicker), 17–19 (demo cues: kickers, the audience-visible "Switch to live console" stage direction, no shared comparison spine). Ask the user before each whether the slide earns its place; they have been cutting.
+3. Slide 2 (intro): drop in the user's photos when they send them.
+4. Continue slide by slide, applying §6. After each change: `./scripts/build.sh`, republish to the same artifact URL, commit and push to `main` (a stop hook asks for it; the user accepted direct pushes to `main`), update §5, and summarise what changed including exact wording changes.
 5. Before the talk: ask whether to add the takeaways and closing slides, run a full detector pass, and do a projector check.
