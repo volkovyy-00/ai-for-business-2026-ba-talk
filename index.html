@@ -387,22 +387,30 @@
   .watch .switch::before{content:"↗";font-size:34px;color:var(--active-hi)}
 
   /* ---------- Who sits at the new constraint ---------- */
-  .who-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;margin-top:64px}
-  .exhibit{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 48px 36px}
-  .ex-row+.ex-row{margin-top:36px}
-  .ex-label{font-size:30px;font-weight:600;margin-bottom:14px}
-  .ex-label span{font-weight:400;color:var(--ink-3);margin-left:12px;font-size:26px}
-  .bar{display:flex;height:68px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.04)}
-  .seg{display:flex;align-items:center;padding:0 22px;font-size:26px;font-weight:700;white-space:nowrap}
-  .seg.people{background:var(--active);color:#fff}
-  .seg.model{background:#2B4A68;color:#E8F0FF;justify-content:flex-end}
-  .ex-key{display:flex;gap:32px;margin-top:28px;font-size:22px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-  .ex-key i{display:inline-block;width:16px;height:16px;border-radius:4px;margin-right:10px;vertical-align:-1px}
-  .ex-key i.people{background:var(--active)} .ex-key i.model{background:#2B4A68}
-  .stations{display:flex;flex-direction:column;gap:18px}
-  .stn{flex:1;border:1px solid var(--line);border-left:5px solid var(--active);background:var(--panel);border-radius:var(--r);padding:22px 32px;display:flex;flex-direction:column;justify-content:center}
-  .stn b{font-size:38px;font-weight:700}
-  .stn span{font-size:28px;color:var(--ink-2);margin-top:4px}
+  .who-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;margin-top:56px;align-items:start}
+  .exhibit{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:44px 48px 48px}
+  .ex-row+.ex-row{margin-top:44px}
+  .ex-label{font-size:32px;font-weight:600;margin-bottom:16px}
+  .ex-label span{font-weight:400;color:var(--ink-3);margin-left:12px;font-size:30px}
+  .bar{display:flex;height:76px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.04)}
+  .bar .seg{display:flex;align-items:center;padding:0 24px;font-size:30px;font-weight:700;white-space:nowrap;
+    transition:clip-path .9s var(--ease-out)}
+  .bar .seg.people{background:var(--active);color:#fff}
+  .bar .seg.model{background:#2B4A68;color:#E8F0FF;justify-content:flex-end}
+  /* bars fill on arrival: people grow from the left, model from the right, meeting at the split */
+  .bar[data-build].pending{opacity:1;transform:none}
+  .bar[data-build].pending .seg.people{clip-path:inset(0 100% 0 0)}
+  .bar[data-build].pending .seg.model{clip-path:inset(0 0 0 100%)}
+  .bar .seg{clip-path:inset(0)}
+  .bar .seg.model{transition-delay:.15s}
+  /* where people still decide: three stations on one line, nodes in the "people" blue */
+  .stations{display:flex;flex-direction:column;gap:26px;padding-top:44px}
+  .stations .ex-label{margin:0 0 4px}
+  .stn{position:relative;padding-left:72px}
+  .stn::before{content:"";position:absolute;left:0;top:12px;width:30px;height:30px;border-radius:50%;background:var(--active)}
+  .stn:not(:last-child)::after{content:"";position:absolute;left:13px;top:50px;bottom:-28px;width:4px;background:var(--line)}
+  .stn b{display:block;font-family:var(--font-display);font-size:42px;font-weight:700;line-height:1.1}
+  .stn span{display:block;font-size:30px;color:var(--ink-2);margin-top:4px}
   .s-who .remember{margin-top:52px;font-size:42px;line-height:1.3;color:var(--ink-2)}
   .s-who .remember b{color:var(--ink);font-weight:700}
 
@@ -646,29 +654,29 @@
   <!-- ================= WHO SITS AT THE NEW CONSTRAINT ================= -->
   <!-- Source: Anthropic, "Agentic coding and persistent returns to expertise" (Jun 2026), ~400k Claude Code sessions:
        https://www.anthropic.com/research/claude-code-expertise — people make ~70% of planning decisions; Claude ~80% of execution decisions. -->
-  <section class="slide s-who" data-title="Who sits at the new constraint"
-    data-notes="Anthropic looked at about 400,000 Claude Code sessions. People make about 70% of the planning decisions; the model makes about 80% of the execution decisions. When execution gets cheap, whoever frames the question and checks the answer sets the value. That's the BA.">
+  <section class="slide s-who" data-title="Who sits at the new constraint" data-auto="700"
+    data-notes="Anthropic looked at about 400,000 Claude Code sessions. People make about 70% of the planning decisions; the model makes about 80% of the execution decisions. When execution gets cheap, whoever frames the question and checks the answer sets the value. The bars fill on their own, then the three stations and the closing line appear. That's the BA.">
     <div class="rule"></div>
     <h2>Who sits at the new constraint</h2>
     <div class="who-grid">
       <div class="exhibit">
         <div class="ex-row">
           <div class="ex-label">Planning decisions <span>what to do</span></div>
-          <div class="bar"><div class="seg people" style="width:70%">People ~70%</div><div class="seg model" style="width:30%"></div></div>
+          <div class="bar" data-build="1"><div class="seg people" style="width:70%">People ~70%</div><div class="seg model" style="width:30%">Model</div></div>
         </div>
         <div class="ex-row">
           <div class="ex-label">Execution decisions <span>how to do it</span></div>
-          <div class="bar"><div class="seg people" style="width:20%"></div><div class="seg model" style="width:80%">Model ~80%</div></div>
+          <div class="bar" data-build="2"><div class="seg people" style="width:20%">People</div><div class="seg model" style="width:80%">Model ~80%</div></div>
         </div>
-        <div class="ex-key"><span><i class="people"></i>People</span><span><i class="model"></i>Model</span></div>
       </div>
-      <div class="stations">
+      <div class="stations" data-build="3">
+        <div class="ex-label">Where people still decide</div>
         <div class="stn"><b>Discovery</b><span>frame the question</span></div>
         <div class="stn"><b>Review</b><span>check what came back</span></div>
         <div class="stn"><b>Decision</b><span>say what is done</span></div>
       </div>
     </div>
-    <p class="remember">When execution gets cheap, <b>the person who frames and checks sets the value.</b></p>
+    <p class="remember" data-build="4">When execution gets cheap, <b>the person who frames and checks sets the value.</b></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Anthropic, Agentic coding and persistent returns to expertise (2026)</span><span>How AI rewired the business analyst role</span><span class="slide-no">07</span></span></div>
   </section>
   </div>
