@@ -386,48 +386,32 @@
 
 
 
-  /* ---------- Several agents, different angles ---------- */
+  /* ---------- Deep research: you · AI agent · you ---------- */
+  /* no panel, one blue line weight; Frame and Check are plain type, Report the only filled shape; ownership is one segmented line underneath */
   .s-multi h2{font-size:80px;line-height:1.05}
   .s-multi h2 .hl{color:var(--accent)}
-  /* one small grey hop (chat) vs one dominant panel: a racetrack loop that keeps circling, then the only solid blue box (Report) */
-  .dr-wrap{position:relative;margin-top:44px}
+  .dr-lede{display:flex;align-items:baseline;gap:20px;margin-top:40px;font-size:34px;color:var(--ink-2);white-space:nowrap}
+  .dr-lede > .doclink:first-child{font-family:var(--font-display);font-size:36px;font-weight:700}
+  .dr-lede b{font-weight:600;color:var(--accent)}
+  .dr-lede .run{margin-left:auto;font-size:30px;color:var(--ink-2)}
+  .dr-wrap{margin:auto 0}
   .multi-svg{display:block;width:100%;height:auto;font-family:var(--font);overflow:visible}
-  .multi-svg .lab{font-family:var(--font-display);font-size:40px;font-weight:700;fill:var(--ink)}
-  .multi-svg .lab.sm{font-size:36px;fill:var(--ink-2)}
+  .multi-svg .t{font-family:var(--font-display);font-size:44px;font-weight:700;fill:var(--ink)}
+  .multi-svg .t.w{font-size:40px;fill:#fff}
+  .multi-svg .ms{font-size:30px;fill:var(--ink-2)}
   .multi-svg .s{font-size:28px;fill:var(--ink-2)}
-  .multi-svg .ans{fill:var(--ink-3)}
-  .multi-svg .ans{font-size:28px;font-weight:600}
-  .multi-svg .box{fill:var(--panel);stroke:var(--line);stroke-width:2}
-  .multi-svg .quick{fill:none;stroke:var(--ink-3);stroke-width:3}
-  .multi-svg .tip{fill:var(--active)} .multi-svg .tip.q{fill:var(--ink-3)}
-  .multi-svg .panel{fill:var(--panel-hi);stroke:var(--active);stroke-width:2}
-  .multi-svg .dur{font-size:30px;font-weight:600;fill:var(--accent)}
-  .multi-svg .loop{fill:none;stroke:var(--active);stroke-width:6;stroke-linejoin:round}
-  .multi-svg .steps circle{fill:var(--active);stroke:var(--panel-hi);stroke-width:6}
   .multi-svg .st{font-family:var(--font-display);font-size:34px;font-weight:700;fill:var(--ink)}
-  .multi-svg .exit{fill:none;stroke:var(--active);stroke-width:6}
+  .multi-svg .ln{fill:none;stroke:var(--active);stroke-width:4}
+  .multi-svg .tip{fill:var(--active)}
+  .multi-svg .loop{fill:none;stroke:var(--active);stroke-width:4}
+  .multi-svg .steps circle{fill:var(--active);stroke:var(--midnight);stroke-width:6}
   .multi-svg .report{fill:var(--active)}
-  .multi-svg .t{font-family:var(--font-display);font-size:40px;font-weight:700;fill:#fff}
   .multi-svg .rs{font-size:28px;font-weight:600;fill:#fff}
-  /* the analyst's two steps: white outline on the darker panel, labelled "You" in cyan; the agent's loop sits between them */
-  .multi-svg .mine{fill:var(--panel);stroke:var(--ink);stroke-width:2}
-  .multi-svg .ms{font-size:28px;fill:var(--ink-2)}
+  .multi-svg .own{fill:none;stroke-width:4;stroke-linecap:round}
+  .multi-svg .own.you{stroke:var(--ink)}
+  .multi-svg .own.ai{stroke:var(--active)}
   .multi-svg .who{font-family:var(--font-display);font-size:30px;font-weight:700;fill:var(--ink-3)}
   .multi-svg .who.you{fill:var(--accent)}
-  .dr-wrap .run-link{position:absolute;right:40px;top:34px;font-size:28px;white-space:nowrap}
-  .dr-wrap .run-link .doclink{color:var(--ink-2)}
-  .dr-wrap .dr-head{position:absolute;left:40px;top:22px;display:flex;align-items:baseline;gap:20px;white-space:nowrap}
-  .dr-head .doclink{font-family:var(--font-display);font-size:40px;font-weight:700}
-  .dr-head span{font-size:28px;color:var(--ink-2);margin-right:-10px}
-  .dr-head b{font-size:30px;font-weight:600;color:var(--accent)}
-  .strategy{display:grid;grid-template-columns:220px repeat(3,minmax(0,1fr));column-gap:40px;margin-top:48px}
-  .strategy ol{display:contents;list-style:none}
-  .strategy .sk{font-family:var(--font-display);font-size:34px;font-weight:700;color:var(--ink);line-height:1.15;align-self:stretch;border-right:2px solid var(--active)}   /* white, with a blue rule binding it to its items (cyan here merged with the falcon below) */
-  .strategy li{position:relative;padding-left:92px}
-  .strategy .mini{position:absolute;left:0;top:0;width:72px;height:40px;fill:none;stroke:var(--active);stroke-width:2.5}
-  .strategy .mini .one{fill:var(--active)}   /* 3 runs → 2 compared → 1 brief */
-  .strategy li b{display:block;font-family:var(--font-display);font-size:34px;font-weight:700;line-height:1.15}
-  .strategy li span{display:block;margin-top:6px;font-size:26px;line-height:1.3;color:var(--ink-2);text-wrap:pretty}
   /* ---------- The agents explored. I decided. (brief → build decisions) ---------- */
   .s-decide h2{font-size:96px}
   .s-decide h2 .hl{color:var(--accent)}
@@ -980,52 +964,36 @@
     data-notes="This is how I use AI as a thinking partner. A chatbot answers in seconds from what it already remembers, usually without sources: fine for a quick fact, not good enough for discovery. A deep research agent works differently, and the analyst sits at both ends. I frame the question; the agent does the legwork. It investigates: it plans what to look for, searches, reads the sources, follows the leads it finds, and repeats until the question is covered. Then it writes a report with a source for every claim. One run takes ten to fifteen minutes. Then it is back to me: I check the sources before I trust any of it. My strategy: I don't run it once. I send the same question out several times, each run with its own angle, then compare what comes back. Where the runs disagree is exactly where I need to look. The result is one brief I can defend. Optional: click 'Deep research' to show how Anthropic built its research system (article excerpt and architecture diagram). Click 'Watch a run' for two recordings, Microsoft 365 Copilot's Researcher first, then the re-created multi-run recording; a clicker press moves to the next recording, then closes; Esc closes at once. Next slide: what I decided from that brief.">
     <div class="rule"></div>
     <h2>Don’t ask AI for an answer.<br><span class="hl">Send it to research.</span></h2>
+    <p class="dr-lede"><button class="doclink" type="button" data-dialog="research-system" aria-haspopup="dialog">Deep research</button><span>an agent that investigates · <b>10–15 minutes per run</b></span><button class="doclink run" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
     <div class="dr-wrap">
-    <svg class="multi-svg" viewBox="0 0 1640 360" role="img"
-      aria-label="Deep research, an agent that investigates for 10 to 15 minutes per run. You frame the question. The agent plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources. You check the sources.">
-      <g>
-        <rect class="panel" x="0" y="0" width="1640" height="360" rx="20"/>
-        <text class="who you" x="145" y="148" text-anchor="middle">You</text>
-        <rect class="mine" x="40" y="180" width="210" height="130" rx="16"/>
-        <text class="t" x="145" y="238" text-anchor="middle">Frame</text>
-        <text class="ms" x="145" y="278" text-anchor="middle">the question</text>
-        <path class="exit" d="M250 245H288"/><path class="tip" d="M282 233L302 245L282 257Z"/>
+    <svg class="multi-svg" viewBox="0 0 1640 330" role="img"
+      aria-label="Deep research, an agent that investigates for 10 to 15 minutes per run. You frame the question. The AI agent plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources. You check the sources.">
+      <text class="t" x="125" y="124" text-anchor="middle">Frame</text>
+      <text class="ms" x="125" y="166" text-anchor="middle">the question</text>
+      <path class="ln" d="M250 130H316"/><path class="tip" d="M312 120L332 130L312 140Z"/>
+      <path class="loop" d="M430 50H1060A80 80 0 0 1 1060 210H430A80 80 0 0 1 430 50Z"/>
+      <path class="tip" d="M757 199L735 210L757 221Z"/>
+      <g class="steps">
+        <circle cx="450" cy="50" r="13"/><circle cx="600" cy="50" r="13"/><circle cx="750" cy="50" r="13"/><circle cx="950" cy="50" r="13"/>
+        <text class="st" x="450" y="110" text-anchor="middle">Plan</text>
+        <text class="st" x="600" y="110" text-anchor="middle">Search</text>
+        <text class="st" x="750" y="110" text-anchor="middle">Read</text>
+        <text class="st" x="950" y="110" text-anchor="middle">Follow leads</text>
+        <text class="s" x="745" y="168" text-anchor="middle">repeats until the question is covered</text>
       </g>
-      <g>
-        <text class="who" x="705" y="148" text-anchor="middle">AI agent</text>
-        <path class="loop" pathLength="1" d="M390 175H1020A70 70 0 0 1 1020 315H390A70 70 0 0 1 390 175Z"/>
-        <g class="steps">
-          <path class="tip" d="M717 303L693 315L717 327Z"/>
-          <circle cx="410" cy="175" r="16"/><circle cx="560" cy="175" r="16"/><circle cx="708" cy="175" r="16"/><circle cx="900" cy="175" r="16"/>
-          <text class="st" x="410" y="231" text-anchor="middle">Plan</text>
-          <text class="st" x="560" y="231" text-anchor="middle">Search</text>
-          <text class="st" x="708" y="231" text-anchor="middle">Read</text>
-          <text class="st" x="900" y="231" text-anchor="middle">Follow leads</text>
-          <text class="s" x="705" y="293" text-anchor="middle">repeats until the question is covered</text>
-        </g>
-      </g>
-      <g>
-        <path class="exit" d="M1090 245H1128"/><path class="tip" d="M1122 233L1142 245L1122 257Z"/>
-        <rect class="report" x="1152" y="180" width="210" height="130" rx="16"/>
-        <text class="t" x="1257" y="238" text-anchor="middle">Report</text>
-        <text class="rs" x="1257" y="278" text-anchor="middle">with sources</text>
-        <path class="exit" d="M1362 245H1394"/><path class="tip" d="M1388 233L1408 245L1388 257Z"/>
-        <text class="who you" x="1510" y="148" text-anchor="middle">You</text>
-        <rect class="mine" x="1420" y="180" width="180" height="130" rx="16"/>
-        <text class="t" x="1510" y="238" text-anchor="middle">Check</text>
-        <text class="ms" x="1510" y="278" text-anchor="middle">the sources</text>
-      </g>
+      <path class="ln" d="M1140 130H1196"/><path class="tip" d="M1192 120L1212 130L1192 140Z"/>
+      <rect class="report" x="1224" y="70" width="190" height="120" rx="14"/>
+      <text class="t w" x="1319" y="124" text-anchor="middle">Report</text>
+      <text class="rs" x="1319" y="162" text-anchor="middle">with sources</text>
+      <path class="ln" d="M1414 130H1460"/><path class="tip" d="M1456 120L1476 130L1456 140Z"/>
+      <text class="t" x="1565" y="124" text-anchor="middle">Check</text>
+      <text class="ms" x="1565" y="166" text-anchor="middle">the sources</text>
+      <!-- who owns each part: one line, three segments -->
+      <path class="own you" d="M45 262H205"/><path class="own ai" d="M350 262H1414"/><path class="own you" d="M1490 262H1640"/>
+      <text class="who you" x="125" y="312" text-anchor="middle">You</text>
+      <text class="who" x="882" y="312" text-anchor="middle">AI agent</text>
+      <text class="who you" x="1565" y="312" text-anchor="middle">You</text>
     </svg>
-    <p class="dr-head"><button class="doclink" type="button" data-dialog="research-system" aria-haspopup="dialog">Deep research</button><span>an agent that investigates ·</span><b>10–15 minutes per run</b></p>
-    <p class="run-link"><button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
-    </div>
-    <div class="strategy">
-      <p class="sk">My strategy</p>
-      <ol>
-        <li><svg class="mini" viewBox="0 0 72 40" aria-hidden="true"><rect x="8" y="2" width="56" height="10" rx="5"/><rect x="8" y="15" width="56" height="10" rx="5"/><rect x="8" y="28" width="56" height="10" rx="5"/></svg><b>Several angles</b><span>same question, each run framed differently</span></li>
-        <li><svg class="mini" viewBox="0 0 72 40" aria-hidden="true"><rect x="2" y="8" width="44" height="24" rx="12"/><rect x="26" y="8" width="44" height="24" rx="12"/></svg><b>Compare the runs</b><span>where they disagree, look closer</span></li>
-        <li><svg class="mini" viewBox="0 0 72 40" aria-hidden="true"><rect class="one" x="8" y="8" width="56" height="24" rx="12"/></svg><b>One brief</b><span>synthesised, sources kept</span></li>
-      </ol>
     </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
   </section>
