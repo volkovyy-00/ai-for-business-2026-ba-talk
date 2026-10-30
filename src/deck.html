@@ -518,6 +518,37 @@
   .s5 .twist{margin-top:18px;font-size:36px;line-height:1.4;color:var(--ink-2)}
   .s5 .twist b{color:var(--active-hi);font-weight:700}
 
+  /* ---------- 10-K example modal (slide 11) ---------- */
+  .doclink{font:inherit;color:var(--ink);font-weight:600;background:none;border:0;padding:0;cursor:pointer;
+    text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:8px}
+  .doclink::after{content:"";display:inline-block;width:.62em;height:.62em;margin-left:.3em;vertical-align:.02em;
+    border:3px solid var(--accent);border-radius:4px;box-sizing:border-box;box-shadow:inset 0 .18em 0 -.06em var(--accent)}
+  .doclink:hover{color:var(--accent)}
+  .doclink:focus-visible{outline:3px solid var(--accent);outline-offset:8px;border-radius:4px}
+  dialog.filing{position:fixed;inset:0;margin:auto;width:min(1120px,92vw);max-height:90vh;padding:0;border:1px solid var(--line);border-radius:var(--r);
+    background:var(--panel);color:var(--ink);font-family:var(--font);overflow:hidden;display:flex;flex-direction:column;
+    font-size:clamp(16px,1.25vw,22px)}
+  dialog.filing:not([open]){display:none}
+  dialog.filing::backdrop{background:rgba(5,12,20,.72)}
+  dialog.filing[open]{animation:dlg .35s var(--ease-out)}
+  @keyframes dlg{from{opacity:0;transform:translateY(16px)}}
+  .filing header{display:flex;align-items:center;gap:1em;padding:1em 1.4em;border-bottom:1px solid var(--line)}
+  .filing header h3{font-family:var(--font-display);font-size:1.35em;font-weight:700;flex:1}
+  .filing header .x{font:inherit;font-size:1.6em;line-height:1;color:var(--ink-2);background:none;border:0;cursor:pointer;padding:.1em .3em;border-radius:8px}
+  .filing header .x:hover{color:var(--ink)} .filing header .x:focus-visible{outline:2px solid var(--accent)}
+  .filing .paper{margin:1.2em 1.4em;padding:1.6em 2em;background:#F5F7FA;color:#0B1C2C;border-radius:10px;overflow:auto;overscroll-behavior:contain;
+    font-family:Georgia,"Times New Roman",serif;font-size:1.05em;line-height:1.55}
+  .paper .doc-head{font-family:var(--font);font-size:.82em;letter-spacing:.06em;text-transform:uppercase;color:#4A5D70;padding-bottom:.8em;border-bottom:1px solid #C9D3DD}
+  .paper .item{margin-top:1em;font-weight:700}
+  .paper .cat{margin-top:.6em;font-style:italic;color:#4A5D70}
+  .paper .rf{margin-top:.9em;font-weight:700;font-style:italic}
+  .paper p{margin-top:.8em}
+  .paper mark{background:rgba(0,174,239,.24);color:inherit;padding:0 .15em;border-radius:3px}
+  .filing footer{display:flex;align-items:center;gap:1.4em;padding:0 1.4em 1.2em;color:var(--ink-2);font-size:.9em}
+  .filing footer p{flex:1} .filing footer b{color:var(--ink);font-weight:600}
+  .filing footer a{color:var(--accent);font-weight:600;white-space:nowrap;text-underline-offset:4px}
+  @media (prefers-reduced-motion:reduce){ dialog.filing[open]{animation:none} }
+
   .preload *{transition:none!important}
   @media print{ .frame{page-break-after:always} }
 </style>
@@ -824,10 +855,10 @@
   <div class="frame" id="slide-11">
   <!-- ================= THE QUESTION ================= -->
   <section class="slide s-question" data-title="The question"
-    data-notes="So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only. This is the question for the rest of the talk; we'll come back to it in the demo.">
+    data-notes="So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only. This is the question for the rest of the talk; we'll come back to it in the demo. Optional: click 'public 10-K filings only' to show a real risk factor (Ford, FY2021, semiconductor shortage — note 'we and our competitors'); any clicker press or Esc closes it.">
     <div class="rule"></div>
     <h2 class="big"><span class="lead">Across ten public auto and semiconductor companies:</span><span class="hl">Which risks do they share&nbsp;—<br>and how strongly?</span></h2>
-    <p class="src">Source material: <b>public 10-K filings only.</b></p>
+    <p class="src">Source material: <button class="doclink" type="button" data-dialog="filing-ford" aria-haspopup="dialog">public 10-K filings only.</button></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
   </section>
   </div>
@@ -1016,6 +1047,21 @@
 
 
   </main>
+<!-- 10-K example, opened from slide 11. Excerpt is verbatim (omissions marked …) from Ford Motor Company, Form 10-K for fiscal 2021, Item 1A, filed 4 Feb 2022:
+     https://www.sec.gov/Archives/edgar/data/37996/000003799622000013/f-20211231.htm -->
+<dialog class="filing" id="filing-ford" aria-labelledby="filing-ford-t">
+  <header><h3 id="filing-ford-t">What a 10-K risk factor looks like</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
+  <div class="paper">
+    <div class="doc-head">Ford Motor Company · Form 10-K · Fiscal year ended December 31, 2021</div>
+    <div class="item">ITEM 1A. Risk Factors.</div>
+    <div class="cat">Operational Risks</div>
+    <div class="rf">Ford is highly dependent on its suppliers to deliver components in accordance with Ford’s production schedule, and a shortage of key components, such as semiconductors, or raw materials can disrupt Ford’s production of vehicles.</div>
+    <p>Our products contain components that we source globally from suppliers who, in turn, source components from their suppliers. If there is a shortage of a key component in our supply chain, and the component cannot be easily sourced from a different supplier, the shortage may disrupt our production. For example, the automotive industry continues to face <mark>a significant shortage of semiconductors</mark>, which has a complex supply chain with long lead times required to increase production and capacity. …</p>
+    <p>In addition, <mark>Renesas Electronics Corporation, a key supplier of semiconductors</mark> for the automotive industry and for us in particular, experienced a significant fire at its Naka Factory in March 2021 … With up to fifty modules on a vehicle, <mark>we and our competitors</mark> who need integrated circuits are experiencing various levels of semiconductor impact.</p>
+  </div>
+  <footer><p>One risk factor from one company. <b>The question: which of these recur across all ten filings?</b></p>
+    <a href="https://www.sec.gov/Archives/edgar/data/37996/000003799622000013/f-20211231.htm" target="_blank" rel="noopener">Full filing on SEC.gov ↗</a></footer>
+</dialog>
 <nav id="dots" aria-label="Slides"></nav>
 
 <script>
@@ -1161,7 +1207,19 @@
     step[i] > 0 && groups[i].length ? setStep(i, step[i]-1) : go(i-1, 'key');
   }
   // clickers send PageDown/PageUp or arrows; native scroll (wheel / trackpad / touch) still works
+  // 10-K example dialog: opens from a .doclink; while open, clicker/arrow keys close it instead of moving slides
+  const openDlg = () => document.querySelector('dialog[open]');
+  document.querySelectorAll('[data-dialog]').forEach(b => b.addEventListener('click', () => {
+    const d = document.getElementById(b.dataset.dialog); document.documentElement.style.overflow = 'hidden'; d.showModal(); d.querySelector('[data-close]').focus();
+  }));
+  document.querySelectorAll('dialog').forEach(d => {
+    d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-close]')) d.close(); });
+    d.addEventListener('wheel', e => e.stopPropagation(), {passive:true});
+    d.addEventListener('close', () => document.documentElement.style.overflow = '');
+  });
   addEventListener('keydown', e => {
+    const d = openDlg();
+    if (d) { if (['ArrowRight','ArrowDown','PageDown','ArrowLeft','ArrowUp','PageUp'].includes(e.key)) { e.preventDefault(); d.close(); } return; }
     if (['ArrowRight','ArrowDown','PageDown'].includes(e.key) || (e.key===' ' && !e.shiftKey)) { e.preventDefault(); next(); }
     else if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key) || (e.key===' ' && e.shiftKey)) { e.preventDefault(); prev(); }
     else if (e.key==='Home') { e.preventDefault(); go(0, 'key'); }
