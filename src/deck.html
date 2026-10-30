@@ -329,20 +329,27 @@
 
   /* ---------- Section divider ---------- */
   .s-div{justify-content:center}
-  .div-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:560px}
-  .div-left{padding-right:80px}
-  .div-left .kicker{margin-bottom:28px}
-  .div-left h2{font-size:120px;line-height:1.02}
-  .div-right{border-left:5px solid var(--active);padding-left:80px;min-height:360px;display:flex;align-items:center}
-  .div-right p{font-size:60px;line-height:1.2;color:var(--ink-2);font-weight:500}
+  .s-div .here{margin-bottom:120px}
+  .s-div .track{margin-top:0}
+  .s-div .track .seg.done{background:rgba(0,109,227,.45)}
+  .s-div .stops{margin-top:-18px}
+  .s-div .stop{padding-top:64px}
+  .s-div .stop p{font-size:30px;font-weight:600;color:var(--ink-3);line-height:1.3}
+  .s-div .stop.done .node{background:var(--active);border-color:var(--active)}
+  .s-div .stop.now p{color:var(--accent)}
+  .s-div .stop:not(.done):not(.now) .node{border-color:rgba(255,255,255,.3)}
+  .s-div .stop.now[data-build].pending{opacity:1;transform:none}
+  .s-div .stop.now .node{transition:all .5s var(--ease-out) .35s}
+  .s-div .stop.now.pending .node{left:0;top:4px;width:28px;height:28px;background:var(--midnight);border-color:rgba(255,255,255,.3);box-shadow:none}
+  .s-div .stop.now.pending p{color:var(--ink-3)}
+  .s-div .stop.now p{transition:color .5s var(--ease-out) .35s}
+  .s-div .stop.now.pending .node,.s-div .stop.now.pending p{transition:none}
+  .s-div h2{font-size:132px;line-height:1;letter-spacing:-.03em}
+  .s-div h2 .hl{color:var(--accent)}
+  .s-div .sub{margin-top:36px}
 
   /* ---------- Jagged frontier ---------- */
   .ev .v.neg{color:var(--ink)}
-  .s-jag .ev .v{font-size:96px}
-  .s-jag .ev .pair{gap:56px}
-  .s-jag .lede{margin-top:20px;font-size:34px;color:var(--ink-2)}
-  .s-jag .ev-grid{margin-top:44px}
-  .s-jag .remember{margin-top:44px}
 
   /* ---------- Live moment ---------- */
   .s-live .kicker{margin-bottom:20px}
@@ -363,14 +370,23 @@
 
   /* ---------- Deep research agent (definition) ---------- */
   .s-dra{justify-content:center}
-  .s-dra .kicker{margin-bottom:28px}
   .s-dra h2{font-size:104px}
+  .dra-svg{display:block;width:100%;height:auto;margin-top:56px;font-family:var(--font);overflow:visible}
+  .dra-svg .box{fill:var(--panel);stroke:var(--line);stroke-width:2}
+  .dra-svg .box.hi{fill:var(--panel-hi);stroke:var(--active)}
+  .dra-svg .t{font-family:var(--font-display);font-size:40px;font-weight:700;fill:var(--ink)}
+  .dra-svg .s{font-size:30px;fill:var(--ink-2)}
+  .dra-svg .c{font-size:28px;fill:var(--ink-3)}
+  .dra-svg .c.b{font-size:32px;font-weight:600;fill:var(--ink)}
+  .dra-svg .ar{stroke:var(--ink-3);stroke-width:3;fill:none}
+  .dra-svg .loop{fill:none;stroke:var(--active);stroke-width:4;stroke-dasharray:2 14;stroke-linecap:round}
+  .dra-svg .nd{fill:var(--midnight);stroke:var(--active);stroke-width:4}
+  .dra-svg .dot{fill:var(--accent)}
+  .dra-svg .ln{fill:rgba(255,255,255,.16)}
+  .dra-svg .cite{fill:var(--accent)}
+  @media (prefers-reduced-motion:reduce){ .dra-svg .dot{display:none} }
   .s-dra .lede{margin-top:36px;font-size:44px;line-height:1.3;color:var(--ink-2);max-width:1500px}
   .s-dra .lede b{color:var(--ink);font-weight:700}
-  .traits{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:72px}
-  .traits li{border:1px solid var(--line);border-top:5px solid var(--active);background:var(--panel);border-radius:16px;padding:36px 36px 40px;display:flex;flex-direction:column}
-  .traits b{font-size:40px;font-weight:700}
-  .traits span{margin-top:14px;font-size:28px;line-height:1.4;color:var(--ink-2)}
 
   /* ---------- Several agents, different angles ---------- */
   .s-multi h2{font-size:84px}
@@ -864,62 +880,58 @@
   </div>
   <div class="frame" id="slide-12">
   <!-- ================= SECTION DIVIDER: AI as a thinking partner ================= -->
-  <section class="slide s-div" data-title="Section: AI as a thinking partner"
-    data-notes="Before anyone builds anything, I use AI to attack the question. Not one chat — several research agents, each coming at it from a different angle. Then I read what comes back and decide what we actually build.">
-    <div class="div-grid">
-      <div class="div-left"><div class="kicker">Section</div><h2>AI as a thinking partner</h2></div>
-      <div class="div-right"><p>Attack the question from several angles before anyone builds</p></div>
+  <section class="slide s-div" data-title="Section: AI as a thinking partner" data-auto="700"
+    data-notes="Part two of four. The line draws on to the second stop on its own. Before anyone builds anything, I use AI to attack the question. Not one chat — several research agents, each coming at it from a different angle. Then I read what comes back and decide what we actually build.">
+    <div class="here" aria-label="Agenda: part 2 of 4">
+      <div class="track" aria-hidden="true"><span class="seg done"></span><span class="seg" data-build="1"></span></div>
+      <ol class="stops">
+        <li class="stop done"><span class="node"></span><p>The constraint moved</p></li>
+        <li class="stop now" data-build="1"><span class="node"></span><p>The BA, thinking with AI</p></li>
+        <li class="stop"><span class="node"></span><p>Three approaches</p></li>
+        <li class="stop"><span class="node"></span><p>Three lines to leave with</p></li>
+      </ol>
     </div>
+    <h2>AI as a <span class="hl">thinking partner</span></h2>
+    <p class="sub">Attack the question from several angles before anyone builds.</p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
   </section>
   </div>
 
   <div class="frame" id="slide-13">
-  <!-- ================= SAME AI, TWO KINDS OF WORK (Dell'Acqua et al.) ================= -->
-  <!-- Source: Dell'Acqua et al., "Navigating the Jagged Technological Frontier", Harvard Business School working paper 24-013 (2023), with BCG; 758 consultants, GPT-4.
-       On 18 tasks within the model's capabilities: 25.1% faster, >40% higher quality vs control. On a task selected to be outside its capabilities:
-       19 percentage points less likely to produce a correct solution. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4573321 -->
-  <section class="slide s-ev s-jag" data-title="Same AI, two kinds of work"
-    data-notes="Harvard and BCG gave 758 consultants GPT-4 and compared them with colleagues working without it. On tasks the AI is good at, they finished about a quarter faster and their work was rated over 40% better. Then they got a task that looked just as easy, but the AI gets it wrong. There, the people using AI were 19 points more often wrong than people working without it. The output looked equally confident both times. You can't tell from the answer which kind of task you're in — so before I trust any answer, I use the AI to attack the framing.">
+  <!-- ================= WHAT IS A DEEP RESEARCH AGENT ================= -->
+  <section class="slide s-dra" data-title="What is a deep research agent"
+    data-notes="Quick definition, because I'll use the term a lot. The dot keeps going round the loop. A deep research agent isn't a chat reply. You give it a question, and it goes off with tools — search, read, follow links — for minutes, sometimes longer, and comes back with a brief that cites where every claim came from. You still own the question. And the trick I want to show you: I didn't run one. I ran several, in parallel.">
     <div class="rule"></div>
-    <h2>Same AI, two kinds of work</h2>
-    <p class="lede">Harvard &amp; BCG gave 758 consultants GPT-4 and compared them with colleagues working without it.</p>
-    <div class="ev-grid">
-      <div class="ev hero">
-        <div class="k">Tasks the AI is good at</div>
-        <div class="pair"><div><div class="v">25%</div><div class="l">faster to finish</div></div><div><div class="v">&gt;40%</div><div class="l">better quality</div></div></div>
-        <div class="foot">vs colleagues without AI · 18 consulting tasks</div>
-      </div>
-      <div class="ev">
-        <div class="k">Similar-looking task the AI gets wrong</div>
-        <div class="pair"><div><div class="v neg">19 pts</div><div class="l">more often wrong</div></div></div>
-        <div class="foot">vs colleagues without AI · one business-case task</div>
-      </div>
-    </div>
-    <p class="remember">The output can’t tell you which kind you’re in. <b>So attack the framing first.</b></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Dell’Acqua et al., Harvard Business School &amp; BCG (2023)</span><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
+    <h2>What is a deep research agent?</h2>
+    <p class="lede">Not a chat reply. <b>An agent that searches, reads and comes back with a sourced brief.</b></p>
+    <svg class="dra-svg" viewBox="0 0 1640 470" role="img"
+      aria-label="You give the agent a question and an angle. It loops: search, read, follow links, for minutes rather than seconds. It returns a brief where every claim is cited.">
+      <defs><marker id="dra-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8FA3B6"/></marker></defs>
+      <rect class="box" x="0" y="160" width="380" height="180" rx="16"/>
+      <text class="t" x="40" y="238">Your question</text>
+      <text class="s" x="40" y="284">you set the angle</text>
+      <path class="ar" d="M392 250H612" marker-end="url(#dra-ar)"/>
+      <circle class="loop" cx="820" cy="250" r="180"/>
+      <path id="dra-orbit" d="M820 70a180 180 0 1 1 -0.01 0" fill="none"/>
+      <circle class="nd" cx="820" cy="70" r="14"/><text class="s" x="820" y="38" text-anchor="middle">Search</text>
+      <circle class="nd" cx="976" cy="340" r="14"/><text class="s" x="1004" y="392">Read</text>
+      <circle class="nd" cx="664" cy="340" r="14"/><text class="s" x="636" y="392" text-anchor="end">Follow links</text>
+      <text class="c" x="820" y="240" text-anchor="middle">loops for</text>
+      <text class="c b" x="820" y="280" text-anchor="middle">minutes, not seconds</text>
+      <circle class="dot" r="11"><animateMotion dur="4.5s" repeatCount="indefinite" rotate="auto"><mpath href="#dra-orbit"/></animateMotion></circle>
+      <path class="ar" d="M1028 250H1248" marker-end="url(#dra-ar)"/>
+      <rect class="box hi" x="1260" y="130" width="380" height="240" rx="16"/>
+      <rect class="ln" x="1300" y="170" width="300" height="10" rx="5"/><rect class="cite" x="1606" y="168" width="14" height="14" rx="3"/>
+      <rect class="ln" x="1300" y="198" width="250" height="10" rx="5"/><rect class="cite" x="1556" y="196" width="14" height="14" rx="3"/>
+      <rect class="ln" x="1300" y="226" width="280" height="10" rx="5"/><rect class="cite" x="1586" y="224" width="14" height="14" rx="3"/>
+      <text class="t" x="1300" y="302">Sourced brief</text>
+      <text class="s" x="1300" y="344">every claim cited</text>
+    </svg>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
   </section>
   </div>
 
   <div class="frame" id="slide-14">
-  <!-- ================= WHAT IS A DEEP RESEARCH AGENT ================= -->
-  <section class="slide s-dra" data-title="What is a deep research agent"
-    data-notes="Quick definition, because I'll use the term a lot. A deep research agent isn't a chat reply. You give it a question, and it goes off with tools — search, read, follow links — for minutes, sometimes longer, and comes back with a brief that cites where every claim came from. You still own the question. And the trick I want to show you: I didn't run one. I ran several, in parallel.">
-    <div class="rule"></div>
-    <div class="kicker">A quick definition</div>
-    <h2>What is a deep research agent?</h2>
-    <p class="lede">Not a chat reply. <b>An agent that searches, reads and comes back with a sourced brief.</b></p>
-    <ul class="traits">
-      <li><b>Uses tools</b><span>search, open, read, follow links</span></li>
-      <li><b>Runs long</b><span>minutes, not seconds — loops until done</span></li>
-      <li><b>Cites sources</b><span>every claim points back to a page</span></li>
-      <li><b>You steer</b><span>you own the question and the angle</span></li>
-    </ul>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
-  </section>
-  </div>
-
-  <div class="frame" id="slide-15">
   <!-- ================= SEVERAL AGENTS, DIFFERENT ANGLES ================= -->
   <section class="slide s-multi" data-title="Several agents, different angles"
     data-notes="Here's what that looked like. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. I'll play the short recording rather than spin them up live — it takes a while. Then I merged what came back into one brief, and that brief is what I prototyped from.">
@@ -939,11 +951,11 @@
       <div class="shot-slot" role="img" aria-label="Placeholder: multi-agent research video"><span>Video · Agents researching in parallel</span></div>
     </div>
     <div class="strip"><span class="tag">Then</span><b>Synthesise</b><span class="ar">→</span><b>one brief</b><span class="ar">→</span><b>prototype</b></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-16">
+  <div class="frame" id="slide-15">
   <!-- ================= THREE APPROACHES ================= -->
   <section class="slide s-three" data-title="Three approaches"
     data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live.">
@@ -955,11 +967,11 @@
       <div class="ap"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p></div>
       <div class="ap"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-17">
+  <div class="frame" id="slide-16">
   <!-- ================= DEMO: HOW THE CONSOLE WORKS (foundation mock, not the real app) ================= -->
   <section class="slide s-console" data-title="Demo: how the console works"
     data-notes="Before I leave the slides, one walk through the console so you know where to look. Top right tells you whether it's live or a replay. You pick a question from the chips, or type one. The answer comes back in the middle. And on the right is the part I care about most: the evidence — which filing, which passage, so you can check it. Same layout for all three approaches.">
@@ -981,11 +993,11 @@
       </div>
     </div>
     <div class="c-flow"><b>Question</b><span class="ar">→</span><b>Answer</b><span class="ar">→</span><b>Evidence you can check</b><span class="mock">Schematic · not the live app</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-18">
+  <div class="frame" id="slide-17">
   <!-- ================= DEMO CUE 1: PLAIN RAG ================= -->
   <section class="slide s-cue" data-title="Plain RAG"
     data-notes="Demo one, plain vector RAG. Watch the answer — it reads well. Then try to trace it: which filings, which passages, how many companies actually said this? That's the gap. Switching to the live console now.">
@@ -1001,11 +1013,11 @@
       <!-- PLACEHOLDER: live console, Plain RAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Plain RAG"><span>Live console · Plain vector RAG</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-19">
+  <div class="frame" id="slide-18">
   <!-- ================= DEMO CUE 2: GRAPHRAG ================= -->
   <section class="slide s-cue" data-title="GraphRAG"
     data-notes="Demo two, GraphRAG on Neo4j. This time watch three things: the Cypher query it writes, the subgraph of companies and risks that comes back, and that I can click any link to see the quote behind it. Over to the console.">
@@ -1021,11 +1033,11 @@
       <!-- PLACEHOLDER: live console, GraphRAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, GraphRAG"><span>Live console · GraphRAG (Neo4j)</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">19</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-20">
+  <div class="frame" id="slide-19">
   <!-- ================= DEMO CUE 3: TAXONOMY-FIRST ================= -->
   <section class="slide s-cue" data-title="Taxonomy-first"
     data-notes="Demo three, taxonomy first. Categories fixed up front, the counting done in code. Watch the heatmap — risk by company — and then open any cell: the quote drawer shows exactly which passage put it there. Let's go live.">
@@ -1041,7 +1053,7 @@
       <!-- PLACEHOLDER: live console, Taxonomy-first. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Taxonomy-first"><span>Live console · Taxonomy-first</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">20</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">19</span></span></div>
   </section>
   </div>
 
