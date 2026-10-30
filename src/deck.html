@@ -387,25 +387,34 @@
 
 
   /* ---------- Several agents, different angles ---------- */
-  .s-multi h2{font-size:96px}
-  .s-multi .lede{margin-top:24px;font-size:36px;line-height:1.35;color:var(--ink-2)}
-  .s-multi .lede b{color:var(--ink);font-weight:600}
-  /* lead agent fans out to three angles; bars are the real run times (53/53/38 s, 240 units = 53 s); they merge into one brief */
-  .multi-svg{display:block;width:100%;height:auto;margin-top:48px;font-family:var(--font);overflow:visible}
-  .multi-svg .lab{font-family:var(--font-display);font-size:36px;font-weight:700;fill:var(--ink)}
-  .multi-svg .trk{fill:rgba(255,255,255,.1)}
-  .multi-svg .fill{fill:var(--active);transform-box:fill-box;transform-origin:left center;transition:transform var(--d,1.4s) var(--ease-out)}
-  .multi-svg .fill[data-build].pending{opacity:1;transform:scaleX(0)}
-  .multi-svg .sec{font-size:28px;font-weight:600;fill:var(--ink-2);font-variant-numeric:tabular-nums}
-  .multi-svg .mg{fill:none;stroke:var(--ink-3);stroke-width:3}
+  .s-multi h2{font-size:80px;line-height:1.05}
+  .s-multi h2 .hl{color:var(--accent)}
+  /* chat reply = one short hop; deep research = a loop that repeats, then a sourced report */
+  .multi-svg{display:block;width:100%;height:auto;margin-top:52px;font-family:var(--font);overflow:visible}
+  .multi-svg .lab{font-family:var(--font-display);font-size:40px;font-weight:700;fill:var(--ink)}
+  .multi-svg .s{font-size:30px;fill:var(--ink-2)}
   .multi-svg .box{fill:var(--panel);stroke:var(--line);stroke-width:2}
   .multi-svg .box.hi{fill:var(--panel-hi);stroke:var(--active)}
   .multi-svg .t{font-family:var(--font-display);font-size:40px;font-weight:700;fill:var(--ink)}
-  .multi-svg .s{font-size:30px;fill:var(--ink-2)}
-  .s-multi .verdict{margin-top:44px;font-size:40px;line-height:1.3;color:var(--ink-2)}
-  .s-multi .verdict .by{display:block;font-size:30px;color:var(--ink-3);margin-bottom:6px}
-  .s-multi .verdict b{color:var(--accent);font-weight:700}
-  .s-multi .verdict .doclink{margin-left:24px;font-size:30px;color:var(--ink-2)}
+  .multi-svg .t.sm{font-size:34px;fill:var(--ink-2)}
+  .multi-svg .quick{fill:none;stroke:var(--ink-3);stroke-width:3}
+  .multi-svg .run{fill:none;stroke:var(--active);stroke-width:6;stroke-linecap:round}
+  .multi-svg .again{fill:none;stroke:var(--ink-3);stroke-width:3;stroke-dasharray:8 8}
+  .multi-svg .nd{fill:var(--active)}
+  .multi-svg .st{font-family:var(--font-display);font-size:34px;font-weight:700;fill:var(--ink)}
+  .multi-svg .dur{font-size:30px;font-weight:600;fill:var(--accent)}
+  .multi-svg [data-build]{transition:opacity .7s var(--ease-out)}
+  .multi-svg [data-build].pending{transform:none}
+  .multi-svg .run{transition:stroke-dashoffset 1.2s var(--ease-out);stroke-dasharray:820;stroke-dashoffset:0}
+  .multi-svg .pending .run{stroke-dashoffset:820}
+  .strategy{display:grid;grid-template-columns:300px repeat(3,minmax(0,1fr));column-gap:40px;margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
+  .strategy ol{display:contents;list-style:none}
+  .strategy .sk{font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--accent);line-height:1.15}
+  .strategy .sk .doclink{display:block;margin-top:14px;font-family:var(--font);font-size:28px;color:var(--ink-2)}
+  .strategy li{position:relative;padding-left:40px}
+  .strategy li::before{content:"";position:absolute;left:0;top:12px;width:20px;height:20px;border-radius:50%;background:var(--active)}
+  .strategy li b{display:block;font-family:var(--font-display);font-size:36px;font-weight:700;line-height:1.15}
+  .strategy li span{display:block;margin-top:6px;font-size:28px;line-height:1.3;color:var(--ink-2);text-wrap:balance}
   /* ---------- The agents explored. I decided. (brief → build decisions) ---------- */
   .s-decide h2{font-size:96px}
   .s-decide h2 .hl{color:var(--accent)}
@@ -938,33 +947,47 @@
   </section>
   </div>
   <div class="frame" id="slide-12">
-  <!-- ================= THREE RESEARCH AGENTS, ONE BRIEF (matches the user's recording agents-run.mp4: lead + domain/approaches/spec angles, 53/53/38 s, "2 conflicts · 0 unsupported citations", "Taxonomy is the critical-path decision — owned by the BA, not the agent") ================= -->
-  <section class="slide s-multi" data-title="Three research agents, one brief" data-auto="2200"
-    data-notes="Here's what that looked like, from the real run. A deep research agent isn't a chat reply: you give it a question and it searches, reads and follows sources for a minute or more, then comes back with a brief that cites its claims. I didn't run one; a lead agent sent the same question out on three angles, in parallel. Domain: why shared industry risk matters to a bank. Approaches: three ways to answer it — plain vector RAG, GraphRAG on Neo4j, and taxonomy-first. Spec: what an afternoon prototype would need. The bars are the real run times: 53, 53 and 38 seconds. Then the lead checked the three briefs against each other: two conflicts, no unsupported citations, and wrote one brief. And look at what the agent itself concluded: the taxonomy is the critical-path decision, and it belongs to the BA, not the agent. That's the next slide. Optional: click 'the real run' to play the 29-second recording (sped up); any clicker press or Esc closes it.">
+  <!-- ================= DEEP RESEARCH: WHY, HOW IT WORKS, MY STRATEGY (user: real runs take 10–15 min; the recording is a re-creation, not a real run) ================= -->
+  <section class="slide s-multi" data-title="Deep research: how the analyst uses AI" data-auto="1400"
+    data-notes="This is how I use AI as a thinking partner. First, why not just ask the chatbot? A chat reply comes back in seconds, from what the model already remembers, usually without sources. Fine for a quick fact; not good enough for discovery. A deep research agent works differently. You give it a question and it investigates: it plans what to look for, searches, reads the sources, follows the leads it finds, and repeats until the question is covered. Then it writes a report with a source for every claim. One run takes ten to fifteen minutes. My strategy: I don't run it once. I send the same question out several times, each run with its own angle, then compare what comes back. Where the runs disagree is exactly where I need to look. The result is one brief I can defend. Optional: click 'Watch a run' to show the recording (re-created and sped up; any clicker press or Esc closes it). Next slide: what I decided from that brief.">
     <div class="rule"></div>
-    <h2>Three research agents, one brief</h2>
-    <p class="lede">Same question: <b>which risks do they share — and how strongly?</b> A lead agent sent it out on three angles, then merged what came back.</p>
-    <svg class="multi-svg" viewBox="0 0 1640 340" role="img"
-      aria-label="A lead agent sends the question to three research agents in parallel: domain (why shared industry risk matters), approaches (vector RAG, GraphRAG, taxonomy-first) and spec (what an afternoon prototype needs). They took 53, 53 and 38 seconds. The lead checks their claims against each other, finds 2 conflicts and 0 unsupported citations, and writes one brief.">
-      <rect class="box" x="0" y="110" width="230" height="120" rx="16"/>
-      <text class="t" x="115" y="164" text-anchor="middle">Lead</text>
-      <text class="s" x="115" y="204" text-anchor="middle">agent</text>
-      <path class="mg" d="M230 170C270 170 260 40 300 40M230 170H300M230 170C270 170 260 300 300 300"/>
-      <text class="lab" x="320" y="38">Domain</text><text class="s" x="320" y="76">why shared industry risk matters</text>
-      <text class="lab" x="320" y="168">Approaches</text><text class="s" x="320" y="206">vector RAG · GraphRAG · taxonomy-first</text>
-      <text class="lab" x="320" y="298">Spec</text><text class="s" x="320" y="336">what an afternoon prototype needs</text>
-      <rect class="trk" x="900" y="43" width="240" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.9s" x="900" y="43" width="240" height="14" rx="7"/><text class="sec" x="1156" y="60">53 s</text>
-      <rect class="trk" x="900" y="173" width="240" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.9s" x="900" y="173" width="240" height="14" rx="7"/><text class="sec" x="1156" y="190">53 s</text>
-      <rect class="trk" x="900" y="303" width="240" height="14" rx="7"/><rect class="fill" data-build="1" style="--d:1.4s" x="900" y="303" width="172" height="14" rx="7"/><text class="sec" x="1156" y="320">38 s</text>
-      <g data-build="2">
-        <path class="mg" d="M1226 50C1262 50 1254 166 1286 168M1226 180H1286M1226 310C1262 310 1254 194 1286 192"/>
-        <rect class="box hi" x="1290" y="60" width="350" height="240" rx="16"/>
-        <text class="t" x="1324" y="128">One brief</text>
-        <text class="s" x="1324" y="196">2 conflicts resolved</text>
-        <text class="s" x="1324" y="244">0 unsupported citations</text>
+    <h2>Don’t ask AI for an answer.<br><span class="hl">Send it to research.</span></h2>
+    <svg class="multi-svg" viewBox="0 0 1640 346" role="img"
+      aria-label="A chat reply goes straight from question to answer in seconds, from memory, usually without sources. A deep research agent plans, searches, reads and follows leads, repeating until the question is covered, then writes a report with sources. One run takes 10 to 15 minutes.">
+      <defs><marker id="multi-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8FA3B6"/></marker></defs>
+      <g data-build="1">
+        <text class="lab" x="0" y="48">Chat reply</text>
+        <text class="s" x="0" y="86">answers from memory</text>
+        <path class="quick" d="M560 58H650" marker-end="url(#multi-ar)"/>
+        <rect class="box" x="664" y="18" width="190" height="80" rx="14"/>
+        <text class="t sm" x="759" y="70" text-anchor="middle">Answer</text>
+        <text class="s" x="886" y="68">seconds · usually no sources</text>
       </g>
+      <g data-build="2"><g transform="translate(0 36)">
+        <text class="lab" x="0" y="178">Deep research</text>
+        <text class="s" x="0" y="216">an agent that investigates</text>
+        <text class="dur" x="0" y="258">10–15 minutes per run</text>
+        <path class="run" d="M560 200H1380"/>
+        <path class="again" d="M1250 218C1250 290 820 290 820 222" marker-end="url(#multi-ar)"/>
+        <text class="s" x="1035" y="306" text-anchor="middle">repeats until the question is covered</text>
+        <circle class="nd" cx="600" cy="200" r="14"/><circle class="nd" cx="820" cy="200" r="14"/><circle class="nd" cx="1040" cy="200" r="14"/><circle class="nd" cx="1250" cy="200" r="14"/>
+        <text class="st" x="600" y="164" text-anchor="middle">Plan</text>
+        <text class="st" x="820" y="164" text-anchor="middle">Search</text>
+        <text class="st" x="1040" y="164" text-anchor="middle">Read</text>
+        <text class="st" x="1250" y="164" text-anchor="middle">Follow leads</text>
+        <rect class="box hi" x="1394" y="140" width="246" height="120" rx="16"/>
+        <text class="t" x="1517" y="194" text-anchor="middle">Report</text>
+        <text class="s" x="1517" y="234" text-anchor="middle">with sources</text>
+      </g></g>
     </svg>
-    <p class="verdict" data-build="3"><span class="by">The lead agent’s own conclusion:</span> “Taxonomy is the critical-path decision — <b>owned by the BA, not the agent.</b>” <button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">the real run</button></p>
+    <div class="strategy" data-build="3">
+      <p class="sk">My strategy<button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
+      <ol>
+        <li><b>Several angles</b><span>same question, each run framed differently</span></li>
+        <li><b>Compare the runs</b><span>where they disagree, look closer</span></li>
+        <li><b>One brief</b><span>synthesised, sources kept</span></li>
+      </ol>
+    </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
   </section>
   </div>
@@ -982,7 +1005,7 @@
       <div>
         <div class="ex-label">What the agents did</div>
         <div class="agents-box">
-          <div class="stn"><b>Explored angles</b><span>three, in parallel</span></div>
+          <div class="stn"><b>Explored angles</b><span>several, in parallel</span></div>
           <div class="stn"><b>Drafted options</b><span>one synthesised brief</span></div>
         </div>
         <p class="rec">Extract: <button class="doclink" type="button" data-dialog="brief-extract" aria-haspopup="dialog">brief → build decisions</button></p>
@@ -1141,10 +1164,10 @@
 </dialog>
 <!-- Recording, opened from slide 12 -->
 <dialog class="filing wide" id="agents-run" aria-labelledby="agents-run-t">
-  <header><h3 id="agents-run-t">The real run: a lead agent and three research angles</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
-  <!-- the user's screen recording (29 s, sped up; badges in the video say how much). Published next to the page as agents-run.mp4; git-ignored, see HANDOFF.md -->
-  <div class="shot-slot vid"><video src="agents-run.mp4" muted playsinline controls preload="auto" aria-label="Screen recording: the lead agent fans the question out to three research agents, each returns a cited brief, and the lead writes one synthesised research brief"></video></div>
-  <footer><p>Top left: <b>the lead agent</b> sends the question out, checks the claims and writes the brief. Next three: <b>domain, approaches, spec</b>. Bottom row: coding agents fetch the filings and set up the checks.</p></footer>
+  <header><h3 id="agents-run-t">Several research runs, one question</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
+  <!-- the user's recording: a re-creation, sped up (not a real run; real runs take 10–15 min). Published next to the page as agents-run.mp4; git-ignored, see HANDOFF.md -->
+  <div class="shot-slot vid"><video src="agents-run.mp4" muted playsinline controls preload="auto" aria-label="Recording: several research agents work on the same question in parallel and their findings are merged into one brief"></video></div>
+  <footer><p><b>Re-created and sped up.</b> A real run takes 10–15 minutes.</p></footer>
 </dialog>
 <!-- Brief extract, opened from "The agents explored. I decided." -->
 <dialog class="filing" id="brief-extract" aria-labelledby="brief-extract-t">
