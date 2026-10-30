@@ -411,11 +411,6 @@
   .multi-svg .steps circle{fill:var(--active);stroke:var(--midnight);stroke-width:6}
   .multi-svg .report{fill:var(--active)}
   .multi-svg .rs{font-size:28px;font-weight:600;fill:#fff}
-  .multi-svg .own{fill:none;stroke-width:4;stroke-linecap:round}
-  .multi-svg .own.you{stroke:var(--ink)}
-  .multi-svg .own.ai{stroke:var(--active)}
-  .multi-svg .who{font-family:var(--font-display);font-size:30px;font-weight:700;fill:var(--ink-3)}
-  .multi-svg .who.you{fill:var(--accent)}
   /* ---------- The agents explored. I decided. (brief → build decisions) ---------- */
   .s-decide h2{font-size:96px}
   .s-decide h2 .hl{color:var(--accent)}
@@ -970,7 +965,7 @@
     <h2>Don’t ask AI for an answer.<br><span class="hl">Send it to research.</span></h2>
     <p class="dr-lede"><button class="doclink" type="button" data-dialog="research-system" aria-haspopup="dialog">Deep research</button><span>an agent that investigates · <b>10–15 minutes per run</b></span><button class="doclink run" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
     <div class="dr-wrap">
-    <svg class="multi-svg" viewBox="0 0 1640 330" role="img"
+    <svg class="multi-svg" viewBox="0 0 1640 230" role="img"
       aria-label="Deep research, an agent that investigates for 10 to 15 minutes per run. You frame the question. The AI agent plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources. You check the sources.">
       <text class="t" x="125" y="124" text-anchor="middle">Frame</text>
       <text class="ms" x="125" y="166" text-anchor="middle">the question</text>
@@ -992,11 +987,6 @@
       <path class="ln" d="M1414 130H1460"/><path class="tip" d="M1456 120L1476 130L1456 140Z"/>
       <text class="t" x="1565" y="124" text-anchor="middle">Check</text>
       <text class="ms" x="1565" y="166" text-anchor="middle">the sources</text>
-      <!-- who owns each part: one line, three segments -->
-      <path class="own you" d="M45 262H205"/><path class="own ai" d="M350 262H1414"/><path class="own you" d="M1490 262H1640"/>
-      <text class="who you" x="125" y="312" text-anchor="middle">You</text>
-      <text class="who" x="882" y="312" text-anchor="middle">AI agent</text>
-      <text class="who you" x="1565" y="312" text-anchor="middle">You</text>
     </svg>
     </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
