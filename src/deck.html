@@ -537,7 +537,7 @@
   .flow-svg .why text{font-family:var(--font);font-size:24px;font-weight:600;letter-spacing:.04em;fill:var(--ink-3)}
   .flow-svg .why .fast{fill:var(--ink)}
   .s-flow .cue{display:none}
-  .s-after2 .twist{transition-delay:.5s}
+  .s-flow .twist[data-build].built{transition-delay:.9s}   /* the line follows the widen / zoom it describes */
   @media (prefers-reduced-motion:reduce){ .zoom-a,.zoom-b{transition:opacity .4s} }
 
   .s5 .rule{margin-bottom:40px}
@@ -671,12 +671,12 @@
 
   <div class="frame" id="slide-4">
   <section class="slide s-flow" data-title="The bottleneck"
-    data-notes="The pipe runs as soon as the slide is up. Requirements come in faster than coding can turn them into working software, so they queue at the narrow part and the 'waiting' number keeps climbing. Let it run for a few seconds in silence. Then: the narrowest station sets the throughput of the whole system. For years that station was coding. (What changed comes on the next slides.)">
+    data-notes="The pipe runs as soon as the slide is up. Requirements come in faster than coding can turn them into working software, so they queue at the narrow part and the 'waiting' number keeps climbing. Let it run for a few seconds in silence. Then: the narrowest station sets the throughput of the whole system. For years that station was coding. Click: coding agents arrive and Coding widens. The queue drains and everything that comes in now goes out. Coding got wider, more flows through. (Why that alone didn't speed up delivery comes next.)">
     <div class="rule"></div>
     <h2>This is a bottleneck</h2>
     <div class="flow-wrap">
-      <svg class="flow-svg" viewBox="0 0 1640 340" role="img" data-play="sdlc"
-        aria-label="Pipe: a wide Requirements section narrows into a Coding choke, then widens into Working software. Requirements arrive faster than Coding can finish them, so they queue inside Coding.">
+      <svg class="flow-svg" viewBox="0 0 1640 340" role="img" data-play="widen"
+        aria-label="Pipe: a wide Requirements section narrows into a Coding choke, then widens into Working software. Requirements arrive faster than Coding can finish them, so they queue inside Coding. Then Coding widens and the queue drains.">
         <defs>
           <pattern id="hatch-flow" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <line x1="0" y1="0" x2="0" y2="14" stroke="rgba(255,255,255,.07)" stroke-width="4"/>
@@ -687,17 +687,19 @@
           <text x="820" y="66">Coding</text>
           <text x="1390" y="66">Working software</text>
         </g>
-        <path class="body" d="M20 120 H500 C570 120 570 172 640 172 H1000 C1070 172 1070 120 1140 120 H1620 V260 H1140 C1070 260 1070 208 1000 208 H640 C570 208 570 260 500 260 H20 Z"/>
-        <path class="throat" d="M640 172 H1000 M640 208 H1000"/>
+        <path class="body"/>
+        <path class="throat"/>
         <g class="flow"></g>
         <g class="under" text-anchor="middle">
           <text x="250" y="316">TOO MANY IN</text>
           <text x="820" y="316" class="hot"><tspan class="waiting">17</tspan> REQUIREMENTS WAITING</text>
-          <text x="1390" y="316">LESS OUT THAN IN</text>
+          <text x="1390" y="316" class="out-label">LESS OUT THAN IN</text>
         </g>
       </svg>
     </div>
     <p class="caption">The narrowest station sets the throughput of the whole system.</p>
+    <span class="cue" data-build="1" data-action="widen"></span>
+    <p class="twist" data-build="1">Coding got wider. More flows through.</p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">04</span></span></div>
   </section>
   </div>
@@ -725,13 +727,13 @@
 
   <div class="frame" id="slide-6">
   <section class="slide s-flow s-after2" data-title="After coding agents"
-    data-notes="Same pipe as before, still jammed. Click 1: coding agents arrive and Coding widens. The queue drains and everything that comes in now goes out. Click 2: coding got wider, more flows through. Click 3: but zoom out to the whole lifecycle. Code is now one wide station among eight, and everything after it flows. The queue has moved upstream, to discovery: working out what problem we are solving. That's where the BA sits.">
+    data-notes="Same pipe as slide 4, Coding already widened and flowing. Click: but zoom out to the whole lifecycle. Code is now one wide station among eight, and everything after it flows. The queue has moved upstream, to discovery: working out what problem we are solving. That's where the BA sits.">
     <div class="rule"></div>
     <h2>After coding agents</h2>
     <div class="flow-wrap">
       <div class="flow-stage">
-        <svg class="flow-svg zoom-a" viewBox="0 0 1640 360" role="img" data-play="widen"
-          aria-label="The same pipe as slide 4. Coding widens; the queue drains and output rises to match input.">
+        <svg class="flow-svg zoom-a" viewBox="0 0 1640 360" role="img" data-play="wide"
+          aria-label="The same pipe as slide 4, with Coding already widened: nothing waits and output matches input.">
           <defs>
             <pattern id="hatch-flow5" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
               <line x1="0" y1="0" x2="0" y2="14" stroke="rgba(255,255,255,.07)" stroke-width="4"/>
@@ -748,7 +750,7 @@
           <g class="under" text-anchor="middle">
             <text x="250" y="316">TOO MANY IN</text>
             <text x="820" y="316" class="hot"><tspan class="waiting">17</tspan> REQUIREMENTS WAITING</text>
-            <text x="1390" y="316" class="out-label">LESS OUT THAN IN</text>
+            <text x="1390" y="316">MORE OUT</text>
           </g>
         </svg>
         <svg class="flow-svg zoom-b" viewBox="0 0 1640 360" role="img" data-play="lifecycle"
@@ -770,10 +772,8 @@
         </svg>
       </div>
     </div>
-    <span class="cue" data-build="1" data-action="widen"></span>
-    <p class="caption" data-build="2">Coding got wider. More flows through.</p>
-    <span class="cue" data-build="3" data-action="zoom"></span>
-    <p class="twist" data-build="3">Build is no longer the constraint — <b>discovery is.</b></p>
+    <span class="cue" data-build="1" data-action="zoom"></span>
+    <p class="twist" data-build="1">Build is no longer the constraint — <b>discovery is.</b></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">06</span></span></div>
   </section>
   </div>
@@ -1151,21 +1151,18 @@
   // cosine ease between two widths, for smooth pipe shoulders
   const blend = (a, b, t) => a + (b - a)*(1 - Math.cos(Math.PI*Math.max(0, Math.min(1, t))))/2;
   const players = {
-    // slide 4: requirements queue single-file inside Coding; the waiting count keeps climbing
-    sdlc: el => makeFlow(el, {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560,
-      half: x => x < 500 ? 70 : x < 640 ? 70 - 52*(x-500)/140 : x < 1000 ? 18 : x < 1140 ? 18 + 52*(x-1000)/140 : 70,
-      gates:[{x:988, every:1.0, waiting: el.querySelector('.waiting')}], spawn:.45, cap:26, inSpeed:190, outSpeed:220,
-      seed:[[90, 200, 300, 390, 470, ...rowOf(988, 24, 12)], [1230, 1480]]}),
-    // slide 6, part 1: same pipe; the Coding section can widen (o.w) and then releases at agent speed
-    widen: el => {
-      const o = {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560, w:18, x0:20, x1:1620,
-        gates:[{x:988, every:1.0, waiting: el.querySelector('.waiting')}], spawn:.45, cap:26, inSpeed:190, outSpeed:220,
-        seed:[[90, 200, 300, 390, 470, ...rowOf(988, 24, 12)], [1230, 1480]],
+    // slide 4: requirements queue single-file inside Coding and the waiting count climbs; a click widens Coding (o.w) and it releases at agent speed
+    widen: (el, wide) => {
+      const o = {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560, w: wide ? 56 : 18, x0:20, x1:1620,
+        gates:[{x:988, every: wide ? .2 : 1.0, waiting: el.querySelector('.waiting')}], spawn:.45, cap:26, inSpeed:190, outSpeed:220,
+        seed: wide ? [[100, 260, 420, 580, 740, 900], [1080, 1240, 1400, 1540]] : [[90, 200, 300, 390, 470, ...rowOf(988, 24, 12)], [1230, 1480]],
         throat: () => `M640 ${190-o.w} H1000 M640 ${190+o.w} H1000`};
       o.half = x => x < 500 ? 70 : x < 640 ? blend(70, o.w, (x-500)/140) : x < 1000 ? o.w : x < 1140 ? blend(o.w, 70, (x-1000)/140) : 70;
       return makeFlow(el, o);
     },
-    // slide 6, part 2: the whole lifecycle; Code is wide, the human-speed steps are narrow
+    // slide 6: the same pipe, arriving already widened (where slide 4 ended)
+    wide: el => players.widen(el, true),
+    // slide 6, after the zoom: the whole lifecycle; Code is wide, the human-speed steps are narrow
     lifecycle: el => {
       const W = [70, 16, 32, 60, 46, 56, 62, 70];               // half-width per station, 200 units each from x=20
       const half = x => {
@@ -1185,7 +1182,7 @@
   // one-off moments triggered by a build step; called with on=false when the speaker steps back
   const actions = {
     widen(cue, on){
-      const svg = cue.closest('.slide').querySelector('.zoom-a'), f = svg._player.flow;
+      const svg = cue.closest('.slide').querySelector('[data-play=widen]'), f = svg._player.flow;
       f.tween('w', on ? 56 : 18, reduce.matches ? 0 : 900);
       f.o.gates[0].every = on ? .2 : 1.0;
       svg.querySelector('.out-label').textContent = on ? 'MORE OUT' : 'LESS OUT THAN IN';
