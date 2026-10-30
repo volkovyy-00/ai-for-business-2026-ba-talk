@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 <script>document.documentElement.classList.add('preload')</script>
 <!--
-  Foundation deck, slides 1–23. Static.
+  Foundation deck, slides 1–17. Static.
   One-page vertical deck: each slide is a full-viewport section (scroll-snap). Design stage = 1920×1080, scaled to fit.
   Navigation: native scroll (wheel / trackpad / touch); ↑/↓, ←/→, Space / Shift+Space, PageUp/PageDown, Home/End jump; dots on the right.
   Deep link: index.html#3 opens slide 3.
@@ -313,12 +313,7 @@
   .s-rand h2 .lead{display:block;font-size:68px;line-height:1.2;letter-spacing:-.015em;margin-bottom:12px}
   .s-rand .hl{color:var(--accent)}
   .s-rand .sub2{margin-top:36px;font-size:36px;color:var(--ink-2)}
-  /* callback to slide 6: the lifecycle as a row of stations, Discovery lit */
-  .s-rand .life{list-style:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px;margin-top:96px}
-  .s-rand .life li{height:72px;border:1.5px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;
-    font-size:28px;font-weight:600;color:var(--ink-3);transition:background .6s var(--ease-out) .5s,border-color .6s var(--ease-out) .5s,color .6s var(--ease-out) .5s}
-  .s-rand .life.built li.on{background:var(--active);border-color:var(--active);color:#fff}
-  .s-rand .life-note{margin-top:28px;font-size:36px;color:var(--ink-2)}
+  .s-rand .life-note{margin-top:64px;font-size:48px;line-height:1.25;color:var(--ink-2)}
   .s-rand .life-note b{color:var(--ink);font-weight:600}
 
   /* ---------- Discovery under pressure ---------- */
@@ -338,7 +333,10 @@
   .s-question .rule{margin-bottom:48px}
   .s-question h2.big{font-size:112px;line-height:1.06;letter-spacing:-.025em;max-width:1600px;text-wrap:balance}
   .s-question h2 .lead{display:block;font-size:64px;line-height:1.2;letter-spacing:-.015em;margin-bottom:20px;color:var(--ink)}
-  .s-question .src{margin-top:56px;font-size:34px;color:var(--ink-2)}
+  .s-question .stakes{margin-top:48px;font-size:36px;line-height:1.35;color:var(--ink-2)}
+  .s-question .stakes b{color:var(--ink);font-weight:700}
+  .s-question .stakes .dim{color:var(--ink-3)}
+  .s-question .src{margin-top:24px;font-size:34px;color:var(--ink-2)}
   .s-question .src b{color:var(--ink);font-weight:600}
   .settle{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:72px}
   .settle .it{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:36px 32px 40px;display:flex;flex-direction:column;min-height:360px}
@@ -387,26 +385,6 @@
 
 
 
-
-  /* ---------- Deep research agent (definition) ---------- */
-  .s-dra{justify-content:center}
-  .s-dra h2{font-size:104px}
-  .dra-svg{display:block;width:100%;height:auto;margin-top:56px;font-family:var(--font);overflow:visible}
-  .dra-svg .box{fill:var(--panel);stroke:var(--line);stroke-width:2}
-  .dra-svg .box.hi{fill:var(--panel-hi);stroke:var(--active)}
-  .dra-svg .t{font-family:var(--font-display);font-size:40px;font-weight:700;fill:var(--ink)}
-  .dra-svg .s{font-size:30px;fill:var(--ink-2)}
-  .dra-svg .c{font-size:28px;fill:var(--ink-3)}
-  .dra-svg .c.b{font-size:32px;font-weight:600;fill:var(--ink)}
-  .dra-svg .ar{stroke:var(--ink-3);stroke-width:3;fill:none}
-  .dra-svg .loop{fill:none;stroke:var(--active);stroke-width:4;stroke-dasharray:2 14;stroke-linecap:round}
-  .dra-svg .nd{fill:var(--midnight);stroke:var(--active);stroke-width:4}
-  .dra-svg .dot{fill:var(--accent)}
-  .dra-svg .ln{fill:rgba(255,255,255,.16)}
-  .dra-svg .cite{fill:var(--accent)}
-  @media (prefers-reduced-motion:reduce){ .dra-svg .dot{display:none} }
-  .s-dra .lede{margin-top:36px;font-size:44px;line-height:1.3;color:var(--ink-2);max-width:1500px}
-  .s-dra .lede b{color:var(--ink);font-weight:700}
 
   /* ---------- Several agents, different angles ---------- */
   .s-multi h2{font-size:96px}
@@ -576,7 +554,7 @@
   .s5 .twist{margin-top:18px;font-size:36px;line-height:1.4;color:var(--ink-2)}
   .s5 .twist b{color:var(--active-hi);font-weight:700}
 
-  /* ---------- 10-K example modal (slide 11) ---------- */
+  /* ---------- 10-K example modal (slide 10) ---------- */
   .doclink{font:inherit;color:var(--ink);font-weight:600;background:none;border:0;padding:0;cursor:pointer;
     text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:8px}
   .doclink::after{content:"";display:inline-block;width:.62em;height:.62em;margin-left:.3em;vertical-align:.02em;
@@ -897,63 +875,34 @@
        https://www.rand.org/pubs/research_reports/RRA2680-1.html -->
   <!-- Aside in notes — IIBA, Global State of Business Analysis 2026 (2,120 professionals, 122 countries): communication #1 skill, critical thinking #2.
        https://www.iiba.org/business-analysis-blogs/insight-enables-confidence-the-2026-global-state-of-business-analysis-report/ -->
-  <section class="slide s-rand" data-title="RAND: misunderstanding the problem" data-auto="800"
-    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. The lifecycle from slide 6 appears on its own and Discovery lights up: getting the problem right is discovery's job. Let me make this concrete with one question from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
+  <section class="slide s-rand" data-title="RAND: misunderstanding the problem"
+    data-notes="RAND interviewed 65 experienced data scientists and engineers about why AI projects fail. The most common root cause: the problem itself was misunderstood. One finding — that's all I need. Understanding the problem is the analyst's job. Let me make this concrete with one question from credit risk. Optional aside for a BA room: IIBA's 2026 survey of 2,120 analysts in 122 countries ranked critical thinking as the #2 BA skill, behind communication.">
     <div class="rule"></div>
     <h2 class="big"><span class="lead">The most common reason AI projects fail:</span><span class="hl">misunderstanding the problem.</span></h2>
     <p class="sub2">RAND interviews with 65 experienced data scientists and engineers.</p>
-    <ol class="life" data-build="1" aria-label="The delivery lifecycle from slide 6, with Discovery highlighted">
-      <li>Idea</li><li class="on">Discovery</li><li>Prioritise</li><li>Code</li><li>Review</li><li>CI / QA</li><li>Deploy</li><li>User</li>
-    </ol>
-    <p class="life-note" data-build="1">Getting the problem right is <b>discovery’s job</b> — the new constraint.</p>
+    <p class="life-note">Understanding the problem is <b>the analyst’s job.</b></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">RAND, Root Causes of Failure for AI Projects (2024)</span><span>How AI rewired the business analyst role</span><span class="slide-no">09</span></span></div>
   </section>
   </div>
 
   
   <div class="frame" id="slide-10">
-  <!-- ================= WHY CONCENTRATION: Basel quote + sector vs name (merged; the "Discovery under pressure" divider was cut) ================= -->
+  <!-- ================= THE QUESTION (the old "Shared risk beats single names" slide is folded in: its 2021 line is on the slide, Basel in the notes) ================= -->
   <!-- Sources: BCBS Working Paper No. 15, "Studies on credit risk concentration" (Nov 2006): https://www.bis.org/publ/bcbs_wp15.pdf
        "Historical experience shows that concentration of credit risk in asset portfolios has been one of the major causes of bank distress."
        Name concentration could add 2–8% to credit VaR; sector concentration can increase economic capital by 20–40%.
        AlixPartners press release, 23 Sep 2021: shortages related to semiconductors to cost the auto industry $210bn in revenue in 2021; 7.7m units of production lost (forecast).
        https://www.alixpartners.com/newsroom/press-release-shortages-related-to-semiconductors-to-cost-the-auto-industry-210-billion-in-revenues-this-year-says-new-alixpartners-forecast/ -->
-  <section class="slide s-ev s-sector" data-title="Shared risk beats single names" data-auto="800"
-    data-notes="RAND said the root cause is misunderstanding the problem. So let me make it concrete with one question from my world, credit risk. Why concentration? The Basel Committee says it plainly: concentration of credit risk has been one of the major causes of bank distress. And it is not mainly about single big names. Basel's studies: name concentration adds about 2 to 8% to credit VaR; sector concentration can add 20 to 40% to economic capital. What hurts is risk that many counterparties share. 2021 is the example: one chip shortage hit a whole industry, about $210bn of auto revenue and 7.7 million vehicles, per AlixPartners' forecast. Those are exactly the kinds of companies in the question that comes next. The two rows and the 2021 line build on their own.">
+  <section class="slide s-question" data-title="The question"
+    data-notes="RAND said the root cause is misunderstanding the problem. So let me make it concrete with one question from my world, credit risk. Why would a bank ask it? The Basel Committee: concentration of credit risk has been one of the major causes of bank distress, and it is not mainly about single big names. Name concentration adds about 2 to 8% to credit VaR; sector concentration can add 20 to 40% to economic capital. What hurts is risk that many counterparties share. 2021 is the example on the slide: one chip shortage hit a whole industry at once, about $210bn of auto revenue (and 7.7 million vehicles), per AlixPartners' forecast. So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only. This is the question for the rest of the talk; we'll come back to it in the demo. Optional: click 'public 10-K filings only' to show a real risk factor (Ford, FY2021, semiconductor shortage — note 'we and our competitors'); any clicker press or Esc closes it.">
     <div class="rule"></div>
-    <h2>Shared risk beats single names</h2>
-    <blockquote class="bq">“Concentration of credit risk … has been <span class="hl">one of the major causes of bank distress.</span>” <cite>Basel Committee</cite></blockquote>
-    <div class="dbx">
-      <div class="dbrow weak" data-build="1">
-        <div class="who"><b>Name concentration</b><span>one big borrower · credit VaR</span></div>
-        <div class="plot" style="--a:4%;--b:16%"><div class="conn"></div></div>
-        <div class="gap">+2–8%</div>
-      </div>
-      <div class="dbrow strong" data-build="2">
-        <div class="who"><b>Sector concentration</b><span>a risk many share · economic capital</span></div>
-        <div class="plot" style="--a:40%;--b:80%"><div class="conn"></div></div>
-        <div class="gap">+20–40%</div>
-      </div>
-      <div class="dbaxis" aria-hidden="true"><span></span>
-        <div class="ticks"><span style="left:0">0%</span><span style="left:20%">10%</span><span style="left:40%">20%</span><span style="left:60%">30%</span><span style="left:80%">40%</span><span style="left:100%">50%</span></div><span></span>
-      </div>
-    </div>
-    <p class="shock2" data-build="3"><b>2021:</b> one chip shortage hit a whole industry — <b>~$210bn</b> of auto revenue and <b>7.7m vehicles</b> lost <span class="dim">(forecast)</span>.</p>
+    <h2 class="big"><span class="lead">Across ten public auto and semiconductor companies:</span><span class="hl">Which risks do they share&nbsp;—<br>and how strongly?</span></h2>
+    <p class="stakes"><b>2021:</b> one chip shortage hit a whole industry at once — <b>~$210bn</b> of auto revenue lost <span class="dim">(forecast)</span>.</p>
+    <p class="src">Source material: <button class="doclink" type="button" data-dialog="filing-ford" aria-haspopup="dialog">public annual reports (US 10-K filings) only.</button></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">BCBS WP15 (2006) · AlixPartners (Sep 2021)</span><span>How AI rewired the business analyst role</span><span class="slide-no">10</span></span></div>
   </section>
   </div>
-
   <div class="frame" id="slide-11">
-  <!-- ================= THE QUESTION ================= -->
-  <section class="slide s-question" data-title="The question"
-    data-notes="So here is the question that runs through the rest of the talk. Across ten public auto and semiconductor companies: which risks do they share, and how strongly? Public filings only. This is the question for the rest of the talk; we'll come back to it in the demo. Optional: click 'public 10-K filings only' to show a real risk factor (Ford, FY2021, semiconductor shortage — note 'we and our competitors'); any clicker press or Esc closes it.">
-    <div class="rule"></div>
-    <h2 class="big"><span class="lead">Across ten public auto and semiconductor companies:</span><span class="hl">Which risks do they share&nbsp;—<br>and how strongly?</span></h2>
-    <p class="src">Source material: <button class="doclink" type="button" data-dialog="filing-ford" aria-haspopup="dialog">public 10-K filings only.</button></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
-  </section>
-  </div>
-  <div class="frame" id="slide-12">
   <!-- ================= SECTION DIVIDER: AI as a thinking partner ================= -->
   <section class="slide s-div" data-title="Section: AI as a thinking partner" data-auto="700"
     data-notes="Part two of four. The line draws on to the second stop on its own. Before anyone builds anything, I use AI to attack the question. Not one chat — several research agents, each coming at it from a different angle. Then I read what comes back and decide what we actually build.">
@@ -967,52 +916,18 @@
       </ol>
     </div>
     <h2>AI as a <span class="hl">thinking partner</span></h2>
-    <p class="sub">Attack the question from several angles before anyone builds.</p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
+    <p class="sub">Use the model to attack your framing <b>before you use it to produce answers.</b></p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">11</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-13">
-  <!-- ================= WHAT IS A DEEP RESEARCH AGENT ================= -->
-  <section class="slide s-dra" data-title="What is a deep research agent"
-    data-notes="Quick definition, because I'll use the term a lot. The dot keeps going round the loop. A deep research agent isn't a chat reply. You give it a question, and it goes off with tools — search, read, follow links — for minutes, sometimes longer, and comes back with a brief that cites where every claim came from. You still own the question. And the trick I want to show you: I didn't run one. I ran several, in parallel.">
-    <div class="rule"></div>
-    <h2>What is a deep research agent?</h2>
-    <p class="lede">Not a chat reply. <b>An agent that searches, reads and comes back with a sourced brief.</b></p>
-    <svg class="dra-svg" viewBox="0 0 1640 470" role="img"
-      aria-label="You give the agent a question and an angle. It loops: search, read, follow links, for minutes rather than seconds. It returns a brief where every claim is cited.">
-      <defs><marker id="dra-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8FA3B6"/></marker></defs>
-      <rect class="box" x="0" y="160" width="380" height="180" rx="16"/>
-      <text class="t" x="40" y="238">Your question</text>
-      <text class="s" x="40" y="284">you set the angle</text>
-      <path class="ar" d="M392 250H612" marker-end="url(#dra-ar)"/>
-      <circle class="loop" cx="820" cy="250" r="180"/>
-      <path id="dra-orbit" d="M820 70a180 180 0 1 1 -0.01 0" fill="none"/>
-      <circle class="nd" cx="820" cy="70" r="14"/><text class="s" x="820" y="38" text-anchor="middle">Search</text>
-      <circle class="nd" cx="976" cy="340" r="14"/><text class="s" x="1004" y="392">Read</text>
-      <circle class="nd" cx="664" cy="340" r="14"/><text class="s" x="636" y="392" text-anchor="end">Follow links</text>
-      <text class="c" x="820" y="240" text-anchor="middle">loops for</text>
-      <text class="c b" x="820" y="280" text-anchor="middle">minutes, not seconds</text>
-      <circle class="dot" r="11"><animateMotion dur="4.5s" repeatCount="indefinite" rotate="auto"><mpath href="#dra-orbit"/></animateMotion></circle>
-      <path class="ar" d="M1028 250H1248" marker-end="url(#dra-ar)"/>
-      <rect class="box hi" x="1260" y="130" width="380" height="240" rx="16"/>
-      <rect class="ln" x="1300" y="170" width="300" height="10" rx="5"/><rect class="cite" x="1606" y="168" width="14" height="14" rx="3"/>
-      <rect class="ln" x="1300" y="198" width="250" height="10" rx="5"/><rect class="cite" x="1556" y="196" width="14" height="14" rx="3"/>
-      <rect class="ln" x="1300" y="226" width="280" height="10" rx="5"/><rect class="cite" x="1586" y="224" width="14" height="14" rx="3"/>
-      <text class="t" x="1300" y="302">Sourced brief</text>
-      <text class="s" x="1300" y="344">every claim cited</text>
-    </svg>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
-  </section>
-  </div>
-
-  <div class="frame" id="slide-14">
+  <div class="frame" id="slide-12">
   <!-- ================= SEVERAL AGENTS, DIFFERENT ANGLES ================= -->
   <section class="slide s-multi" data-title="Several agents, different angles" data-auto="2200"
-    data-notes="Here's what that looked like. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. The four bars fill on their own, at different speeds, like the real runs. Then what came back merges into one brief, and that brief is what I prototyped from. Optional: click 'four agents running in parallel' to play the short recording rather than spin them up live; any clicker press or Esc closes it.">
+    data-notes="Here's what that looked like. A deep research agent isn't a chat reply: you give it a question and it searches, reads and follows links for minutes, then comes back with a brief that cites every claim. I didn't run one; I ran several, in parallel. Same question as before — shared risks across ten companies. But each agent got its own angle: how risk analysts frame it, what the filings actually contain, which retrieval approaches exist, and how you'd check the answer. The four bars fill on their own, at different speeds, like the real runs. Then what came back merges into one brief, and that brief is what I prototyped from. Optional: click 'four agents running in parallel' to play the short recording rather than spin them up live; any clicker press or Esc closes it.">
     <div class="rule"></div>
     <h2>Several agents, different angles</h2>
-    <p class="lede">Same question: <b>which risks do they share — and how strongly?</b> Each agent got a different angle.</p>
+    <p class="lede">Same question: <b>which risks do they share — and how strongly?</b> Each agent — searching, reading, citing — got a different angle.</p>
     <svg class="multi-svg" viewBox="0 0 1640 420" role="img"
       aria-label="Four research agents work on the same question from different angles: the risk-analyst view, what 10-K filings contain, retrieval approaches, and how to check the answer. Their findings merge into one synthesised brief, which becomes a prototype.">
       <defs><marker id="multi-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8FA3B6"/></marker></defs>
@@ -1040,11 +955,11 @@
       </g>
     </svg>
     <p class="rec" data-build="3">Recording: <button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">four agents running in parallel</button></p>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-15">
+  <div class="frame" id="slide-13">
   <!-- ================= THREE APPROACHES ================= -->
   <section class="slide s-three" data-title="Three approaches"
     data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live.">
@@ -1056,11 +971,11 @@
       <div class="ap"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p></div>
       <div class="ap"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-16">
+  <div class="frame" id="slide-14">
   <!-- ================= DEMO: HOW THE CONSOLE WORKS (foundation mock, not the real app) ================= -->
   <section class="slide s-console" data-title="Demo: how the console works"
     data-notes="Before I leave the slides, one walk through the console so you know where to look. Top right tells you whether it's live or a replay. You pick a question from the chips, or type one. The answer comes back in the middle. And on the right is the part I care about most: the evidence — which filing, which passage, so you can check it. Same layout for all three approaches.">
@@ -1082,11 +997,11 @@
       </div>
     </div>
     <div class="c-flow"><b>Question</b><span class="ar">→</span><b>Answer</b><span class="ar">→</span><b>Evidence you can check</b><span class="mock">Schematic · not the live app</span></div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-17">
+  <div class="frame" id="slide-15">
   <!-- ================= DEMO CUE 1: PLAIN RAG ================= -->
   <section class="slide s-cue" data-title="Plain RAG"
     data-notes="Demo one, plain vector RAG. Watch the answer — it reads well. Then try to trace it: which filings, which passages, how many companies actually said this? That's the gap. Switching to the live console now.">
@@ -1102,11 +1017,11 @@
       <!-- PLACEHOLDER: live console, Plain RAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Plain RAG"><span>Live console · Plain vector RAG</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-18">
+  <div class="frame" id="slide-16">
   <!-- ================= DEMO CUE 2: GRAPHRAG ================= -->
   <section class="slide s-cue" data-title="GraphRAG"
     data-notes="Demo two, GraphRAG on Neo4j. This time watch three things: the Cypher query it writes, the subgraph of companies and risks that comes back, and that I can click any link to see the quote behind it. Over to the console.">
@@ -1122,11 +1037,11 @@
       <!-- PLACEHOLDER: live console, GraphRAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, GraphRAG"><span>Live console · GraphRAG (Neo4j)</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
   </section>
   </div>
 
-  <div class="frame" id="slide-19">
+  <div class="frame" id="slide-17">
   <!-- ================= DEMO CUE 3: TAXONOMY-FIRST ================= -->
   <section class="slide s-cue" data-title="Taxonomy-first"
     data-notes="Demo three, taxonomy first. Categories fixed up front, the counting done in code. Watch the heatmap — risk by company — and then open any cell: the quote drawer shows exactly which passage put it there. Let's go live.">
@@ -1142,13 +1057,13 @@
       <!-- PLACEHOLDER: live console, Taxonomy-first. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
       <div class="shot-slot" role="img" aria-label="Placeholder: live console, Taxonomy-first"><span>Live console · Taxonomy-first</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">19</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
   </section>
   </div>
 
 
   </main>
-<!-- 10-K example, opened from slide 11. Excerpt is verbatim (omissions marked …) from Ford Motor Company, Form 10-K for fiscal 2021, Item 1A, filed 4 Feb 2022:
+<!-- 10-K example, opened from slide 10. Excerpt is verbatim (omissions marked …) from Ford Motor Company, Form 10-K for fiscal 2021, Item 1A, filed 4 Feb 2022:
      https://www.sec.gov/Archives/edgar/data/37996/000003799622000013/f-20211231.htm -->
 <dialog class="filing" id="filing-ford" aria-labelledby="filing-ford-t">
   <header><h3 id="filing-ford-t">What a 10-K risk factor looks like</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
@@ -1183,7 +1098,7 @@
   <footer><p>Excerpt from Anthropic’s playbook.</p>
     <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Open the full article on claude.com ↗</a></footer>
 </dialog>
-<!-- Recording, opened from slide 14 -->
+<!-- Recording, opened from slide 12 -->
 <dialog class="filing" id="agents-run" aria-labelledby="agents-run-t">
   <header><h3 id="agents-run-t">Four research agents, one question</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
   <!-- PLACEHOLDER: short video of the agents running in parallel. Replace the span with <video src="…" controls muted playsinline></video> -->
