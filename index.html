@@ -556,6 +556,7 @@
     font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:.84em;line-height:1.45;color:var(--ink-2);white-space:pre-wrap}
   .filing .md .h{color:var(--accent);font-weight:700}
   .filing .md .c{color:var(--ink-3)}
+  .filing .md b{color:var(--ink);font-weight:700}
   .filing .pb{margin:1em 1.4em 1.2em;font-size:.95em;color:var(--ink-2)}
   .filing .pb q{color:var(--ink)}
 
@@ -1303,34 +1304,34 @@
   <footer><p class="reel-cap"><b>Sped up.</b> Microsoft 365 Copilot’s Researcher agent, several runs side by side.</p>
     <p class="reel-cap" hidden><b>Re-created and sped up.</b> A real run takes 10–15 minutes.</p></footer>
 </dialog>
-<!-- intent.md, opened from slide 15. Re-created for the talk from the slide 13 decisions; headings follow the playbook's intent template
+<!-- intent.md, opened from slide 15. The speaker's own file, verbatim (supplied in session 6); headings follow the playbook's intent template
      (problem, outcome, users, constraints, open questions). Quote verbatim from https://claude.com/resources/articles/the-ai-native-sdlc-playbook (01 Plan). -->
 <dialog class="filing wide" id="intent-file" aria-labelledby="intent-file-t">
   <header><h3 id="intent-file-t">intent.md</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
   <div class="addr" aria-hidden="true"><b>shared-risk-demo</b>/intent/intent.md</div>
-<div class="md"><span class="h"># Shared industry risk across ten counterparties</span>
+<div class="md"><span class="h"># Intent: shared industry risks across autos + semis counterparties</span>
+<span class="c">Author: Yevhenii Volkovych (Risk AI BA). Status: accepted for afternoon prototype.</span>
 
 <span class="h">## Problem</span>
-Which industry risks do ten US-listed auto and chip companies share, and how strongly?
+Wholesale credit needs to see which industry risks connect a fixed group of ~10 US-listed autos and semis counterparties (GM, F, TSLA, APTV, BWA, LEA, NXPI, MCHP, ON, TXN). Today that means reading 10-K Item 1A by hand; similarity of wording is easy to confuse with truly shared risk.
 
-<span class="h">## Outcome</span>
-A short list of shared risks, each with how many of the ten name it.
+<span class="h">## Proposed outcome</span>
+For a fixed question — “which industry risks do many of these companies share?” — produce a checkable answer from public latest 10-K Item 1A only: company, risk category/leaf, verbatim quote, source ref. Compare three approaches under one scoring idea: plain vector RAG, GraphRAG (Neo4j), taxonomy-first extraction + deterministic aggregation.
+
+<span class="h">## Affected users and systems</span>
+Risk AI BA / discovery; prototype console (no production credit systems). Public EDGAR filings only — no employer or customer data.
 
 <span class="h">## Constraints</span>
-- Public 10-K filings only, Item 1A (risk factors).
-- A fixed list of risk categories, agreed up front.
-- “Shared” = many of the ten map to the same category, counted in code.
-
-<span class="h">## A correct answer</span>
-Every claim cites the passage it came from.
-
-<span class="h">## Scoring</span>
-One scoring idea for all three approaches.
+- Human settles source, taxonomy, “shared”, correct-answer shape, and scoring <b>**before**</b> build.
+- Closed taxonomy for the structured path; quotes must verify against source text.
+- Offline/replay fallback allowed; synthetic/demo data OK for the talk; views are the author’s, not the employer’s.
+- Do not treat the three approaches as three products — one intent, one eval.
 
 <span class="h">## Open questions</span>
-<span class="c">- How many companies make a risk “shared”?</span></div>
+- Exact leaf set for the closed taxonomy (freeze v1 before coding).
+- Threshold for “shared” (e.g. ≥N counterparties on the same leaf) — set in scoring, not ad hoc in the LLM.</div>
   <p class="pb">Anthropic’s playbook, Plan stage: <q>Intent is captured once, in the originator’s own words, as a version-controlled artifact the next stage can act on.</q></p>
-  <footer><p>Re-created for this talk. <b>Next: the agent expands it into spec.md; I review it, I don’t write it.</b></p>
+  <footer><p><b>Next: the agent expands it into spec.md; I review it, I don’t write it.</b></p>
     <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Open the full article on claude.com ↗</a></footer>
 </dialog>
 <!-- "How it works" explainer for slide 14, one panel shared by the three approaches; filled by the explainer script below. Staged demo data only. -->
