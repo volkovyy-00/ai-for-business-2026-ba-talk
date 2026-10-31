@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 <script>document.documentElement.classList.add('preload')</script>
 <!--
-  Foundation deck, slides 1–17. Static.
+  Foundation deck, slides 1–18. Static.
   One-page vertical deck: each slide is a full-viewport section (scroll-snap). Design stage = 1920×1080, scaled to fit.
   Navigation: native scroll (wheel / trackpad / touch); ↑/↓, ←/→, Space / Shift+Space, PageUp/PageDown, Home/End jump; dots on the right.
   Deep link: index.html#3 opens slide 3.
@@ -619,6 +619,19 @@
   .take .l1{font-size:46px;font-weight:600;line-height:1.2;color:var(--ink);text-wrap:balance}
   .take .l2{margin-top:10px;font-size:40px;line-height:1.25;color:var(--ink-2);text-wrap:balance}
 
+  /* ---------- Closing (slide 18): two QR codes on white tiles (dark modules on light scan most reliably) ---------- */
+  .s-qr .kicker{margin-bottom:24px}
+  .s-qr h2{font-size:96px;line-height:1.05}
+  .qr-row{display:grid;grid-template-columns:repeat(2,1fr);column-gap:96px;margin:56px 0 auto;padding:0 40px}
+  .qr{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--ink)}
+  .qr-img{display:block;background:#fff;padding:24px;border-radius:var(--r)}
+  .qr-img svg{display:block;width:330px;height:330px}
+  .qr-k{margin-top:28px;font-size:44px;font-weight:700}
+  .qr-u{margin-top:8px;font-size:26px;color:var(--ink-3)}
+  .qr-u b{color:var(--ink-2);font-weight:600}
+  .qr:hover .qr-k{color:var(--accent)}
+  .qr:focus-visible{outline:3px solid var(--accent);outline-offset:12px;border-radius:var(--r)}
+
   /* ---------- Who sits at the new constraint ---------- */
   .who-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;margin-top:56px;align-items:start}
   .exhibit{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:40px 48px 32px}
@@ -1231,6 +1244,30 @@
       <li data-build="3"><span class="n">03</span><div><p class="l1">Ask the same question three ways.</p><p class="l2">Keep quotes checkable, categories fixed, and the overlap count in code.</p></div></li>
     </ol>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
+  </section>
+  </div>
+
+
+  <div class="frame" id="slide-18">
+  <!-- ================= CLOSING: QR codes to the two public GitHub repos (generated offline with segno, error level M; inline SVG) ================= -->
+  <section class="slide s-qr" data-title="Slides and code"
+    data-notes="Thank you. Both repos are public: the first QR is this deck, the second is the demo you just saw, the three approaches and the scoring. Happy to take questions.">
+    <div class="rule"></div>
+    <div class="kicker">Thank you</div>
+    <h2>Slides and code</h2>
+    <div class="qr-row">
+        <a class="qr" href="https://github.com/volkovyy-00/ai-for-business-2026-ba-talk" target="_blank" rel="noopener">
+          <span class="qr-img"><svg aria-hidden="true" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33"><path stroke="#0b1c2c" d="M0 0.5h7m1 0h1m1 0h1m1 0h3m3 0h4m1 0h1m2 0h7m-33 1h1m5 0h1m1 0h1m1 0h4m7 0h1m1 0h2m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m3 0h3m3 0h1m3 0h1m3 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h1m1 0h1m2 0h1m3 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h3m1 0h1m4 0h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m2 0h1m2 0h2m2 0h1m1 0h5m1 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-25 1h2m1 0h1m2 0h1m2 0h1m5 0h2m-25 1h1m1 0h2m1 0h3m1 0h2m1 0h1m4 0h2m2 0h2m1 0h1m1 0h1m2 0h1m1 0h2m-32 1h2m4 0h2m2 0h2m5 0h4m1 0h1m2 0h2m1 0h2m1 0h1m-33 1h1m1 0h2m1 0h3m3 0h2m1 0h1m1 0h2m2 0h2m1 0h1m2 0h4m2 0h1m-30 1h3m1 0h2m1 0h5m3 0h1m1 0h1m4 0h3m1 0h1m-29 1h4m1 0h1m2 0h4m4 0h2m4 0h3m1 0h3m2 0h1m-32 1h1m1 0h1m4 0h2m9 0h3m2 0h2m1 0h1m2 0h2m-31 1h1m1 0h1m2 0h1m1 0h1m1 0h2m5 0h1m1 0h1m1 0h1m4 0h4m-30 1h2m2 0h1m2 0h1m2 0h2m1 0h1m5 0h3m1 0h1m1 0h2m1 0h3m-29 1h5m1 0h3m1 0h4m2 0h1m2 0h2m2 0h2m1 0h3m-30 1h1m2 0h2m4 0h2m1 0h5m2 0h7m1 0h2m1 0h2m-32 1h1m2 0h1m1 0h2m2 0h7m3 0h3m1 0h2m1 0h2m1 0h2m-27 1h1m1 0h1m1 0h2m3 0h1m2 0h3m2 0h5m1 0h1m2 0h2m-33 1h1m2 0h6m2 0h1m1 0h6m1 0h3m6 0h3m-32 1h2m2 0h2m1 0h1m3 0h4m1 0h2m1 0h1m1 0h3m1 0h3m1 0h2m1 0h1m-31 1h1m2 0h3m2 0h1m1 0h1m5 0h1m1 0h2m1 0h4m1 0h5m-32 1h1m2 0h1m4 0h1m1 0h1m1 0h2m3 0h1m7 0h1m1 0h2m2 0h1m-33 1h1m2 0h2m1 0h2m2 0h5m1 0h2m4 0h7m3 0h1m-25 1h6m1 0h6m3 0h1m3 0h2m-30 1h7m1 0h2m1 0h1m1 0h1m4 0h7m1 0h1m1 0h1m-29 1h1m5 0h1m1 0h2m5 0h1m2 0h1m1 0h2m1 0h2m3 0h5m-33 1h1m1 0h3m1 0h1m2 0h1m1 0h1m3 0h1m2 0h2m1 0h1m1 0h6m1 0h2m-32 1h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m5 0h1m1 0h1m3 0h1m1 0h2m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m4 0h1m3 0h2m1 0h1m-30 1h1m5 0h1m3 0h1m2 0h1m3 0h1m2 0h1m1 0h3m1 0h3m3 0h1m-33 1h7m1 0h2m1 0h2m1 0h1m2 0h3m1 0h1m1 0h1m2 0h1m1 0h3"/></svg></span>
+          <span class="qr-k">The slides</span>
+          <span class="qr-u">github.com/volkovyy-00/<b>ai-for-business-2026-ba-talk</b></span>
+        </a>
+        <a class="qr" href="https://github.com/volkovyy-00/counterparty-risk-rag-comparison" target="_blank" rel="noopener">
+          <span class="qr-img"><svg aria-hidden="true" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37"><path stroke="#0b1c2c" d="M0 0.5h7m1 0h1m2 0h1m2 0h2m5 0h1m4 0h1m1 0h1m1 0h7m-37 1h1m5 0h1m1 0h1m1 0h3m1 0h1m2 0h2m2 0h2m2 0h2m1 0h1m1 0h1m5 0h1m-37 1h1m1 0h3m1 0h1m5 0h1m2 0h2m1 0h2m2 0h5m1 0h1m1 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m1 0h2m4 0h1m1 0h2m2 0h1m1 0h2m1 0h3m2 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m2 0h2m1 0h1m3 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1m1 0h3m1 0h1m-37 1h1m5 0h1m2 0h1m2 0h4m1 0h4m1 0h1m1 0h1m3 0h1m1 0h1m5 0h1m-37 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-29 1h2m1 0h1m7 0h1m2 0h1m1 0h1m1 0h3m-29 1h1m1 0h2m1 0h3m1 0h1m2 0h3m3 0h1m3 0h3m1 0h3m1 0h1m2 0h1m1 0h2m-37 1h2m2 0h1m7 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h2m2 0h1m2 0h1m1 0h1m1 0h1m-36 1h1m1 0h2m1 0h6m1 0h2m2 0h1m1 0h3m2 0h3m5 0h2m1 0h1m-35 1h2m1 0h1m4 0h1m7 0h1m3 0h1m4 0h2m1 0h4m1 0h2m-34 1h1m3 0h3m3 0h7m1 0h1m2 0h1m1 0h4m1 0h2m1 0h5m-36 1h3m6 0h3m1 0h6m1 0h2m1 0h4m1 0h5m2 0h1m-36 1h1m3 0h2m1 0h1m1 0h1m5 0h1m2 0h3m2 0h2m2 0h2m2 0h1m1 0h2m-36 1h3m5 0h3m2 0h1m5 0h1m3 0h2m1 0h1m2 0h1m1 0h2m2 0h2m-37 1h1m2 0h1m1 0h4m1 0h1m1 0h2m3 0h1m4 0h1m2 0h1m2 0h2m3 0h2m1 0h1m-37 1h2m1 0h3m3 0h1m4 0h1m3 0h2m1 0h2m1 0h1m1 0h2m2 0h1m4 0h2m-36 1h1m1 0h12m5 0h2m1 0h2m1 0h3m3 0h1m2 0h2m-34 1h3m2 0h1m2 0h1m1 0h1m1 0h3m2 0h1m1 0h1m1 0h1m3 0h1m3 0h2m1 0h1m-33 1h2m1 0h3m2 0h2m1 0h2m1 0h3m1 0h3m3 0h3m1 0h3m2 0h1m-37 1h4m3 0h2m1 0h2m1 0h2m1 0h6m1 0h1m4 0h2m3 0h1m-34 1h4m2 0h1m4 0h1m1 0h1m2 0h1m1 0h1m4 0h1m1 0h2m1 0h1m1 0h2m3 0h1m-36 1h1m4 0h1m2 0h1m4 0h2m1 0h2m2 0h1m3 0h3m2 0h1m2 0h4m-36 1h1m1 0h8m3 0h4m2 0h1m1 0h1m1 0h5m1 0h4m1 0h1m-34 1h1m2 0h1m3 0h1m1 0h1m3 0h1m2 0h1m3 0h3m1 0h8m2 0h2m-36 1h1m4 0h1m4 0h2m5 0h1m7 0h1m2 0h1m3 0h1m1 0h1m-36 1h1m1 0h1m4 0h1m1 0h1m1 0h1m1 0h3m3 0h4m1 0h1m1 0h1m1 0h1m1 0h3m2 0h1m-34 1h5m1 0h1m2 0h1m1 0h2m3 0h4m1 0h1m1 0h1m1 0h6m1 0h1m1 0h1m-29 1h1m2 0h3m1 0h1m2 0h1m2 0h1m1 0h2m1 0h3m3 0h1m1 0h3m-37 1h7m1 0h2m1 0h1m2 0h2m2 0h1m3 0h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h3m-37 1h1m5 0h1m1 0h1m1 0h3m4 0h2m1 0h2m2 0h1m2 0h2m3 0h1m2 0h1m-36 1h1m1 0h3m1 0h1m2 0h1m3 0h2m1 0h1m2 0h2m2 0h1m2 0h1m1 0h6m1 0h1m-36 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h4m4 0h1m2 0h1m2 0h1m1 0h2m1 0h4m-36 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h3m7 0h1m1 0h1m2 0h3m1 0h4m-36 1h1m5 0h1m6 0h1m1 0h1m3 0h1m2 0h4m5 0h2m1 0h1m-35 1h7m1 0h1m1 0h1m1 0h3m1 0h2m2 0h1m2 0h4m2 0h1m2 0h5"/></svg></span>
+          <span class="qr-k">The demo</span>
+          <span class="qr-u">github.com/volkovyy-00/<b>counterparty-risk-rag-comparison</b></span>
+        </a>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
   </section>
   </div>
 
