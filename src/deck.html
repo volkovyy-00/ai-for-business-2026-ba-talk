@@ -463,11 +463,20 @@
   .appr.peeking .ap:not(.peek-on){opacity:.4}
   .ap .open{position:absolute;top:56px;right:48px;width:30px;height:30px;border:3px solid var(--accent);border-radius:6px;box-shadow:inset 0 6px 0 -2px var(--accent);opacity:.55;transition:opacity .3s}
   .ap:hover .open,.ap.peek-on .open,.ap:focus-visible .open{opacity:1}
-  .peek{position:absolute;left:0;right:0;bottom:calc(100% + 18px);padding:18px 20px 20px;border-radius:var(--r);background:var(--panel-hi);border:1px solid rgba(0,174,239,.35);
+  /* the peek spans the full content width above the cards (the dimmed title sits under it); a notch points down to the hovered card */
+  .peek{position:absolute;left:0;width:1640px;bottom:calc(100% + 22px);padding:24px 28px;display:grid;grid-template-columns:831px 1fr;column-gap:44px;align-items:center;
+    border-radius:var(--r);background:var(--panel-hi);border:1px solid rgba(0,174,239,.35);
     box-shadow:0 24px 60px rgba(0,0,0,.45);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+  .ap:nth-child(2) .peek{left:-560px} .ap:nth-child(3) .peek{left:-1120px}
+  .peek::after{content:"";position:absolute;bottom:-11px;width:20px;height:20px;background:var(--panel-hi);border-right:1px solid rgba(0,174,239,.35);border-bottom:1px solid rgba(0,174,239,.35);transform:rotate(45deg);left:250px}
+  .ap:nth-child(2) .peek::after{left:810px} .ap:nth-child(3) .peek::after{left:1370px}
   .ap.peek-on .peek{opacity:1;transform:none}
-  .peek svg{display:block;width:100%;height:auto}
-  .ap .peek p{margin-top:12px;padding-top:0;border-top:0;font-size:28px;line-height:1.3;color:var(--ink);min-height:2.6em}
+  .peek svg{display:block;width:831px;height:300px}
+  .peek ol{list-style:none;display:flex;flex-direction:column;gap:18px}
+  .peek li{font-size:32px;line-height:1.25;color:var(--ink-3);transition:color .3s}
+  .peek li b{display:inline-block;width:1.4em;font-family:var(--font-display);font-weight:800;color:var(--ink-3)}
+  .peek li.on{color:var(--ink)} .peek li.on b{color:var(--accent)} .peek li.done{color:var(--ink-2)}
+  .peek .more{margin-top:10px;font-size:28px;color:var(--ink-3)}
   /* shared SVG language for the three visualisations (viewBox 1552×560 = stage px in the panel, so 28 = 28 px on the stage) */
   .how-svg text{font-family:var(--font);font-size:28px;fill:var(--ink-2)}
   .how-svg .h-lab{fill:var(--ink);font-weight:600;font-size:30px}
@@ -1832,9 +1841,12 @@
     if (dlg.open) return;
     let pk = c.querySelector('.peek');
     if (!pk){ pk = document.createElement('div'); pk.className = 'peek'; pk.setAttribute('aria-hidden', 'true');
-      pk.innerHTML = '<svg class="how-svg mini" viewBox="0 0 1552 560"></svg><p></p>'; c.appendChild(pk);
-      const key = c.dataset.how, p = pk.querySelector('p'), render = mount(pk.querySelector('svg'), key);
-      c._peek = runner(render, 2.4, t => { const b = HOW[key].beats[beatAt(key, t)]; if (p.textContent !== b) p.textContent = b; }); }
+      const key = c.dataset.how;
+      pk.innerHTML = '<svg class="how-svg mini" viewBox="0 0 1552 560"></svg><div><ol></ol><div class="more">Click to open the full explainer</div></div>'; c.appendChild(pk);
+      const ol = pk.querySelector('ol'), render = mount(pk.querySelector('svg'), key);
+      HOW[key].beats.forEach((b, k) => { const li = document.createElement('li'); li.innerHTML = `<b>${k + 1}</b>`; li.append(b); ol.appendChild(li); });
+      const lis = [...ol.children];
+      c._peek = runner(render, 2.4, t => { const k = beatAt(key, t); lis.forEach((l, j) => { l.classList.toggle('on', j === k); l.classList.toggle('done', j < k); }); }); }
     hidePeek(); peeked = c;
     c.classList.add('peek-on'); row.classList.add('peeking'); slide.classList.add('peeking');
     c._peek.play(0);
