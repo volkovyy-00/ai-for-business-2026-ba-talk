@@ -395,22 +395,23 @@
   .s-multi h2{font-size:80px;line-height:1.05}
   .s-multi h2 .hl{color:var(--accent)}
   .dr-lede{display:flex;align-items:baseline;gap:20px;margin-top:40px;font-size:34px;color:var(--ink-2);white-space:nowrap}
-  .dr-lede > .doclink:first-child{font-family:var(--font-display);font-size:36px;font-weight:700}
-  .dr-lede b{font-weight:600;color:var(--accent)}
-  .dr-lede .run{margin-left:auto;font-size:30px;color:var(--ink-2)}
-  .dr-wrap{margin:auto 0}
+  .dr-lede > .doclink{font-family:var(--font-display);font-size:36px;font-weight:700}
+  .dr-lede b{font-weight:600;color:var(--ink)}   /* the only cyan left is the title and the two "You" steps */
+  .dr-wrap{position:relative;margin:auto 0;padding-bottom:96px}
+  .dr-wrap .run{position:absolute;left:683.5px;bottom:0;transform:translateX(-50%);font-size:30px;white-space:nowrap}   /* under the loop it shows */
+  .dr-wrap .run .doclink{color:var(--ink-2)}
   .multi-svg{display:block;width:100%;height:auto;font-family:var(--font);overflow:visible}
-  .multi-svg .t{font-family:var(--font-display);font-size:44px;font-weight:700;fill:var(--ink)}
-  .multi-svg .t.w{font-size:40px;fill:#fff}
-  .multi-svg .ms{font-size:30px;fill:var(--ink-2)}
-  .multi-svg .s{font-size:28px;fill:var(--ink-2)}
-  .multi-svg .st{font-family:var(--font-display);font-size:34px;font-weight:700;fill:var(--ink)}
+  .multi-svg .t{font-family:var(--font-display);font-size:48px;font-weight:700;fill:var(--ink)}
+  .multi-svg .t.you{fill:var(--accent)}
+  .multi-svg .t.w{font-size:44px;fill:#fff}
+  .multi-svg .ms{font-size:32px;fill:var(--ink-2)}
+  .multi-svg .s{font-size:30px;fill:var(--ink-2)}
+  .multi-svg .st{font-family:var(--font-display);font-size:40px;font-weight:700;fill:var(--ink)}
   .multi-svg .ln{fill:none;stroke:var(--active);stroke-width:4}
   .multi-svg .tip{fill:var(--active)}
   .multi-svg .loop{fill:none;stroke:var(--active);stroke-width:4}
-  .multi-svg .steps circle{fill:var(--active);stroke:var(--midnight);stroke-width:6}
   .multi-svg .report{fill:var(--active)}
-  .multi-svg .rs{font-size:28px;font-weight:600;fill:#fff}
+  .multi-svg .rs{font-size:30px;font-weight:600;fill:#fff}
   /* ---------- The agents explored. I decided. (brief → build decisions) ---------- */
   .s-decide h2{font-size:96px}
   .s-decide h2 .hl{color:var(--accent)}
@@ -960,34 +961,33 @@
   <div class="frame" id="slide-12">
   <!-- ================= DEEP RESEARCH: WHY, HOW IT WORKS, MY STRATEGY (user: real runs take 10–15 min; the recording is a re-creation, not a real run) ================= -->
   <section class="slide s-multi" data-title="Deep research: how the analyst uses AI"
-    data-notes="This is how I use AI as a thinking partner. A chatbot answers in seconds from what it already remembers, usually without sources: fine for a quick fact, not good enough for discovery. A deep research agent works differently, and the analyst sits at both ends. I frame the question; the agent does the legwork. It investigates: it plans what to look for, searches, reads the sources, follows the leads it finds, and repeats until the question is covered. Then it writes a report with a source for every claim. One run takes ten to fifteen minutes. Then it is back to me: I check the sources before I trust any of it. My strategy: I don't run it once. I send the same question out several times, each run with its own angle, then compare what comes back. Where the runs disagree is exactly where I need to look. The result is one brief I can defend. Optional: click 'Deep research' to show how Anthropic built its research system (article excerpt and architecture diagram). Click 'Watch a run' for two recordings, Microsoft 365 Copilot's Researcher first, then the re-created multi-run recording; a clicker press moves to the next recording, then closes; Esc closes at once. Next slide: what I decided from that brief.">
+    data-notes="This is how I use AI as a thinking partner. A chatbot answers in seconds from what it already remembers, usually without sources: fine for a quick fact, not good enough for discovery. A deep research agent works differently, and the analyst sits at both ends. I frame the question; the agent does the legwork. It investigates: it plans what to look for, searches, reads the sources, follows the leads it finds, and repeats until the question is covered. Then it writes a report with a source for every claim. One run takes ten to fifteen minutes. Then it is back to me: I check the sources before I trust any of it. My strategy: I don't run it once. I send the same question out several times, each run with its own angle, then compare what comes back. Where the runs disagree is exactly where I need to look. The result is one brief I can defend. You frame the question, the agent researches, you check the sources. Optional: click 'Deep research' to show how Anthropic built its research system (article excerpt and architecture diagram). Click 'Watch a run' for two recordings, Microsoft 365 Copilot's Researcher first, then the re-created multi-run recording; a clicker press moves to the next recording, then closes; Esc closes at once. Next slide: what I decided from that brief.">
     <div class="rule"></div>
     <h2>Don’t ask AI for an answer.<br><span class="hl">Send it to research.</span></h2>
-    <p class="dr-lede"><button class="doclink" type="button" data-dialog="research-system" aria-haspopup="dialog">Deep research</button><span>an agent that investigates · <b>10–15 minutes per run</b></span><button class="doclink run" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
+    <p class="dr-lede"><button class="doclink" type="button" data-dialog="research-system" aria-haspopup="dialog">Deep research</button><span>an agent that investigates · <b>10–15 minutes per run</b></span></p>
     <div class="dr-wrap">
-    <svg class="multi-svg" viewBox="0 0 1640 230" role="img"
-      aria-label="Deep research, an agent that investigates for 10 to 15 minutes per run. You frame the question. The AI agent plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources. You check the sources.">
-      <text class="t" x="125" y="124" text-anchor="middle">Frame</text>
-      <text class="ms" x="125" y="166" text-anchor="middle">the question</text>
-      <path class="ln" d="M250 130H316"/><path class="tip" d="M312 120L332 130L312 140Z"/>
-      <path class="loop" d="M430 50H1060A80 80 0 0 1 1060 210H430A80 80 0 0 1 430 50Z"/>
-      <path class="tip" d="M757 199L735 210L757 221Z"/>
-      <g class="steps">
-        <circle cx="450" cy="50" r="13"/><circle cx="600" cy="50" r="13"/><circle cx="750" cy="50" r="13"/><circle cx="950" cy="50" r="13"/>
-        <text class="st" x="450" y="110" text-anchor="middle">Plan</text>
-        <text class="st" x="600" y="110" text-anchor="middle">Search</text>
-        <text class="st" x="750" y="110" text-anchor="middle">Read</text>
-        <text class="st" x="950" y="110" text-anchor="middle">Follow leads</text>
-        <text class="s" x="745" y="168" text-anchor="middle">repeats until the question is covered</text>
-      </g>
-      <path class="ln" d="M1140 130H1196"/><path class="tip" d="M1192 120L1212 130L1192 140Z"/>
-      <rect class="report" x="1224" y="70" width="190" height="120" rx="14"/>
-      <text class="t w" x="1319" y="124" text-anchor="middle">Report</text>
-      <text class="rs" x="1319" y="162" text-anchor="middle">with sources</text>
-      <path class="ln" d="M1414 130H1460"/><path class="tip" d="M1456 120L1476 130L1456 140Z"/>
-      <text class="t" x="1565" y="124" text-anchor="middle">Check</text>
-      <text class="ms" x="1565" y="166" text-anchor="middle">the sources</text>
+    <!-- geometry: Frame flush left, Check flush right, three equal connectors (gap 14 · 48 · gap 10), step labels evenly spaced (56) inside the loop -->
+    <svg class="multi-svg" viewBox="0 0 1640 216" role="img"
+      aria-label="Deep research, an agent that investigates for 10 to 15 minutes per run. You frame the question. The agent plans, searches, reads and follows leads, going round the loop until the question is covered, then writes a report with sources. You check the sources.">
+      <text class="t you" x="0" y="108">You frame</text>
+      <text class="ms" x="0" y="152">the question</text>
+      <path class="ln" d="M239 117H277"/><path class="tip" d="M269 107L287 117L269 127Z"/>
+      <path class="loop" d="M392 22H975A95 95 0 0 1 975 212H392A95 95 0 0 1 392 22Z"/>
+      <path class="tip" d="M695 201L673 212L695 223Z"/>
+      <text class="st" x="376" y="97" text-anchor="middle">Plan</text>
+      <text class="st" x="535" y="97" text-anchor="middle">Search</text>
+      <text class="st" x="701.5" y="97" text-anchor="middle">Read</text>
+      <text class="st" x="917" y="97" text-anchor="middle">Follow leads</text>
+      <text class="s" x="683.5" y="162" text-anchor="middle">repeats until the question is covered</text>
+      <path class="ln" d="M1084 117H1122"/><path class="tip" d="M1114 107L1132 117L1114 127Z"/>
+      <rect class="report" x="1142" y="47" width="200" height="140" rx="16"/>
+      <text class="t w" x="1242" y="112" text-anchor="middle">Report</text>
+      <text class="rs" x="1242" y="154" text-anchor="middle">with sources</text>
+      <path class="ln" d="M1356 117H1394"/><path class="tip" d="M1386 107L1404 117L1386 127Z"/>
+      <text class="t you" x="1640" y="108" text-anchor="end">You check</text>
+      <text class="ms" x="1640" y="152" text-anchor="end">the sources</text>
     </svg>
+    <p class="run"><button class="doclink" type="button" data-dialog="agents-run" aria-haspopup="dialog">Watch a run</button></p>
     </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">12</span></span></div>
   </section>
