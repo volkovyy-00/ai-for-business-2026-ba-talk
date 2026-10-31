@@ -411,16 +411,16 @@
   /* ---------- The agents explored. I decided. (brief → build decisions) ---------- */
   .s-decide h2{font-size:96px}
   .s-decide h2 .hl{color:var(--accent)}
-  .decide-grid{display:grid;grid-template-columns:500px 1fr;gap:64px;margin-top:56px;align-items:start}
-  .agents-box{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:36px 40px 40px}
-  .decide-grid .ex-label{margin:0 0 24px}
-  .agents-box .stn::before{background:none;border:4px solid #3A5B7A;box-sizing:border-box}   /* hollow: the model side, as on slide 7 */
-  .agents-box .stn b{color:var(--ink-2)}
-  .agents-box .stn + .stn{margin-top:22px}
-  .agents-box .stn::after{display:none}
-  .decide-grid .stations{padding-top:0;gap:26px}
-  .decide-grid .rec{margin-top:32px;font-size:30px;color:var(--ink-2)}
-  .s-decide .remember{margin-top:44px;font-size:40px;line-height:1.3;color:var(--ink-2)}
+  /* one line of four stations across the width: the title carries the agents' half (left column removed, session 5) */
+  .stations.decide{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:56px;row-gap:0;padding-top:0;margin-top:auto;position:relative}   /* list + closing line centred between title and footer */
+  .stations.decide .ex-label{grid-column:1/-1;margin:0 0 44px;color:var(--ink-2)}
+  .stations.decide::before{content:"";position:absolute;left:15px;right:353px;top:103px;height:4px;background:var(--line)}   /* runs node centre to node centre: label block 90px, node 30px, line 4px; right = column width 368 − 15 */
+  .s-decide .stn{padding:72px 0 0}
+  .s-decide .stn::before{top:0;width:30px;height:30px}
+  .s-decide .stn:not(:last-child)::after{display:none}
+  .s-decide .stn b{font-size:40px}
+  .s-decide .stn span{font-size:30px;line-height:1.3;margin-top:12px;text-wrap:pretty}
+  .s-decide .remember{margin-top:68px;margin-bottom:auto;font-size:40px;line-height:1.3;color:var(--ink-2)}
   .s-decide .remember b{color:var(--ink);font-weight:700}
   /* recording dialog (reuses the 10-K dialog frame) */
   .filing .vid{margin:1.2em 1.4em;aspect-ratio:16/9;height:auto}
@@ -995,26 +995,17 @@
        the risk taxonomy / what 'shared across counterparties' means, what a correct answer looks like, and that we'd compare three
        approaches under one fixed scoring idea before building. Defining that took longer than the build." No extracts shown, no animation, no "in an afternoon" (user, session 5). -->
   <section class="slide s-decide" data-title="The agents explored. I decided."
-    data-notes="This is the part that's still the analyst's job. The agents explored the angles and drafted options. But four things no agent decided for me. Which filing section and which year we'd use. The risk taxonomy — and what 'shared across counterparties' actually means. What a correct answer looks like. And that we'd compare three approaches under one fixed scoring idea, before building anything. Defining that took longer than the build. The build itself was the quick part: a coding agent turned those decisions into three prototypes. That's the bottleneck shift from the start of the talk, in my own project.">
+    data-notes="This is the part that's still the analyst's job. The agents explored the angles and drafted options. But four things no agent decided for me. Which filing section and which year we'd use. The risk taxonomy — and what 'shared across counterparties' actually means. What a correct answer looks like. And that we'd compare three approaches under one fixed scoring idea, before building anything. Deciding these took longer than the build. The build itself was the quick part: a coding agent turned those decisions into three prototypes. That's the bottleneck shift from the start of the talk, in my own project.">
     <div class="rule"></div>
     <h2>The agents explored. <span class="hl">I decided.</span></h2>
-    <div class="decide-grid">
-      <div>
-        <div class="ex-label">What the agents did</div>
-        <div class="agents-box">
-          <div class="stn"><b>Explored angles</b><span>several, in parallel</span></div>
-          <div class="stn"><b>Drafted options</b><span>one synthesised brief</span></div>
-        </div>
-      </div>
-      <div class="stations">
-        <div class="ex-label">What I settled before anyone built</div>
-        <div class="stn"><b>Source</b><span>which filing section, which year</span></div>
-        <div class="stn"><b>Taxonomy</b><span>the risk categories, and what “shared across counterparties” means</span></div>
-        <div class="stn"><b>A correct answer</b><span>what a right answer looks like</span></div>
-        <div class="stn"><b>One scoring idea</b><span>three approaches, compared the same way, fixed before building</span></div>
-      </div>
+    <div class="stations decide">
+      <div class="ex-label">What I settled before anyone built</div>
+      <div class="stn"><b>Source</b><span>which filing section, which year</span></div>
+      <div class="stn"><b>Taxonomy</b><span>the risk categories, and what “shared across counterparties” means</span></div>
+      <div class="stn"><b>A correct answer</b><span>what a right answer looks like</span></div>
+      <div class="stn"><b>One scoring idea</b><span>three approaches, compared the same way</span></div>
     </div>
-    <p class="remember">Defining that took <b>longer than the build.</b></p>
+    <p class="remember">Deciding these took <b>longer than the build.</b></p>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">13</span></span></div>
   </section>
   </div>
