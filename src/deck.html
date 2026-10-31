@@ -521,6 +521,40 @@
   .how-fine{margin-top:auto;font-size:24px;color:var(--ink-3)}
   @media (prefers-reduced-motion:reduce){ dialog.how[open]{animation:none} .peek{transform:none} }
 
+  /* ---------- Intent before build ---------- */
+  .s-intent .int-grid{display:grid;grid-template-columns:minmax(0,1fr) 720px;column-gap:80px;align-items:center;margin:auto 0}
+  .s-intent h2{font-size:72px;line-height:1.08;white-space:nowrap}
+  .s-intent h2 .hl{color:var(--accent)}
+  .then-now{margin-top:56px;display:grid;grid-template-columns:auto 1fr;column-gap:28px;row-gap:10px;font-size:36px;line-height:1.3}
+  .then-now div{display:contents}
+  .then-now dt{color:var(--ink-3);font-weight:600}
+  .then-now dd{color:var(--ink-2)}
+  .int-fix{margin-top:40px;font-size:36px;line-height:1.35;color:var(--ink-2)}
+  .int-fix b{color:var(--ink);font-weight:600}
+  .int-link{display:inline-block;margin-top:56px;font-size:30px;font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);
+    text-decoration-thickness:3px;text-underline-offset:8px}
+  .int-link span{color:var(--accent)}
+  .int-link:hover{color:var(--accent)}
+  .int-link:focus-visible{outline:3px solid var(--accent);outline-offset:8px;border-radius:4px}
+  .int-card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:32px 40px 40px;cursor:pointer;transition:border-color .3s,background-color .3s}
+  .int-card:hover{border-color:rgba(0,174,239,.45);background:var(--panel-hi)}
+  .int-card:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
+  .int-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:22px;border-bottom:1px solid var(--line);
+    font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:28px;color:var(--ink-2)}
+  .int-card .open{position:static;display:block;width:30px;height:30px;border:3px solid var(--accent);border-radius:6px;box-shadow:inset 0 6px 0 -2px var(--accent);opacity:.7}
+  .int-card ol{list-style:none;counter-reset:s;margin-top:24px;display:flex;flex-direction:column;gap:18px}
+  .int-card li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;font-size:30px;line-height:1.35;color:var(--ink)}
+  .int-card li::before{content:counter(s);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:26px;color:var(--ink-3);padding-top:3px}
+  .int-cap{margin-top:24px;font-size:28px;color:var(--ink-3)}
+  .int-cap code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em;color:var(--ink-2)}
+  /* intent.md file view (dialog) */
+  .filing .md{margin:1.2em 1.4em 0;padding:1.4em 1.8em;background:var(--midnight);border:1px solid var(--line);border-radius:10px;overflow:auto;overscroll-behavior:contain;
+    font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:.84em;line-height:1.45;color:var(--ink-2);white-space:pre-wrap}
+  .filing .md .h{color:var(--accent);font-weight:700}
+  .filing .md .c{color:var(--ink-3)}
+  .filing .pb{margin:1em 1.4em 1.2em;font-size:.95em;color:var(--ink-2)}
+  .filing .pb q{color:var(--ink)}
+
   /* ---------- Console explainer (foundation mock) ---------- */
   .s-console h2{font-size:84px}
   .console{margin-top:44px;border:1px solid rgba(255,255,255,.14);border-radius:var(--r);background:#08141F;overflow:hidden;display:flex;flex-direction:column;flex:1 1 auto;min-height:0;flex-shrink:1}
@@ -1095,27 +1129,37 @@
   </div>
 
   <div class="frame" id="slide-15">
-  <!-- ================= DEMO: HOW THE CONSOLE WORKS (foundation mock, not the real app) ================= -->
-  <section class="slide s-console" data-title="Demo: how the console works"
-    data-notes="Before I leave the slides, one walk through the console so you know where to look. Top right tells you whether it's live or a replay. You pick a question from the chips, or type one. The answer comes back in the middle. And on the right is the part I care about most: the evidence — which filing, which passage, so you can check it. Same layout for all three approaches.">
+  <!-- ================= INTENT BEFORE BUILD (replaces the console schematic, session 6) =================
+       Design: subagent critique picked a cut-down "Layout A": the two-line title carries the message, the intent.md card is the one filled shape.
+       Playbook facts (checked against the article's HTML, 21 Aug 2026, Louis Claxton): stages Plan → Design → Build…; Plan produces intent.md,
+       Design produces spec.md; "Intent is captured once, in the originator's own words, as a version-controlled artifact the next stage can act on."
+       In the playbook Claude drafts intent.md and the product owner corrects/accepts it, so the slide does NOT claim "no AI at the intent gate".
+       Jira stays a valid source of truth in the playbook; "intent sits above the tickets" is the speaker's own view.
+       The five sentences are re-created for the talk from the slide 13 decisions; the speaker should swap in his real file if he has one. -->
+  <section class="slide s-intent" data-title="Intent before build"
+    data-notes="Before the demo, one habit. We went from death by PowerPoint to death by AI slop: long documents nobody wrote and nobody reads. So I start with a few sentences of intent, in my own words. That's the human gate. Then the agent expands it into the spec, and I review the spec rather than write it. This matches the Plan stage in Anthropic's AI-native SDLC playbook: intent captured once, in the originator's own words, as a version-controlled intent.md the next stage can act on. Jira still tracks the work — one intent can turn into several tickets; the intent is the decision above them. [Click the card to show the file.]">
     <div class="rule"></div>
-    <div class="kicker">Demo</div>
-    <h2>How the console works</h2>
-    <div class="console" role="img" aria-label="Schematic of the demo console: question, answer and evidence panels">
-      <div class="c-chrome"><span class="dotsx"><i></i><i></i><i></i></span><span class="ttl">Shared-risk console · synthetic demo</span><span class="sp"></span><span class="badge live">Live</span><span class="badge replay">Replay</span></div>
-      <div class="c-body">
-        <div class="pnl"><span class="pk"><em>1</em>Ask</span>
-          <span class="qchip on">Which risks do they share?</span><span class="qchip">How strongly?</span><span class="qchip">Who is most exposed?</span>
-          <span class="qbox">or type a question…</span></div>
-        <div class="pnl"><span class="pk"><em>2</em>Answer</span>
-          <span class="ans-line hi" style="width:88%"></span><span class="ans-line" style="width:96%"></span><span class="ans-line" style="width:72%"></span><span class="ans-line hi" style="width:60%"></span><span class="ans-line" style="width:84%"></span>
-          <span class="ans-note">shared risks · strength · companies</span></div>
-        <div class="pnl"><span class="pk"><em>3</em>Evidence</span>
-          <span class="ev-item">Company A · 10-K <code>Item 1A ¶4</code></span><span class="ev-item">Company D · 10-K <code>Item 1A ¶11</code></span><span class="ev-item">Company G · 10-K <code>Item 1A ¶2</code></span>
-          <span class="ans-note">click to see the quoted passage</span></div>
+    <div class="int-grid">
+      <div class="int-l">
+        <h2>I write the intent.<br><span class="hl">The agent writes the spec.</span></h2>
+        <dl class="then-now"><div><dt>Then</dt><dd>death by PowerPoint</dd></div><div><dt>Now</dt><dd>death by AI slop</dd></div></dl>
+        <p class="int-fix">The fix: a few sentences in my own words.<br><b>The agent expands the rest; I review it.</b></p>
+        <a class="int-link" href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">AI-native SDLC · Plan → intent.md <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="int-r">
+        <div class="int-card" role="button" tabindex="0" data-dialog="intent-file" aria-haspopup="dialog" aria-label="Open intent.md">
+          <div class="int-head"><span>intent.md</span><i class="open" aria-hidden="true"></i></div>
+          <ol>
+            <li>Which industry risks do ten auto and chip companies share, and how strongly?</li>
+            <li>Use only public 10-K filings, Item 1A (risk factors).</li>
+            <li>Sort risks into a fixed list of categories, agreed up front.</li>
+            <li>“Shared” means many of the ten map to the same category, counted in code.</li>
+            <li>Every claim cites its passage; all three approaches are scored the same way.</li>
+          </ol>
+        </div>
+        <p class="int-cap">Then the agent writes <code>spec.md</code> · Jira keeps the tickets</p>
       </div>
     </div>
-    <div class="c-flow"><b>Question</b><span class="ar">→</span><b>Answer</b><span class="ar">→</span><b>Evidence you can check</b><span class="mock">Schematic · not the live app</span></div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
   </section>
   </div>
@@ -1254,6 +1298,36 @@
   </div>
   <footer><p class="reel-cap"><b>Sped up.</b> Microsoft 365 Copilot’s Researcher agent, several runs side by side.</p>
     <p class="reel-cap" hidden><b>Re-created and sped up.</b> A real run takes 10–15 minutes.</p></footer>
+</dialog>
+<!-- intent.md, opened from slide 15. Re-created for the talk from the slide 13 decisions; headings follow the playbook's intent template
+     (problem, outcome, users, constraints, open questions). Quote verbatim from https://claude.com/resources/articles/the-ai-native-sdlc-playbook (01 Plan). -->
+<dialog class="filing wide" id="intent-file" aria-labelledby="intent-file-t">
+  <header><h3 id="intent-file-t">intent.md</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
+  <div class="addr" aria-hidden="true"><b>shared-risk-demo</b>/intent/intent.md</div>
+<div class="md"><span class="h"># Shared industry risk across ten counterparties</span>
+
+<span class="h">## Problem</span>
+Which industry risks do ten US-listed auto and chip companies share, and how strongly?
+
+<span class="h">## Outcome</span>
+A short list of shared risks, each with how many of the ten name it.
+
+<span class="h">## Constraints</span>
+- Public 10-K filings only, Item 1A (risk factors).
+- A fixed list of risk categories, agreed up front.
+- “Shared” = many of the ten map to the same category, counted in code.
+
+<span class="h">## A correct answer</span>
+Every claim cites the passage it came from.
+
+<span class="h">## Scoring</span>
+One scoring idea for all three approaches.
+
+<span class="h">## Open questions</span>
+<span class="c">- How many companies make a risk “shared”?</span></div>
+  <p class="pb">Anthropic’s playbook, Plan stage: <q>Intent is captured once, in the originator’s own words, as a version-controlled artifact the next stage can act on.</q></p>
+  <footer><p>Re-created for this talk. <b>Next: the agent expands it into spec.md; I review it, I don’t write it.</b></p>
+    <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Open the full article on claude.com ↗</a></footer>
 </dialog>
 <!-- "How it works" explainer for slide 14, one panel shared by the three approaches; filled by the explainer script below. Staged demo data only. -->
 <dialog class="how" id="how" aria-labelledby="how-t">
@@ -1862,5 +1936,7 @@
     c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); open(c.dataset.how); } });
   });
   addEventListener('scroll', hidePeek, {passive:true, capture:true});
+  // non-button dialog openers (the intent.md card on slide 15): Enter / Space open them, without moving the slide
+  document.querySelectorAll('[data-dialog][role=button]').forEach(b => b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); b.click(); } }));
 })();
 </script>
