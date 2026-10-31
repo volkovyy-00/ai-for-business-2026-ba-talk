@@ -456,7 +456,7 @@
   .ap .k{margin-top:28px;font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
   .ap h3{margin-top:12px;font-size:46px;font-weight:700;line-height:1.15;min-height:2.3em}
   .ap p{margin-top:28px;padding-top:28px;border-top:1px solid var(--line);font-size:30px;line-height:1.4;color:var(--ink-2)}
-  /* slide 14 explainers: hover a card (400 ms) for a peek rising above it; click / Enter / tap opens the full panel (dialog#how) */
+  /* slide 15 explainers: hover a card (400 ms) for a peek rising above it; click / Enter / tap opens the full panel (dialog#how) */
   .s-three .rule,.s-three h2,.s-three .lede{transition:opacity .35s var(--ease-out)}
   .s-three.peeking .rule,.s-three.peeking h2,.s-three.peeking .lede{opacity:.28}
   .ap{position:relative;cursor:pointer;transition:opacity .35s var(--ease-out),border-color .3s,background-color .3s}
@@ -1144,22 +1144,6 @@
   </div>
 
   <div class="frame" id="slide-14">
-  <!-- ================= THREE APPROACHES ================= -->
-  <section class="slide s-three" data-title="Three ways to approach"
-    data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live. Optional, if there's time or a question: click a card to open a short animated explainer of how that approach works (Esc or the clicker closes it). Hovering with the mouse shows a small preview above the card.">
-    <div class="rule"></div>
-    <h2>Three ways to approach</h2>
-    <p class="lede">From the synthesised brief · same shared-risk question</p>
-    <div class="appr">
-      <div class="ap" data-how="rag" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">01</span><span class="k">Similarity</span><h3>Plain vector RAG</h3><p>Retrieves the most similar passages and lets the model summarise shared risks.</p><i class="open" aria-hidden="true"></i></div>
-      <div class="ap" data-how="graph" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p><i class="open" aria-hidden="true"></i></div>
-      <div class="ap" data-how="tax" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p><i class="open" aria-hidden="true"></i></div>
-    </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
-  </section>
-  </div>
-
-  <div class="frame" id="slide-15">
   <!-- ================= INTENT BEFORE BUILD (replaces the console schematic, session 6) =================
        Design: subagent critique picked a cut-down "Layout A": the two-line title carries the message, the intent.md card is the one filled shape.
        Playbook facts (checked against the article's HTML, 21 Aug 2026, Louis Claxton): stages Plan → Design → Build…; Plan produces intent.md,
@@ -1168,7 +1152,7 @@
        Jira stays a valid source of truth in the playbook; "intent sits above the tickets" is the speaker's own view.
        The card lists the section headings of the speaker's own intent.md; the full file opens in the dialog. -->
   <section class="slide s-intent" data-title="Intent before build"
-    data-notes="Before the demo, one habit. We went from death by PowerPoint to death by AI slop: long documents nobody wrote and nobody reads. So I start with a few sentences of intent, in my own words. That's the human gate. Then the agent expands it into the spec, and I review the spec rather than write it. This matches the Plan stage in Anthropic's AI-native SDLC playbook: intent captured once, in the originator's own words, as a version-controlled intent.md the next stage can act on. Jira still tracks the work — one intent can turn into several tickets; the intent is the decision above them. [Click the card to show the file.]">
+    data-notes="Those four decisions don't stay in my head. We went from death by PowerPoint to death by AI slop: long documents nobody wrote and nobody reads. So I start with a few sentences of intent, in my own words. That's the human gate. Then the agent expands it into the spec, and I review the spec rather than write it. This matches the Plan stage in Anthropic's AI-native SDLC playbook: intent captured once, in the originator's own words, as a version-controlled intent.md the next stage can act on. Jira still tracks the work — one intent can turn into several tickets; the intent is the decision above them. [Click the card to show the file.]">
     <div class="rule"></div>
     <div class="int-grid">
       <div class="int-l">
@@ -1190,6 +1174,22 @@
         </div>
         <p class="int-cap">Then the agent writes <code>spec.md</code> · Jira keeps the tickets</p>
       </div>
+    </div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-15">
+  <!-- ================= THREE APPROACHES ================= -->
+  <section class="slide s-three" data-title="Three ways to approach"
+    data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live. Optional, if there's time or a question: click a card to open a short animated explainer of how that approach works (Esc or the clicker closes it). Hovering with the mouse shows a small preview above the card.">
+    <div class="rule"></div>
+    <h2>Three ways to approach</h2>
+    <p class="lede">From the synthesised brief · same shared-risk question</p>
+    <div class="appr">
+      <div class="ap" data-how="rag" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">01</span><span class="k">Similarity</span><h3>Plain vector RAG</h3><p>Retrieves the most similar passages and lets the model summarise shared risks.</p><i class="open" aria-hidden="true"></i></div>
+      <div class="ap" data-how="graph" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p><i class="open" aria-hidden="true"></i></div>
+      <div class="ap" data-how="tax" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p><i class="open" aria-hidden="true"></i></div>
     </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">15</span></span></div>
   </section>
@@ -1231,7 +1231,7 @@
     <h2>Three lines to leave with</h2>
     <ol class="take">
       <li data-build="1"><span class="n">01</span><div><p class="l1">Coding got faster. Delivery didn’t.</p><p class="l2">The wait moved to discovery, and that’s the BA’s seat.</p></div></li>
-      <li data-build="2"><span class="n">02</span><div><p class="l1">You write the intent: problem, outcome, constraints, how you’ll score a right answer.</p><p class="l2">Agents can expand the rest.</p></div></li>
+      <li data-build="2"><span class="n">02</span><div><p class="l1">You write the intent: problem, outcome, constraints, scoring.</p><p class="l2">Agents can expand the rest.</p></div></li>
       <li data-build="3"><span class="n">03</span><div><p class="l1">Ask the same question three ways.</p><p class="l2">Keep quotes checkable, categories fixed, and the overlap count in code.</p></div></li>
     </ol>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
@@ -1313,7 +1313,7 @@
   <footer><p class="reel-cap"><b>Sped up.</b> Microsoft 365 Copilot’s Researcher agent, several runs side by side.</p>
     <p class="reel-cap" hidden><b>Re-created and sped up.</b> A real run takes 10–15 minutes.</p></footer>
 </dialog>
-<!-- intent.md, opened from slide 15. The speaker's own file, verbatim (supplied in session 6); headings follow the playbook's intent template
+<!-- intent.md, opened from slide 14. The speaker's own file, verbatim (supplied in session 6); headings follow the playbook's intent template
      (problem, outcome, users, constraints, open questions). Quote verbatim from https://claude.com/resources/articles/the-ai-native-sdlc-playbook (01 Plan). -->
 <dialog class="filing" id="intent-file" aria-labelledby="intent-file-t">
   <header><h3 id="intent-file-t">intent.md</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
@@ -1352,7 +1352,7 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
   <header><h3 id="console-t">Counterparty Risk Console</h3><a href="https://claude.ai/artifact/Nv1CCs5GUqkuWo4DZS3uB6" target="_blank" rel="noopener">Open in new tab ↗</a><button class="x" type="button" data-close aria-label="Close">×</button></header>
   <iframe title="Counterparty Risk Console, live prototype" data-src="console/index.html?v=2"></iframe>
 </dialog>
-<!-- "How it works" explainer for slide 14, one panel shared by the three approaches; filled by the explainer script below. Staged demo data only. -->
+<!-- "How it works" explainer for slide 15, one panel shared by the three approaches; filled by the explainer script below. Staged demo data only. -->
 <dialog class="how" id="how" aria-labelledby="how-t">
   <div class="how-in">
     <div class="how-head"><span class="num"></span><div class="tt"><h3 id="how-t"></h3><p class="one"></p></div>
@@ -1665,7 +1665,7 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
 })();
 </script>
 <script>
-/* Slide 14 — "how it works" explainers for the three approaches.
+/* Slide 15 — "how it works" explainers for the three approaches.
    Each visualisation is a deterministic timeline: build(svg) draws the scene once and returns render(t), t in seconds.
    The hover peek plays the same timeline sped up (≈5 s, then holds); the panel plays it once at full length (12 s) with three caption beats.
    Reduced motion: both show the final, fully annotated frame. All data is staged for the talk (public tickers; mappings and scores invented). */
@@ -1960,7 +1960,7 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
     c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); open(c.dataset.how); } });
   });
   addEventListener('scroll', hidePeek, {passive:true, capture:true});
-  // non-button dialog openers (the intent.md card on slide 15): Enter / Space open them, without moving the slide
+  // non-button dialog openers (the intent.md card on slide 14): Enter / Space open them, without moving the slide
   document.querySelectorAll('[data-dialog][role=button]').forEach(b => b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); b.click(); } }));
 })();
 
