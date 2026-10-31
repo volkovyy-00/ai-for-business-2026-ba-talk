@@ -453,10 +453,8 @@
   .ap h3{margin-top:12px;font-size:46px;font-weight:700;line-height:1.15;min-height:2.3em}
   .ap p{margin-top:28px;padding-top:28px;border-top:1px solid var(--line);font-size:30px;line-height:1.4;color:var(--ink-2)}
   /* slide 14 explainers: hover a card (400 ms) for a peek rising above it; click / Enter / tap opens the full panel (dialog#how) */
-  .s-three .lede-row{display:flex;align-items:baseline;justify-content:space-between;gap:40px}
-  .s-three .hint{font-size:28px;color:var(--ink-3)}
-  .s-three .rule,.s-three h2,.s-three .lede-row{transition:opacity .35s var(--ease-out)}
-  .s-three.peeking .rule,.s-three.peeking h2,.s-three.peeking .lede-row{opacity:.28}
+  .s-three .rule,.s-three h2,.s-three .lede{transition:opacity .35s var(--ease-out)}
+  .s-three.peeking .rule,.s-three.peeking h2,.s-three.peeking .lede{opacity:.28}
   .ap{position:relative;cursor:pointer;transition:opacity .35s var(--ease-out),border-color .3s,background-color .3s}
   .ap:hover,.ap.peek-on{border-color:rgba(0,174,239,.45);background:var(--panel-hi)}
   .ap:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
@@ -476,7 +474,6 @@
   .peek li{font-size:32px;line-height:1.25;color:var(--ink-3);transition:color .3s}
   .peek li b{display:inline-block;width:1.4em;font-family:var(--font-display);font-weight:800;color:var(--ink-3)}
   .peek li.on{color:var(--ink)} .peek li.on b{color:var(--accent)} .peek li.done{color:var(--ink-2)}
-  .peek .more{margin-top:10px;font-size:28px;color:var(--ink-3)}
   /* shared SVG language for the three visualisations (viewBox 1552×560 = stage px in the panel, so 28 = 28 px on the stage) */
   .how-svg text{font-family:var(--font);font-size:28px;fill:var(--ink-2)}
   .how-svg .h-lab{fill:var(--ink);font-weight:600;font-size:30px}
@@ -1083,11 +1080,11 @@
 
   <div class="frame" id="slide-14">
   <!-- ================= THREE APPROACHES ================= -->
-  <section class="slide s-three" data-title="Three approaches"
+  <section class="slide s-three" data-title="Three ways to approach"
     data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live. Optional, if there's time or a question: click a card to open a short animated explainer of how that approach works (Esc or the clicker closes it). Hovering with the mouse shows a small preview above the card.">
     <div class="rule"></div>
-    <h2>Three approaches</h2>
-    <div class="lede-row"><p class="lede">From the synthesised brief · same shared-risk question</p><p class="hint">Hover to see how · click to expand</p></div>
+    <h2>Three ways to approach</h2>
+    <p class="lede">From the synthesised brief · same shared-risk question</p>
     <div class="appr">
       <div class="ap" data-how="rag" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">01</span><span class="k">Similarity</span><h3>Plain vector RAG</h3><p>Retrieves the most similar passages and lets the model summarise shared risks.</p><i class="open" aria-hidden="true"></i></div>
       <div class="ap" data-how="graph" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p><i class="open" aria-hidden="true"></i></div>
@@ -1835,14 +1832,13 @@
 
   /* ---------- the cards: hover peek, click / Enter / tap opens ---------- */
   const cards = [...document.querySelectorAll('.s-three .ap[data-how]')], row = document.querySelector('.s-three .appr'), slide = document.querySelector('.s-three');
-  if (!canHover.matches) { const hint = slide.querySelector('.hint'); if (hint) hint.textContent = 'Tap a card to see how it works'; }
   let peekT = 0, peeked = null;
   function showPeek(c){
     if (dlg.open) return;
     let pk = c.querySelector('.peek');
     if (!pk){ pk = document.createElement('div'); pk.className = 'peek'; pk.setAttribute('aria-hidden', 'true');
       const key = c.dataset.how;
-      pk.innerHTML = '<svg class="how-svg mini" viewBox="0 0 1552 560"></svg><div><ol></ol><div class="more">Click to open the full explainer</div></div>'; c.appendChild(pk);
+      pk.innerHTML = '<svg class="how-svg mini" viewBox="0 0 1552 560"></svg><div><ol></ol></div>'; c.appendChild(pk);
       const ol = pk.querySelector('ol'), render = mount(pk.querySelector('svg'), key);
       HOW[key].beats.forEach((b, k) => { const li = document.createElement('li'); li.innerHTML = `<b>${k + 1}</b>`; li.append(b); ol.appendChild(li); });
       const lis = [...ol.children];
