@@ -542,9 +542,9 @@
   .int-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:22px;border-bottom:1px solid var(--line);
     font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:28px;color:var(--ink-2)}
   .int-card .open{position:static;display:block;width:30px;height:30px;border:3px solid var(--accent);border-radius:6px;box-shadow:inset 0 6px 0 -2px var(--accent);opacity:.7}
-  .int-card ol{list-style:none;counter-reset:s;margin-top:24px;display:flex;flex-direction:column;gap:18px}
-  .int-card li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;font-size:30px;line-height:1.35;color:var(--ink)}
-  .int-card li::before{content:counter(s);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:26px;color:var(--ink-3);padding-top:3px}
+  .int-card ul{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:20px}
+  .int-card li{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:30px;line-height:1.3;color:var(--ink)}
+  .int-card li span{color:var(--accent);margin-right:.2em}
   .int-cap{margin-top:24px;font-size:28px;color:var(--ink-3)}
   .int-cap code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em;color:var(--ink-2)}
   /* intent.md file view (dialog) */
@@ -1136,7 +1136,7 @@
        Design produces spec.md; "Intent is captured once, in the originator's own words, as a version-controlled artifact the next stage can act on."
        In the playbook Claude drafts intent.md and the product owner corrects/accepts it, so the slide does NOT claim "no AI at the intent gate".
        Jira stays a valid source of truth in the playbook; "intent sits above the tickets" is the speaker's own view.
-       The five sentences are re-created for the talk from the slide 13 decisions; the speaker should swap in his real file if he has one. -->
+       The card lists the section headings of the speaker's own intent.md; the full file opens in the dialog. -->
   <section class="slide s-intent" data-title="Intent before build"
     data-notes="Before the demo, one habit. We went from death by PowerPoint to death by AI slop: long documents nobody wrote and nobody reads. So I start with a few sentences of intent, in my own words. That's the human gate. Then the agent expands it into the spec, and I review the spec rather than write it. This matches the Plan stage in Anthropic's AI-native SDLC playbook: intent captured once, in the originator's own words, as a version-controlled intent.md the next stage can act on. Jira still tracks the work — one intent can turn into several tickets; the intent is the decision above them. [Click the card to show the file.]">
     <div class="rule"></div>
@@ -1150,13 +1150,13 @@
       <div class="int-r">
         <div class="int-card" role="button" tabindex="0" data-dialog="intent-file" aria-haspopup="dialog" aria-label="Open intent.md">
           <div class="int-head"><span>intent.md</span><i class="open" aria-hidden="true"></i></div>
-          <ol>
-            <li>Which industry risks do ten auto and chip companies share, and how strongly?</li>
-            <li>Use only public 10-K filings, Item 1A (risk factors).</li>
-            <li>Sort risks into a fixed list of categories, agreed up front.</li>
-            <li>“Shared” means many of the ten map to the same category, counted in code.</li>
-            <li>Every claim cites its passage; all three approaches are scored the same way.</li>
-          </ol>
+          <ul>
+            <li><span>##</span> Problem</li>
+            <li><span>##</span> Proposed outcome</li>
+            <li><span>##</span> Affected users and systems</li>
+            <li><span>##</span> Constraints</li>
+            <li><span>##</span> Open questions</li>
+          </ul>
         </div>
         <p class="int-cap">Then the agent writes <code>spec.md</code> · Jira keeps the tickets</p>
       </div>
@@ -1302,30 +1302,33 @@
 </dialog>
 <!-- intent.md, opened from slide 15. The speaker's own file, verbatim (supplied in session 6); headings follow the playbook's intent template
      (problem, outcome, users, constraints, open questions). Quote verbatim from https://claude.com/resources/articles/the-ai-native-sdlc-playbook (01 Plan). -->
-<dialog class="filing wide" id="intent-file" aria-labelledby="intent-file-t">
+<dialog class="filing" id="intent-file" aria-labelledby="intent-file-t">
   <header><h3 id="intent-file-t">intent.md</h3><button class="x" type="button" data-close aria-label="Close">×</button></header>
   <div class="addr" aria-hidden="true"><b>shared-risk-demo</b>/intent/intent.md</div>
 <div class="md"><span class="h"># Intent: shared industry risks across autos + semis counterparties</span>
-<span class="c">Author: Yevhenii Volkovych (Risk AI BA). Status: accepted for afternoon prototype.</span>
+<span class="c">Author: Yevhenii Volkovych. Status: accepted prototype.</span>
 
 <span class="h">## Problem</span>
-Wholesale credit needs to see which industry risks connect a fixed group of ~10 US-listed autos and semis counterparties (GM, F, TSLA, APTV, BWA, LEA, NXPI, MCHP, ON, TXN). Today that means reading 10-K Item 1A by hand; similarity of wording is easy to confuse with truly shared risk.
+For a fixed set of 10 US-listed autos and semis names (GM, F, TSLA, APTV, BWA, LEA, NXPI, MCHP, ON, TXN) which live in 'docs/sources' I need to see which industry risks show up across several of them. Right now that means reading 10-K Item 1A by hand. Easy trap: two filings use similar wording and you treat it as the same risk when it isn’t.
 
 <span class="h">## Proposed outcome</span>
-For a fixed question — “which industry risks do many of these companies share?” — produce a checkable answer from public latest 10-K Item 1A only: company, risk category/leaf, verbatim quote, source ref. Compare three approaches under one scoring idea: plain vector RAG, GraphRAG (Neo4j), taxonomy-first extraction + deterministic aggregation.
+Answer one question from public latest Item 1A only: which industry risks do many of these companies share?
+
+Each hit should be checkable — company, risk category, quote or extracted chunk, source ref.
+
+Run three builds against the same scoring idea: plain vector RAG, GraphRAG (Neo4j as local container), and taxonomy-first extraction with code doing the overlap count. One intent, one eval — not three separate products.
 
 <span class="h">## Affected users and systems</span>
-Risk AI BA / discovery; prototype console (no production credit systems). Public EDGAR filings only — no employer or customer data.
+Me who does discovery stage for this request. Thin prototype console. EDGAR/public filings. No employer or customer data.
 
 <span class="h">## Constraints</span>
-- Human settles source, taxonomy, “shared”, correct-answer shape, and scoring <b>**before**</b> build.
-- Closed taxonomy for the structured path; quotes must verify against source text.
-- Offline/replay fallback allowed; synthetic/demo data OK for the talk; views are the author’s, not the employer’s.
-- Do not treat the three approaches as three products — one intent, one eval.
+- I settle source, taxonomy, what “shared” means, what a right answer looks like, and the scoring rule before anyone codes.
+- Structured path uses a closed taxonomy; quotes have to match the filing text.
+- Offline/replay is fine for the talk. Demo/synthetic data OK. Views are mine, not the bank’s.
 
 <span class="h">## Open questions</span>
-- Exact leaf set for the closed taxonomy (freeze v1 before coding).
-- Threshold for “shared” (e.g. ≥N counterparties on the same leaf) — set in scoring, not ad hoc in the LLM.</div>
+- Freeze the v1 leaf list for the taxonomy before build.
+- Lock the “shared” rule in scoring (e.g. ≥N names on the same leaf) — don’t leave that to the model mid-run.</div>
   <p class="pb">Anthropic’s playbook, Plan stage: <q>Intent is captured once, in the originator’s own words, as a version-controlled artifact the next stage can act on.</q></p>
   <footer><p><b>Next: the agent expands it into spec.md; I review it, I don’t write it.</b></p>
     <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Open the full article on claude.com ↗</a></footer>
