@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 <script>document.documentElement.classList.add('preload')</script>
 <!--
-  Foundation deck, slides 1–16. Static.
+  Foundation deck, slides 1–17. Static.
   One-page vertical deck: each slide is a full-viewport section (scroll-snap). Design stage = 1920×1080, scaled to fit.
   Navigation: native scroll (wheel / trackpad / touch); ↑/↓, ←/→, Space / Shift+Space, PageUp/PageDown, Home/End jump; dots on the right.
   Deep link: index.html#3 opens slide 3.
@@ -614,6 +614,15 @@
   dialog.console header a{color:var(--accent);font-weight:600;font-size:.9em;text-underline-offset:4px;white-space:nowrap}
   dialog.console iframe{flex:1;width:100%;border:0;background:#07111C;display:block}
 
+  /* ---------- Takeaways (slide 17): three stacked lines, each fades in on its own after arrival ---------- */
+  .s-take .kicker{margin-bottom:24px}
+  .s-take h2{font-size:96px;line-height:1.05}
+  .take{list-style:none;margin:48px 0 auto;display:flex;flex-direction:column;gap:30px}
+  .take li{display:grid;grid-template-columns:110px 1fr;align-items:baseline;padding-top:30px;border-top:1px solid var(--line)}
+  .take .n{font-size:36px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+  .take b{display:block;font-size:56px;font-weight:700;line-height:1.1}
+  .take p{margin-top:14px;font-size:34px;line-height:1.3;color:var(--ink-2);max-width:1500px}
+
   /* ---------- Who sits at the new constraint ---------- */
   .who-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;margin-top:56px;align-items:start}
   .exhibit{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:40px 48px 32px}
@@ -1209,6 +1218,23 @@
       </div>
     </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
+  </section>
+  </div>
+
+
+  <div class="frame" id="slide-17">
+  <!-- ================= TAKEAWAYS (agenda part 04) ================= -->
+  <section class="slide s-take" data-title="Three lines to leave with" data-auto="700"
+    data-notes="Three lines to leave with. One: coding is not delivery. The choke is discovery, and that is BA ground. Two: I write the intent, agents do the rest. Five human sentences first, one intent, one scoring idea; then the long doc and the build. Three: three approaches, one question. Don't bet on one pattern. Put the audit trail in the prototype: quotes, a closed taxonomy, counts in code. Thank you.">
+    <div class="rule"></div>
+    <div class="kicker">04 · Takeaways</div>
+    <h2>Three lines to leave with</h2>
+    <ol class="take">
+      <li data-build="1"><span class="n">01</span><div><b>Coding ≠ delivery.</b><p>The choke is discovery. That’s BA ground.</p></div></li>
+      <li data-build="2"><span class="n">02</span><div><b>I write the intent. Agents do the rest.</b><p>Five human sentences first — one intent, one scoring idea — then the long doc and the build.</p></div></li>
+      <li data-build="3"><span class="n">03</span><div><b>Three approaches. One question.</b><p>Don’t bet on one pattern. Put the audit trail in the prototype: quotes, closed taxonomy, counts in code.</p></div></li>
+    </ol>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
   </section>
   </div>
 
