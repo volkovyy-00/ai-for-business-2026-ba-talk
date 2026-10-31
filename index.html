@@ -456,6 +456,68 @@
   .ap .k{margin-top:28px;font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
   .ap h3{margin-top:12px;font-size:46px;font-weight:700;line-height:1.15;min-height:2.3em}
   .ap p{margin-top:28px;padding-top:28px;border-top:1px solid var(--line);font-size:30px;line-height:1.4;color:var(--ink-2)}
+  /* slide 14 explainers: hover a card (400 ms) for a peek rising above it; click / Enter / tap opens the full panel (dialog#how) */
+  .s-three .lede-row{display:flex;align-items:baseline;justify-content:space-between;gap:40px}
+  .s-three .hint{font-size:28px;color:var(--ink-3)}
+  .s-three .rule,.s-three h2,.s-three .lede-row{transition:opacity .35s var(--ease-out)}
+  .s-three.peeking .rule,.s-three.peeking h2,.s-three.peeking .lede-row{opacity:.28}
+  .ap{position:relative;cursor:pointer;transition:opacity .35s var(--ease-out),border-color .3s,background-color .3s}
+  .ap:hover,.ap.peek-on{border-color:rgba(0,174,239,.45);background:var(--panel-hi)}
+  .ap:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
+  .appr.peeking .ap:not(.peek-on){opacity:.4}
+  .ap .open{position:absolute;top:56px;right:48px;width:30px;height:30px;border:3px solid var(--accent);border-radius:6px;box-shadow:inset 0 6px 0 -2px var(--accent);opacity:.55;transition:opacity .3s}
+  .ap:hover .open,.ap.peek-on .open,.ap:focus-visible .open{opacity:1}
+  .peek{position:absolute;left:0;right:0;bottom:calc(100% + 18px);padding:18px 20px 20px;border-radius:var(--r);background:var(--panel-hi);border:1px solid rgba(0,174,239,.35);
+    box-shadow:0 24px 60px rgba(0,0,0,.45);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+  .ap.peek-on .peek{opacity:1;transform:none}
+  .peek svg{display:block;width:100%;height:auto}
+  .ap .peek p{margin-top:12px;padding-top:0;border-top:0;font-size:28px;line-height:1.3;color:var(--ink);min-height:2.6em}
+  /* shared SVG language for the three visualisations (viewBox 1552×560 = stage px in the panel, so 28 = 28 px on the stage) */
+  .how-svg text{font-family:var(--font);font-size:28px;fill:var(--ink-2)}
+  .how-svg .h-lab{fill:var(--ink);font-weight:600;font-size:30px}
+  .how-svg .h-gl,.how-svg .h-cl{fill:var(--ink-3)}
+  .how-svg .h-tk{font-size:24px;font-weight:600;fill:var(--ink-3)}
+  .how-svg .h-b{fill:var(--ink);font-weight:600}
+  .how-svg .h-c{fill:var(--accent)}
+  .how-svg .h-a{fill:#E8A33D}
+  .how-svg .h-num{font-family:var(--font-display);font-weight:800;fill:var(--ink)}
+  .how-svg .h-mono{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:26px}
+  .how-svg .h-frame{fill:rgba(255,255,255,.02);stroke:rgba(255,255,255,.16);stroke-width:2;stroke-dasharray:6 8}
+  .how-svg .h-box{fill:var(--panel);stroke:var(--line);stroke-width:2}
+  .how-svg .h-edge{fill:none;stroke:#BCCBDA;stroke-width:2;stroke-dasharray:1}
+  .how-svg .h-glow{fill:none;stroke:var(--accent);stroke-width:12;stroke-linecap:round}
+  .how-svg .h-ray{stroke-width:2.5;stroke-linecap:round}
+  dialog.how{position:fixed;left:50%;top:50%;margin:0;width:1680px;height:1040px;max-width:none;max-height:none;padding:0;border:1px solid var(--line);border-radius:20px;
+    background:var(--midnight-2);color:var(--ink);font-family:var(--font);transform:translate(-50%,-50%) scale(var(--s,1));overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.5)}
+  dialog.how:not([open]){display:none}
+  dialog.how::backdrop{background:rgba(5,12,20,.82)}
+  dialog.how[open]{animation:howIn .4s var(--ease-out)}
+  @keyframes howIn{from{opacity:0;transform:translate(-50%,-50%) scale(calc(var(--s,1)*.97))}}
+  .how-in{display:flex;flex-direction:column;height:100%;padding:40px 64px 30px}
+  .how-head{display:flex;align-items:flex-start;gap:28px}
+  .how-head .num{font-family:var(--font-display);font-size:60px;font-weight:800;color:var(--accent);line-height:1.05;letter-spacing:-.02em}
+  .how-head .tt{flex:1}
+  .how-head h3{font-family:var(--font-display);font-size:60px;font-weight:800;line-height:1.05;letter-spacing:-.015em}
+  .how-head .one{margin-top:10px;font-size:32px;line-height:1.3;color:var(--ink-2)}
+  .how-btn{font:inherit;font-size:28px;font-weight:600;color:var(--ink-2);background:none;border:1px solid var(--line);border-radius:999px;padding:10px 26px;cursor:pointer;white-space:nowrap}
+  .how-btn:hover{color:var(--ink);border-color:var(--accent)}
+  .how-x{font:inherit;font-size:56px;line-height:.8;color:var(--ink-2);background:none;border:0;cursor:pointer;padding:6px 10px;border-radius:10px}
+  .how-x:hover{color:var(--ink)}
+  .how-btn:focus-visible,.how-x:focus-visible,.how-beats button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+  .how-q{margin-top:24px;display:flex;align-items:center;gap:28px}
+  .how-q .q{font-size:28px;font-weight:600;color:var(--ink);border:1px solid var(--active);background:rgba(0,109,227,.16);border-radius:999px;padding:10px 26px;white-space:nowrap}
+  .how-q .gl{font-size:28px;line-height:1.3;color:var(--ink-3)}
+  .how-stage{margin-top:22px}
+  .how-stage svg{display:block;width:1552px;height:560px}
+  .how-beats{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:22px}
+  .how-beats button{font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;display:block;width:100%;cursor:pointer;border-radius:4px}
+  .how-beats .bar{display:block;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+  .how-beats .bar i{display:block;height:100%;width:0;background:var(--active)}
+  .how-beats .bt{display:block;margin-top:14px;font-size:28px;line-height:1.3;color:var(--ink-3);transition:color .3s}
+  .how-beats li.done .bt{color:var(--ink-2)}
+  .how-beats li.on .bt{color:var(--ink)}
+  .how-fine{margin-top:auto;font-size:24px;color:var(--ink-3)}
+  @media (prefers-reduced-motion:reduce){ dialog.how[open]{animation:none} .peek{transform:none} }
 
   /* ---------- Console explainer (foundation mock) ---------- */
   .s-console h2{font-size:84px}
@@ -1017,14 +1079,14 @@
   <div class="frame" id="slide-14">
   <!-- ================= THREE APPROACHES ================= -->
   <section class="slide s-three" data-title="Three approaches"
-    data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live.">
+    data-notes="Out of that one brief came three ways to answer the question. One: plain vector RAG — find the passages that look most similar and let the model summarise. Two: GraphRAG on Neo4j — turn the filings into a graph of companies and risks, and ask which risks connect to many companies. Three: taxonomy first — fix the risk categories up front, extract into them, and do the counting in plain code, not in the model. Next, we'll see each one live. Optional, if there's time or a question: click a card to open a short animated explainer of how that approach works (Esc or the clicker closes it). Hovering with the mouse shows a small preview above the card.">
     <div class="rule"></div>
     <h2>Three approaches</h2>
-    <p class="lede">From the synthesised brief · same shared-risk question</p>
+    <div class="lede-row"><p class="lede">From the synthesised brief · same shared-risk question</p><p class="hint">Hover to see how · click to expand</p></div>
     <div class="appr">
-      <div class="ap"><span class="n">01</span><span class="k">Similarity</span><h3>Plain vector RAG</h3><p>Retrieves the most similar passages and lets the model summarise shared risks.</p></div>
-      <div class="ap"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p></div>
-      <div class="ap"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p></div>
+      <div class="ap" data-how="rag" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">01</span><span class="k">Similarity</span><h3>Plain vector RAG</h3><p>Retrieves the most similar passages and lets the model summarise shared risks.</p><i class="open" aria-hidden="true"></i></div>
+      <div class="ap" data-how="graph" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">02</span><span class="k">Graph</span><h3>GraphRAG (Neo4j)</h3><p>Links companies to risks in a graph, then queries which risks many companies share.</p><i class="open" aria-hidden="true"></i></div>
+      <div class="ap" data-how="tax" tabindex="0" role="button" aria-haspopup="dialog"><span class="n">03</span><span class="k">Structure</span><h3>Taxonomy-first extraction</h3><p>Extracts into fixed risk categories, then counts overlap deterministically.</p><i class="open" aria-hidden="true"></i></div>
     </div>
     <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">14</span></span></div>
   </section>
@@ -1190,6 +1252,17 @@
   </div>
   <footer><p class="reel-cap"><b>Sped up.</b> Microsoft 365 Copilot’s Researcher agent, several runs side by side.</p>
     <p class="reel-cap" hidden><b>Re-created and sped up.</b> A real run takes 10–15 minutes.</p></footer>
+</dialog>
+<!-- "How it works" explainer for slide 14, one panel shared by the three approaches; filled by the explainer script below. Staged demo data only. -->
+<dialog class="how" id="how" aria-labelledby="how-t">
+  <div class="how-in">
+    <div class="how-head"><span class="num"></span><div class="tt"><h3 id="how-t"></h3><p class="one"></p></div>
+      <button class="how-btn" type="button" data-replay>↻ Replay</button><button class="how-x" type="button" data-close aria-label="Close">×</button></div>
+    <div class="how-q"><span class="q">Which risks do many of these companies share?</span><span class="gl"></span></div>
+    <div class="how-stage"><svg class="how-svg" viewBox="0 0 1552 560" role="img"></svg></div>
+    <ol class="how-beats"></ol>
+    <p class="how-fine"></p>
+  </div>
 </dialog>
 <nav id="dots" aria-label="Slides"></nav>
 
@@ -1489,6 +1562,302 @@
       stop(){ cancelAnimationFrame(raf); raf = 0; tw = null; svg.classList.remove('running'); seed(); }
     };
   }
+})();
+</script>
+<script>
+/* Slide 14 — "how it works" explainers for the three approaches.
+   Each visualisation is a deterministic timeline: build(svg) draws the scene once and returns render(t), t in seconds.
+   The hover peek plays the same timeline sped up (≈5 s, then holds); the panel plays it once at full length (12 s) with three caption beats.
+   Reduced motion: both show the final, fully annotated frame. All data is staged for the talk (public tickers; mappings and scores invented). */
+(function(){
+  const NS = 'http://www.w3.org/2000/svg';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)'), canHover = matchMedia('(hover: hover) and (pointer: fine)');
+  const ACC = '#00AEEF', ACT = '#006DE3', AMB = '#E8A33D', INK2 = '#BCCBDA', PANEL = '#12293F';
+  const cl = x => x < 0 ? 0 : x > 1 ? 1 : x, seg = (t, a, b) => cl((t - a)/(b - a)), lerp = (a, b, p) => a + (b - a)*p;
+  const eo = x => 1 - Math.pow(1 - x, 3), eio = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3)/2;
+  const bell = (t, a, b) => Math.sin(Math.PI*seg(t, a, b));
+  function el(p, tag, a, txt){ const e = document.createElementNS(NS, tag); if (a) for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; p.appendChild(e); return e; }
+  const set = (e, a) => { for (const k in a) e.setAttribute(k, typeof a[k] === 'number' ? +a[k].toFixed(2) : a[k]); };
+  const rng = s => () => (s = (s*9301 + 49297) % 233280)/233280;
+  const text = (p, x, y, cls, segs, a) => { const t = el(p, 'text', Object.assign({x, y, class: cls || ''}, a || {})); (Array.isArray(segs) ? segs : [[segs, '']]).forEach(([s, c]) => el(t, 'tspan', c ? {class: c} : null, s)); return t; };
+  // typewriter over tspans: show the first n characters across all segments
+  const typer = (t) => { const sp = [...t.querySelectorAll('tspan')], full = sp.map(s => s.textContent); const N = full.join('').length;
+    return p => { let n = Math.round(N*p); sp.forEach((s, k) => { const v = full[k].slice(0, Math.max(0, n)); if (s.textContent !== v) s.textContent = v; n -= full[k].length; }); }; };
+
+  // staged demo data: ten US-listed auto and semiconductor companies × a closed set of risk categories (1 = the 10-K maps to it)
+  const TICK = ['GM','F','TSLA','APTV','BWA','LEA','NXPI','MCHP','ON','TXN'];
+  const CATS = ['Supply chain','Geopolitics & trade','Cyber','Demand cycle','Competition','Regulation','Liquidity & funding','Labour'];
+  const M = ['1111111111','1101101111','1111011111','1101111011','0110101111','1111100000','1100000000','1100110000'].map(r => [...r].map(Number));
+  const COUNT = M.map(r => r.reduce((a, b) => a + b, 0));
+
+  /* ---------- 01 Plain vector RAG: similarity field → ranked neighbours → prompt dock → answer ---------- */
+  function rag(svg){
+    const Q = [520, 300], rnd = rng(11);
+    el(svg, 'rect', {x:1, y:1, width:900, height:558, rx:16, class:'h-frame'});
+    text(svg, 28, 50, 'h-lab', 'Similarity space (projected)');
+    text(svg, 28, 86, 'h-gl', 'each dot = one 10-K passage · closer = more similar wording');
+    const CL = [
+      {c:[430,388], n:16, s:58, l:'supply chain', lp:[430,500]}, {c:[700,172], n:9, s:38, l:'talent & labour', lp:[700,124]},
+      {c:[170,220], n:12, s:50, l:'cyber', lp:[170,152]},          {c:[190,430], n:11, s:48, l:'demand', lp:[190,522]},
+      {c:[790,432], n:10, s:46, l:'regulation', lp:[790,522]},     {c:[380,180], n:9, s:36, l:'funding', lp:[380,128]}];
+    const dots = [];
+    CL.forEach(k => { for (let j = 0; j < k.n; j++){ let x, y, n = 0;
+      do { const a = rnd()*6.283, r = Math.sqrt(rnd())*k.s; x = k.c[0] + Math.cos(a)*r; y = k.c[1] + Math.sin(a)*r; } while (Math.hypot(x - Q[0], y - Q[1]) < 110 && ++n < 30);
+      dots.push({x, y}); } });
+    // the six nearest passages, in rank order; rank 3 is the trap: similar wording ("shortage"), different risk (skilled staff)
+    const TOP = [[34,170,'F','semiconductor shortage','.91'],[46,120,'GM','supplier disruption','.89'],[58,-40,'NXPI','shortage of skilled talent','.87'],
+                 [70,200,'APTV','chip supply constraints','.85'],[82,140,'LEA','component shortages','.83'],[94,105,'TSLA','supply chain delays','.81']];
+    const top = TOP.map(([d, a, tk, gist, sc], k) => { const r = a*Math.PI/180, o = {x:Q[0] + d*Math.cos(r), y:Q[1] + d*Math.sin(r), bx:Q[0] + (d+24)*Math.cos(r), by:Q[1] + (d+24)*Math.sin(r) + 9, rank:k, tk, gist, sc, amb:k === 2}; dots.push(o); return o; });
+    dots.forEach(d => { d.sx = 60 + rnd()*780; d.sy = 120 + rnd()*400; d.dl = rnd()*.5; });
+    const labs = CL.map(k => text(svg, k.lp[0], k.lp[1], 'h-cl', k.l, {'text-anchor':'middle'}));
+    const gR = el(svg, 'g'), rays = top.map(d => el(gR, 'line', {x1:Q[0], y1:Q[1], x2:Q[0], y2:Q[1], class:'h-ray', stroke: d.amb ? AMB : ACC}));
+    const dEls = dots.map(() => el(svg, 'circle', {r:6.5, fill:INK2}));
+    const badges = top.map(d => text(svg, d.bx, d.by, d.amb ? 'h-a' : 'h-c', String(d.rank + 1), {'text-anchor':'middle', 'font-size':24, 'font-weight':700}));
+    const ripple = el(svg, 'circle', {cx:Q[0], cy:Q[1], r:10, fill:'none', stroke:ACC, 'stroke-width':2});
+    const qd = el(svg, 'path', {d:'M0 -15 L15 0 L0 15 L-15 0Z', fill:ACC, stroke:'#0B1C2C', 'stroke-width':3});
+    const qlab = text(svg, Q[0] + 30, Q[1] + 44, 'h-c', 'your question, as a point', {'font-weight':600});
+    // the trap, called out late
+    const amb = top[2], aRing = el(svg, 'circle', {cx:amb.x, cy:amb.y, r:12, fill:'none', stroke:AMB, 'stroke-width':2.5});
+    const aLead = el(svg, 'line', {x1:amb.x + 10, y1:amb.y - 4, x2:604, y2:250, stroke:AMB, 'stroke-width':2});
+    const aTxt = [text(svg, 612, 258, 'h-a', 'same word: “shortage”', {'font-weight':600}), text(svg, 612, 292, 'h-a', 'different risk story')];
+    // prompt dock
+    el(svg, 'rect', {x:960, y:1, width:591, height:330, rx:16, class:'h-box'});
+    text(svg, 988, 46, 'h-lab', 'Prompt to the model');
+    text(svg, 988, 82, 'h-gl', 'what the model reads before it answers');
+    const slots = top.map((d, k) => { const g = el(svg, 'g', {opacity:0});
+      text(g, 988, 136 + k*36, '', [[(k+1) + '  ', 'h-gl'], [d.tk, d.amb ? 'h-a' : 'h-b'], [' · ' + d.gist, d.amb ? 'h-a' : '']]);
+      text(g, 1524, 136 + k*36, d.amb ? 'h-a' : 'h-c', d.sc, {'text-anchor':'end'}); return g; });
+    const chips = top.map(d => el(svg, 'circle', {r:7, fill: d.amb ? AMB : ACC, opacity:0}));
+    // model answer
+    el(svg, 'rect', {x:960, y:350, width:591, height:209, rx:16, class:'h-box'});
+    const aHead = text(svg, 988, 394, 'h-lab', 'Model answer');
+    const ans = [text(svg, 988, 438, 'h-b', 'Shared risks: chip and component'), text(svg, 988, 474, 'h-b', 'shortages, supplier disruption,'),
+                 text(svg, 988, 510, '', [['skilled-staff shortages', 'h-a'], ['.', 'h-b']])].map(typer);
+    const cites = text(svg, 988, 546, 'h-gl', [['cites  F · GM · ', ''], ['NXPI', 'h-a'], [' · APTV · LEA · TSLA', '']]);
+    return t => {
+      const dim = seg(t, 5.4, 6.0);
+      dots.forEach((d, k) => { const p = eo(seg(t, .1 + d.dl, 1.3 + d.dl)), e = dEls[k];
+        let o = p*.55, r = 6.5, f = INK2;
+        if (d.rank != null){ const lp = seg(t, 3.1 + d.rank*.42, 3.35 + d.rank*.42); o = lerp(o, 1, lp); r = lerp(6.5, 10, lp); if (lp > 0) f = d.amb ? AMB : ACC; }
+        else o *= lerp(1, .5, dim);
+        set(e, {cx:lerp(d.sx, d.x, p), cy:lerp(d.sy, d.y, p), r, opacity:o}); if (e.getAttribute('fill') !== f) e.setAttribute('fill', f); });
+      labs.forEach(l => set(l, {opacity: seg(t, 1.0, 1.6)*lerp(1, .5, dim)}));
+      const qp = eo(seg(t, 1.6, 2.4));
+      set(qd, {transform:`translate(${Q[0]} ${lerp(-20, Q[1], qp)})`, opacity: seg(t, 1.6, 1.75)});
+      const rp = seg(t, 2.4, 3.4); set(ripple, {r: lerp(12, 140, eo(rp)), opacity: rp > 0 && rp < 1 ? (1 - rp)*.6 : 0});
+      set(qlab, {opacity: seg(t, 2.4, 2.8)*(1 - seg(t, 5.2, 5.6))});
+      top.forEach((d, k) => { const p = eo(seg(t, 2.8 + k*.42, 3.25 + k*.42));
+        set(rays[k], {x2:lerp(Q[0], d.x, p), y2:lerp(Q[1], d.y, p), opacity: p > 0 ? lerp(.9, .45, dim) : 0});
+        set(badges[k], {opacity: seg(t, 3.2 + k*.42, 3.4 + k*.42)});
+        const s0 = 5.6 + k*.3, cp = eio(seg(t, s0, s0 + .7)), x1 = 982, y1 = 126 + k*36, mx = (d.x + x1)/2, my = Math.min(d.y, y1) - 70;
+        set(chips[k], {cx: (1-cp)*(1-cp)*d.x + 2*(1-cp)*cp*mx + cp*cp*x1, cy: (1-cp)*(1-cp)*d.y + 2*(1-cp)*cp*my + cp*cp*y1, opacity: cp > 0 && cp < 1 ? 1 : 0});
+        set(slots[k], {opacity: seg(t, s0 + .55, s0 + .85)}); });
+      set(aHead, {opacity: seg(t, 8.0, 8.4)});
+      const tp = seg(t, 8.4, 10.0); ans[0](cl(tp*3)); ans[1](cl(tp*3 - 1)); ans[2](cl(tp*3 - 2));
+      set(cites, {opacity: seg(t, 10.0, 10.4)});
+      const ap = seg(t, 9.8, 10.4), ar = seg(t, 9.8, 10.9);
+      set(aRing, {r: lerp(12, 34, eo(ar)), opacity: ar > 0 ? lerp(1, .55, ar) : 0}); set(aLead, {opacity: ap}); aTxt.forEach(x => set(x, {opacity: ap}));
+    };
+  }
+
+  /* ---------- 02 GraphRAG: companies ↔ risk nodes; count links per risk node; walk back to the filings ---------- */
+  function graph(svg){
+    const R = [0, 1, 2, 3, 4, 7], CY = 330, PY = 78;
+    const xs = TICK.map((_, i) => 162 + i*132 + (i > 5 ? 40 : 0)), rxs = R.map((_, j) => 160 + j*246.4);
+    text(svg, (xs[0] + xs[5])/2, 30, 'h-cl', 'Autos', {'text-anchor':'middle'});
+    text(svg, (xs[6] + xs[9])/2, 30, 'h-cl', 'Semiconductors', {'text-anchor':'middle'});
+    const gE = el(svg, 'g'), gG = el(svg, 'g'), edges = [];
+    R.forEach((r, j) => TICK.forEach((_, i) => { if (!M[r][i]) return;
+      const P = [[xs[i], PY + 24], [xs[i], 210], [rxs[j], 200], [rxs[j], CY]];
+      const d = `M${P[0]} C${P[1]} ${P[2]} ${P[3]}`;
+      edges.push({i, j, P, e: el(gE, 'path', {d, class:'h-edge', pathLength:1, 'stroke-dashoffset':1}), g: j === 0 ? el(gG, 'path', {d, class:'h-glow', opacity:0}) : null}); }));
+    const hot = edges.filter(e => e.j === 0);
+    const bez = (P, u) => { const v = 1 - u; return [0, 1].map(k => v*v*v*P[0][k] + 3*v*v*u*P[1][k] + 3*v*u*u*P[2][k] + u*u*u*P[3][k]); };
+    const pulses = hot.map(() => el(svg, 'circle', {r:6, fill:ACC, opacity:0}));
+    const nodes = R.map((r, j) => { const g = el(svg, 'g', {opacity:0});
+      const c = el(g, 'circle', {cx:rxs[j], cy:CY, r:26, fill:PANEL, stroke:ACT, 'stroke-width':3});
+      const n = text(g, rxs[j], CY + 11, 'h-num', '0', {'text-anchor':'middle', 'font-size':30, opacity:0});
+      const l = text(g, rxs[j], CY + 92, '', CATS[r], {'text-anchor':'middle'});
+      return {g, c, n, l, cnt: COUNT[r]}; });
+    const pills = TICK.map((tk, i) => { const g = el(svg, 'g', {opacity:0});
+      const b = el(g, 'rect', {x:xs[i] - 56, y:PY - 24, width:112, height:48, rx:24, fill:PANEL, stroke:'rgba(255,255,255,.28)', 'stroke-width':2});
+      text(g, xs[i], PY + 10, 'h-b', tk, {'text-anchor':'middle'}); return {g, b}; });
+    // query: Cypher, Neo4j's query language
+    const cy = [text(svg, 0, 486, 'h-mono', [['MATCH', 'h-c'], [' (c:Company)-[:HAS_RISK]->(r:Risk)', '']]),
+                text(svg, 0, 524, 'h-mono', [['RETURN', 'h-c'], [' r.name, count(c) AS companies ', ''], ['ORDER BY', 'h-c'], [' companies DESC', '']])].map(typer);
+    const cyGl = text(svg, 660, 486, 'h-gl', '← Neo4j’s query language', {opacity:0});
+    const ansG = el(svg, 'g', {opacity:0});
+    el(ansG, 'rect', {x:1000, y:452, width:551, height:107, rx:16, class:'h-box'});
+    text(ansG, 1026, 496, '', [['Most shared: ', 'h-b'], ['Supply chain', 'h-c']], {'font-size':30});
+    text(ansG, 1026, 536, '', '10 of 10 companies · cites each Item 1A');
+    return t => {
+      pills.forEach((p, i) => set(p.g, {opacity: seg(t, i*.07, .5 + i*.07)}));
+      edges.forEach(e => set(e.e, {'stroke-dashoffset': 1 - eo(seg(t, 1.2 + e.i*.26, 1.9 + e.i*.26))}));
+      const cp = seg(t, 6.4, 7.8), hp = seg(t, 8.0, 8.6);
+      edges.forEach(e => { const top = e.j === 0;
+        set(e.e, {opacity: top ? lerp(.22 + .14*cp, 1, hp) : lerp(.22 + .14*cp, .07, hp)});
+        if (top && (hp > 0) !== (e.e.getAttribute('stroke') === ACC)) e.e.setAttribute('stroke', hp > 0 ? ACC : INK2);
+        if (e.g) set(e.g, {opacity: .16*hp + .12*bell(t, 8.0, 9.2)}); });
+      nodes.forEach((n, j) => { const v = n.cnt*eo(cp), top = j === 0;
+        set(n.g, {opacity: seg(t, .6 + j*.08, 1.1 + j*.08)*(top ? 1 : lerp(1, .42, hp))});
+        set(n.c, {r: 26 + 1.8*v, 'stroke-width': top ? lerp(3, 5, hp) : 3});
+        n.c.setAttribute('fill', top && hp > 0 ? ACT : PANEL); n.c.setAttribute('stroke', top && hp > 0 ? ACC : ACT);
+        if (n.n.textContent !== String(Math.round(v))) n.n.textContent = Math.round(v);
+        set(n.n, {opacity: seg(t, 6.4, 6.7)});
+        if (top) { n.l.setAttribute('class', hp > 0 ? 'h-c' : ''); n.l.setAttribute('font-weight', hp > 0 ? 700 : 400); } });
+      // hop 1: from every company into the shared node; then walk back out to cite each filing
+      hot.forEach((e, m) => { const f = seg(t, 8.0 + m*.05, 8.9 + m*.05), b = seg(t, 9.8 + m*.04, 10.6 + m*.04);
+        const u = b > 0 ? 1 - eio(b) : eio(f), on = (f > 0 && f < 1) || (b > 0 && b < 1);
+        const [x, y] = bez(e.P, u); set(pulses[m], {cx:x, cy:y, opacity: on ? 1 : 0}); });
+      const lit = seg(t, 10.5, 10.9);
+      pills.forEach(p => p.b.setAttribute('stroke', lit > 0 ? ACC : 'rgba(255,255,255,.28)'));
+      const qp = seg(t, 4.4, 6.2), L1 = 39, L2 = 59; cy[0](cl(qp*(L1 + L2)/L1)); cy[1](cl((qp*(L1 + L2) - L1)/L2));
+      set(cyGl, {opacity: seg(t, 5.0, 5.5)}); set(ansG, {opacity: seg(t, 9.9, 10.5)});
+    };
+  }
+
+  /* ---------- 03 Taxonomy-first: passages → fixed boxes → company × category matrix → count in code ---------- */
+  function tax(svg){
+    const X0 = 822, CW = 62, RY = r => 80 + r*54, N = 8, SNY = [76, 196, 316, 436];
+    text(svg, 0, 26, 'h-lab', 'Item 1A passages');
+    text(svg, 450, 26, 'h-lab', 'Fixed boxes (closed set)');
+    text(svg, X0, 26, 'h-lab', 'Who maps where');
+    const tks = TICK.map((tk, c) => text(svg, X0 + c*CW + 26, 64, 'h-tk', tk, {'text-anchor':'middle'}));
+    text(svg, 1494, 64, 'h-tk', 'count', {'text-anchor':'middle'});
+    const boxes = CATS.map((c, r) => { const g = el(svg, 'g', {opacity:0});
+      const b = el(g, 'rect', {x:450, y:RY(r), width:330, height:44, rx:10, fill:PANEL, stroke:'rgba(255,255,255,.14)', 'stroke-width':2});
+      const l = text(g, 470, RY(r) + 31, '', c); return {g, b, l}; });
+    const bands = CATS.map((_, r) => el(svg, 'rect', {x:X0 - 8, y:RY(r) - 4, width:1530 - X0 + 8, height:52, rx:12, fill:'none', stroke:ACC, 'stroke-width':2, opacity:0}));
+    const cells = [];
+    CATS.forEach((_, r) => TICK.forEach((_, c) => cells.push({r, c, on: M[r][c], e: el(svg, 'rect', {x:X0 + c*CW, y:RY(r), width:52, height:44, rx:6, fill:'rgba(255,255,255,.05)'})})));
+    const counts = CATS.map((_, r) => text(svg, 1494, RY(r) + 33, 'h-num', '0', {'text-anchor':'middle', 'font-size':30, opacity:0}));
+    // four messy passages; the Ford line is verbatim (FY2021 10-K), the others paraphrased
+    const SN = [{tk:1, row:0, l:['“a significant shortage', 'of semiconductors”']}, {tk:9, row:1, l:['export controls and', 'trade restrictions…']},
+                {tk:0, row:2, l:['cyber-attacks on vehicles', 'and IT systems…']},     {tk:8, row:3, l:['customers may cut orders', 'in a downturn…']}];
+    const snips = SN.map((s, k) => { const g = el(svg, 'g', {opacity:0}), y = SNY[k];
+      const b = el(g, 'rect', {x:1, y, width:379, height:116, rx:12, fill:PANEL, stroke:'rgba(255,255,255,.14)', 'stroke-width':2});
+      text(g, 22, y + 36, '', [[TICK[s.tk], 'h-b'], [' · Item 1A', 'h-gl']]);
+      s.l.forEach((ln, j) => text(g, 22, y + 70 + j*32, '', ln, {'font-style':'italic'}));
+      const ya = y + 58, yb = RY(s.row) + 22;
+      const a = el(svg, 'path', {d:`M381 ${ya} C418 ${ya} 412 ${yb} 440 ${yb}`, fill:'none', stroke:ACC, 'stroke-width':2.5, pathLength:1, 'stroke-dasharray':1, 'stroke-dashoffset':1});
+      const h = el(svg, 'path', {d:`M440 ${yb - 7} L450 ${yb} L440 ${yb + 7}Z`, fill:ACC, opacity:0});
+      return {g, b, a, h, t0: 1.6 + k*1.0, s}; });
+    const rule = text(svg, X0, 548, '', [['Shared if ', ''], ['≥ 8 of 10', 'h-c'], [' companies · counted in code', '']], {opacity:0});
+    const shared = COUNT.map(n => n >= 8);
+    return t => {
+      boxes.forEach((b, r) => set(b.g, {opacity: seg(t, r*.06, .5 + r*.06)}));
+      snips.forEach((s, k) => set(s.g, {opacity: seg(t, .8 + k*.12, 1.3 + k*.12)}));
+      tks.forEach((e, c) => set(e, {opacity: lerp(.6, 1, seg(t, 6.0 + c*.22, 6.3 + c*.22))}));
+      const sp = seg(t, 9.6, 10.1);
+      const mapped = new Set();
+      snips.forEach(s => { const p = seg(t, s.t0, s.t0 + .5);
+        set(s.a, {'stroke-dashoffset': 1 - eo(p)}); set(s.h, {opacity: p > .9 ? 1 : 0});
+        s.b.setAttribute('stroke', p > 0 ? ACT : 'rgba(255,255,255,.14)');
+        if (t >= s.t0 + .45) mapped.add(s.s.row); });
+      boxes.forEach((b, r) => { const sh = shared[r] && sp > 0, on = mapped.has(r);
+        b.b.setAttribute('stroke', sh ? ACC : on ? ACT : 'rgba(255,255,255,.14)');
+        b.b.setAttribute('fill', sh || on ? 'rgba(0,109,227,.28)' : PANEL);
+        set(b.l, {opacity: shared[r] ? 1 : lerp(1, .5, sp)}); b.l.style.fill = sh ? '#FFFFFF' : ''; });
+      cells.forEach(x => { if (!x.on){ set(x.e, {opacity: shared[x.r] ? 1 : lerp(1, .5, sp)}); return; }
+        const s = SN.findIndex(q => q.tk === x.c && q.row === x.r), t0 = s >= 0 ? snips[s].t0 + .6 : 6.0 + x.c*.22;
+        const p = seg(t, t0, t0 + .35);
+        x.e.setAttribute('fill', p > 0 ? ACT : 'rgba(255,255,255,.05)');
+        set(x.e, {opacity: (p > 0 ? lerp(.3, .9, p) : 1)*(shared[x.r] ? 1 : lerp(1, .4, sp))}); });
+      const cp = seg(t, 8.4, 9.4);
+      counts.forEach((e, r) => { const v = String(Math.round(COUNT[r]*eo(cp))); if (e.textContent !== v) e.textContent = v;
+        set(e, {opacity: seg(t, 8.4, 8.6)*(shared[r] ? 1 : lerp(1, .5, sp))}); e.style.fill = shared[r] && sp > 0 ? ACC : ''; });
+      set(rule, {opacity: sp});
+      bands.forEach((b, r) => set(b, {opacity: shared[r] ? seg(t, 10.0 + r*.12, 10.4 + r*.12)*(.6 + .4*bell(t, 10.0 + r*.12, 11.0 + r*.12)) : 0}));
+    };
+  }
+
+  const HOW = {
+    rag:   {n:'01', title:'Plain vector RAG', build:rag, at:[0, 5.4, 9.6],
+            one:'Finds the passages that read most like the question; the model sums them up.',
+            gl:'Embedding: text turned into a point · top-k: the k closest passages (here 6)',
+            beats:['Nearest passages win, ranked by similarity', 'The top 6 go to the model to summarise', 'Similar words ≠ same risk story'],
+            fine:'Staged illustration: passages paraphrased, scores invented. Not live output.'},
+    graph: {n:'02', title:'GraphRAG (Neo4j)', build:graph, at:[0, 6.4, 9.6],
+            one:'Stores which company reports which risk as links, then counts the links.',
+            gl:'Node: a company or a risk · Edge: “this 10-K names this risk” · Cypher: Neo4j’s query language',
+            beats:['Links, not just similar text', 'Shared = many companies → same risk node', 'Answer walks the graph + cites filings'],
+            fine:'Staged illustration: links and counts invented for the demo. Not live output.'},
+    tax:   {n:'03', title:'Taxonomy-first extraction', build:tax, at:[0, 6.0, 9.6],
+            one:'Sorts each risk into a fixed list of categories, then counts the overlap in code.',
+            gl:'Taxonomy: a fixed list of risk categories, agreed before extraction',
+            beats:['Model only maps into fixed boxes', 'Overlap is counted in code, not guessed', 'Same leaf → shared risk, auditably'],
+            fine:'Staged illustration: the Ford line is verbatim (FY2021 10-K); other passages paraphrased, mappings invented. Not live output.'}
+  };
+  const T = 12;
+  function mount(svg, key){ svg.replaceChildren(); return HOW[key].build(svg); }
+  // plays render(t) from `from` to T at `speed`, then holds the last frame; reduced motion jumps to the end
+  function runner(render, speed, onT){
+    let t = 0, raf = 0, last = 0;
+    const frame = now => { t = Math.min(T, t + Math.min(.05, (now - last)/1000)*speed); last = now; render(t); onT && onT(t); raf = t < T ? requestAnimationFrame(frame) : 0; };
+    return {
+      play(from){ cancelAnimationFrame(raf); t = reduce.matches ? T : from || 0; render(t); onT && onT(t); if (t < T){ last = performance.now(); raf = requestAnimationFrame(frame); } },
+      stop(){ cancelAnimationFrame(raf); raf = 0; }
+    };
+  }
+  const beatAt = (key, t) => { const a = HOW[key].at; let k = 0; a.forEach((s, j) => { if (t >= s) k = j; }); return k; };
+
+  /* ---------- the panel ---------- */
+  const dlg = document.getElementById('how'), dsvg = dlg.querySelector('svg'), beatsEl = dlg.querySelector('.how-beats');
+  let run = null, cur = null;
+  function open(key){
+    const h = HOW[key]; cur = key; hidePeek();
+    dlg.querySelector('.num').textContent = h.n; dlg.querySelector('h3').textContent = h.title;
+    dlg.querySelector('.one').textContent = h.one; dlg.querySelector('.gl').textContent = h.gl; dlg.querySelector('.how-fine').textContent = h.fine;
+    dsvg.setAttribute('aria-label', h.title + ', animated explainer: ' + h.beats.join('. ') + '.');
+    beatsEl.replaceChildren(...h.beats.map((b, k) => { const li = document.createElement('li');
+      li.innerHTML = `<button type="button"><span class="bar"><i></i></span><span class="bt"></span></button>`;
+      li.querySelector('.bt').textContent = (k + 1) + '  ' + b;
+      li.querySelector('button').addEventListener('click', () => run.play(h.at[k]));
+      return li; }));
+    const lis = [...beatsEl.children], bars = lis.map(l => l.querySelector('.bar i'));
+    const render = mount(dsvg, key);
+    run && run.stop();
+    run = runner(render, 1, t => { const k = beatAt(key, t);
+      lis.forEach((l, j) => { l.classList.toggle('on', j === k); l.classList.toggle('done', j < k || t >= T);
+        const a = h.at[j], b = j < 2 ? h.at[j + 1] : T; bars[j].style.width = (seg(t, a, b)*100) + '%'; }); });
+    document.documentElement.style.overflow = 'hidden';
+    dlg.showModal(); dlg.querySelector('[data-close]').focus();
+    run.play(0);
+  }
+  dlg.querySelector('[data-replay]').addEventListener('click', () => run && run.play(0));
+  let closedAt = 0;
+  dlg.addEventListener('close', () => { closedAt = performance.now(); run && run.stop(); const c = cur && document.querySelector(`.ap[data-how="${cur}"]`); if (c) c.focus({preventScroll:true}); });
+
+  /* ---------- the cards: hover peek, click / Enter / tap opens ---------- */
+  const cards = [...document.querySelectorAll('.s-three .ap[data-how]')], row = document.querySelector('.s-three .appr'), slide = document.querySelector('.s-three');
+  if (!canHover.matches) { const hint = slide.querySelector('.hint'); if (hint) hint.textContent = 'Tap a card to see how it works'; }
+  let peekT = 0, peeked = null;
+  function showPeek(c){
+    if (dlg.open) return;
+    let pk = c.querySelector('.peek');
+    if (!pk){ pk = document.createElement('div'); pk.className = 'peek'; pk.setAttribute('aria-hidden', 'true');
+      pk.innerHTML = '<svg class="how-svg mini" viewBox="0 0 1552 560"></svg><p></p>'; c.appendChild(pk);
+      const key = c.dataset.how, p = pk.querySelector('p'), render = mount(pk.querySelector('svg'), key);
+      c._peek = runner(render, 2.4, t => { const b = HOW[key].beats[beatAt(key, t)]; if (p.textContent !== b) p.textContent = b; }); }
+    hidePeek(); peeked = c;
+    c.classList.add('peek-on'); row.classList.add('peeking'); slide.classList.add('peeking');
+    c._peek.play(0);
+  }
+  function hidePeek(){
+    clearTimeout(peekT);
+    if (!peeked) return;
+    peeked._peek.stop(); peeked.classList.remove('peek-on'); row.classList.remove('peeking'); slide.classList.remove('peeking'); peeked = null;
+  }
+  cards.forEach(c => {
+    c.setAttribute('aria-label', c.querySelector('h3').textContent + ': open how it works');
+    c.addEventListener('mouseenter', () => { if (!canHover.matches) return; clearTimeout(peekT); peekT = setTimeout(() => showPeek(c), 400); });
+    c.addEventListener('mouseleave', hidePeek);
+    c.addEventListener('focus', () => { if (c.matches(':focus-visible') && !dlg.open && performance.now() - closedAt > 300){ clearTimeout(peekT); peekT = setTimeout(() => showPeek(c), 400); } });
+    c.addEventListener('blur', hidePeek);
+    c.addEventListener('click', () => open(c.dataset.how));
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); open(c.dataset.how); } });
+  });
+  addEventListener('scroll', hidePeek, {passive:true, capture:true});
 })();
 </script>
 
