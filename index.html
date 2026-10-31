@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 <script>document.documentElement.classList.add('preload')</script>
 <!--
-  Foundation deck, slides 1–18. Static.
+  Foundation deck, slides 1–16. Static.
   One-page vertical deck: each slide is a full-viewport section (scroll-snap). Design stage = 1920×1080, scaled to fit.
   Navigation: native scroll (wheel / trackpad / touch); ↑/↓, ←/→, Space / Shift+Space, PageUp/PageDown, Home/End jump; dots on the right.
   Deep link: index.html#3 opens slide 3.
@@ -587,15 +587,32 @@
   .c-flow{display:flex;align-items:center;gap:22px;margin-top:28px;font-size:30px;color:var(--ink-2)}
   .c-flow b{color:var(--ink)} .c-flow .ar{color:var(--active-hi)} .c-flow .mock{margin-left:auto;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
 
-  /* ---------- Demo cue slides ---------- */
-  .s-cue h2{font-size:96px}
-  .s-cue .kicker{margin-bottom:24px}
-  .cue-grid{display:grid;grid-template-columns:620px 1fr;gap:48px;margin-top:48px;flex:1 1 auto;min-height:0;flex-shrink:1}
-  .watch{border:1px solid var(--active);background:var(--panel-hi);border-radius:var(--r);padding:44px 48px;display:flex;flex-direction:column}
-  .watch .wk{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--active-hi)}
-  .watch p{margin-top:24px;font-size:44px;line-height:1.25;font-weight:600}
-  .watch .switch{margin-top:auto;display:flex;align-items:center;gap:16px;font-size:26px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
-  .watch .switch::before{content:"↗";font-size:34px;color:var(--active-hi)}
+  /* ---------- Live demo (slide 16): the prototype console opens in dialog#console ---------- */
+  .s-demo .kicker{margin-bottom:24px}
+  .s-demo h2{font-size:88px;line-height:1.05} .s-demo h2 .hl{color:var(--accent)}
+  .demo-grid{display:grid;grid-template-columns:minmax(0,1fr) 980px;column-gap:72px;align-items:center;margin:auto 0}
+  .demo-watch{list-style:none;display:flex;flex-direction:column;gap:44px}
+  .demo-watch li{display:grid;grid-template-columns:72px 1fr;align-items:baseline}
+  .demo-watch .n{font-size:30px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+  .demo-watch b{display:block;font-size:44px;font-weight:700;line-height:1.1}
+  .demo-watch p{margin-top:10px;font-size:30px;line-height:1.3;color:var(--ink-2)}
+  .con-card{background:#07111C;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .3s;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+  .con-card:hover{border-color:rgba(0,174,239,.55)}
+  .con-card:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
+  .con-bar{display:flex;align-items:center;gap:20px;padding:18px 26px;background:var(--panel);border-bottom:1px solid var(--line);font-size:24px;font-weight:600;color:var(--ink-2)}
+  .con-bar .dots{display:flex;gap:9px} .con-bar .dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.18)}
+  .con-bar > span:nth-child(2){flex:1}
+  .con-bar .open{display:block;width:28px;height:28px;border:3px solid var(--accent);border-radius:6px;box-shadow:inset 0 6px 0 -2px var(--accent);opacity:.7}
+  .con-body{padding:56px 56px 48px}
+  .con-q{font-family:Georgia,"Times New Roman",serif;font-size:46px;line-height:1.2;color:var(--ink)}
+  .con-tk{margin-top:44px;display:grid;grid-template-columns:repeat(10,1fr);gap:8px}
+  .con-tk span{padding-top:12px;border-top:4px solid var(--ink-2);font-size:20px;font-weight:700;color:var(--ink-2);letter-spacing:.02em}
+  .con-tk span.c{border-color:var(--accent);color:var(--accent)}
+  .con-go{margin-top:52px;display:flex;align-items:center;gap:14px;font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .con-go::after{content:"↗";font-size:30px;letter-spacing:0}
+  dialog.filing.console{width:96vw;height:94vh;max-height:none}
+  dialog.console header a{color:var(--accent);font-weight:600;font-size:.9em;text-underline-offset:4px;white-space:nowrap}
+  dialog.console iframe{flex:1;width:100%;border:0;background:#07111C;display:block}
 
   /* ---------- Who sits at the new constraint ---------- */
   .who-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;margin-top:56px;align-items:start}
@@ -1170,62 +1187,28 @@
   </div>
 
   <div class="frame" id="slide-16">
-  <!-- ================= DEMO CUE 1: PLAIN RAG ================= -->
-  <section class="slide s-cue" data-title="Plain RAG"
-    data-notes="Demo one, plain vector RAG. Watch the answer — it reads well. Then try to trace it: which filings, which passages, how many companies actually said this? That's the gap. Switching to the live console now.">
+  <!-- ================= LIVE DEMO: the prototype console, opened in dialog#console ================= -->
+  <section class="slide s-demo" data-title="Live demo"
+    data-notes="Now the same question, answered three ways, live. Click the console to open it. Demo one, plain RAG: the answer reads well, but try to trace it: which filings, which passages, how many companies actually said this? Demo two, GraphRAG: watch the query it writes, the subgraph that comes back, and click any link to see the quote behind it. Demo three, taxonomy first: categories fixed up front, the counting done in code; watch the heatmap of risk by company, then open any cell to see the passage that put it there. [Inside the console the keys drive the console; close it with the × button. If the popup misbehaves, use 'Open in new tab'.]">
     <div class="rule"></div>
-    <div class="kicker">Demo 1 of 3 · Plain vector RAG</div>
-    <h2>Plain RAG</h2>
-    <div class="cue-grid">
-      <div class="watch">
-        <div class="wk">Watch for</div>
-        <p>Fluent answer — but can you trace which filings it came from?</p>
-        <div class="switch">Switch to live console</div>
+    <div class="kicker">Live demo</div>
+    <h2>One question, <span class="hl">three ways</span></h2>
+    <div class="demo-grid">
+      <ol class="demo-watch">
+        <li><span class="n">01</span><div><b>Plain RAG</b><p>A fluent answer. Can you trace which filings it came from?</p></div></li>
+        <li><span class="n">02</span><div><b>GraphRAG</b><p>The query it writes, the subgraph it returns, the quote behind each link.</p></div></li>
+        <li><span class="n">03</span><div><b>Taxonomy-first</b><p>A heatmap of risk × company, and the passage behind every cell.</p></div></li>
+      </ol>
+      <div class="con-card" role="button" tabindex="0" data-dialog="console" aria-haspopup="dialog" aria-label="Open the live console">
+        <div class="con-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Counterparty Risk Console</span><i class="open" aria-hidden="true"></i></div>
+        <div class="con-body">
+          <p class="con-q">What industry risks connect these counterparties, and which counterparties share each one?</p>
+          <div class="con-tk" aria-hidden="true"><span>GM</span><span>F</span><span>TSLA</span><span>APTV</span><span>BWA</span><span>LEA</span><span class="c">NXPI</span><span class="c">MCHP</span><span class="c">ON</span><span class="c">TXN</span></div>
+          <p class="con-go">Open the console</p>
+        </div>
       </div>
-      <!-- PLACEHOLDER: live console, Plain RAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
-      <div class="shot-slot" role="img" aria-label="Placeholder: live console, Plain RAG"><span>Live console · Plain vector RAG</span></div>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
-  </section>
-  </div>
-
-  <div class="frame" id="slide-17">
-  <!-- ================= DEMO CUE 2: GRAPHRAG ================= -->
-  <section class="slide s-cue" data-title="GraphRAG"
-    data-notes="Demo two, GraphRAG on Neo4j. This time watch three things: the Cypher query it writes, the subgraph of companies and risks that comes back, and that I can click any link to see the quote behind it. Over to the console.">
-    <div class="rule"></div>
-    <div class="kicker">Demo 2 of 3 · GraphRAG (Neo4j)</div>
-    <h2>GraphRAG</h2>
-    <div class="cue-grid">
-      <div class="watch">
-        <div class="wk">Watch for</div>
-        <p>The Cypher query, the subgraph it returns, and click-to-quote on each link.</p>
-        <div class="switch">Switch to live console</div>
-      </div>
-      <!-- PLACEHOLDER: live console, GraphRAG. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
-      <div class="shot-slot" role="img" aria-label="Placeholder: live console, GraphRAG"><span>Live console · GraphRAG (Neo4j)</span></div>
-    </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
-  </section>
-  </div>
-
-  <div class="frame" id="slide-18">
-  <!-- ================= DEMO CUE 3: TAXONOMY-FIRST ================= -->
-  <section class="slide s-cue" data-title="Taxonomy-first"
-    data-notes="Demo three, taxonomy first. Categories fixed up front, the counting done in code. Watch the heatmap — risk by company — and then open any cell: the quote drawer shows exactly which passage put it there. Let's go live.">
-    <div class="rule"></div>
-    <div class="kicker">Demo 3 of 3 · Taxonomy-first</div>
-    <h2>Taxonomy-first</h2>
-    <div class="cue-grid">
-      <div class="watch">
-        <div class="wk">Watch for</div>
-        <p>A heatmap of risk × company — and the quote drawer behind every cell.</p>
-        <div class="switch">Switch to live console</div>
-      </div>
-      <!-- PLACEHOLDER: live console, Taxonomy-first. Live demo runs in the console; optional fallback still/video — drop an <img> or <video> inside .shot-slot -->
-      <div class="shot-slot" role="img" aria-label="Placeholder: live console, Taxonomy-first"><span>Live console · Taxonomy-first</span></div>
-    </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Synthetic demo · public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span class="credit">Public 10-K filings only</span><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
   </section>
   </div>
 
@@ -1336,6 +1319,12 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
   <p class="pb">Anthropic’s playbook, Plan stage: <q>Intent is captured once, in the originator’s own words, as a version-controlled artifact the next stage can act on.</q></p>
   <footer><p><b>Next: the agent expands it into spec.md; I review it, I don’t write it.</b></p>
     <a href="https://claude.com/resources/articles/the-ai-native-sdlc-playbook" target="_blank" rel="noopener">Open the full article on claude.com ↗</a></footer>
+</dialog>
+<!-- Live demo, opened from slide 16: a copy of the prototype console (https://claude.ai/artifact/Nv1CCs5GUqkuWo4DZS3uB6), published with the deck under console/.
+     The iframe loads when slide 16 comes near. Keys inside the frame drive the console; the × closes the dialog. -->
+<dialog class="filing console" id="console" aria-labelledby="console-t">
+  <header><h3 id="console-t">Counterparty Risk Console</h3><a href="https://claude.ai/artifact/Nv1CCs5GUqkuWo4DZS3uB6" target="_blank" rel="noopener">Open in new tab ↗</a><button class="x" type="button" data-close aria-label="Close">×</button></header>
+  <iframe title="Counterparty Risk Console, live prototype" data-src="console/index.html"></iframe>
 </dialog>
 <!-- "How it works" explainer for slide 14, one panel shared by the three approaches; filled by the explainer script below. Staged demo data only. -->
 <dialog class="how" id="how" aria-labelledby="how-t">
@@ -1523,6 +1512,7 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
   });
   addEventListener('keydown', e => {
     const d = openDlg();
+    if (d && d.id === 'console') return;   // the console keeps its own keys; close it with × or Esc
     if (d) {
       const fwd = ['ArrowRight','ArrowDown','PageDown'].includes(e.key), back = ['ArrowLeft','ArrowUp','PageUp'].includes(e.key);
       if (!fwd && !back) return;
@@ -1947,6 +1937,15 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
   // non-button dialog openers (the intent.md card on slide 15): Enter / Space open them, without moving the slide
   document.querySelectorAll('[data-dialog][role=button]').forEach(b => b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); b.click(); } }));
 })();
+
+  // slide 16: load the console when its slide comes near; on open, hand the keyboard to the console
+  (() => {
+    const d = document.getElementById('console'), f = d && d.querySelector('iframe'); if (!f) return;
+    const load = () => { if (!f.src) f.src = f.dataset.src; };
+    new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { load(); o.disconnect(); } }, {rootMargin:'100% 0px'}).observe(document.getElementById('slide-16'));
+    document.querySelector('[data-dialog=console]').addEventListener('click', () => { load(); setTimeout(() => f.focus(), 50); });
+    f.addEventListener('load', () => { if (d.open) f.focus(); });
+  })();
 </script>
 
 </html>
