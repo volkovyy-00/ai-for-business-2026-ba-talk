@@ -713,7 +713,8 @@
   .flow-svg .why .fast{fill:var(--ink)}
   /* zoomed-out lifecycle: a slim line-drawn tube, Code as the one wide highlighted chamber, dashed station marks */
   .s-after2 .zoom-b .body{fill:rgba(255,255,255,.025);stroke:rgba(255,255,255,.28);stroke-width:2}
-  .zoom-b .chamber{fill:rgba(0,109,227,.2);stroke:var(--active);stroke-width:3}   /* drawn over the body, clipped to the Code section */
+  .zoom-b .chamber{fill:url(#hatch-waste);stroke:var(--active);stroke-width:3}
+  .s-after2 .waste{fill:url(#hatch-waste)}   /* drawn over the body, clipped to the Code section */
   .zoom-b .marks{stroke:rgba(255,255,255,.22);stroke-width:2;stroke-dasharray:4 7}
   .s-flow .cue{display:none}
   .s-flow .rec{margin-top:20px;font-size:32px;color:var(--ink-2)}
@@ -920,30 +921,36 @@
 
   <div class="frame" id="slide-6">
   <section class="slide s-flow s-after2" data-title="After coding agents"
-    data-notes="Same pipe as slide 4, Coding already widened and flowing. Click: but zoom out to the whole lifecycle. Code is now one wide station among eight, and everything after it flows. The queue has moved upstream, to discovery: working out what problem we are solving. That's where the BA sits.">
+    data-notes="Same pipe as slide 4, Coding already widened and flowing. Look at Coding: it is now wider than the work coming through it. The hatched space is coding capacity sitting idle. Click: but zoom out to the whole lifecycle. Code is now one wide station among eight, and everything after it flows. The queue has moved upstream, to discovery: working out what problem we are solving. That's where the BA sits.">
     <div class="rule"></div>
     <h2>After coding agents</h2>
     <div class="flow-wrap">
       <div class="flow-stage">
         <svg class="flow-svg zoom-a" viewBox="0 0 1640 360" role="img" data-play="wide"
-          aria-label="The same pipe as slide 4, with Coding already widened: nothing waits and output matches input.">
+          aria-label="The same pipe as slide 4, with Coding now wider than the rest of the pipe: requirements flow through in their usual lane, nothing waits, and the hatched space around them is idle coding capacity.">
           <defs>
             <pattern id="hatch-flow5" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
               <line x1="0" y1="0" x2="0" y2="14" stroke="rgba(255,255,255,.07)" stroke-width="4"/>
             </pattern>
+            <!-- idle capacity in Coding: Active Blue stripes (a fill), shared with the zoomed-out Code chamber -->
+            <pattern id="hatch-waste" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="16" height="16" fill="rgba(0,109,227,.10)"/>
+              <line x1="0" y1="0" x2="0" y2="16" stroke="rgba(0,109,227,.75)" stroke-width="5"/>
+            </pattern>
           </defs>
           <g class="stations" text-anchor="middle">
-            <text x="250" y="66">Requirements</text>
-            <text x="820" y="66">Coding</text>
-            <text x="1390" y="66">Working software</text>
+            <text x="250" y="40">Requirements</text>
+            <text x="820" y="40">Coding</text>
+            <text x="1390" y="40">Working software</text>
           </g>
           <path class="body"/>
+          <path class="waste"/>
           <path class="throat"/>
           <g class="flow"></g>
           <g class="under" text-anchor="middle">
-            <text x="250" y="316">TOO MANY IN</text>
-            <text x="820" y="316" class="hot"><tspan class="waiting">17</tspan> REQUIREMENTS WAITING</text>
-            <text x="1390" y="316">MORE OUT</text>
+            <text x="250" y="344">TOO MANY IN</text>
+            <text x="820" y="344" class="hot"><tspan class="waiting">17</tspan> REQUIREMENTS WAITING</text>
+            <text x="1390" y="344">MORE OUT</text>
           </g>
         </svg>
         <svg class="flow-svg zoom-b" viewBox="0 0 1640 360" role="img" data-play="lifecycle"
@@ -1420,16 +1427,23 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
   const blend = (a, b, t) => a + (b - a)*(1 - Math.cos(Math.PI*Math.max(0, Math.min(1, t))))/2;
   const players = {
     // slide 4: requirements queue single-file inside Coding and the waiting count climbs; a click widens Coding (o.w) and it releases at agent speed
-    widen: (el, wide) => {
-      const o = {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560, w: wide ? 56 : 18, x0:20, x1:1620,
+    widen: (el, wide, w = 56, lane) => {
+      const o = {C:190, R:10, gap:24, valueAt:1000, exit:1640, fadeOut:1560, w: wide ? w : 18, lane, x0:20, x1:1620,
         gates:[{x:988, every: wide ? .2 : 1.0, waiting: el.querySelector('.waiting')}], spawn:.45, cap:26, inSpeed:190, outSpeed:220,
         seed: wide ? [[100, 260, 420, 580, 740, 900], [1080, 1240, 1400, 1540]] : [[90, 200, 300, 390, 470, ...rowOf(988, 24, 12)], [1230, 1480]],
         throat: () => `M640 ${190-o.w} H1000 M640 ${190+o.w} H1000`};
       o.half = x => x < 500 ? 70 : x < 640 ? blend(70, o.w, (x-500)/140) : x < 1000 ? o.w : x < 1140 ? blend(o.w, 70, (x-1000)/140) : 70;
       return makeFlow(el, o);
     },
-    // slide 6: the same pipe, arriving already widened (where slide 4 ended)
-    wide: el => players.widen(el, true),
+    // slide 6: the same pipe, Coding now wider than the rest of it (±118 against the pipe's ±70; station names and labels sit further out to make room). Requirements keep the pipe's
+    // usual lane, so the bulge beyond it (.waste, hatched in Active Blue) is idle coding capacity
+    wide: el => {
+      const W = 118, L = 70, p = players.widen(el, true, W, L), half = p.flow.o.half;
+      const band = sgn => { const pts = []; for (let x = 500; x <= 1140; x += 4) pts.push(x + ' ' + (190 + sgn*Math.max(L, half(x))).toFixed(1));
+        return 'M' + pts.join(' L') + ` L1140 ${190 + sgn*L} L500 ${190 + sgn*L} Z`; };
+      el.querySelector('.waste').setAttribute('d', band(-1) + ' ' + band(1));
+      return p;
+    },
     // slide 6, after the zoom: the whole lifecycle; Code is wide, the human-speed steps are narrow
     lifecycle: el => {
       const W = [40, 14, 40, 70, 40, 40, 40, 40];               // half-width per station, 200 units each from x=20: one slim tube, Code the wide chamber, Discovery the throat
@@ -1439,7 +1453,7 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
         if (edge + 200 - x < 26 && k < 7) return blend(W[k], W[k+1], (x - (edge+200) + 26)/52);
         return W[k];
       };
-      const p = makeFlow(el, {C:190, R:9, gap:21, valueAt:820, exit:1640, fadeOut:1570, x0:20, x1:1620, half,
+      const p = makeFlow(el, {C:190, R:9, gap:21, valueAt:820, exit:1640, fadeOut:1570, x0:20, x1:1620, half, lane:40,
         gates:[{x:410, every:1.1, waiting: el.querySelector('.w0')}],
         spawn:.45, cap:16, inSpeed:200, outSpeed:220,
         throat: () => [[220,420,14]].map(([a,b,w]) => `M${a+26} ${190-w} H${b-26} M${a+26} ${190+w} H${b-26}`).join(' '),
@@ -1635,7 +1649,7 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
     }
     function draw(d){
       d.el.setAttribute('cx', d.x.toFixed(1));
-      d.el.setAttribute('cy', (o.C + d.off*Math.max(0, o.half(d.x) - o.R - 3)).toFixed(1));
+      d.el.setAttribute('cy', (o.C + d.off*Math.max(0, Math.min(o.half(d.x), o.lane || Infinity) - o.R - 3)).toFixed(1));   // o.lane: work keeps to its usual lane, a wider chamber shows as idle room
       d.el.setAttribute('class', d.x > o.valueAt ? 'value' : 'idea');
       d.el.style.opacity = d.x < 20 ? Math.max(0, (d.x+20)/40) : d.x > o.fadeOut ? Math.max(0, 1 - (d.x-o.fadeOut)/(o.exit-o.fadeOut)) : 1;
     }
