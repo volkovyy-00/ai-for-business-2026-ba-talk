@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 <script>document.documentElement.classList.add('preload')</script>
 <!--
-  Foundation deck, slides 1–17. Static.
+  Foundation deck, slides 1–18. Static.
   One-page vertical deck: each slide is a full-viewport section (scroll-snap). Design stage = 1920×1080, scaled to fit.
   Navigation: native scroll (wheel / trackpad / touch); ↑/↓, ←/→, Space / Shift+Space, PageUp/PageDown, Home/End jump; dots on the right.
   Deep link: index.html#3 opens slide 3.
@@ -618,7 +618,7 @@
   dialog.console header a{color:var(--accent);font-weight:600;font-size:.9em;text-underline-offset:4px;white-space:nowrap}
   dialog.console iframe{flex:1;width:100%;border:0;background:#07111C;display:block}
 
-  /* ---------- Takeaways (slide 16): three stacked lines, each fades in on its own after arrival ---------- */
+  /* ---------- Takeaways (slide 17): three stacked lines, each fades in on its own after arrival ---------- */
   .s-take .kicker{margin-bottom:24px}
   .s-take h2{font-size:96px;line-height:1.05}
   .take{list-style:none;margin:48px 0 auto;display:flex;flex-direction:column;gap:30px}
@@ -627,7 +627,7 @@
   .take .l1{font-size:46px;font-weight:600;line-height:1.2;color:var(--ink);text-wrap:balance}
   .take .l2{margin-top:10px;font-size:40px;line-height:1.25;color:var(--ink-2);text-wrap:balance}
 
-  /* ---------- Closing (slide 17): two QR codes on white tiles (dark modules on light scan most reliably) ---------- */
+  /* ---------- Closing (slide 18): two QR codes on white tiles (dark modules on light scan most reliably) ---------- */
   .s-qr .kicker{margin-bottom:24px}
   .s-qr h2{font-size:96px;line-height:1.05}
   .qr-row{display:grid;grid-template-columns:repeat(2,1fr);column-gap:96px;margin:56px 0 auto;padding:0 40px}
@@ -724,6 +724,15 @@
   .s-flow .rec{margin-top:20px;font-size:32px;color:var(--ink-2)}
   .s-flow .twist[data-build].built,.s-flow .rec[data-build].built{transition-delay:.9s}   /* the line follows the widen / zoom it describes */
   @media (prefers-reduced-motion:reduce){ .zoom-a,.zoom-b{transition:opacity .4s} }
+  /* slide 16: slide 6's zoomed-out lifecycle on its own; two seconds after arrival Discovery widens to the tube's width and its queue drains */
+  .s-open .flow-svg .body{fill:rgba(255,255,255,.025);stroke:rgba(255,255,255,.28);stroke-width:2}
+  .s-open .flow-svg .chamber{fill:url(#hatch-waste-16);stroke:var(--active);stroke-width:3}
+  .s-open .flow-svg .marks{stroke:rgba(255,255,255,.22);stroke-width:2;stroke-dasharray:4 7}
+  .s-open h2 .hl{color:var(--accent)}
+  .s-open .why .swap{transition:opacity .5s var(--ease-out)}
+  .s-open .why .after{opacity:0}
+  .s-open.opened .why .before{opacity:0}
+  .s-open.opened .why .after{opacity:1;transition-delay:.6s}
 
   .s5 .rule{margin-bottom:40px}
   .s5 h2{font-size:96px}
@@ -1225,6 +1234,50 @@
 
 
   <div class="frame" id="slide-16">
+  <!-- ================= DISCOVERY WIDENS (after the demo, before the takeaways) =================
+       Slide 6's zoomed-out lifecycle on its own. data-auto-first: the first build fires 2 s after arrival (user, session 6):
+       Discovery widens from ±14 to the tube's ±40, its gate speeds up and the queue drains; the closing line follows. -->
+  <section class="slide s-flow s-open" data-title="Discovery widens" data-auto="2000" data-auto-first="2000"
+    data-notes="Back to the pipe from the start. Discovery was the narrow part: work waiting on what problem we are solving. Now widen it. When the analyst writes the intent first, with agents doing the exploring, discovery stops being the queue and the work flows through to the user. That's the shift in one picture.">
+    <div class="rule"></div>
+    <h2>Widen discovery. <span class="hl">The work flows.</span></h2>
+    <div class="flow-wrap">
+      <svg class="flow-svg" viewBox="0 0 1640 360" role="img" data-play="discover"
+        aria-label="The delivery lifecycle from slide 6: Idea, Discovery, Prioritise, Code, Review, CI and QA, Deploy, User. Discovery starts as the narrow step with work queued in front of it, then widens to match the rest of the pipe and the queue clears.">
+        <defs>
+          <pattern id="hatch-waste-16" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="16" height="16" fill="rgba(0,109,227,.10)"/>
+            <line x1="0" y1="0" x2="0" y2="16" stroke="rgba(0,109,227,.75)" stroke-width="5"/>
+          </pattern>
+          <linearGradient id="life-fade-16" x1="0" x2="1"><stop offset=".02" stop-color="#fff" stop-opacity="0"/><stop offset=".08" stop-color="#fff"/><stop offset=".92" stop-color="#fff"/><stop offset=".98" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <clipPath id="life-code-16"><rect x="596" y="0" width="248" height="360"/></clipPath>
+          <mask id="life-mask-16" maskUnits="userSpaceOnUse" x="0" y="0" width="1640" height="360"><rect width="1640" height="360" fill="url(#life-fade-16)"/></mask>
+        </defs>
+        <g class="stations small" text-anchor="middle">
+          <text x="120" y="66">Idea</text><text x="320" y="66">Discovery</text><text x="520" y="66">Prioritise</text><text x="720" y="66">Code</text>
+          <text x="920" y="66">Review</text><text x="1120" y="66">CI / QA</text><text x="1320" y="66">Deploy</text><text x="1520" y="66">User</text>
+        </g>
+        <path class="body" mask="url(#life-mask-16)"/>
+        <path class="chamber" clip-path="url(#life-code-16)"/>
+        <path class="marks" d="M120 166V214M320 166V214M520 166V214M920 166V214M1120 166V214M1320 166V214M1520 166V214"/>
+        <path class="throat"/>
+        <g class="flow"></g>
+        <g class="under small" text-anchor="middle">
+          <text x="320" y="302" class="hot"><tspan class="w0">0</tspan> WAITING</text>
+        </g>
+        <g class="why" text-anchor="middle">
+          <text x="320" y="346" class="swap before">WHAT PROBLEM?</text><text x="320" y="346" class="swap after fast">INTENT WRITTEN</text>
+          <text x="720" y="346" class="fast">AGENT SPEED</text>
+        </g>
+      </svg>
+    </div>
+    <span class="cue" data-build="1" data-action="open"></span>
+    <p class="twist" data-build="1">Write the intent first, and <b>the queue clears.</b></p>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
+  </section>
+  </div>
+
+  <div class="frame" id="slide-17">
   <!-- ================= TAKEAWAYS (agenda part 04) ================= -->
   <section class="slide s-take" data-title="Three lines to leave with" data-auto="700"
     data-notes="Three lines to leave with. One: coding got faster, delivery didn’t. The wait moved to discovery, and that’s the BA’s seat. Two: you write the intent: problem, outcome, constraints, how you’ll score a right answer. Agents can expand the rest. Three: ask the same question three ways. Keep quotes checkable, categories fixed, and the overlap count in code. Thank you.">
@@ -1236,12 +1289,12 @@
       <li data-build="2"><span class="n">02</span><div><p class="l1">You write the intent: problem, outcome, constraints, scoring.</p><p class="l2">Agents can expand the rest.</p></div></li>
       <li data-build="3"><span class="n">03</span><div><p class="l1">Ask the same question three ways.</p><p class="l2">Keep quotes checkable, categories fixed, and the overlap count in code.</p></div></li>
     </ol>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">16</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
   </section>
   </div>
 
 
-  <div class="frame" id="slide-17">
+  <div class="frame" id="slide-18">
   <!-- ================= CLOSING: QR codes to the deck on GitHub Pages (claude.ai links open in the Claude app on phones, which does not show the deck) and the public demo repo (generated offline with segno, error level M; inline SVG) ================= -->
   <section class="slide s-qr" data-title="Slides and code"
     data-notes="Thank you. The first QR opens this deck; the second is the demo repo on GitHub, the code behind what you just saw, the three approaches and the scoring. Happy to take questions.">
@@ -1258,7 +1311,7 @@
           <span class="qr-k">The demo</span>
         </a>
     </div>
-    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">17</span></span></div>
+    <div class="footer"><span class="brand"><img class="falcon" alt="Barclays"></span><span class="meta"><span>How AI rewired the business analyst role</span><span class="slide-no">18</span></span></div>
   </section>
   </div>
 
@@ -1446,6 +1499,27 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
       return p;
     }
   };
+  // slide 16: the slide 6 lifecycle, Discovery's half-width is o.w (14 = the throat) so actions.open can tween it to the tube's 40
+  players.discover = el => {
+    const W = [40, 14, 40, 70, 40, 40, 40, 40];
+    const shut = [[40, 120, 190, ...rowOf(410, 21, 9)], [560, 700, 930, 1150, 1360, 1500]],
+          open = [[], [60, 180, 300, 430, 560, 700, 930, 1150, 1360, 1500]];   // still frame once widened: nothing waiting
+    const o = {C:190, R:9, gap:21, valueAt:820, exit:1640, fadeOut:1570, x0:20, x1:1620, lane:40, w:14,
+      gates:[{x:410, every:1.1, waiting: el.querySelector('.w0')}],
+      spawn:.45, cap:16, inSpeed:200, outSpeed:220, seed: shut, seeds: {shut, open},
+      throat: () => `M246 ${190-o.w} H394 M246 ${190+o.w} H394`};
+    const w = k => k === 1 ? o.w : W[k];
+    o.half = x => {
+      const k = Math.max(0, Math.min(7, Math.floor((x-20)/200))), edge = 20 + 200*k;
+      if (x - edge < 26 && k > 0) return blend(w(k-1), w(k), (x - edge + 26)/52);
+      if (edge + 200 - x < 26 && k < 7) return blend(w(k), w(k+1), (x - (edge+200) + 26)/52);
+      return w(k);
+    };
+    const p = makeFlow(el, o), chamber = el.querySelector('.chamber'), body = el.querySelector('.body');
+    chamber.setAttribute('d', body.getAttribute('d'));
+    new MutationObserver(() => chamber.setAttribute('d', body.getAttribute('d'))).observe(body, {attributes:true, attributeFilter:['d']});   // Code chamber follows the outline as Discovery widens
+    return p;
+  };
   function rowOf(head, gap, n){ return Array.from({length:n}, (_, k) => head - k*gap); }
   // one-off moments triggered by a build step; called with on=false when the speaker steps back
   const actions = {
@@ -1454,6 +1528,14 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
       f.tween('w', on ? 56 : 18, reduce.matches ? 0 : 900);
       f.o.gates[0].every = on ? .2 : 1.0;
       svg.querySelector('.out-label').textContent = on ? 'MORE OUT' : 'LESS OUT THAN IN';
+    },
+    open(cue, on){   // slide 16: Discovery widens to the tube's width, its gate keeps pace, the queue drains
+      const slide = cue.closest('.slide'), svg = slide.querySelector('[data-play=discover]'), pl = svg._player, f = pl.flow;
+      slide.classList.toggle('opened', on);
+      f.o.gates[0].every = on ? .22 : 1.1;
+      f.o.seed = on ? f.o.seeds.open : f.o.seeds.shut;
+      if (svg.classList.contains('running')) f.tween('w', on ? 40 : 14, reduce.matches ? 0 : 1200);
+      else { f.tween('w', on ? 40 : 14, 0); pl.stop(); }   // not playing (reduced motion, or stepping back): show the matching still frame
     },
     zoom(cue, on){ cue.closest('.slide').querySelector('.flow-stage').classList.toggle('zoomed', on); }
   };
@@ -1491,14 +1573,14 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
 
   let arriving = null;   // set by keyboard / clicker navigation
   // slides with data-auto="ms" reveal their builds on their own after arrival; a clicker press finishes the sequence
-  // data-auto-stop="n" stops the auto sequence after n builds; the rest are clicks
+  // data-auto-stop="n" stops the auto sequence after n builds; the rest are clicks; data-auto-first="ms" sets the pause before the first build
   let autoT = 0;
   const autoEnd = k => Math.min(groups[k].length, +slides[k].dataset.autoStop || Infinity);
   function autoRun(k, first){
     clearTimeout(autoT);
     const ms = +slides[k].dataset.auto;
     if (!ms || shot || step[k] >= autoEnd(k)) return;
-    autoT = setTimeout(() => { if (k === i){ setStep(k, step[k] + 1); autoRun(k); } }, first ? 600 : ms);
+    autoT = setTimeout(() => { if (k === i){ setStep(k, step[k] + 1); autoRun(k); } }, first ? (+slides[k].dataset.autoFirst || 600) : ms);   // data-auto-first: delay before the first build (slide 16: 2 s)
   }
   function mark(k){
     if (k === i) return;
