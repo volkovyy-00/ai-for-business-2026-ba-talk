@@ -1231,9 +1231,9 @@
 
   <div class="frame" id="slide-16">
   <!-- ================= DISCOVERY WIDENS (after the demo, before the takeaways) =================
-       Slide 6's zoomed-out lifecycle on its own. data-auto-first: the first build fires 2 s after arrival (user, session 6):
+       Slide 6's zoomed-out lifecycle on its own. data-auto-first: the first build fires 5 s after arrival (user, session 6; was 2 s):
        Discovery widens from ±14 to the tube's ±40, its gate speeds up and the queue drains; the closing line follows. -->
-  <section class="slide s-flow s-open" data-title="Discovery widens" data-auto="2000" data-auto-first="2000"
+  <section class="slide s-flow s-open" data-title="Discovery widens" data-auto="2000" data-auto-first="5000"
     data-notes="Back to the pipe from the start. Discovery was the narrow part: work waiting on what problem we are solving. Now widen it. When the analyst writes the intent first, with agents doing the exploring, discovery stops being the queue and the work flows through to the user. That's the shift in one picture.">
     <div class="rule"></div>
     <h2>Widen discovery. <span class="hl">The work flows.</span></h2>
@@ -1576,7 +1576,7 @@ Me who does discovery stage for this request. Thin prototype console. EDGAR/publ
     clearTimeout(autoT);
     const ms = +slides[k].dataset.auto;
     if (!ms || shot || step[k] >= autoEnd(k)) return;
-    autoT = setTimeout(() => { if (k === i){ setStep(k, step[k] + 1); autoRun(k); } }, first ? (+slides[k].dataset.autoFirst || 600) : ms);   // data-auto-first: delay before the first build (slide 16: 2 s)
+    autoT = setTimeout(() => { if (k === i){ setStep(k, step[k] + 1); autoRun(k); } }, first ? (+slides[k].dataset.autoFirst || 600) : ms);   // data-auto-first: delay before the first build (slide 16: 5 s)
   }
   function mark(k){
     if (k === i) return;
