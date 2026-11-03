@@ -24,7 +24,7 @@ The same deck is online at https://volkovyy-00.github.io/ai-for-business-2026-ba
 
 The mouse wheel and trackpad also work.
 
-**Logo:** the logo appears when a `falcon.svg` file sits next to `index.html`. It is left out of this repository on purpose; see `HANDOFF.md`.
+**Logo:** the Barclays logo is `falcon.svg`, next to `index.html`. If the file is missing, the logo slots hide themselves.
 
 ## Edit it
 
